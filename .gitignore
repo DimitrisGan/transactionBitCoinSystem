@@ -26,3 +26,9 @@
 *.exe
 *.out
 *.app
+
+
+
+#CLION DEPENDENCIES
+cmake-build-debug
+.idea
