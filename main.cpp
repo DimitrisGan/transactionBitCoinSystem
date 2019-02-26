@@ -37,14 +37,21 @@ int main() {
 
     cout << "~~~~~~~~~~TESTING ITERATOR~~~~~~~~~~~~~~~\n";
 
-    linkedList<int>::Iterator it ;
-    for (it = llist.begin();
-         it != llist.end(); it++) {
 
-        cout << *it<<endl;
+    linkedList<int>::Iterator it;
+//    for (it = llist.begin();it != llist.end(); ++it) {
+//
+//        cout <<*it<<endl;
+//    }
+
+    it = llist.begin();
+    while (it != llist.end()){
+        cout <<*it<<endl;
+        it++;
     }
+    cout<<"last node:"<<endl;
+    cout <<*it<<endl;
 
-    cout << *it<<endl;
 
     return 0;
 }

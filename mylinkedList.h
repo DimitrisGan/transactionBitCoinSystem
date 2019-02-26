@@ -12,7 +12,7 @@ using namespace std;
 
 template <class T>
 struct node {
-    node(T data) : data(data), next(NULL) {}
+    node(T data) : data(data), next(nullptr) {}
     T data;
     node<T> *next;
 
@@ -37,7 +37,7 @@ private: //private methods
     friend std::ostream &operator<<(std::ostream &os, const linkedList<U> &rhs);
 
 public:
-    linkedList() : head(NULL) ,tail(NULL){};
+    linkedList() : head(nullptr) ,tail(nullptr){};
     linkedList(const linkedList &rhs);
     ~linkedList();
 
@@ -46,6 +46,8 @@ public:
 
     bool exists(T data) const;
     node<T>* search(T data); //searches for a value in the linked list and returns the point to object that contains that value
+    node<T>* getNext(node<T> baseNode); //get next node
+
 
     void remove(T data);
     bool isEmpty() const;
@@ -54,10 +56,13 @@ public:
     /*operators overload*/
     linkedList &operator=(const linkedList &rhs);
 
+
+
 public:
     class Iterator;
     Iterator begin(){ return Iterator(head);};
     Iterator end(){return Iterator(tail);};
+
 };
 
 
@@ -116,7 +121,7 @@ public:
 
 
 template<class T>
-linkedList<T>::linkedList(const linkedList & rhs) : head(NULL) ,tail(NULL)
+linkedList<T>::linkedList(const linkedList & rhs) : head(nullptr) ,tail(nullptr)
 {
     *this = rhs;
 }
@@ -136,7 +141,7 @@ void linkedList<T>::clear () {
 
         node<T> *currPtr = head;
         node<T> *tempPtr ;
-        while (currPtr != NULL) { // delete remaining nodes
+        while (currPtr != nullptr) { // delete remaining nodes
             tempPtr = currPtr;
             currPtr = currPtr->next;
             delete tempPtr;
@@ -154,7 +159,7 @@ node<T>* linkedList<T>::search(T keyData) { //searches for a value in the linked
 
     nodePtr = head;
 
-    while((!found) && (nodePtr != NULL)) //runs through list until data is found within a node or end of list is reached
+    while((!found) && (nodePtr != nullptr)) //runs through list until data is found within a node or end of list is reached
     {
         if(nodePtr->data == keyData) //if the node's data equals the key then the node has been found
             found = true;
@@ -311,32 +316,32 @@ bool linkedList<T>::exists(const T data) const
     return false;
 }
 
-template<class T>
-void linkedList<T>::remove(const T data)
-{
-    bool removed = false;
-    node<T> *curr = head;
-    node<T> *prev = head;
-
-    for (; curr != NULL && removed == false; curr = curr->next)
-    {
-        if (head->data == data)
-        {
-            node<T> *tmp = head;
-            head = head->next;
-            delete tmp;
-            removed = true;
-        }
-        else if (curr->data == data)
-        {
-            node<T> *tmp = curr;
-            prev->next = curr->next;
-            delete tmp;
-            removed = true;
-        }
-        prev = curr;
-    }
-}
+//template<class T>
+//void linkedList<T>::remove(const T data)
+//{
+//    bool removed = false;
+//    node<T> *curr = head;
+//    node<T> *prev = head;
+//
+//    for (; curr != NULL && removed == false; curr = curr->next)
+//    {
+//        if (head->data == data)
+//        {
+//            node<T> *tmp = head;
+//            head = head->next;
+//            delete tmp;
+//            removed = true;
+//        }
+//        else if (curr->data == data)
+//        {
+//            node<T> *tmp = curr;
+//            prev->next = curr->next;
+//            delete tmp;
+//            removed = true;
+//        }
+//        prev = curr;
+//    }
+//}
 
 template<class T>
 bool linkedList<T>::isEmpty() const
