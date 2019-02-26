@@ -1,5 +1,7 @@
 #include <iostream>
 #include "mylinkedList.h"
+#include "myString.h"
+
 using  namespace std;
 
 int main() {
@@ -51,6 +53,24 @@ int main() {
     }
     cout<<"last node:"<<endl;
     cout <<*it<<endl;
+
+
+/*test myString*/
+    char* ch = const_cast<char *>("hello1!");
+    char* ch2 = const_cast<char *>("hello!");
+    myString myS (ch);
+    myString myS2 (ch2);
+    bool val = myS2 == ch ;
+    cout << val<<endl;
+    cout << myS.size();
+
+    linkedList<myString> llistString;
+    llistString.insert_last(myS);
+    llistString.insert_last(myS2);
+
+
+//    cout<< llistString<<endl;
+    cout<< "ok?"<<endl;
 
 
     return 0;

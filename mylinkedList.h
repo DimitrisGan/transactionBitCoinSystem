@@ -206,28 +206,13 @@ linkedList<T> & linkedList<T>::operator=(const linkedList<T> &rhs)
     }
     else {
 
-
         this->clear(); // the function at the start of this review
 
         if (rhs.isEmpty()) {
             // short cut, since the other list is empty
             return *this;
         }
-        else{
 
-        }
-
-
-        //perittooo
-        /*head = new node<T>(rhs.head->data);
-
-        node<T> * current = head;
-
-        for (node<T> *tmp = rhs.head->next; tmp != NULL; tmp = tmp->next)
-        {
-            current->next = new node<T>(tmp->data);
-            current = current->next;
-        }*/
     }
 
 }
@@ -248,7 +233,7 @@ void linkedList<T>::insert_first(const T data)
     {
         head = temp;
         tail = temp;
-        temp = NULL;
+        temp = nullptr;
     }
     else
     {
@@ -267,7 +252,7 @@ void linkedList<T>::insert_first(const T data)
 
 //  https://www.codementor.io/codementorteam/a-comprehensive-guide-to-implementation-of-singly-linked-list-using-c_plus_plus-ondlm5azr
 template<class T>
-void linkedList<T>::insert_last(const T data)
+void linkedList<T>::insert_last( T data)
 {
 
 
@@ -276,7 +261,7 @@ void linkedList<T>::insert_last(const T data)
     if (isEmpty()){
         head=temp;
         tail=temp;
-        temp = NULL;
+        temp = nullptr;
     }
     else{
 
@@ -309,7 +294,7 @@ bool linkedList<T>::exists(const T data) const
     if (isEmpty())
         return false;
 
-    for (node<T> *tmp = head; tmp != NULL; tmp = tmp->next)
+    for (node<T> *tmp = head; tmp != nullptr; tmp = tmp->next)
         if (tmp->data == data)
             return true;
 
@@ -346,7 +331,7 @@ bool linkedList<T>::exists(const T data) const
 template<class T>
 bool linkedList<T>::isEmpty() const
 {
-    return head == NULL && tail == NULL; //if the start pointer and end pointer are NULL then the list is empty
+    return head == nullptr && tail == nullptr; //if the start pointer and end pointer are NULL then the list is empty
 }
 
 template<class T>
@@ -356,10 +341,10 @@ std::ostream & operator<<(std::ostream & os, const linkedList<T>& rhs)
         os << "EMPTY LIST";
 
     }
-    for (node<T> *temp = rhs.head; temp != NULL; temp = temp->next)
+    for (node<T> *temp = rhs.head; temp != nullptr; temp = temp->next)
     {
         os << temp->data;
-        if (temp->next != NULL)
+        if (temp->next != nullptr)
             os << ", ";
     }
 //    os<<"\n";
