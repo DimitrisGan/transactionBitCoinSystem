@@ -8,7 +8,7 @@
 
 
 #include <iostream>
-//using namespace std;
+using namespace std;
 
 template <class T>
 struct node {
@@ -56,7 +56,7 @@ public:
 
 public:
     class Iterator;
-    Iterator begin(){ return Iterator(head->next);};
+    Iterator begin(){ return Iterator(head);};
     Iterator end(){return Iterator(tail);};
 };
 
@@ -66,17 +66,48 @@ public:
 template <class T>
 class linkedList<T>:: Iterator{
 private:
-    node<T> *ptr;
+    node<T> *currPtr;
 public:
-    explicit Iterator(node<T> *currPtr) : ptr(currPtr) {}
+    Iterator() = default;;
+     Iterator(node<T> *currPtr) : currPtr(currPtr) {}
     virtual ~Iterator() = default;
 
-    bool operator==(const Iterator &rhs) const { return ptr == rhs.ptr; }
-    bool operator!=(const Iterator &rhs) const {return !(rhs == *this); }
-    T& operator * ()  {return ptr->data; }
-    Iterator& operator ++ () {ptr->next;return *this; }
+    Iterator& operator=(node<T>* pNode){currPtr = pNode;return *this;}
 
+
+    bool operator == (const Iterator &rhs) const { return currPtr == rhs.currPtr; }
+
+    bool operator != (const Iterator &rhs) const {
+        std::cout<<"SUGKRINEI : "<<currPtr->data << " $$ "<<rhs.currPtr->data<<endl;
+        return !(rhs == *this);
+    }
+
+    T& operator * ()  {return currPtr->data; }
+
+    // Prefix ++ overload
+    Iterator& operator ++ () {
+
+
+        if (currPtr != nullptr) {
+            currPtr = currPtr->next;
+
+        }
+
+        return *this;
+    }
+
+// Postfix ++ overload
+    Iterator operator++(int)
+    {
+        Iterator old = *this;
+        ++(*this);
+        return old;
+    }
 };
+
+
+///////===========================================================
+
 
 
 

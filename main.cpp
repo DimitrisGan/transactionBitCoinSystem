@@ -9,30 +9,42 @@ int main() {
 
     //todo call linked list
     linkedList<int> llist;
+    llist.insert_last(1);
+    llist.insert_last(2);
     llist.insert_last(3);
-    llist.insert_last(5);
-    llist.insert_first(0);
+//    llist.insert_first(0);
     cout << llist<<endl;
-    cout<<    llist.isEmpty() <<endl;
-    llist.clear();
-    cout << llist<<endl;
-    llist.insert_first(1);
-    llist.insert_first(-1);
-    llist.insert_last(10);
-    cout << llist<<endl;
+//    cout<<    llist.isEmpty() <<endl;
+//    llist.clear();
+//    cout << llist<<endl;
+//    llist.insert_first(1);
+//    llist.insert_first(-1);
+//    llist.insert_last(10);
+//    cout << llist<<endl;
 
-    cout << "~~~~EXISTS~~~\n";
-    cout << llist.exists(3)<<endl;
+//    cout << "~~~~EXISTS~~~\n";
+//    cout << llist.exists(3)<<endl;
+//
+////    for (node<int> *tmp = llist.; tmp != NULL; tmp = tmp->next)
+////        if (tmp->data == data)
+////            return true;
+//
+//cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+//    node<int>* nodeFound = llist.search(-1);
+//    cout << nodeFound->data<<endl;
+//    cout << nodeFound->next->data<<endl;
+////    while ()
 
-//    for (node<int> *tmp = llist.; tmp != NULL; tmp = tmp->next)
-//        if (tmp->data == data)
-//            return true;
+    cout << "~~~~~~~~~~TESTING ITERATOR~~~~~~~~~~~~~~~\n";
 
-cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
-    node<int>* nodeFound = llist.search(-1);
-    cout << nodeFound->data<<endl;
-    cout << nodeFound->next->data<<endl;
-//    while ()
+    linkedList<int>::Iterator it ;
+    for (it = llist.begin();
+         it != llist.end(); it++) {
+
+        cout << *it<<endl;
+    }
+
+    cout << *it<<endl;
 
     return 0;
 }
