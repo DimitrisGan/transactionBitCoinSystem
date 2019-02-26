@@ -21,6 +21,9 @@ struct node {
     typedef node_type* node_ptr;
 };
 
+
+
+
 template <class T>
 class linkedList {
 
@@ -51,43 +54,34 @@ public:
     /*operators overload*/
     linkedList &operator=(const linkedList &rhs);
 
+public:
+    class Iterator;
+    Iterator begin(){ return Iterator(head->next);};
+    Iterator end(){return Iterator(tail);};
 };
 
 
 
 
-//template <class T>
-//bool linkedList<T>::operator==(const linkedList<T> &rhs) const
-//{ //vvvvv
-//    const node<T> *lhsTemp = head;
-//    const node<T> *rhsTemp = rhs.head;
-//    while (lhsTemp != NULL && rhsTemp != NULL)
-//    {
-//        if (lhsTemp->data != rhsTemp->data)
-//            return false;
-//        lhsTemp = lhsTemp->next;
-//        rhsTemp = rhsTemp->next;
-//    }
-//    return (lhsTemp == NULL) && (rhsTemp == NULL);
-//}
+template <class T>
+class linkedList<T>:: Iterator{
+private:
+    node<T> *ptr;
+public:
+    explicit Iterator(node<T> *currPtr) : ptr(currPtr) {}
+    virtual ~Iterator() = default;
+
+    bool operator==(const Iterator &rhs) const { return ptr == rhs.ptr; }
+    bool operator!=(const Iterator &rhs) const {return !(rhs == *this); }
+    T& operator * ()  {return ptr->data; }
+    Iterator& operator ++ () {ptr->next;return *this; }
+
+};
 
 
-//template <typename T>
-//List<T>::~List()
-//{
-//    if ( !isEmpty() ) // List is not empty
-//    {
-//        ListNode<T> *currentPtr = startPtr;
-//        ListNode<T> *tempPtr;
-//
-//        while ( currentPtr != 0 ) // delete remaining nodes
-//        {
-//            tempPtr = currentPtr;
-//            currentPtr = currentPtr->nextPtr;
-//            delete tempPtr;
-//        }
-//    }
-//}
+
+
+
 
 
 template<class T>
