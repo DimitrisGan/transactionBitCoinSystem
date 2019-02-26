@@ -41,7 +41,9 @@ public:
     void insert_first(T data);
     void insert_last(T data);
 
-    bool search(T data) const;
+    bool exists(T data) const;
+    node<T>* search(T data); //searches for a value in the linked list and returns the point to object that contains that value
+
     void remove(T data);
     bool isEmpty() const;
     void clear();
@@ -118,6 +120,23 @@ void linkedList<T>::clear () {
         tail= nullptr;
 
     }
+}
+
+template<class T>
+node<T>* linkedList<T>::search(T keyData) { //searches for a value in the linked list and returns the point to object that contains that value
+    node<T>* nodePtr;
+    bool found = false;
+
+    nodePtr = head;
+
+    while((!found) && (nodePtr != NULL)) //runs through list until data is found within a node or end of list is reached
+    {
+        if(nodePtr->data == keyData) //if the node's data equals the key then the node has been found
+            found = true;
+        else
+            nodePtr = nodePtr->next; //moves to next node in list
+    }
+    return nodePtr; //returns pointer to the node that contains data equal to key (NULL if not found)
 }
 
 //template <class T>
@@ -255,16 +274,16 @@ void linkedList<T>::insert_last(const T data)
 //
 
 template<class T>
-bool linkedList<T>::search(const T data) const
+bool linkedList<T>::exists(const T data) const
 {
-    if (head == NULL)
+    if (isEmpty())
         return false;
 
     for (node<T> *tmp = head; tmp != NULL; tmp = tmp->next)
         if (tmp->data == data)
             return true;
 
-    return true;
+    return false;
 }
 
 template<class T>
