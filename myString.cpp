@@ -13,7 +13,7 @@
 
 myString::myString(char *sptr)  {
 
-    int len = static_cast<int>(strlen(sptr));
+    this->len = static_cast<int>(strlen(sptr));
     this->myStr= new char[len + 1];
     strcpy(this->myStr, sptr);
 }
@@ -23,6 +23,7 @@ myString::myString(char *sptr)  {
 //**************************************************
 
 myString::~myString() {
+
     delete[] this->myStr;
     this->myStr= nullptr;
 
@@ -85,6 +86,7 @@ myString myString::operator=(myString right)
         delete [] myStr;
     myStr = new char[right.size() + 1];
     strcpy(myStr, right.getMyStr());
+    len  = right.size();
     return *this;
 }
 
@@ -96,11 +98,12 @@ myString myString::operator=(myString right)
 
 myString myString::operator=(const char *right)
 {
-    if (this->size() != 0)
+    if (len != 0)
         delete [] myStr;
-    int len = static_cast<int>(strlen(right));
-    myStr = new char[len + 1];
+    int lenRight = static_cast<int>(strlen(right));
+    myStr = new char[lenRight + 1];
     strcpy(myStr, right);
+    len = static_cast<unsigned int>(strlen(right));
     return *this;
 }
 
@@ -114,8 +117,29 @@ char *myString::getMyStr() const {
 }
 
 unsigned myString::size() {
-    return static_cast<unsigned int>(strlen(this->myStr));
+    return  len;
+}
 
+void myString::setMyStr(char *myStr) {
+
+    this->myStr= new char[len + 1];
+    strcpy(this->myStr, myStr);
+}
+
+//    ostream & operator << (ostream &out, myString &c)
+//    {
+//        for (int i = 0; i < c.size(); ++i) {
+//
+//        }
+//        out << c.getMyStr();
+//        return out;
+//    }
+
+ostream& operator<<(ostream &os, const myString &string) {
+    if (string.myStr) {
+        os << string.myStr;
+    }
+    return os;
 }
 
 //void myString::makeOneToken(char delimeter) {

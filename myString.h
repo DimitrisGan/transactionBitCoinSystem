@@ -6,18 +6,26 @@
 #define TRANSACTIONBITCOINSYSTEM_MYSTRING_H
 
 
+#include <iostream>
+using namespace std;
+
 
 class myString{
 private:
     char* myStr;
+    unsigned len;
 public:
     //todo myString(); na kskekinaei me char* opote na mh desmeuei epipleon xwro
-    explicit myString(char *sptr);
+    myString(){myStr= nullptr;len =0;}
+    myString(char *sptr);
     myString(myString &right); //move operator maybe not needed because of not existing simple constructor
 
     virtual ~myString();
 
     char *getMyStr() const;
+
+    void setMyStr(char *myStr);
+
     unsigned size();
 //    void myString::makeOneToken(char delimeter);
     //todo split () for date dd:mm:yyyy and time hh:mm
@@ -32,6 +40,9 @@ public:
 
     myString operator=(myString right);   // for assign with myString
     myString operator=(const char *right); // for assign with char*
+
+    friend ostream & operator << (ostream &out, const myString &c);
+
 
 
 
