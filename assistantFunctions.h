@@ -9,5 +9,5 @@
 //todo ArgsParser
 //todo inputParser
 
-
+//todo get opt get long opt
 #endif //TRANSACTIONBITCOINSYSTEM_ASSISTANTFUNCTIONS_H

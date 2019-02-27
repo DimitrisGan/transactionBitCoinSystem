@@ -3,11 +3,19 @@ project(transactionBitCoinSystem)
 
 set(CMAKE_CXX_STANDARD 14)
 
+include_directories(.)
+
 add_executable(transactionBitCoinSystem
-        cmake-build-debug/cmake_install.cmake
-        cmake-build-debug/CMakeCache.txt
-        cmake-build-debug/Makefile
-        cmake-build-debug/transactionBitCoinSystem
-        cmake-build-debug/transactionBitCoinSystem.cbp
-        CMakeLists.txt
-        main.cpp dataStructures.cpp dataStructures.h walletStructure.cpp walletStructure.h mylinkedList.cpp mylinkedList.h myString.cpp myString.h myHashTable.cpp myHashTable.h assistantFunctions.cpp assistantFunctions.h)
+        assistantFunctions.cpp
+        assistantFunctions.h
+        dataStructures.cpp
+        dataStructures.h
+        main.cpp
+        myHashTable.cpp
+        myHashTable.h
+        mylinkedList.cpp
+        mylinkedList.h
+        myString.cpp
+        myString.h
+        walletStructure.cpp
+        walletStructure.h hashFunction.h bucket.cpp bucket.h wallet&BitcoinInfo.cpp wallet&BitcoinInfo.h)
