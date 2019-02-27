@@ -83,8 +83,9 @@ public:
     bool operator == (const Iterator &rhs) const { return currPtr == rhs.currPtr; }
 
     bool operator != (const Iterator &rhs) const {
-        std::cout<<"SUGKRINEI : "<<currPtr->data << " $$ "<<rhs.currPtr->data<<endl;
-        return !(rhs == *this);
+        if (currPtr != nullptr)
+            std::cout<<"SUGKRINEI : "<<currPtr->data << " $$ "<<rhs.currPtr->data<<endl;
+        return currPtr != nullptr;
     }
 
     T& operator * ()  {return currPtr->data; }

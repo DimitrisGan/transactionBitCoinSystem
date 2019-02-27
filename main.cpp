@@ -41,32 +41,38 @@ int main() {
 
 
     linkedList<int>::Iterator it;
-//    for (it = llist.begin();it != llist.end(); ++it) {
-//
-//        cout <<*it<<endl;
-//    }
+    for (it = llist.begin();it != llist.end(); ++it) {
 
-    it = llist.begin();
-    while (it != llist.end()){
         cout <<*it<<endl;
-        it++;
     }
-    cout<<"last node:"<<endl;
-    cout <<*it<<endl;
+    cout << "~~~~~~~~~~TESTING AYTO ITERATOR~~~~~~~~~~~~~~~\n";
+
+    for (auto nod : llist) {
+
+        cout <<nod<<endl;
+    }
+
+//    it = llist.begin();
+//    while (it != llist.end()){
+//        cout <<*it<<endl;
+//        it++;
+//    }
+//    cout<<"last node:"<<endl;
+//    cout <<*it<<endl;
 
 
 /*test myString*/
-    char* ch = const_cast<char *>("hello1!");
-    char* ch2 = const_cast<char *>("hello!");
-    myString myS (ch);
-    myString myS2 (ch2);
-    bool val = myS2 == ch ;
-    cout << val<<endl;
-    cout << myS.size();
-
-    linkedList<myString> llistString;
-    llistString.insert_last(myS);
-    llistString.insert_last(myS2);
+//    char* ch = const_cast<char *>("hello1!");
+//    char* ch2 = const_cast<char *>("hello!");
+//    myString myS (ch);
+//    myString myS2 (ch2);
+//    bool val = myS2 == ch ;
+//    cout << val<<endl;
+//    cout << myS.size();
+//
+//    linkedList<myString> llistString;
+//    llistString.insert_last(myS);
+//    llistString.insert_last(myS2);
 
 
 //    cout<< llistString<<endl;

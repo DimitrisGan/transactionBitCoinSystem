@@ -10,4 +10,4 @@ add_executable(transactionBitCoinSystem
         cmake-build-debug/transactionBitCoinSystem
         cmake-build-debug/transactionBitCoinSystem.cbp
         CMakeLists.txt
-        main.cpp dataStructures.cpp dataStructures.h walletStructure.cpp walletStructure.h mylinkedList.cpp mylinkedList.h myString.cpp myString.h)
+        main.cpp dataStructures.cpp dataStructures.h walletStructure.cpp walletStructure.h mylinkedList.cpp mylinkedList.h myString.cpp myString.h myHashTable.cpp myHashTable.h assistantFunctions.cpp assistantFunctions.h)
