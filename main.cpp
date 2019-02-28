@@ -6,8 +6,7 @@
 using  namespace std;
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    std::cout << "commit from laptop!" << std::endl;
+    std::cout << "Hello, World!\n" << std::endl;
 
 
 //    //todo call linked list
@@ -61,8 +60,11 @@ int main() {
 //    cout<<"last l_node:"<<endl;
 //    cout <<*it<<endl;
 
+/*
 
+*/
 /*test myString*/
+
     char* ch = const_cast<char *>("hello1!");
     char* ch2 = const_cast<char *>("hello!");
     myString myS (ch);
@@ -76,32 +78,33 @@ int main() {
     llistString.insert_last(myS2);
 
 
-//    cout<< llistString<<endl;
-
-
+    cout<< llistString<<endl;
+//
+//*/
 //PAIZEI
     linkedList<bucket*> listForBuckets;
 //    unsigned recrodsAvailable = 2;
-    bucket*  newBucket0 = new bucket (1);
-    bucket*  newBucket1 = new bucket (2);
+    auto *  newBucket0 = new bucket (1);
+    auto *  newBucket1 = new bucket (2);
     bucket*  newBucket2 = new bucket (3);
     listForBuckets.insert_last(newBucket0);
     listForBuckets.insert_last(newBucket1);
     listForBuckets.insert_last(newBucket2);
 
-/*
-
-    //DEN PAIZEI
-    linkedList<bucket> listForBucketsWRONG;
-//    unsigned recrodsAvailable = 2;
-    bucket  newBucket0W(1) ;
-    bucket  newBucket1W(2) ;
-    bucket  newBucket2W(3) ;
-    listForBucketsWRONG.insert_last(newBucket0W);
-    listForBucketsWRONG.insert_last(newBucket1W);
-//    listForBucketsWRONG.insert_last(newBucket2W);
-*/
-
+//
+//
+////    //DEN PAIZEI
+////    linkedList<bucket> listForBucketsWRONG;
+//////    unsigned recrodsAvailable = 2;
+////    bucket  newBucket0W(1) ;
+//////    bucket  newBucket1W(2) ;
+//////    bucket  newBucket2W(3) ;
+////    listForBucketsWRONG.insert_last(newBucket0W);
+////    listForBucketsWRONG.insert_last(newBucket0W);
+//////    listForBucketsWRONG.insert_last(newBucket1W);
+//////    listForBucketsWRONG.insert_last(newBucket2W);
+//
+//
 
     linkedList<int> listOFints;
     int n1=1;
@@ -112,31 +115,36 @@ int main() {
     listOFints.insert_last(n4);
 
 
-//    char* c1 = const_cast<char *>("hi0dfgfdgfd");
-//    char* c2 = const_cast<char *>("hi1");
-//    char* c3 = const_cast<char *>("hi2");
-
-//    myString* dynamicArray = new  myString [3];
-//    myString staticArray[3] ;//= new myString[3];
-
-//    dynamicArray[0] = c1;
-//    dynamicArray[1] = c2;
-//    dynamicArray[2] = c3;
 //
-//    staticArray[0] = c1;
-//    staticArray[1] = c2;
-//    staticArray[2] = c3;
-
-
+////    char* c1 = const_cast<char *>("hi0dfgfdgfd");
+////    char* c2 = const_cast<char *>("hi1");
+////    char* c3 = const_cast<char *>("hi2");
+//
+////    myString* dynamicArray = new  myString [3];
+////    myString staticArray[3] ;//= new myString[3];
+//
+////    dynamicArray[0] = c1;
+////    dynamicArray[1] = c2;
+////    dynamicArray[2] = c3;
+////
+////    staticArray[0] = c1;
+////    staticArray[1] = c2;
+////    staticArray[2] = c3;
+//
+//
     cout<< "ok?"<<endl;
-
-//        cout << array;
-
+//
+////        cout << array;
+//
         delete  newBucket0;
         delete  newBucket1;
         delete  newBucket2;
-//        array = nullptr;
-//    cout<<listForBuckets<<endl;
+////        array = nullptr;
+////    cout<<listForBuckets<<endl;
+
+
+    //todo 1# ftiaxnw to bucket apo ysvd
+
 
     return 0;
 }

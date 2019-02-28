@@ -27,6 +27,7 @@ struct bucket{
     virtual ~bucket();
     bucket& operator=(bucket right)
     {
+
         this->recordsArray = right.recordsArray;
         this->recordsAvailableRemain= right.recordsAvailableRemain;
         return *this;
@@ -35,7 +36,7 @@ struct bucket{
     bucket(bucket &right)
     {
         recordsArray = right.recordsArray ;
-         recordsAvailableRemain =right.recordsAvailableRemain;
+        recordsAvailableRemain =right.recordsAvailableRemain;
     }
 
 

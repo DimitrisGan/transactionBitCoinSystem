@@ -83,10 +83,10 @@ myString::myString(myString &right)
 // Returns the calling object.                   *
 //************************************************
 
-myString myString::operator=(myString right)
+myString& myString::operator=(myString right)
 {
-    if (this->size() != 0)
-        delete [] myStr;
+//    if (this->size() != 0)
+//        delete [] myStr;
     myStr = new char[right.size() + 1];
     strcpy(myStr, right.getMyStr());
     len  = right.size();
@@ -99,7 +99,7 @@ myString myString::operator=(myString right)
 // Returns the calling object.                  *
 //***********************************************
 
-myString myString::operator=(const char *right)
+myString& myString::operator=(const char *right)
 {
     if (len != 0)
         delete [] myStr;

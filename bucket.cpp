@@ -9,14 +9,17 @@
 //  //todo
 //}
 
-
+int globo=0;
+int globo2=0;
 
 bucket::bucket(unsigned RecordsCapacity)  {
+
+      cout << "CONSTRUCTOR OF BUCKET IS CALLED #"<<globo2++ <<endl;
+
 
     this->recordsAvailableRemain = RecordsCapacity;
 
     this->recordsArray = new myString [RecordsCapacity ];
-
 
 
 }
@@ -24,8 +27,8 @@ bucket::bucket(unsigned RecordsCapacity)  {
 bucket::~bucket() {
 //    delete  recordsArray;
 
-
-    delete [] recordsArray;
+    cout << "DESTRUCTOR OF BUCKET IS CALLED #"<<globo++ <<endl;
+    delete  [] recordsArray;
     recordsArray= nullptr;
 }
 

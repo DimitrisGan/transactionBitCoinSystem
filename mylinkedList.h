@@ -10,10 +10,11 @@
 #include <iostream>
 using namespace std;
 
+
 template <class T>
 struct l_node {
 
-    explicit l_node(T data) : data(data), next(nullptr) {}
+    explicit l_node(T data) : data(data), next(nullptr) { static  int globo3=0;  cout << "CONSTRUCTOR OF list NODE IS CALLED #"<<globo3++ <<endl; }
     T data;
     l_node<T> *next;
 
@@ -229,7 +230,8 @@ template<class T>
 void linkedList<T>::insert_first(const T data)
 {
 
-    l_node<T> *temp = createNode(data);
+//    l_node<T> *temp = createNode(data);
+    auto temp =  new l_node<T>(data);//createNode(data);
 
 
     if (isEmpty())
@@ -259,7 +261,7 @@ void linkedList<T>::insert_last( T data)
 {
 
 
-    l_node<T> *temp = createNode(data);
+    auto temp =  new l_node<T>(data);//createNode(data);
 
     if (isEmpty()){
         head=temp;

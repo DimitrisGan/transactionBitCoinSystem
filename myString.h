@@ -38,8 +38,8 @@ public:
     bool operator!=(const char *rhs);           //compared with char *
 
 
-    myString operator=(myString right);   // for assign with myString
-    myString operator=(const char *right); // for assign with char*
+    myString& operator=(myString right);   // for assign with myString
+    myString& operator=(const char *right); // for assign with char*
 
     friend ostream & operator << (ostream &out, const myString &c);
 
