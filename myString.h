@@ -42,6 +42,7 @@ public:
     myString& operator=(const char *right); // for assign with char*
 
     friend ostream & operator << (ostream &out, const myString &c);
+    friend std::istream& operator>> (std::istream& is, myString& s);
 
 
 

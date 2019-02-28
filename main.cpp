@@ -1,14 +1,21 @@
 #include <iostream>
+#include <getopt.h>
 #include "mylinkedList.h"
 #include "myString.h"
 #include "bucket.h"
+#include "assistantFunctions.h"
 
 using  namespace std;
 
-int main() {
+int main(int argc, char **argv) {
     std::cout << "Hello, World!\n" << std::endl;
 
+    ArgumentsKeeper argmKeeper;
+    ArgmParser(argc, argv , argmKeeper);
 
+    argmKeeper.printArgs();
+
+    exit(1);
 //    //todo call linked list
 //    linkedList<int> llist;
 //    llist.insert_last(1);
@@ -136,9 +143,9 @@ int main() {
 //
 ////        cout << array;
 //
-        delete  newBucket0;
-        delete  newBucket1;
-        delete  newBucket2;
+    delete  newBucket0;
+    delete  newBucket1;
+    delete  newBucket2;
 ////        array = nullptr;
 ////    cout<<listForBuckets<<endl;
 

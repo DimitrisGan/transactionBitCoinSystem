@@ -151,6 +151,17 @@ ostream& operator<<(ostream &os, const myString &string) {
     return os;
 }
 
+
+std::istream& operator>> (std::istream& is, myString& s)
+{
+    char* c = new char[100];
+    is >> c;
+    s.setMyStr(c);
+    delete[] c;
+
+    return is;
+}
+
 //void myString::makeOneToken(char delimeter) {
 //    char* token = strtok(this->myStr, "-"); //todo ???
 //}
