@@ -80,15 +80,16 @@ int main() {
 
 
 //PAIZEI
-//    linkedList<bucket*> listForBuckets;
-////    unsigned recrodsAvailable = 2;
-//    bucket*  newBucket0 = new bucket (1);
-//    bucket*  newBucket1 = new bucket (2);
-//    bucket*  newBucket2 = new bucket (3);
-//    listForBuckets.insert_last(newBucket0);
-//    listForBuckets.insert_last(newBucket1);
-//    listForBuckets.insert_last(newBucket2);
+    linkedList<bucket*> listForBuckets;
+//    unsigned recrodsAvailable = 2;
+    bucket*  newBucket0 = new bucket (1);
+    bucket*  newBucket1 = new bucket (2);
+    bucket*  newBucket2 = new bucket (3);
+    listForBuckets.insert_last(newBucket0);
+    listForBuckets.insert_last(newBucket1);
+    listForBuckets.insert_last(newBucket2);
 
+/*
 
     //DEN PAIZEI
     linkedList<bucket> listForBucketsWRONG;
@@ -99,6 +100,7 @@ int main() {
     listForBucketsWRONG.insert_last(newBucket0W);
     listForBucketsWRONG.insert_last(newBucket1W);
 //    listForBucketsWRONG.insert_last(newBucket2W);
+*/
 
 
     linkedList<int> listOFints;
@@ -130,9 +132,9 @@ int main() {
 
 //        cout << array;
 
-//        delete  newBucket0;
-//        delete  newBucket1;
-//        delete  newBucket2;
+        delete  newBucket0;
+        delete  newBucket1;
+        delete  newBucket2;
 //        array = nullptr;
 //    cout<<listForBuckets<<endl;
 

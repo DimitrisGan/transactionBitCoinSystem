@@ -74,6 +74,7 @@ myString::myString(myString &right)
 {
     myStr = new char[right.size() + 1];
     strcpy(myStr, right.getMyStr());
+    len = right.size();
 }
 
 //************************************************
