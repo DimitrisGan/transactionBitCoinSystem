@@ -4,7 +4,28 @@
 
 #include "bucket.h"
 
-//bucket::bucket(int recordsToRemain) : recordsToRemain(recordsToRemain) {
+//bucket::bucket(int recordsRemain) : recordsRemain(recordsRemain) {
 //
 //  //todo
 //}
+
+
+
+bucket::bucket(unsigned RecordsCapacity)  {
+
+    this->recordsAvailableRemain = RecordsCapacity;
+
+    this->recordsArray = new myString [RecordsCapacity ];
+
+
+
+}
+
+bucket::~bucket() {
+//    delete  recordsArray;
+
+
+    delete [] recordsArray;
+    recordsArray= nullptr;
+}
+

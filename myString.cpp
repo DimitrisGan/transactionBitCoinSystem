@@ -24,8 +24,10 @@ myString::myString(char *sptr)  {
 
 myString::~myString() {
 
-    delete[] this->myStr;
+    if (len != 0)
+        delete [] this->myStr;
     this->myStr= nullptr;
+    len=0;
 
 }
 
@@ -122,8 +124,14 @@ unsigned myString::size() {
 
 void myString::setMyStr(char *myStr) {
 
-    this->myStr= new char[len + 1];
-    strcpy(this->myStr, myStr);
+    if (myStr != nullptr) {
+        this->myStr = new char[len + 1];
+        strcpy(this->myStr, myStr);
+    }
+    else{
+        this->myStr = nullptr;
+    }
+
 }
 
 //    ostream & operator << (ostream &out, myString &c)

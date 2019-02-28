@@ -11,13 +11,14 @@
 using namespace std;
 
 template <class T>
-struct node {
-    node(T data) : data(data), next(nullptr) {}
+struct l_node {
+
+    explicit l_node(T data) : data(data), next(nullptr) {}
     T data;
-    node<T> *next;
+    l_node<T> *next;
 
 
-    typedef node<T> node_type;
+    typedef l_node<T> node_type;
     typedef node_type* node_ptr;
 };
 
@@ -28,10 +29,10 @@ template <class T>
 class linkedList {
 
 private: //private attributes
-    node<T> *head;
-    node<T> *tail;
+    l_node<T> *head;
+    l_node<T> *tail;
 private: //private methods
-    node<T> *createNode(T data);
+    l_node<T> *createNode(T data);
 
     template<class U>
     friend std::ostream &operator<<(std::ostream &os, const linkedList<U> &rhs);
@@ -39,14 +40,15 @@ private: //private methods
 public:
     linkedList() : head(nullptr) ,tail(nullptr){};
     linkedList(const linkedList &rhs);
-    ~linkedList();
+
+    virtual ~linkedList();
 
     void insert_first(T data);
     void insert_last(T data);
 
     bool exists(T data) const;
-    node<T>* search(T data); //searches for a value in the linked list and returns the point to object that contains that value
-    node<T>* getNext(node<T> baseNode); //get next node
+    l_node<T>* search(T data); //searches for a value in the linked list and returns the point to object that contains that value
+    l_node<T>* getNext(l_node<T> baseNode); //get next l_node
 
 
     void remove(T data);
@@ -71,13 +73,13 @@ public:
 template <class T>
 class linkedList<T>:: Iterator{
 private:
-    node<T> *currPtr;
+    l_node<T> *currPtr;
 public:
     Iterator() = default;;
-     Iterator(node<T> *currPtr) : currPtr(currPtr) {}
+     Iterator(l_node<T> *currPtr) : currPtr(currPtr) {}
     virtual ~Iterator() = default;
 
-    Iterator& operator=(node<T>* pNode){currPtr = pNode;return *this;}
+    Iterator& operator=(l_node<T>* pNode){currPtr = pNode;return *this;}
 
 
     bool operator == (const Iterator &rhs) const { return currPtr == rhs.currPtr; }
@@ -140,8 +142,8 @@ template<class T>
 void linkedList<T>::clear () {
     if ( !isEmpty() ) { // List is not empty
 
-        node<T> *currPtr = head;
-        node<T> *tempPtr ;
+        l_node<T> *currPtr = head;
+        l_node<T> *tempPtr ;
         while (currPtr != nullptr) { // delete remaining nodes
             tempPtr = currPtr;
             currPtr = currPtr->next;
@@ -154,20 +156,20 @@ void linkedList<T>::clear () {
 }
 
 template<class T>
-node<T>* linkedList<T>::search(T keyData) { //searches for a value in the linked list and returns the point to object that contains that value
-    node<T>* nodePtr;
+l_node<T>* linkedList<T>::search(T keyData) { //searches for a value in the linked list and returns the point to object that contains that value
+    l_node<T>* nodePtr;
     bool found = false;
 
     nodePtr = head;
 
-    while((!found) && (nodePtr != nullptr)) //runs through list until data is found within a node or end of list is reached
+    while((!found) && (nodePtr != nullptr)) //runs through list until data is found within a l_node or end of list is reached
     {
-        if(nodePtr->data == keyData) //if the node's data equals the key then the node has been found
+        if(nodePtr->data == keyData) //if the l_node's data equals the key then the l_node has been found
             found = true;
         else
-            nodePtr = nodePtr->next; //moves to next node in list
+            nodePtr = nodePtr->next; //moves to next l_node in list
     }
-    return nodePtr; //returns pointer to the node that contains data equal to key (NULL if not found)
+    return nodePtr; //returns pointer to the l_node that contains data equal to key (NULL if not found)
 }
 
 //template <class T>
@@ -175,7 +177,7 @@ node<T>* linkedList<T>::search(T keyData) { //searches for a value in the linked
 //{
 //    if (this != &rhs)
 //    {
-//        node<T> *temp;
+//        l_node<T> *temp;
 //        while (head != NULL)
 //        {
 //            temp = head;
@@ -184,13 +186,13 @@ node<T>* linkedList<T>::search(T keyData) { //searches for a value in the linked
 //        }
 //
 //        if (rhs.head != NULL)
-//            head = new node<T>(rhs.head->data);
+//            head = new l_node<T>(rhs.head->data);
 //
-//        node<T> *tmpHead = head;
+//        l_node<T> *tmpHead = head;
 //
-//        for (node<T> *tmp = rhs.head->next; tmp != NULL; tmp = tmp->next)
+//        for (l_node<T> *tmp = rhs.head->next; tmp != NULL; tmp = tmp->next)
 //        {
-//            tmpHead->next = new node<T>(tmp->data);
+//            tmpHead->next = new l_node<T>(tmp->data);
 //            tmpHead = tmpHead->next;
 //        }
 //    }
@@ -227,7 +229,7 @@ template<class T>
 void linkedList<T>::insert_first(const T data)
 {
 
-    node<T> *temp = createNode(data);
+    l_node<T> *temp = createNode(data);
 
 
     if (isEmpty())
@@ -243,9 +245,9 @@ void linkedList<T>::insert_first(const T data)
         head = temp;
 
         //de thelw sto tail
-        //        node<T> *temp = head;
+        //        l_node<T> *temp = head;
         //        for (temp = head; temp->next != NULL; temp = temp->next);
-        //        temp->next = new node<T>(data);
+        //        temp->next = new l_node<T>(data);
     }
 }
 
@@ -257,12 +259,11 @@ void linkedList<T>::insert_last( T data)
 {
 
 
-    node<T> *temp = createNode(data);
+    l_node<T> *temp = createNode(data);
 
     if (isEmpty()){
         head=temp;
         tail=temp;
-        temp = nullptr;
     }
     else{
 
@@ -277,8 +278,8 @@ void linkedList<T>::insert_last( T data)
 
 //void delete_position(int pos)
 //{
-//    node *current=new node;
-//    node *previous=new node;
+//    l_node *current=new l_node;
+//    l_node *previous=new l_node;
 //    current=head;
 //    for(int i=1;i<pos;i++)
 //    {
@@ -295,7 +296,7 @@ bool linkedList<T>::exists(const T data) const
     if (isEmpty())
         return false;
 
-    for (node<T> *tmp = head; tmp != nullptr; tmp = tmp->next)
+    for (l_node<T> *tmp = head; tmp != nullptr; tmp = tmp->next)
         if (tmp->data == data)
             return true;
 
@@ -306,21 +307,21 @@ bool linkedList<T>::exists(const T data) const
 //void linkedList<T>::remove(const T data)
 //{
 //    bool removed = false;
-//    node<T> *curr = head;
-//    node<T> *prev = head;
+//    l_node<T> *curr = head;
+//    l_node<T> *prev = head;
 //
 //    for (; curr != NULL && removed == false; curr = curr->next)
 //    {
 //        if (head->data == data)
 //        {
-//            node<T> *tmp = head;
+//            l_node<T> *tmp = head;
 //            head = head->next;
 //            delete tmp;
 //            removed = true;
 //        }
 //        else if (curr->data == data)
 //        {
-//            node<T> *tmp = curr;
+//            l_node<T> *tmp = curr;
 //            prev->next = curr->next;
 //            delete tmp;
 //            removed = true;
@@ -333,6 +334,7 @@ template<class T>
 bool linkedList<T>::isEmpty() const
 {
     return head == nullptr && tail == nullptr; //if the start pointer and end pointer are NULL then the list is empty
+//    return head ==  tail ; //if the start pointer and end pointer are NULL then the list is empty
 }
 
 template<class T>
@@ -342,7 +344,7 @@ std::ostream & operator<<(std::ostream & os, const linkedList<T>& rhs)
         os << "EMPTY LIST";
 
     }
-    for (node<T> *temp = rhs.head; temp != nullptr; temp = temp->next)
+    for (l_node<T> *temp = rhs.head; temp != nullptr; temp = temp->next)
     {
         os << temp->data;
         if (temp->next != nullptr)
@@ -353,10 +355,10 @@ std::ostream & operator<<(std::ostream & os, const linkedList<T>& rhs)
 }
 
 template<class T>
-node<T> *linkedList<T>::createNode(T data) {
-    node<T> *temp = new node<T>(data);
-    temp->data = data;
-    temp->next = NULL;
+l_node<T> *linkedList<T>::createNode(T data) {
+    //todo an dothei gia data bucket object anti gia ptr trww seg ston destructor tou bucket
+    l_node<T> *temp = new l_node<T>(data);
+
     return temp;
 }
 

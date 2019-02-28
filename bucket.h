@@ -9,19 +9,45 @@
 #include "mylinkedList.h"
 #include "myString.h"
 
+
+
+
+
+//todo tha paiksei kai memcpy
 struct bucket{
     //todo
-    int recordsToRemain;
-    myString record; //walletId; //RECORD == walletId
+    unsigned recordsAvailableRemain;
+    myString* recordsArray; //walletId; //RECORD == walletId
 //    OXI GT EINAI TO LLIST KATALLHLO GI AUTObucket* next;
 
 
-    bucket(int recordsToRemain);
+//    bucket() {recordsAvailableRemain = 0;recordsArray= nullptr;};
+
+    explicit bucket(unsigned RecordsCapacity);
+    virtual ~bucket();
+    bucket& operator=(bucket right)
+    {
+        this->recordsArray = right.recordsArray;
+        this->recordsAvailableRemain= right.recordsAvailableRemain;
+        return *this;
+    }
+
+    bucket(bucket &right)
+    {
+        recordsArray = right.recordsArray ;
+         recordsAvailableRemain =right.recordsAvailableRemain;
+    }
+
+
+
 };
 
 //TODO EDW EXW MEINEI
 struct bucket_chain{
-    linkedList<bucket*> maybeBucketChain;
+    linkedList<bucket> maybeBucketChain;
+
+
+    //todo insertRecord2bucket(bucket );
 };
 
 

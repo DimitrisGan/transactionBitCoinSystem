@@ -28,7 +28,7 @@ struct KeyHash {
     }
 };
 
-// Hash node class template
+// Hash l_node class template
 template <typename K, typename V>
 class HashEntry {
 public:
@@ -100,6 +100,7 @@ public:
 
 
 
+    bool freeSpaceExist2insertRecordInBucket();
 
 //    bool get(const K &key, V &value)
 //    {
