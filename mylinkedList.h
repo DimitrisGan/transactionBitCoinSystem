@@ -40,7 +40,7 @@ private: //private methods
 
 public:
     linkedList() : head(nullptr) ,tail(nullptr){};
-    linkedList(const linkedList &rhs);
+    linkedList( linkedList &rhs);
 
     virtual ~linkedList();
 
@@ -87,7 +87,7 @@ public:
 
     bool operator != (const Iterator &rhs) const {
         if (currPtr != nullptr)
-            std::cout<<"SUGKRINEI : "<<currPtr->data << " $$ "<<rhs.currPtr->data<<endl;
+//            std::cout<<"SUGKRINEI : "<<currPtr->data << " $$ "<<rhs.currPtr->data<<endl;
         return currPtr != nullptr;
     }
 
@@ -122,10 +122,8 @@ public:
 
 
 
-
-
 template<class T>
-linkedList<T>::linkedList(const linkedList & rhs) : head(nullptr) ,tail(nullptr)
+linkedList<T>::linkedList( linkedList & rhs) : head(nullptr) ,tail(nullptr)
 {
     *this = rhs;
 }
@@ -227,11 +225,11 @@ linkedList<T> & linkedList<T>::operator=(const linkedList<T> &rhs)
 //===========================================================
 
 template<class T>
-void linkedList<T>::insert_first(const T data)
+void linkedList<T>::insert_first( T data)
 {
 
-//    l_node<T> *temp = createNode(data);
-    auto temp =  new l_node<T>(data);//createNode(data);
+    l_node<T> *temp = createNode(data);
+//    auto temp =  new l_node<T>(data);//createNode(data);
 
 
     if (isEmpty())
@@ -363,6 +361,8 @@ l_node<T> *linkedList<T>::createNode(T data) {
 
     return temp;
 }
+
+
 
 
 

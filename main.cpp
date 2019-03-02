@@ -9,11 +9,18 @@ using  namespace std;
 
 int main(int argc, char **argv) {
     std::cout << "Hello, World!\n" << std::endl;
+/*
 
     ArgumentsKeeper argmKeeper;
     ArgmParser(argc, argv , argmKeeper);
 
     argmKeeper.printArgs();
+*/
+
+
+
+
+    //todo parse the files and save them
 
     exit(1);
 //    //todo call linked list
