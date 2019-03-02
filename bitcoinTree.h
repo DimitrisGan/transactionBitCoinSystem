@@ -21,18 +21,25 @@
 
 struct t_node{
 
+    virtual ~t_node();
+
     myString walletId;
     int amount;
     struct t_node *left; // the receiver user/walletId with the amount that gets
     struct t_node *right; // the sender user/walletId (same as parent walletId) with the remainder amount
+
+    void fillNode( myString id, int amount , t_node* left , t_node* right );
 };
 
-class btree{
+class btc_tree{
 public:
-    btree();
-    ~btree();
+    btc_tree( myString initWalletIdOwner , int initialBtcValue);
+    ~btc_tree();
 
-    void insert(myString walletId ,int amount); //inserts one t_node
+    t_node *getRoot() const;
+
+    void insert(myString senderWalletId, myString receiverWalletId, int amount);
+
     t_node *search(int key);
     void destroy_tree();
 
@@ -44,7 +51,8 @@ public:
 
 private:
     void destroy_tree(t_node *leaf);
-    void insert(myString senderWalletId ,myString receiverWalletId ,int amount, t_node *leaf);
+    void insert(myString receiverWalletID ,int amountToSend , t_node* senderNode); //inserts one t_node
+
     t_node *search(int key, t_node *leaf);
 
 

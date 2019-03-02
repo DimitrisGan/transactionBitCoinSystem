@@ -13,7 +13,7 @@
 struct bitcoinInfo{
     myString id;
     //todo pointer to a tree
-    btree * transactionTree_ptr;
+    btc_tree * transactionTree_ptr;
 
 };
 

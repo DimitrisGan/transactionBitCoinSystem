@@ -2,27 +2,33 @@
 // Created by dimitrisgan on 2/3/2019.
 //
 
+#include <assert.h>
 #include "bitcoinTree.h"
 
 
-btree::btree(){
-    root = nullptr;
-    //todo logika arxikopoihsh me to walletID tou prwtou katoxou kai valuw thn arxikh timh t
+btc_tree::btc_tree( myString initWalletIdOwner , int initialBtcValue){
+
+    root = new t_node;
+    root->fillNode(initWalletIdOwner,initialBtcValue, nullptr, nullptr);
 
 }
 
-btree::~btree(){
-//    destroy_tree();
+btc_tree::~btc_tree(){
+//todo    destroy_tree();
 }
 
-//void btree::destroy_tree(t_node *leaf){
-//    if(leaf != NULL){
-//        destroy_tree(leaf->left);
-//        destroy_tree(leaf->right);
-//        delete leaf;
-//    }
-//}
+void btc_tree::destroy_tree(t_node *leaf){
+    if(leaf != nullptr){
+        destroy_tree(leaf->left);
+        destroy_tree(leaf->right);
+        delete leaf;
+    }
+}
 
+t_node::~t_node() {
+//    delete walletId;
+
+}
 
 // function to print leaf
 // nodes from left to right
@@ -65,11 +71,16 @@ void searchKeyIdFromLeafs(myString keyWalletId, linkedList<t_node*> &leafs_list,
 
 }
 
-//
-//
 
-//void insert(myString walletId ,int amount, t_node *leaf);
-void btree::insert(myString senderWalletId ,myString receiverWalletId ,int amount, t_node *leaf){
+
+
+
+
+//
+//
+/*basically inserts all the amount asked for the transcation in the tree.
+ * Thus,it can add more than 1 node in the tree*/
+void btc_tree::insert(myString senderWalletId, myString receiverWalletId, int amount){
 
 //    if ( leaf->amount < amount){ // lathos
 //        fprintf(stderr, "Can't divide-send the bitcoin into pieces ");
@@ -87,58 +98,104 @@ void btree::insert(myString senderWalletId ,myString receiverWalletId ,int amoun
     //todo
     //todo
     //todo
-//
-//    if(key < leaf->value){
-//        if(leaf->left != NULL){
-//            insert(key, leaf->left);
-//        }else{
-//            leaf->left = new t_node;
-//            leaf->left->value = key;
-//            leaf->left->left = NULL;
-//            leaf->left->right = NULL;
-//        }
-//    }else if(key >= leaf->value){
-//        if(leaf->right != NULL){
-//            insert(key, leaf->right);
-//        }else{
-//            leaf->right = new t_node;
-//            leaf->right->value = key;
-//            leaf->right->right = NULL;
-//            leaf->right->left = NULL;
-//        }
-//    }
+    int amountLeft = amount;
+    for (const auto &senderLeafNode : found_list) {
+        //todo insert node here
+        if ( amountLeft <= senderLeafNode->amount){ //means that we only need one node too add
+            //and also that will take only the amountLeft2add because is less than the potential amount to give
+            //todo digNode() - createNode()
+            //todo add2Tree()
+            insert(receiverWalletId ,amountLeft , senderLeafNode);
+            amountLeft = 0;
+            break;
+
+        }
+        else{ //means that the amount of the node is not enough we need to add another node
+            //todo digNode() - createNode()
+            //todo add2Tree()
+            insert(receiverWalletId ,senderLeafNode->amount /*node can give only the amount that contains*/ , senderLeafNode);
+            amountLeft = amountLeft - senderLeafNode->amount;
+            continue;
+        }
+
+
+    }
+
+    assert(amountLeft == 0);
+
+
 
 }
-//
-//void btree::insert(myString walletId ,int amount){
+
+
+void t_node::fillNode( myString id, int amount , t_node* left , t_node* right ){
+
+    this->walletId = id;
+    this->amount = amount;
+    this->left = left;
+    this->right = right;
+
+}
+
+
+
+/*digs the given node
+ * and inserts 2 nodes
+ * Left  : the receiver user
+ * Right : the remain amount of sender user
+ * */
+void btc_tree::insert(myString receiverWalletID ,int amountToSend , t_node* senderNode) //inserts 2 t_node
+{
+//lathos o root de tha nai null
 //    if(root != nullptr){
 //        insert(key, root);
 //    }else{
-//        root = new t_node;
-//        root->walletId = walletId;
-//        root->amount = amount;
-//        root->left = nullptr;
-//        root->right = nullptr;
-//    }
-//}
+    senderNode->left = new t_node;
+
+//    senderNode->left->walletId = receiverWalletID;
+//    senderNode->left->amountToSend = ;
+//    senderNode->left->left = nullptr ;
+//    senderNode->left->right = nullptr ;
+
+    senderNode->left->fillNode(receiverWalletID,amountToSend, nullptr, nullptr);
+
+
+    int amountRemain = senderNode->amount - amountToSend;
+    assert(amountRemain >=0);
+
+    senderNode->right = new t_node;
+//    senderNode->right->walletId = senderNode->walletId;
+//    senderNode->right->amountToSend = ;
 //
+//    senderNode->right->left = nullptr ;
+//    senderNode->right->right = nullptr ;
+//
+
+    senderNode->right->fillNode(senderNode->walletId , amountRemain , nullptr , nullptr);
+}
+
+t_node *btc_tree::getRoot() const {
+    return root;
+}
+
+
 
 
 //
-//t_node *btree::searchKeyIdFromLeafs(int key){
+//t_node *btc_tree::searchKeyIdFromLeafs(int key){
 //    return searchKeyIdFromLeafs(key, root);
 //}
 //
-//void btree::destroy_tree(){
+//void btc_tree::destroy_tree(){
 //    destroy_tree(root);
 //}
 //
-//void btree::inorder_print(){
+//void btc_tree::inorder_print(){
 //    inorder_print(root);
 //    cout << "\n";
 //}
 //
-//void btree::inorder_print(t_node *leaf){
+//void btc_tree::inorder_print(t_node *leaf){
 //    if(leaf != NULL){
 //        inorder_print(leaf->left);
 //        cout << leaf->value << ",";
@@ -146,12 +203,12 @@ void btree::insert(myString senderWalletId ,myString receiverWalletId ,int amoun
 //    }
 //}
 //
-//void btree::postorder_print(){
+//void btc_tree::postorder_print(){
 //    postorder_print(root);
 //    cout << "\n";
 //}
 //
-//void btree::postorder_print(t_node *leaf){
+//void btc_tree::postorder_print(t_node *leaf){
 //    if(leaf != NULL){
 //        inorder_print(leaf->left);
 //        inorder_print(leaf->right);
@@ -159,12 +216,12 @@ void btree::insert(myString senderWalletId ,myString receiverWalletId ,int amoun
 //    }
 //}
 //
-//void btree::preorder_print(){
+//void btc_tree::preorder_print(){
 //    preorder_print(root);
 //    cout << "\n";
 //}
 //
-//void btree::preorder_print(t_node *leaf){
+//void btc_tree::preorder_print(t_node *leaf){
 //    if(leaf != NULL){
 //        cout << leaf->value << ",";
 //        inorder_print(leaf->left);

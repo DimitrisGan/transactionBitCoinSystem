@@ -4,6 +4,7 @@
 #include "myString.h"
 #include "bucket.h"
 #include "assistantFunctions.h"
+#include "bitcoinTree.h"
 
 using  namespace std;
 
@@ -17,11 +18,25 @@ int main(int argc, char **argv) {
     argmKeeper.printArgs();
 */
 
+    char* firstWalletId = const_cast<char *>("Owner!");
+    myString rootakos (firstWalletId);
+    char* firstReceivertId = const_cast<char *>("1st Receiver!");
+    myString receiver1 (firstReceivertId);
+    char* secondReceivertId = const_cast<char *>("2st Receiver!");
+    myString receiver2 (secondReceivertId);
+    char* thirdReceivertId = const_cast<char *>("3rd Receiver!");
+    myString receiver3 (thirdReceivertId);
 
+    btc_tree myFirstBtcTree (rootakos,50);
 
-
+//    void insert(myString senderWalletId, myString receiverWalletId, int amount);
+    myFirstBtcTree.insert(rootakos , receiver1 , 10 ); //inserts one t_node
     //todo parse the files and save them
 
+    myFirstBtcTree.insert(rootakos , receiver2 , 20 );
+    myFirstBtcTree.insert(receiver1 , receiver3 , 10 );
+
+cout <<"end\n";
     exit(1);
 //    //todo call linked list
 //    linkedList<int> llist;
