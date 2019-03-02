@@ -36,8 +36,18 @@ int main(int argc, char **argv) {
     myFirstBtcTree.insert(rootakos , receiver2 , 20 );
     myFirstBtcTree.insert(receiver1 , receiver3 , 10 );
 
-cout <<"end\n";
+
+    cout<< "Size of myString :"<< sizeof(myString)<<endl;
+
+    int BucketSize = 1024;
+    unsigned numberOfRecordsInBucket = BucketSize/sizeof(record<myString>);
+    cout <<"numberOfRecords : " <<numberOfRecordsInBucket<<endl;
+
+    bucket<myString> myFirstBucket (numberOfRecordsInBucket);
+
+
     exit(1);
+    cout <<"end\n";
 //    //todo call linked list
 //    linkedList<int> llist;
 //    llist.insert_last(1);
@@ -94,31 +104,31 @@ cout <<"end\n";
 */
 /*test myString*/
 
-    char* ch = const_cast<char *>("hello1!");
-    char* ch2 = const_cast<char *>("hello!");
-    myString myS (ch);
-    myString myS2 (ch2);
-    bool val = myS2 == ch ;
-    cout << val<<endl;
-    cout << myS.size();
-
-    linkedList<myString> llistString;
-    llistString.insert_last(myS);
-    llistString.insert_last(myS2);
-
-
-    cout<< llistString<<endl;
+//    char* ch = const_cast<char *>("hello1!");
+//    char* ch2 = const_cast<char *>("hello!");
+//    myString myS (ch);
+//    myString myS2 (ch2);
+//    bool val = myS2 == ch ;
+//    cout << val<<endl;
+//    cout << myS.size();
 //
-//*/
-//PAIZEI
-    linkedList<bucket*> listForBuckets;
-//    unsigned recrodsAvailable = 2;
-    auto *  newBucket0 = new bucket (1);
-    auto *  newBucket1 = new bucket (2);
-    bucket*  newBucket2 = new bucket (3);
-    listForBuckets.insert_last(newBucket0);
-    listForBuckets.insert_last(newBucket1);
-    listForBuckets.insert_last(newBucket2);
+//    linkedList<myString> llistString;
+//    llistString.insert_last(myS);
+//    llistString.insert_last(myS2);
+//
+//
+//    cout<< llistString<<endl;
+////
+////*/
+////PAIZEI
+//    linkedList<bucket*> listForBuckets;
+////    unsigned recrodsAvailable = 2;
+//    auto *  newBucket0 = new bucket (1);
+//    auto *  newBucket1 = new bucket (2);
+//    bucket*  newBucket2 = new bucket (3);
+//    listForBuckets.insert_last(newBucket0);
+//    listForBuckets.insert_last(newBucket1);
+//    listForBuckets.insert_last(newBucket2);
 
 //
 //
@@ -165,9 +175,9 @@ cout <<"end\n";
 //
 ////        cout << array;
 //
-    delete  newBucket0;
-    delete  newBucket1;
-    delete  newBucket2;
+//    delete  newBucket0;
+//    delete  newBucket1;
+//    delete  newBucket2;
 ////        array = nullptr;
 ////    cout<<listForBuckets<<endl;
 

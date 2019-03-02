@@ -11,31 +11,49 @@
 
 
 
+int globo=0;
+int globo2=0;
 
 
-//todo tha paiksei kai memcpy
+template <class T>
+struct record{
+    myString walletId;
+    linkedList<T> *ptr2transactionLlist;
+};
+
+template <class T>
 struct bucket{
-    //todo
     unsigned recordsAvailableRemain;
-    myString* recordsArray; //walletId; //RECORD == walletId
-//    OXI GT EINAI TO LLIST KATALLHLO GI AUTObucket* next;
+    record<T> *recordTable;
 
 
-//    bucket() {recordsAvailableRemain = 0;recordsArray= nullptr;};
+    explicit bucket(unsigned RecordsCapacity){
+        cout << "CONSTRUCTOR OF BUCKET IS CALLED #"<<globo2++ <<endl;
 
-    explicit bucket(unsigned RecordsCapacity);
-    virtual ~bucket();
+        this->recordsAvailableRemain = RecordsCapacity;
+
+        this->recordTable = new record<T> [RecordsCapacity ];
+
+    }
+    virtual ~bucket(){
+        //    delete  recordsArray;
+
+        cout << "DESTRUCTOR OF BUCKET IS CALLED #"<<globo++ <<endl;
+        this->recordsAvailableRemain=0;
+        delete  [] recordTable;
+        recordTable= nullptr;
+    }
     bucket& operator=(bucket right)
     {
 
-        this->recordsArray = right.recordsArray;
+        this->recordTable = right.recordTable;
         this->recordsAvailableRemain= right.recordsAvailableRemain;
         return *this;
     }
 
     bucket(bucket &right)
     {
-        recordsArray = right.recordsArray ;
+        recordTable = right.recordTable ;
         recordsAvailableRemain =right.recordsAvailableRemain;
     }
 
@@ -43,13 +61,21 @@ struct bucket{
 
 };
 
-//TODO EDW EXW MEINEI
+template <class T>
+
 struct bucket_chain{
-    linkedList<bucket> maybeBucketChain;
+    linkedList<bucket<T>> maybeBucketChain;
 
 
     //todo insertRecord2bucket(bucket );
 };
+
+
+
+
+
+
+
 
 
 #endif //TRANSACTIONBITCOINSYSTEM_BUCKET_H
