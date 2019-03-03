@@ -11,8 +11,7 @@
 #include "bitcoinTree.h"
 
 struct bitcoinInfo{
-    myString id;
-    //todo pointer to a tree
+    myString id; //btcId
     btc_tree * transactionTree_ptr;
 
 };
@@ -20,17 +19,12 @@ struct bitcoinInfo{
 
 struct wallet{
     myString id ; // aka userName
-    int remainder;
-    linkedList<bitcoinInfo> bitcoinOwned_list;
+    int balance;
+    linkedList<bitcoinInfo> btcOwned_list;
+    linkedList<int> amountOnEachBtc;
     //todo prepei na krataw kai ta percentages tou kathe bitcoin
 };
 
-
-//todo
-struct bitCoin_amountOwnership_relation{
-    bitcoinInfo btc;
-    double amountOwned;
-};
 
 
 #endif //TRANSACTIONBITCOINSYSTEM_WALLET_H

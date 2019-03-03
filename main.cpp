@@ -40,14 +40,15 @@ int main(int argc, char **argv) {
     cout<< "Size of myString :"<< sizeof(myString)<<endl;
 
     int BucketSize = 1024;
-    unsigned numberOfRecordsInBucket = BucketSize/sizeof(record<myString>);
+    unsigned numberOfRecordsInBucket = BucketSize/sizeof(record<myString ,myString>);
     cout <<"numberOfRecords : " <<numberOfRecordsInBucket<<endl;
 
-    bucket<myString> myFirstBucket (numberOfRecordsInBucket);
+    bucket<myString,myString> myFirstBucket (numberOfRecordsInBucket);
 
+//    myFirstBucket.insertNewRecord()
 
-    exit(1);
     cout <<"end\n";
+    exit(1);
 //    //todo call linked list
 //    linkedList<int> llist;
 //    llist.insert_last(1);

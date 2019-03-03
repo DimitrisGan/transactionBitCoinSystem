@@ -15,5 +15,4 @@ add_executable(transactionBitCoinSystem
         mylinkedList.h
         myString.cpp
         myString.h
-        walletStructure.cpp
-        walletStructure.h hashFunction.h bucket.tpp bucket.h wallet&BitcoinInfo.cpp wallet&BitcoinInfo.h ErrorsCodes.h bitcoinTree.cpp bitcoinTree.h)
+        hashFunction.h bucket.tpp bucket.h wallet&BitcoinInfo.cpp wallet&BitcoinInfo.h ErrorsCodes.h bitcoinTree.cpp bitcoinTree.h myBucket.tpp myBucket.h)

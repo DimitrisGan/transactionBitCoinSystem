@@ -5,6 +5,8 @@
 #ifndef TRANSACTIONBITCOINSYSTEM_MYHASHTABLE_H
 #define TRANSACTIONBITCOINSYSTEM_MYHASHTABLE_H
 
+#include "bucket.h"
+
 unsigned hashFunction(char *str, int size_of_table);
 
 
@@ -28,59 +30,32 @@ struct KeyHash {
     }
 };
 
-// Hash l_node class template
-template <typename K, typename V>
-class HashEntry {
-public:
-    HashEntry(const K &key, const V &value) :
-            key(key), value(value) {
-    }
-
-    K getKey() const {
-        return key;
-    }
-
-    V getValue() const {
-        return value;
-    }
-
-    void setValue(V value) {
-        HashEntry::value = value;
-    }
-
-
-
-private:
-    // key-value pair
-    K key;
-    V value;
-};
-
-
-
-
-
-
-///todo ayrio tha ulopoihsw to katw me voitheia tou panw gia ta templates
-//todo2 getopt()
-// *********************************************
-
 
 
 //template <typename K, typename V>
-template <typename K, typename V, unsigned tableSize, typename F = KeyHash<K, tableSize> >
+
+// T = bucket type
+/*
+ * T : is the bucket_chain type to choose
+ * U : is the type of the bucket
+ * */
+template < /*typeOfRecord*/typename T,typename U, unsigned tableSize,unsigned bucketSizeInBytes, typename F = KeyHash< /*key=*/myString, tableSize> >
 class HashMap {
 
 private:
 
-    HashEntry<K,V> **table;
+    bucket_chain<T,bucketSizeInBytes> *table;
     F hashFunc;
+
+//    unsigned maxNumberOfRecordsInBucket;
+//    unsigned tableSize;
 
 public:
 
-    HashMap() {
+    HashMap(unsigned bucketSize) {
 
-        table = new HashEntry<K, V> *[tableSize];
+
+        table = new bucket_chain<T , bucketSizeInBytes>  [tableSize] ;
 
         for (int i = 0; i < tableSize; i++)
             table[i] = nullptr; //todo maybe initialize the pointer
@@ -95,6 +70,18 @@ public:
                 delete table[i];
 
         delete[] table;
+
+    }
+
+
+    void insertInHT(T key) {
+        //todo pairnw to key kai to xwnw sto appropriate bucket chain
+
+        int indexHash = hashFunc(key);
+        if (table[indexHash] == nullptr) //if table[index] is null then we have to initialize a bucket chain
+            table[indexHash] = new bucket_chain<T,bucketSizeInBytes> ;
+
+        table[indexHash].insertRecordInChain(key);
 
     }
 
@@ -142,13 +129,7 @@ public:
 };
 
 
-
-
-
-
-
-
-
+#include "mylinkedList.tpp"
 
 
 
