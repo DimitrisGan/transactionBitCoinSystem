@@ -48,7 +48,7 @@ public:
     void insert_last(T data);
 
     bool exists(T data) const;
-//    l_node<T>* search(T data); //searches for a value in the linked list and returns the point to object that contains that value
+    l_node<T>* search(T data); //searches for a value in the linked list and returns the point to object that contains that value
 //    l_node<T>* getNext(l_node<T> baseNode); //get next l_node
 
 

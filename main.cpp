@@ -40,10 +40,10 @@ int main(int argc, char **argv) {
     cout<< "Size of myString :"<< sizeof(myString)<<endl;
 
     int BucketSize = 1024;
-    unsigned numberOfRecordsInBucket = BucketSize/sizeof(record<myString ,myString>);
-    cout <<"numberOfRecords : " <<numberOfRecordsInBucket<<endl;
+//    unsigned numberOfRecordsInBucket = BucketSize/sizeof(record<myString ,myString>);
+//    cout <<"numberOfRecords : " <<numberOfRecordsInBucket<<endl;
 
-    recordsBucket<myString,myString> myFirstBucket (numberOfRecordsInBucket);
+//    recordsBucket<myString,myString> myFirstBucket (numberOfRecordsInBucket);
 
 //    myFirstBucket.insertNewRecord()
 

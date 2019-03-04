@@ -12,8 +12,8 @@
 #include "bitcoinTree.h"
 
 
-int globo=0;
-int globo2=0;
+//int globo=0;
+//int globo2=0;
 
 //template <class U ,class B>
 
@@ -68,7 +68,7 @@ struct recordsBucket{
 
 
     explicit recordsBucket(unsigned RecordsCapacity){
-        cout << "CONSTRUCTOR OF BUCKET IS CALLED #"<<globo2++ <<endl;
+        cout << "CONSTRUCTOR OF BUCKET IS CALLED #" <<endl;
 
         this->recordsMaxCapacity = RecordsCapacity;
 
@@ -80,7 +80,7 @@ struct recordsBucket{
     virtual ~recordsBucket(){
         //    delete  recordsArray;
 
-        cout << "DESTRUCTOR OF BUCKET IS CALLED #"<<globo++ <<endl;
+        cout << "DESTRUCTOR OF BUCKET IS CALLED #" <<endl;
         this->recordsAlreadyExist=0;
         delete  [] recordTable;
         recordTable= nullptr;
@@ -168,8 +168,8 @@ struct recordsBucket_chain{
 
     virtual ~recordsBucket_chain() = default;
 
-    bool recordExistInChain(const myString &key ) {
-        for (const auto &bucket : bucketsList) { //todo tsekarw gia kathe bucket an uparxei
+    bool recordExistInChain( myString key ) {
+        for ( auto &bucket : bucketsList) { //todo tsekarw gia kathe bucket an uparxei
             if (bucket.recordExist(key)) {                //todo an uparxei tote ....
                 return true;
             }
@@ -218,7 +218,7 @@ struct recordsBucket_chain{
             //todo if not ftiakse overflow bucket kai kanw insert to recors sto kainourgio bucket
             if (! bucketChainIsFull()) { //insert a new record
 
-                for (const auto &bucket : this->bucketsList) {
+                for ( auto &bucket : this->bucketsList) {
                     if(!bucket.isFull()){
                         bucket.insertNewRecord(key,newNode);
                     }

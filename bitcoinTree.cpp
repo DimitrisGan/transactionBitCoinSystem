@@ -143,8 +143,12 @@ t_node& t_node::operator=(const t_node &rhs) {
     return *this;
 }
 
-bool t_node::operator!=(const t_node &rhs) const {
+bool t_node::operator!=( t_node rhs)  {
     return !(rhs == *this);
+}
+
+bool t_node::operator==(t_node rhs) {
+    return walletId == rhs.walletId && amount == rhs.amount && left ==rhs.left && right == rhs.right;
 }
 
 

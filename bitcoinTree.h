@@ -32,9 +32,9 @@ struct t_node{
 
     t_node& operator=(const t_node &rhs);
 
-//    bool operator==(const t_node &rhs) const;
+    bool operator==( t_node rhs) ;
 
-    bool operator!=(const t_node &rhs) const;
+    bool operator!=( t_node rhs) ;
 };
 
 class btc_tree{
