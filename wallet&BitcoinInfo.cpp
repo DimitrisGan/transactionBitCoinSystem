@@ -11,3 +11,36 @@ bool wallet::operator==(const wallet &rhs) const {
 bool wallet::operator!=(const wallet &rhs) const {
     return !(rhs == *this);
 }
+
+
+void wallet::setBalance(int balance) {
+    wallet::balance = balance;
+}
+
+void wallet::setBtcIdsOwned_list(const linkedList<myString> &btcIdsOwned_list) {
+    wallet::btcIdsOwned_list = btcIdsOwned_list;
+}
+
+void wallet::setAmountOnEachBtc(const linkedList<int> &amountOnEachBtc) {
+    wallet::amountOnEachBtc = amountOnEachBtc;
+}
+
+wallet::wallet( myString id, int balance,  linkedList<myString> btcIdsOwned_list,
+                linkedList<int> amountOnEachBtc) : id(id), balance(balance), btcIdsOwned_list(btcIdsOwned_list),
+                                                         amountOnEachBtc(amountOnEachBtc) {}
+
+
+//===========================================================================================
+//===========================================================================================
+
+bool bitcoin::operator==( bitcoin &rhs)  {
+    return id == rhs.id;
+}
+
+bool bitcoin::operator!=( bitcoin &rhs)  {
+    return !(rhs == *this);
+}
+
+
+bitcoin::bitcoin( myString id, btc_tree *transactionTree_ptr) : id(id), transactionTree_ptr(
+        transactionTree_ptr) {}

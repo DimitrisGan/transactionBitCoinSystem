@@ -5,6 +5,9 @@
 #include "recordsBucket.h"
 #include "assistantFunctions.h"
 #include "bitcoinTree.h"
+#include "wallet&BitcoinInfo.h"
+#include "myBucket.h"
+#include "myHashMap.h"
 
 using  namespace std;
 
@@ -66,6 +69,36 @@ int main(int argc, char **argv) {
 //    recordsBucket_chain<100> transBucketChain;
 //    transBucketChain.insert(key,myTransNode);
 //    bool test = transBucketChain.bucketChainIsFull();
+
+    struct MyKeyHash hash;
+
+    char* key1 = const_cast<char *>("testWalletId!");
+    char* key2 = const_cast<char *>("testBtcId!");
+    myString walletId (key1);
+    myString btcId (key2);
+    linkedList <myString> btcL;
+    linkedList <int> amountL;
+    wallet testWallet(walletId,5,btcL,amountL);
+
+//    template < typename T, /*type of bucketChain*/unsigned tableSize, typename F = KeyHash< /*key=*/myString, tableSize> >
+    myHashMap< myBucket_chain<wallet> , 100 , MyKeyHash > ht;
+    myHashMap< myBucket_chain<bitcoin> , 100 , MyKeyHash > htBtc;
+
+    btc_tree *btcPtr = new btc_tree( walletId , 200);
+
+    bitcoin btc(btcId,btcPtr);
+
+
+    int index = static_cast<int>(ht.getHashFunc()(201));
+
+    ht.getTable()[index].insert(testWallet);
+    htBtc.getTable()[index].insert(btc);
+    htBtc.getTable()[index].insert(btc);
+
+    cout << "index :"<<index <<endl;
+
+
+
 
     cout <<"end\n";
     exit(1);

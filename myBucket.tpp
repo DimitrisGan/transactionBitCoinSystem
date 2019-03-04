@@ -23,11 +23,11 @@ void myBucket<T>::set_data(T _data) {
 }
 
 template<typename T>
-bool myBucket<T>::operator==(const myBucket &rhs) const {
-    return _data == rhs._data;
+bool myBucket<T>::operator==(T &data)  {
+    return _data == data;
 }
 
 template<typename T>
-bool myBucket<T>::operator!=(const myBucket &rhs) const {
-    return !(rhs == *this);
+bool myBucket<T>::operator!=(T &data)  {
+    return !(data == *this);
 }

@@ -24,9 +24,9 @@ struct myBucket{
 
 
     //todo overload == , =
-    bool operator==(const myBucket &rhs) const;
+    bool operator==(T &data) ;
 
-    bool operator!=(const myBucket &rhs) const;
+    bool operator!=(T &data) ;
 
 };
 

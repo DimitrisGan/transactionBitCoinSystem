@@ -8,12 +8,18 @@
 
 #include "myString.h"
 #include "mylinkedList.h"
+#include "bitcoinTree.h"
 
-//struct bitcoinInfo{
-//    myString id; //btcId
-//    btc_tree * transactionTree_ptr;
-//
-//};
+struct bitcoin{
+    myString id; //btcId
+    btc_tree * transactionTree_ptr;
+
+    bitcoin( myString id, btc_tree *transactionTree_ptr);
+
+    bool operator==( bitcoin &rhs) ;
+
+    bool operator!=( bitcoin &rhs) ;
+};
 
 
 struct wallet{
@@ -21,6 +27,15 @@ struct wallet{
     int balance;
     linkedList<myString> btcIdsOwned_list;
     linkedList<int> amountOnEachBtc;
+
+    wallet( myString id, int balance,  linkedList<myString> btcIdsOwned_list,
+            linkedList<int> amountOnEachBtc);
+
+    void setBalance(int balance);
+
+    void setBtcIdsOwned_list(const linkedList<myString> &btcIdsOwned_list);
+
+    void setAmountOnEachBtc(const linkedList<int> &amountOnEachBtc);
 
     bool operator==(const wallet &rhs) const;
 
