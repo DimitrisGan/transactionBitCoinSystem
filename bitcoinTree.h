@@ -32,7 +32,7 @@ struct t_node{
 
     t_node& operator=(const t_node &rhs);
 
-    bool operator==(const t_node &rhs) const;
+//    bool operator==(const t_node &rhs) const;
 
     bool operator!=(const t_node &rhs) const;
 };
@@ -74,37 +74,6 @@ private:
 void  getLeafs(t_node *root , linkedList<t_node*>  &leafs_list);
 void searchKeyIdFromLeafs(myString keyWalletId, linkedList<t_node*> &leafs_list, linkedList<t_node*> &found_list);
 
-//template <typename T>
-//class Tree;
-//
-//template <typename T>
-//class t_node
-//{
-//    friend class Tree<T>;
-//
-//public:
-//    t_node(T);
-//    T getData(); //returns data stored in t_node
-//
-//private:
-//    T data;
-//    t_node* leftPtr; //pointer to left child t_node of t_node
-//    t_node* rightPtr; //pointer to right child t_node of t_node
-//};
-//
-//template <typename T>
-//t_node<T>::t_node(T dataIn)
-//{
-//    data = dataIn;
-//    leftPtr = 0; //pointer to left and right child nodes are initilized to NULL
-//    rightPtr = 0;
-//}
-//
-//template <typename T>
-//T t_node<T>::getData()
-//{
-//    return data;
-//}
 
 
 #endif //TRANSACTIONBITCOINSYSTEM_BITCOINTREE_H

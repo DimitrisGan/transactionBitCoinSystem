@@ -2,9 +2,9 @@
 // Created by dimitrisgan on 27/2/2019.
 //
 
-#include "transacBucket.h"
+#include "recordsBucket.h"
 
-//transacBucket::transacBucket(int recordsRemain) : recordsRemain(recordsRemain) {
+//recordsBucket::recordsBucket(int recordsRemain) : recordsRemain(recordsRemain) {
 //
 //  //todo
 //}

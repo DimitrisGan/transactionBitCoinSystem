@@ -6,7 +6,7 @@
 #define TRANSACTIONBITCOINSYSTEM_MYHASHMAP_H
 
 
-#include "transacBucket.h"
+#include "recordsBucket.h"
 
 unsigned hashFunction(char *str, int size_of_table);
 
@@ -35,17 +35,17 @@ struct KeyHash {
 
 //template <typename K, typename V>
 
-// T = transacBucket type
+// T = recordsBucket type
 /*
- * T : is the transacBucket_chain type to choose
- * U : is the type of the transacBucket
+ * T : is the recordsBucket_chain type to choose
+ * U : is the type of the recordsBucket
  * */
 template < unsigned tableSize,unsigned bucketSizeInBytes, typename F = KeyHash< /*key=*/myString, tableSize> >
 class transactionHashMap {
 
 private:
 
-    transacBucket_chain<bucketSizeInBytes> *table;
+    recordsBucket_chain<bucketSizeInBytes> *table;
     F hashFunc;
 
 //    unsigned maxNumberOfRecordsInBucket;
@@ -56,7 +56,7 @@ public:
     transactionHashMap(unsigned bucketSize) {
 
 
-        table = new transacBucket_chain< bucketSizeInBytes>  [tableSize] ;
+        table = new recordsBucket_chain< bucketSizeInBytes>  [tableSize] ;
 
         for (int i = 0; i < tableSize; i++)
             table[i] = nullptr; //todo maybe initialize the pointer
@@ -74,13 +74,13 @@ public:
 
     }
 
-    void insertInTransacHT(myString key,transactionNode transacNode2Insert ){
+    void insertInTransacHT(myString key,transacNode transacNode2Insert ){
 
         int indexHash = hashFunc(key);
-        if (table[indexHash] == nullptr) //if table[index] is null then we have to initialize a transacBucket chain
-            table[indexHash] = new transacBucket_chain<bucketSizeInBytes> ;
+        if (table[indexHash] == nullptr) //if table[index] is null then we have to initialize a recordsBucket chain
+            table[indexHash] = new recordsBucket_chain<bucketSizeInBytes> ;
 
-        this->table[indexHash].insertNodeInChain(transacNode2Insert);
+        this->table[indexHash].insertNewRecord(transacNode2Insert);
     }
 
 

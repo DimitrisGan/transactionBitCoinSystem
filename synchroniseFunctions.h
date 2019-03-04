@@ -7,12 +7,20 @@
 
 
 
+struct insertSynchroniser{
+    //todo senderHT
+    //todo receiverHT
+    //todo walletHT
+    //todo btcHT
+
+    void insertTransaction(){};
+
+};
 
 
 
-void insertTransaction(myHashMap);
 
-void readSender();
+//void readSender(); lathos einai edw
 
 
 #endif //TRANSACTIONBITCOINSYSTEM_SYNCHRONISEFUNCTIONS_H

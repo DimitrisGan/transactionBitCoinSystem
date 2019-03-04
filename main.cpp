@@ -2,7 +2,7 @@
 #include <getopt.h>
 #include "mylinkedList.h"
 #include "myString.h"
-#include "transacBucket.h"
+#include "recordsBucket.h"
 #include "assistantFunctions.h"
 #include "bitcoinTree.h"
 
@@ -43,7 +43,7 @@ int main(int argc, char **argv) {
     unsigned numberOfRecordsInBucket = BucketSize/sizeof(record<myString ,myString>);
     cout <<"numberOfRecords : " <<numberOfRecordsInBucket<<endl;
 
-    transacBucket<myString,myString> myFirstBucket (numberOfRecordsInBucket);
+    recordsBucket<myString,myString> myFirstBucket (numberOfRecordsInBucket);
 
 //    myFirstBucket.insertNewRecord()
 
@@ -122,11 +122,11 @@ int main(int argc, char **argv) {
 ////
 ////*/
 ////PAIZEI
-//    linkedList<transacBucket*> listForBuckets;
+//    linkedList<recordsBucket*> listForBuckets;
 ////    unsigned recrodsAvailable = 2;
-//    auto *  newBucket0 = new transacBucket (1);
-//    auto *  newBucket1 = new transacBucket (2);
-//    transacBucket*  newBucket2 = new transacBucket (3);
+//    auto *  newBucket0 = new recordsBucket (1);
+//    auto *  newBucket1 = new recordsBucket (2);
+//    recordsBucket*  newBucket2 = new recordsBucket (3);
 //    listForBuckets.insert_last(newBucket0);
 //    listForBuckets.insert_last(newBucket1);
 //    listForBuckets.insert_last(newBucket2);
@@ -183,7 +183,7 @@ int main(int argc, char **argv) {
 ////    cout<<listForBuckets<<endl;
 
 
-    //todo 1# ftiaxnw to transacBucket apo ysvd
+    //todo 1# ftiaxnw to recordsBucket apo ysvd
 
 
     return 0;

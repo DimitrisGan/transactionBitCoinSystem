@@ -139,7 +139,7 @@ t_node& t_node::operator=(const t_node &rhs) {
     amount = rhs.amount;
     left = rhs.left ;
     right = rhs.right;
-    
+
     return *this;
 }
 

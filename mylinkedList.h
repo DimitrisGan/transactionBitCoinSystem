@@ -48,11 +48,11 @@ public:
     void insert_last(T data);
 
     bool exists(T data) const;
-    l_node<T>* search(T data); //searches for a value in the linked list and returns the point to object that contains that value
-    l_node<T>* getNext(l_node<T> baseNode); //get next l_node
+//    l_node<T>* search(T data); //searches for a value in the linked list and returns the point to object that contains that value
+//    l_node<T>* getNext(l_node<T> baseNode); //get next l_node
 
 
-    void remove(T data);
+//    void remove(T data);
     bool isEmpty() const;
     void clear();
 
@@ -357,7 +357,7 @@ std::ostream & operator<<(std::ostream & os, const linkedList<T>& rhs)
 
 template<class T>
 l_node<T> *linkedList<T>::createNode(T data) {
-    //todo an dothei gia data transacBucket object anti gia ptr trww seg ston destructor tou transacBucket
+    //todo an dothei gia data recordsBucket object anti gia ptr trww seg ston destructor tou recordsBucket
     l_node<T> *temp = new l_node<T>(data);
 
     return temp;
