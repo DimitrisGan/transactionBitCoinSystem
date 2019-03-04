@@ -93,6 +93,14 @@ myString& myString::operator=(myString right)
     return *this;
 }
 
+
+myString &myString::operator=(const myString &right)  {
+    myStr = new char[right.size() + 1];
+    strcpy(myStr, right.getMyStr());
+    len  = right.size();
+    return *this;
+}
+
 //***********************************************
 // Overloaded = operator. Called when operand   *
 // on the right is a string.                    *
@@ -119,7 +127,7 @@ char *myString::getMyStr() const {
     return myStr;
 }
 
-unsigned myString::size() {
+unsigned myString::size() const {
     return  len;
 }
 
@@ -161,6 +169,8 @@ std::istream& operator>> (std::istream& is, myString& s)
 
     return is;
 }
+
+
 
 //void myString::makeOneToken(char delimeter) {
 //    char* token = strtok(this->myStr, "-"); //todo ???

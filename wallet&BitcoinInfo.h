@@ -8,21 +8,20 @@
 
 #include "myString.h"
 #include "mylinkedList.h"
-#include "bitcoinTree.h"
 
-struct bitcoinInfo{
-    myString id; //btcId
-    btc_tree * transactionTree_ptr;
-
-};
+//struct bitcoinInfo{
+//    myString id; //btcId
+//    btc_tree * transactionTree_ptr;
+//
+//};
 
 
 struct wallet{
     myString id ; // aka userName
     int balance;
-    linkedList<bitcoinInfo> btcOwned_list;
+    linkedList<myString> btcIdsOwned_list;
     linkedList<int> amountOnEachBtc;
-    //todo prepei na krataw kai ta percentages tou kathe bitcoin
+
 };
 
 

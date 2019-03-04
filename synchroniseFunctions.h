@@ -1,0 +1,18 @@
+//
+// Created by dimitrisgan on 4/3/2019.
+//
+
+#ifndef TRANSACTIONBITCOINSYSTEM_SYNCHRONISEFUNCTIONS_H
+#define TRANSACTIONBITCOINSYSTEM_SYNCHRONISEFUNCTIONS_H
+
+
+
+
+
+
+void insertTransaction(myHashMap);
+
+void readSender();
+
+
+#endif //TRANSACTIONBITCOINSYSTEM_SYNCHRONISEFUNCTIONS_H

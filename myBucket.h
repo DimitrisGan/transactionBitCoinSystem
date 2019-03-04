@@ -1,5 +1,5 @@
 //
-// Created by dimitrisgan on 3/3/2019.
+// Created by dimitrisgan on 4/3/2019.
 //
 
 #ifndef TRANSACTIONBITCOINSYSTEM_MYBUCKET_H
@@ -8,28 +8,23 @@
 
 #include "mylinkedList.h"
 
-
-
 template <typename T>
 struct myBucket{
-    T data;
+    T _data;
 
-    explicit myBucket(T data) : data(data) {}
+    explicit myBucket(T data) : _data(data) {}
     virtual ~myBucket() = default;
-    virtual void insert(T data) = default;
-
-};
-
-template <typename T>
-struct btcBucket : public  myBucket<T>{
     void insert(T data);
+
+    T get_data() const;
+
+    void set_data(T _data);
+
+
+    //todo overload == , =
 };
 
 
-template <typename T ,typename H>
-struct walletBucket : public  myBucket<T>{
-    void insert(T data);
-};
 
 
 template <typename T>
@@ -40,5 +35,6 @@ struct myBucket_chain{
 
 
 #include "myBucket.tpp"
+
 
 #endif //TRANSACTIONBITCOINSYSTEM_MYBUCKET_H

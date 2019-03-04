@@ -26,7 +26,7 @@ public:
 
     void setMyStr(char *myStr);
 
-    unsigned size();
+    unsigned size() const;
 //    void myString::makeOneToken(char delimeter);
     //todo split () for date dd:mm:yyyy and time hh:mm
     //todo ousiastika tha pernw parametro to symbol ":" kai tha to spaw ws pros auto
@@ -39,6 +39,7 @@ public:
 
 
     myString& operator=(myString right);   // for assign with myString
+    myString& operator=(const myString &right) ;   // for assign with myString
     myString& operator=(const char *right); // for assign with char*
 
     friend ostream & operator << (ostream &out, const myString &c);

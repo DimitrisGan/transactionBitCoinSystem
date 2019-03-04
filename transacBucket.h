@@ -24,16 +24,19 @@ struct transactionNode{
 
     //mporei na exoun dhmiourgithei parapanw apo ena nodes se diaforetika bitcoins trees
     linkedList<myString> bitcoinId;
+    int amount;
     linkedList<t_node *> treeNode_ptr;
 
-    transactionNode(myString WalletId ) : WalletId(WalletId) {
 
-        //todo apo hashing sto senderId pairnw to wallet kai ara ta btc pou exei
-        //todo mazeuw to poso pou thelei ara kai ta btc's
-        //todo apo hashing  sta btc pairnw ta btcTree
-        //todo kanw pollapla (an xreiazetai) insert sto/a dentro/a
-        //todo mou epistrefontai oi deiktes sta t-nodes kai tous xwnw
+     transactionNode& operator=( transactionNode rhs)  {
+        WalletId = rhs.WalletId ;
+        bitcoinId = rhs.bitcoinId ;
+        treeNode_ptr = rhs.treeNode_ptr;
+        amount = rhs.amount;
+        return *this;
     }
+
+
 
     void insertUinList(){
         //todo createTreeNode(& to pointer that returns a list with created t_nodes)
@@ -46,14 +49,14 @@ struct record{
     linkedList<transactionNode> *ptr2transactionLlist; //TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO
 };
 
-struct bucket{
+struct transacBucket{
 
     unsigned recordsMaxCapacity{};
     unsigned recordsAlreadyExist{};
     record *recordTable;
 
 
-    explicit bucket(unsigned RecordsCapacity){
+    explicit transacBucket(unsigned RecordsCapacity){
         cout << "CONSTRUCTOR OF BUCKET IS CALLED #"<<globo2++ <<endl;
 
         this->recordsMaxCapacity = RecordsCapacity;
@@ -63,7 +66,7 @@ struct bucket{
         this->recordTable = new record [RecordsCapacity ];
 
     }
-    virtual ~bucket(){
+    virtual ~transacBucket(){
         //    delete  recordsArray;
 
         cout << "DESTRUCTOR OF BUCKET IS CALLED #"<<globo++ <<endl;
@@ -71,7 +74,7 @@ struct bucket{
         delete  [] recordTable;
         recordTable= nullptr;
     }
-    bucket& operator=(bucket right)
+    transacBucket& operator=(transacBucket right)
     {
 
         this->recordTable = right.recordTable;
@@ -80,7 +83,7 @@ struct bucket{
         return *this;
     }
 
-    bucket(bucket &right)
+    transacBucket(transacBucket &right)
     {
         recordTable = right.recordTable ;
         recordsAlreadyExist =right.recordsAlreadyExist;
@@ -93,13 +96,13 @@ struct bucket{
 
         //todo createRecord;
 //        record<T> newRecord()
-        if (recordsAlreadyExist < recordsMaxCapacity) { //space exist to insert record in this bucket
+        if (recordsAlreadyExist < recordsMaxCapacity) { //space exist to insert record in this transacBucket
 
             recordsAlreadyExist++;
 //            recordTable[recordsAlreadyExist] = key;
 
         }
-        else{ //no free space.Thus, we must insert an overflow bucket
+        else{ //no free space.Thus, we must insert an overflow transacBucket
 
 
         }
@@ -107,28 +110,28 @@ struct bucket{
 
 };
 
-template <unsigned bucketSizeInBytes>
 
-struct bucket_chain{
-    linkedList<bucket> bucketsList;
+template <unsigned bucketSizeInBytes>
+struct transacBucket_chain{
+    linkedList<transacBucket> bucketsList;
     unsigned maxNumberOfRecordsInBucket;
 
-    explicit bucket_chain()  {
+    explicit transacBucket_chain()  {
         maxNumberOfRecordsInBucket = bucketSizeInBytes/sizeof(record);
 
     }
 
-    virtual ~bucket_chain() = default;
+    virtual ~transacBucket_chain() = default;
 
 
-    void insertRecordInChain(myString key){
+    void insertNodeInChain(transacBucket_chain node){
 
 //        createRecord(walletId2insert);
 
 
         for (const auto &bucket : bucketsList) {
             if (bucket.recordsAlreadyExist < maxNumberOfRecordsInBucket ) {
-//                bucket.insertNewRecord(record<T> record2insert)
+//                transacBucket.insertNewRecord(record<T> record2insert)
                 break;
             }
         }
@@ -137,11 +140,11 @@ struct bucket_chain{
 
 
     void insertOverflowBucket(){
-        this->bucketsList.insert_last(new bucket (maxNumberOfRecordsInBucket) ); //todo edw mporei lathos
+        this->bucketsList.insert_last(new transacBucket (maxNumberOfRecordsInBucket) ); //todo edw mporei lathos
     }
 
 
-    //todo insertRecord2bucket(bucket );
+    //todo insertRecord2bucket(transacBucket );
 };
 
 

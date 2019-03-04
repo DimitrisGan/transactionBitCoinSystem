@@ -2,7 +2,7 @@
 // Created by dimitrisgan on 26/2/2019.
 //
 
-#include "transHashTable.h"
+#include "myHashMap.h"
 
 
 
@@ -20,9 +20,9 @@ unsigned hashFunction(char *str, int size_of_table) {
 
 
 //
-//struct bucket_chain  //hash table's bucket
+//struct transacBucket_chain  //hash table's transacBucket
 //{
-//    vector<string> vector_id_bucket_chain;  // basically a bucket is a vector that contains pointers to already saved vector_item_id's
+//    vector<string> vector_id_bucket_chain;  // basically a transacBucket is a vector that contains pointers to already saved vector_item_id's
 //
 //    void add_vector_id_to_bucket_chain(string vector_id);
 //    void print_bucket_chain();
@@ -35,7 +35,7 @@ unsigned hashFunction(char *str, int size_of_table) {
 //struct hash_table
 //{
 //    unsigned int HT_SIZE;
-//    vector<bucket_chain *> bucket_chain_index; //basically a hash table is a vector that contains pointers to its buckets
+//    vector<transacBucket_chain *> bucket_chain_index; //basically a hash table is a vector that contains pointers to its buckets
 //
 //
 //    hash_table(unsigned int& HT_SIZE , LshSimple *lsh);

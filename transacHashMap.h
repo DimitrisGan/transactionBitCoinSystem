@@ -1,11 +1,12 @@
 //
-// Created by dimitrisgan on 26/2/2019.
+// Created by dimitrisgan on 4/3/2019.
 //
 
-#ifndef TRANSACTIONBITCOINSYSTEM_MYHASHTABLE_H
-#define TRANSACTIONBITCOINSYSTEM_MYHASHTABLE_H
+#ifndef TRANSACTIONBITCOINSYSTEM_MYHASHMAP_H
+#define TRANSACTIONBITCOINSYSTEM_MYHASHMAP_H
 
-#include "bucket.h"
+
+#include "transacBucket.h"
 
 unsigned hashFunction(char *str, int size_of_table);
 
@@ -34,17 +35,17 @@ struct KeyHash {
 
 //template <typename K, typename V>
 
-// T = bucket type
+// T = transacBucket type
 /*
- * T : is the bucket_chain type to choose
- * U : is the type of the bucket
+ * T : is the transacBucket_chain type to choose
+ * U : is the type of the transacBucket
  * */
-template < /*typeOfRecord*/typename T,typename U, unsigned tableSize,unsigned bucketSizeInBytes, typename F = KeyHash< /*key=*/myString, tableSize> >
+template < unsigned tableSize,unsigned bucketSizeInBytes, typename F = KeyHash< /*key=*/myString, tableSize> >
 class transactionHashMap {
 
 private:
 
-    bucket_chain<T,bucketSizeInBytes> *table;
+    transacBucket_chain<bucketSizeInBytes> *table;
     F hashFunc;
 
 //    unsigned maxNumberOfRecordsInBucket;
@@ -55,7 +56,7 @@ public:
     transactionHashMap(unsigned bucketSize) {
 
 
-        table = new bucket_chain<T , bucketSizeInBytes>  [tableSize] ;
+        table = new transacBucket_chain< bucketSizeInBytes>  [tableSize] ;
 
         for (int i = 0; i < tableSize; i++)
             table[i] = nullptr; //todo maybe initialize the pointer
@@ -73,21 +74,19 @@ public:
 
     }
 
-
-    void insertInHT(T key) {
-        //todo pairnw to key kai to xwnw sto appropriate bucket chain
+    void insertInTransacHT(myString key,transactionNode transacNode2Insert ){
 
         int indexHash = hashFunc(key);
-        if (table[indexHash] == nullptr) //if table[index] is null then we have to initialize a bucket chain
-            table[indexHash] = new bucket_chain<T,bucketSizeInBytes> ;
+        if (table[indexHash] == nullptr) //if table[index] is null then we have to initialize a transacBucket chain
+            table[indexHash] = new transacBucket_chain<bucketSizeInBytes> ;
 
-        table[indexHash].insertRecordInChain(key);
-
+        this->table[indexHash].insertNodeInChain(transacNode2Insert);
     }
 
 
 
-    bool freeSpaceExist2insertRecordInBucket();
+
+//todo    void getTransacNodeByRef();
 
 //    bool get(const K &key, V &value)
 //    {
@@ -129,8 +128,5 @@ public:
 };
 
 
-#include "mylinkedList.tpp"
 
-
-
-#endif //TRANSACTIONBITCOINSYSTEM_MYHASHTABLE_H
+#endif //TRANSACTIONBITCOINSYSTEM_MYHASHMAP_H

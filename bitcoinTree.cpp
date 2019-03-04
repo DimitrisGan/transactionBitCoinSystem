@@ -137,6 +137,16 @@ void t_node::fillNode( myString id, int amount , t_node* left , t_node* right ){
 
 }
 
+t_node& t_node::operator=(const t_node &rhs) {
+    walletId = rhs.walletId;
+    amount = rhs.amount;
+    left = rhs.left ;
+    right = rhs.right;
+}
+
+bool t_node::operator!=(const t_node &rhs) const {
+    return !(rhs == *this);
+}
 
 
 /*digs the given node

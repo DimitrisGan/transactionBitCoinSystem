@@ -5,15 +5,19 @@
 #include "myBucket.h"
 
 
-template <typename T>
-void btcBucket ::insert(T data) {
 
+template<typename T>
+void myBucket<T>::insert(T data) {
 
-
+    this->_data = data;
 }
 
-template <typename T ,typename H>
-void walletBucket::insert(T data) {
+template<typename T>
+T myBucket<T>::get_data() const {
+    return _data;
+}
 
-
+template<typename T>
+void myBucket<T>::set_data(T _data) {
+    myBucket::_data = _data;
 }

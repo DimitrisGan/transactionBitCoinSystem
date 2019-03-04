@@ -29,6 +29,10 @@ struct t_node{
     struct t_node *right; // the sender user/walletId (same as parent walletId) with the remainder amount
 
     void fillNode( myString id, int amount , t_node* left , t_node* right );
+
+    bool operator==(const t_node &rhs) const;
+
+    bool operator!=(const t_node &rhs) const;
 };
 
 class btc_tree{
