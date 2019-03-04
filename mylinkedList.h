@@ -77,7 +77,8 @@ private:
     l_node<T> *currPtr;
 public:
     Iterator() = default;;
-     Iterator(l_node<T> *currPtr) : currPtr(currPtr) {}
+
+    explicit Iterator(l_node<T> *currPtr) : currPtr(currPtr) {}
     virtual ~Iterator() = default;
 
     Iterator& operator=(l_node<T>* pNode){currPtr = pNode;return *this;}
@@ -106,7 +107,7 @@ public:
     }
 
 // Postfix ++ overload
-    Iterator operator++(int)
+    const Iterator operator++(int)
     {
         Iterator old = *this;
         ++(*this);

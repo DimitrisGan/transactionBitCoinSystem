@@ -25,10 +25,7 @@ void btc_tree::destroy_tree(t_node *leaf){
     }
 }
 
-t_node::~t_node() {
-//    delete walletId;
-
-}
+t_node::~t_node() {}
 
 // function to print leaf
 // nodes from left to right
@@ -142,6 +139,8 @@ t_node& t_node::operator=(const t_node &rhs) {
     amount = rhs.amount;
     left = rhs.left ;
     right = rhs.right;
+    
+    return *this;
 }
 
 bool t_node::operator!=(const t_node &rhs) const {

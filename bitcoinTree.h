@@ -30,6 +30,8 @@ struct t_node{
 
     void fillNode( myString id, int amount , t_node* left , t_node* right );
 
+    t_node& operator=(const t_node &rhs);
+
     bool operator==(const t_node &rhs) const;
 
     bool operator!=(const t_node &rhs) const;

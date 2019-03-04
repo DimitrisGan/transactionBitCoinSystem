@@ -17,7 +17,8 @@ private:
 public:
     //todo myString(); na kskekinaei me char* opote na mh desmeuei epipleon xwro
     myString(){myStr= nullptr;len =0;}
-    myString(char *sptr);
+
+    explicit myString(char *sptr);
     myString(myString &right); //move operator maybe not needed because of not existing simple constructor
 
     virtual ~myString();
@@ -38,7 +39,7 @@ public:
     bool operator!=(const char *rhs);           //compared with char *
 
 
-    myString& operator=(myString right);   // for assign with myString
+//    myString& operator=(myString right);   // for assign with myString
     myString& operator=(const myString &right) ;   // for assign with myString
     myString& operator=(const char *right); // for assign with char*
 
