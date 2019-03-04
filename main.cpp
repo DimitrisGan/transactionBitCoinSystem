@@ -47,6 +47,26 @@ int main(int argc, char **argv) {
 
 //    myFirstBucket.insertNewRecord()
 
+//todo ftiaxnw tnodes kai ta xwnw sto HT
+//    char* key1 = const_cast<char *>("key1!");
+//    t_node root ;
+//    myString key (key1);
+//    root.fillNode(key,10, nullptr, nullptr);
+//
+//    linkedList<myString> btcOwnedList;
+//    t_node * tNode_test_ptr = new t_node; //( myString walletId, int amount, t_node *left, t_node *right)
+//    linkedList<t_node *> treeNodesChangedList;
+//    treeNodesChangedList.insert_last(tNode_test_ptr);
+//
+//    transacNode myTransNode(  key,  btcOwnedList, 50,
+//                              treeNodesChangedList) ;
+//
+//
+//
+//    recordsBucket_chain<100> transBucketChain;
+//    transBucketChain.insert(key,myTransNode);
+//    bool test = transBucketChain.bucketChainIsFull();
+
     cout <<"end\n";
     exit(1);
 //    //todo call linked list

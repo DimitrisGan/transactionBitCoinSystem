@@ -8,8 +8,8 @@
 
 btc_tree::btc_tree( myString initWalletIdOwner , int initialBtcValue){
 
-    root = new t_node;
-    root->fillNode(initWalletIdOwner,initialBtcValue, nullptr, nullptr);
+    root = new t_node (initWalletIdOwner, initialBtcValue, nullptr, nullptr);
+//    root->fillNode(initWalletIdOwner,initialBtcValue, nullptr, nullptr);
 
 }
 
@@ -151,6 +151,11 @@ bool t_node::operator==(t_node rhs) {
     return walletId == rhs.walletId && amount == rhs.amount && left ==rhs.left && right == rhs.right;
 }
 
+t_node::t_node( myString walletId, int amount, t_node *left, t_node *right) : walletId(walletId), amount(amount),
+                                                                                    left(left), right(right) {}
+
+t_node::t_node() {}
+
 
 /*digs the given node
  * and inserts 2 nodes
@@ -189,6 +194,14 @@ void btc_tree::insert(myString receiverWalletID ,int amountToSend , t_node* send
 
 t_node *btc_tree::getRoot() const {
     return root;
+}
+
+bool btc_tree::operator==(const btc_tree &rhs) const {
+    return root->walletId == rhs.root->walletId;
+}
+
+bool btc_tree::operator!=(const btc_tree &rhs) const {
+    return !(rhs.root->walletId == this->root->walletId);
 }
 
 

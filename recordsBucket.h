@@ -21,7 +21,7 @@
 //todo apo to walletID tha pairnw ta btcIds pou tha peiraksw mazi me to poso
 //todo kai tha phgainw sto tree pou tha epistrefei deiktes pou tha tous xwnw
 struct transacNode{
-    myString WalletId; //in sender table is receiverWalletId
+    myString walletId; //in sender table is receiverWalletId
 
     //mporei na exoun dhmiourgithei parapanw apo ena nodes se diaforetika bitcoins trees
     linkedList<myString> bitcoinId;
@@ -29,8 +29,17 @@ struct transacNode{
     linkedList<t_node *> treeNode_ptr;
 
 
+    transacNode( myString WalletId,  linkedList<myString> bitcoinId, int amount,
+                 linkedList<t_node *> treeNode_ptr) : walletId(WalletId), bitcoinId(bitcoinId), amount(amount),
+                                                            treeNode_ptr(treeNode_ptr) {}
+
+    virtual ~transacNode() {
+         treeNode_ptr.clear();
+
+    }
+
     transacNode& operator=( transacNode rhs)  {
-        WalletId = rhs.WalletId ;
+        walletId = rhs.walletId ;
         bitcoinId = rhs.bitcoinId ;
         treeNode_ptr = rhs.treeNode_ptr;
         amount = rhs.amount;
@@ -136,7 +145,7 @@ struct recordsBucket{
     }
 
 
-    void insertNewRecord(const myString &key , transacNode newNode){ //todo//todo//todo//todo//todo//todo//todo//todo
+    void insertNewRecord( myString key , transacNode newNode){ //todo//todo//todo//todo//todo//todo//todo//todo
 
         //todo createRecord;
 //        record<T> newRecord()
@@ -177,7 +186,7 @@ struct recordsBucket_chain{
         return false;
     }
 
-    record* find (const myString &key){
+    record* find ( myString &key){
         int index =-1;
         for (auto &bucket : bucketsList) {
             if (bucket.recordExist(key)){
@@ -192,17 +201,13 @@ struct recordsBucket_chain{
 
     bool bucketChainIsFull(){
         for (auto &bucket : bucketsList) { //insert a new record
-            if (bucket.isFull()){
-                continue;
-            }
-            else{
+            if (! bucket.isFull()) //bucket has free-space -->thus also bucketChain has space
                 return false;
-            }
         }
         return true;
     }
 
-    void insert(const myString &key ,transacNode newNode ){
+    void insert( myString key ,transacNode newNode ){
 
         //todo tsekarw gia kathe bucket an uparxei
         //todo an uparxei tote ....

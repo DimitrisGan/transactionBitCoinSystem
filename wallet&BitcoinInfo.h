@@ -22,6 +22,10 @@ struct wallet{
     linkedList<myString> btcIdsOwned_list;
     linkedList<int> amountOnEachBtc;
 
+    bool operator==(const wallet &rhs) const;
+
+    bool operator!=(const wallet &rhs) const;
+
 };
 
 

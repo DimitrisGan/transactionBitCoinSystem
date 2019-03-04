@@ -21,7 +21,13 @@ struct myBucket{
     void set_data(T _data);
 
 
+
+
     //todo overload == , =
+    bool operator==(const myBucket &rhs) const;
+
+    bool operator!=(const myBucket &rhs) const;
+
 };
 
 
@@ -30,6 +36,31 @@ struct myBucket{
 template <typename T>
 struct myBucket_chain{
     linkedList<myBucket<T>> myBucketList;
+
+
+
+    void insert(T data){
+        //todo
+        if (existInChain(data)){
+            cout << "YPARXEI HDH !!!!!"<<endl;
+            exit(10);
+        }
+        else{
+            myBucket<T> newBucket(data);
+            myBucketList.insert_last(newBucket);
+        }
+    }
+
+    //todo to update ginetai apo tis alles domes
+
+    bool existInChain(T data){
+        for ( auto &item : myBucketList) {
+            if (item == data){
+                return true;
+            }
+        }
+        return false;
+    }
 
 };
 

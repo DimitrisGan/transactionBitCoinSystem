@@ -21,6 +21,10 @@
 
 struct t_node{
 
+    t_node();
+
+    t_node( myString walletId, int amount, t_node *left, t_node *right);
+
     virtual ~t_node();
 
     myString walletId;
@@ -45,6 +49,11 @@ public:
     t_node *getRoot() const;
 
     void insert(myString senderWalletId, myString receiverWalletId, int amount);
+
+    bool operator==(const btc_tree &rhs) const;
+
+    bool operator!=(const btc_tree &rhs) const;
+
 
     t_node *search(int key);
     void destroy_tree();
