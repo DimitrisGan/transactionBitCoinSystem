@@ -40,7 +40,7 @@ struct KeyHash {
  * U : is the type of the bucket
  * */
 template < /*typeOfRecord*/typename T,typename U, unsigned tableSize,unsigned bucketSizeInBytes, typename F = KeyHash< /*key=*/myString, tableSize> >
-class HashMap {
+class transactionHashMap {
 
 private:
 
@@ -52,7 +52,7 @@ private:
 
 public:
 
-    HashMap(unsigned bucketSize) {
+    transactionHashMap(unsigned bucketSize) {
 
 
         table = new bucket_chain<T , bucketSizeInBytes>  [tableSize] ;
@@ -61,7 +61,7 @@ public:
             table[i] = nullptr; //todo maybe initialize the pointer
     }
 
-    ~HashMap() {
+    ~transactionHashMap() {
 
         for (int i = 0; i < tableSize; i++)
 

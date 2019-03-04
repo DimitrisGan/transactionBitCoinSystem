@@ -10,7 +10,7 @@ add_executable(transactionBitCoinSystem
         assistantFunctions.h
         main.cpp
         myHashTable.tpp
-        myHashTable.h
+        transHashTable.h
         mylinkedList.tpp
         mylinkedList.h
         myString.cpp
