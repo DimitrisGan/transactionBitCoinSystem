@@ -13,13 +13,11 @@ using  namespace std;
 
 int main(int argc, char **argv) {
     std::cout << "Hello, World!\n" << std::endl;
-/*
 
     ArgumentsKeeper argmKeeper;
     ArgmParser(argc, argv , argmKeeper);
 
     argmKeeper.printArgs();
-*/
 
     char* firstWalletId = const_cast<char *>("Owner!");
     myString rootakos (firstWalletId);
@@ -42,7 +40,8 @@ int main(int argc, char **argv) {
 
     cout<< "Size of myString :"<< sizeof(myString)<<endl;
 
-    int BucketSize = 1024;
+    const int bucketSize = 1024;
+    const int tableSize =100;
 //    unsigned numberOfRecordsInBucket = BucketSize/sizeof(record<myString ,myString>);
 //    cout <<"numberOfRecords : " <<numberOfRecordsInBucket<<endl;
 
@@ -84,19 +83,19 @@ int main(int argc, char **argv) {
     wallet*  testWalletPtr = new wallet(walletId,5,btcL,amountL);
 
 //    template < typename T, /*type of bucketChain*/unsigned tableSize, typename F = KeyHash< /*key=*/myString, tableSize> >
-    myHashMap< myBucket_chain<wallet> , 100 , MyKeyHash > ht;
-    myHashMap< myBucket_chain<bitcoin> , 100 , MyKeyHash > htBtc;
+    myHashMap< myBucket_chain<wallet> , tableSize , MyKeyHash > walletHT;
+    myHashMap< myBucket_chain<bitcoin> , tableSize , MyKeyHash > btcHT;
 
     btc_tree *btcPtr = new btc_tree( walletId , 200);
 
     bitcoin btc(btcId,btcPtr);
 
 
-    int index = static_cast<int>(ht.getHashFunc()(201));
+    int index = static_cast<int>(walletHT.getHashFunc()(201));
 
-    ht.getTable()[index].insert(*testWalletPtr);
-    htBtc.getTable()[index].insert(btc);
-//    htBtc.getTable()[index].insert(btc);
+    walletHT.getTable()[index].insert(*testWalletPtr);
+    btcHT.getTable()[index].insert(btc);
+//    btcHT.getTable()[index].insert(btc);
 
     cout << "index :"<<index <<endl;
 
@@ -111,7 +110,8 @@ int main(int argc, char **argv) {
 //    delete ptr;
     transacNode newTransactionNode(walletId,btcL,250,treeList);
 
-    myHashMap< recordsBucket_chain<1000> , 100 , MyKeyHash > senderHT;
+    myHashMap< recordsBucket_chain<bucketSize> , tableSize , MyKeyHash > senderHT;
+    myHashMap< recordsBucket_chain<bucketSize> , tableSize , MyKeyHash > receiverHT;
 //
 //
 //

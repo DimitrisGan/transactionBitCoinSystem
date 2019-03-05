@@ -131,7 +131,7 @@ struct recordsBucket{
         for (int i = 0; i < this->recordsMaxCapacity ; ++i) {
             this->recordTable[i] = right.recordTable[i];
         }
-        right.recordTable= nullptr;
+        right.recordTable= nullptr;  //todo edw to kanw null gia na mhn koitaei //todo edw to kanw null gia na mhn koitaei //todo edw to kanw null gia na mhn koitaei //todo edw to kanw null gia na mhn koitaei
 
         recordsAlreadyExist =right.recordsAlreadyExist;
         recordsMaxCapacity =right.recordsMaxCapacity;
