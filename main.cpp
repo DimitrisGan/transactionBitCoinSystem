@@ -1,5 +1,4 @@
 #include <iostream>
-#include <getopt.h>
 #include "mylinkedList.h"
 #include "myString.h"
 #include "recordsBucket.h"
@@ -8,7 +7,8 @@
 #include "wallet&BitcoinInfo.h"
 #include "myBucket.h"
 #include "myHashMap.h"
-#include "hashFunction.h"
+//#include "hashFunction.h"
+#include "transacHashMap.h"
 
 using  namespace std;
 
@@ -43,7 +43,7 @@ int main(int argc, char **argv) {
 
     cout<< "Size of myString :"<< sizeof(myString)<<endl;
 
-    const int bucketSize = 1024;
+    const int bucketSizeInBytes = 1024;
     const int tableSize =100;
 //    unsigned numberOfRecordsInBucket = BucketSize/sizeof(record<myString ,myString>);
 //    cout <<"numberOfRecords : " <<numberOfRecordsInBucket<<endl;
@@ -89,15 +89,15 @@ int main(int argc, char **argv) {
 //    myHashMap< myBucket_chain<bitcoin> , tableSize , MyKeyHash > btcHT;
 
 
-    unsigned  (*myHashFunc)( myString, unsigned)  = & myHash ;
+//    unsigned  (*myHashFunc)( myString, unsigned)  = & myHash ;
 
 
-    int index = (*myHashFunc)(walletId,10);
-    cout << "index = "<<index<<endl;
+//    int index = (*myHashFunc)(walletId,10);
+//    cout << "index = "<<index<<endl;
 
 
-    myHashMap< myBucket_chain<wallet>  > walletHT(tableSize , myHashFunc);
-    myHashMap< myBucket_chain<bitcoin>  > btcHT (tableSize , myHashFunc);
+//    myHashMap< myBucket_chain<wallet>  > walletHT(tableSize , myHashFunc );
+//    myHashMap< myBucket_chain<bitcoin>  > btcHT (tableSize , myHashFunc );
 
 //    walletHT.getIndex(walletId);
 //    btcHT.getIndex(walletId);
@@ -110,11 +110,11 @@ int main(int argc, char **argv) {
 
 
 
-    walletHT.getTable()[index].insert(*testWalletPtr);
-    btcHT.getTable()[index].insert(btc);
+//    walletHT.getTable()[index].insert(*testWalletPtr);
 //    btcHT.getTable()[index].insert(btc);
-
-    cout << "index :"<<index <<endl;
+////    btcHT.getTable()[index].insert(btc);
+//
+//    cout << "index :"<<index <<endl;
 
 
     //////////now let's make the hash table for transactions
@@ -127,8 +127,8 @@ int main(int argc, char **argv) {
 //    delete ptr;
     transacNode newTransactionNode(walletId,btcL,250,treeList);
 
-    myHashMap< recordsBucket_chain   > senderHT;
-    myHashMap< recordsBucket_chain > receiverHT;
+//    myTransacHashMap senderHT(tableSize ,myHashFunc   ,bucketSizeInBytes);
+//    myTransacHashMap  receiverHT(tableSize ,myHashFunc   ,bucketSizeInBytes);
 ////
 ////
 ////

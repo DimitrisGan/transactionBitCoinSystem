@@ -197,9 +197,14 @@ struct recordsBucket_chain{
     linkedList<recordsBucket> bucketsList;
     unsigned maxNumberOfRecordsInBucket;
 
-    explicit recordsBucket_chain(unsigned bucketSizeInBytes)  {
-        maxNumberOfRecordsInBucket = bucketSizeInBytes/sizeof(record);
+//    explicit recordsBucket_chain(unsigned bucketSizeInBytes)  {
+//        maxNumberOfRecordsInBucket = bucketSizeInBytes/sizeof(record);
+//
+//    }
 
+
+    void setMaxNumberOfRecordsInBucket(unsigned int maxNumberOfRecordsInBucket) {
+        recordsBucket_chain::maxNumberOfRecordsInBucket = maxNumberOfRecordsInBucket;
     }
 
     virtual ~recordsBucket_chain() = default;

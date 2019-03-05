@@ -18,7 +18,6 @@
 //myHashMap< recordsBucket_chain<1000> , 100 , MyKeyHash > senderHT;
 //myHashMap< recordsBucket_chain<1000> , 100 , MyKeyHash > receiverHT;
 
-    template < /*type of bucketChain*/unsigned tableSize, unsigned  bucketSize>
 struct Synchroniser{
 
 //    myHashMap< myBucket_chain<wallet> , tableSize , MyKeyHash > *walletHT;

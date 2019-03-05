@@ -6,10 +6,10 @@
 #define TRANSACTIONBITCOINSYSTEM_MYHASHTABLE_H
 
 
+#include "myString.h"
+#include "hashFunction.h"
 
-#include "recordsBucket.h"
 
-unsigned hashFunction(char *str, int size_of_table);
 
 
 
@@ -41,42 +41,22 @@ private:
 
 public:
 
-    myHashMap(int tableSize ,unsigned (*hashF)(const myString, unsigned)  ) {
+    myHashMap(unsigned tableSize ,unsigned (*hashF)( myString, unsigned)  ) {
 
-        tableSize = tableSize;
+        this->tableSize = tableSize;
 
-        table = new T  [tableSize] ;
+        this->table = new T  [tableSize] ;
 
-        this->hashFunc = hashF;
-
-//        for (int i = 0; i < tableSize; i++)
-//            table[i] = nullptr; //todo maybe initialize the pointer
-    }
-
-//myHashMap(int tableSize ,unsigned (*hashF)(const myString, unsigned) , int bucketSize  ) {
-//
-//        tableSize = tableSize;
-//
-//        table = new T  [tableSize] ;
-//
 //        this->hashFunc = hashF;
-//
-////        for (int i = 0; i < tableSize; i++)
-////            table[i] = nullptr; //todo maybe initialize the pointer
-//    }
+
+    }
 
 
 
     ~myHashMap() {
 
-        for (int i = 0; i < tableSize; i++)
-
-//            if (table[i] != nullptr)
-//
-//                delete table[i];
-
         delete[] table;
-
+        table = nullptr;
     }
 
     T *getTable() const {
