@@ -17,17 +17,17 @@ void wallet::setBalance(int balance) {
     wallet::balance = balance;
 }
 
-void wallet::setBtcIdsOwned_list(const linkedList<myString> &btcIdsOwned_list) {
+void wallet::setBtcIdsOwned_list( linkedList<myString> &btcIdsOwned_list) {
     wallet::btcIdsOwned_list = btcIdsOwned_list;
 }
 
-void wallet::setAmountOnEachBtc(const linkedList<int> &amountOnEachBtc) {
+void wallet::setAmountOnEachBtc( linkedList<int> &amountOnEachBtc) {
     wallet::amountOnEachBtc = amountOnEachBtc;
 }
 
 wallet::wallet( myString id, int balance,  linkedList<myString> btcIdsOwned_list,
                 linkedList<int> amountOnEachBtc) : id(id), balance(balance), btcIdsOwned_list(btcIdsOwned_list),
-                                                         amountOnEachBtc(amountOnEachBtc) {}
+                                                         amountOnEachBtc(amountOnEachBtc) {} //todo//todo//todo//todo//todo//todo//todo//todo//todo//todo//todo
 
 
 //===========================================================================================

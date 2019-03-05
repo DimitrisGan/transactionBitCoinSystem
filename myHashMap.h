@@ -83,6 +83,8 @@ public:
         return hashFunc;
     }
 
+
+
 //    void insertInTransacHT(myString key,transacNode transacNode2Insert ){
 //
 //        int indexHash = hashFunc(key);

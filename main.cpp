@@ -70,6 +70,8 @@ int main(int argc, char **argv) {
 //    transBucketChain.insert(key,myTransNode);
 //    bool test = transBucketChain.bucketChainIsFull();
 
+
+
     struct MyKeyHash hash;
 
     char* key1 = const_cast<char *>("testWalletId!");
@@ -77,6 +79,7 @@ int main(int argc, char **argv) {
     myString walletId (key1);
     myString btcId (key2);
     linkedList <myString> btcL;
+    btcL.insert_last(btcId);
     linkedList <int> amountL;
     wallet testWallet(walletId,5,btcL,amountL);
 
@@ -93,12 +96,24 @@ int main(int argc, char **argv) {
 
     ht.getTable()[index].insert(testWallet);
     htBtc.getTable()[index].insert(btc);
-    htBtc.getTable()[index].insert(btc);
+//    htBtc.getTable()[index].insert(btc);
 
     cout << "index :"<<index <<endl;
 
 
+    //////////now let's make the hash table for transactions
 
+    linkedList <t_node*> treeList;
+    t_node *ptr = new t_node(walletId,40, nullptr, nullptr) ;//myString walletId, int amount, t_node *left, t_node *right);
+    treeList.insert_last(ptr);
+
+    myHashMap< recordsBucket_chain<1000> , 100 , MyKeyHash > senderHT;
+
+    transacNode newNode(walletId,btcL,250,treeList);
+
+
+    int indexSender = static_cast<int>(senderHT.getHashFunc()(201));
+    senderHT.getTable()[indexSender].insert(walletId,newNode);
 
     cout <<"end\n";
     exit(1);

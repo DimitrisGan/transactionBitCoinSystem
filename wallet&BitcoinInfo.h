@@ -33,9 +33,9 @@ struct wallet{
 
     void setBalance(int balance);
 
-    void setBtcIdsOwned_list(const linkedList<myString> &btcIdsOwned_list);
+    void setBtcIdsOwned_list( linkedList<myString> &btcIdsOwned_list);
 
-    void setAmountOnEachBtc(const linkedList<int> &amountOnEachBtc);
+    void setAmountOnEachBtc( linkedList<int> &amountOnEachBtc);
 
     bool operator==(const wallet &rhs) const;
 

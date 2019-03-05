@@ -40,7 +40,7 @@ private: //private methods
 
 public:
     linkedList() : head(nullptr) ,tail(nullptr){};
-    linkedList( linkedList &rhs);
+//    linkedList( linkedList &rhs);
 
     virtual ~linkedList();
 
@@ -57,7 +57,7 @@ public:
     void clear();
 
     /*operators overload*/
-    linkedList &operator=(const linkedList &rhs);
+    linkedList& operator=( linkedList &rhs)  ;
 
 
 
@@ -123,11 +123,18 @@ public:
 
 
 
-template<class T>
-linkedList<T>::linkedList( linkedList & rhs) : head(nullptr) ,tail(nullptr)
-{
-    *this = rhs;
-}
+//template<class T>
+//linkedList<T>::linkedList( linkedList & rhs) : head(nullptr) ,tail(nullptr)
+//{
+////    this->clear(); // the function at the start of this review
+////
+////
+////    for ( auto item : rhs) {
+////        this->insert_last(item);
+////    }
+//
+////    return *this;
+//}
 
 
 template<class T>
@@ -202,12 +209,10 @@ l_node<T>* linkedList<T>::search(T keyData) { //searches for a value in the link
 
 
 template <class T>
-linkedList<T> & linkedList<T>::operator=(const linkedList<T> &rhs)
+linkedList<T> &  linkedList<T>::operator=(  linkedList<T> &rhs)
 {
-    if (this == &rhs){
-        return *this;
-    }
-    else {
+
+//        linkedList *tmp = new linkedList;
 
         this->clear(); // the function at the start of this review
 
@@ -216,7 +221,12 @@ linkedList<T> & linkedList<T>::operator=(const linkedList<T> &rhs)
             return *this;
         }
 
-    }
+
+        for ( auto item : rhs) {
+            this->insert_last(item);
+        }
+
+        return *this;
 
 }
 
@@ -262,7 +272,7 @@ void linkedList<T>::insert_last( T data)
 
     auto temp =  new l_node<T>(data);//createNode(data);
 
-    if (isEmpty()){
+    if (this->isEmpty()){
         head=temp;
         tail=temp;
     }

@@ -24,24 +24,24 @@ struct transacNode{
     myString walletId; //in sender table is receiverWalletId
 
     //mporei na exoun dhmiourgithei parapanw apo ena nodes se diaforetika bitcoins trees
-    linkedList<myString> bitcoinId;
+    linkedList<myString> bitcoinSentList;
     int amount;
-    linkedList<t_node *> treeNode_ptr;
+    linkedList<t_node *> treeNodeList_ptrs;
 
 
     transacNode( myString WalletId,  linkedList<myString> bitcoinId, int amount,
-                 linkedList<t_node *> treeNode_ptr) : walletId(WalletId), bitcoinId(bitcoinId), amount(amount),
-                                                            treeNode_ptr(treeNode_ptr) {}
+                 linkedList<t_node *> treeNode_ptr) : walletId(WalletId), bitcoinSentList(bitcoinId), amount(amount),
+                                                            treeNodeList_ptrs(treeNode_ptr) {}
 
     virtual ~transacNode() {
-         treeNode_ptr.clear();
+//         treeNodeList_ptrs.clear();
 
     }
 
     transacNode& operator=( transacNode rhs)  {
         walletId = rhs.walletId ;
-        bitcoinId = rhs.bitcoinId ;
-        treeNode_ptr = rhs.treeNode_ptr;
+        bitcoinSentList = rhs.bitcoinSentList ;
+        treeNodeList_ptrs = rhs.treeNodeList_ptrs;
         amount = rhs.amount;
         return *this;
     }
