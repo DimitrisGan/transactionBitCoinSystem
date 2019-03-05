@@ -15,6 +15,7 @@ btc_tree::btc_tree( myString initWalletIdOwner , int initialBtcValue){
 
 btc_tree::~btc_tree(){
 //todo    destroy_tree();
+    destroy_tree(this->root);
 }
 
 void btc_tree::destroy_tree(t_node *leaf){

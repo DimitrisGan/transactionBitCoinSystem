@@ -66,6 +66,23 @@ struct record{
         transacLlist_ptr = nullptr;
     }
 
+
+    record& operator=(record right)
+    {
+
+        this->walletId = right.walletId;   //todo AYTA TA 2 EINIA LATHOS//todo AYTA TA 2 EINIA LATHOS//todo AYTA TA 2 EINIA LATHOS//todo AYTA TA 2 EINIA LATHOS//todo AYTA TA 2 EINIA LATHOS
+        this->transacLlist_ptr = right.transacLlist_ptr;
+        return *this;
+    }
+
+    record(record &right)
+    {
+        this->walletId = right.walletId;   //todo AYTA TA 2 EINIA LATHOS//todo AYTA TA 2 EINIA LATHOS//todo AYTA TA 2 EINIA LATHOS//todo AYTA TA 2 EINIA LATHOS//todo AYTA TA 2 EINIA LATHOS
+        this->transacLlist_ptr = right.transacLlist_ptr;
+    }
+
+
+
     void insertTransacNodeInTransacList(transacNode transacNode2add){
         transacLlist_ptr->insert_last(transacNode2add);
     }
@@ -91,15 +108,19 @@ struct recordsBucket{
     virtual ~recordsBucket(){
         //    delete  recordsArray;
 
-        cout << "DESTRUCTOR OF BUCKET IS CALLED #" <<endl;
+        cout << "DESTRUCTOR OF BUCKET RECORD TABLE IS CALLED #" <<endl;
 //        this->recordsAlreadyExist=0;
-        delete  [] recordTable;
+        delete  [] recordTable; //todo des ksana//todo des ksana//todo des ksana//todo des ksana//todo des ksana//todo des ksana//todo des ksana//todo des ksana
         recordTable= nullptr;
     }
+
     recordsBucket& operator=(recordsBucket right)
     {
 
-        this->recordTable = right.recordTable;
+        for (int i = 0; i < this->recordsMaxCapacity ; ++i) {
+            this->recordTable[i] = right.recordTable[i];
+        }   //todo AYTA TA 2 EINIA LATHOS//todo AYTA TA 2 EINIA LATHOS//todo AYTA TA 2 EINIA LATHOS//todo AYTA TA 2 EINIA LATHOS//todo AYTA TA 2 EINIA LATHOS
+        right.recordTable= nullptr;
         this->recordsAlreadyExist= right.recordsAlreadyExist;
         this->recordsMaxCapacity= right.recordsMaxCapacity;
         return *this;
@@ -107,7 +128,11 @@ struct recordsBucket{
 
     recordsBucket(recordsBucket &right)
     {
-        recordTable = right.recordTable ;
+        for (int i = 0; i < this->recordsMaxCapacity ; ++i) {
+            this->recordTable[i] = right.recordTable[i];
+        }
+        right.recordTable= nullptr;
+
         recordsAlreadyExist =right.recordsAlreadyExist;
         recordsMaxCapacity =right.recordsMaxCapacity;
     }
@@ -234,7 +259,7 @@ struct recordsBucket_chain{
             else    //insert a new overflow bucket because there is no free-space and then the record
             {
 
-                recordsBucket newBucket(maxNumberOfRecordsInBucket);
+                recordsBucket  newBucket(maxNumberOfRecordsInBucket);
                 newBucket.insertNewRecord(key,newNode);
                 this->bucketsList.insert_last(newBucket);
             }

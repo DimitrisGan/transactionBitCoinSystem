@@ -109,16 +109,22 @@ int main(int argc, char **argv) {
 
 
 //    delete ptr;
-    transacNode newNode(walletId,btcL,250,treeList);
+    transacNode newTransactionNode(walletId,btcL,250,treeList);
 
     myHashMap< recordsBucket_chain<1000> , 100 , MyKeyHash > senderHT;
 //
 //
 //
     int indexSender = static_cast<int>(senderHT.getHashFunc()(201));
-    senderHT.getTable()[indexSender].insert(walletId,newNode);
+    senderHT.getTable()[indexSender].insert(walletId,newTransactionNode);
 
     cout <<"end\n";
+
+
+    delete ptr;
+    delete btcPtr;
+    delete testWalletPtr;
+
     exit(1);
 //    //todo call linked list
 //    linkedList<int> llist;
