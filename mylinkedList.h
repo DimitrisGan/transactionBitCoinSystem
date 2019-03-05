@@ -45,7 +45,7 @@ private: //private methods
 
 public:
     linkedList() : head(nullptr) ,tail(nullptr){};
-//    linkedList( linkedList &rhs);
+    linkedList( linkedList &rhs);
 
     virtual ~linkedList();
 
@@ -224,10 +224,12 @@ linkedList<T> &  linkedList<T>::operator=(  linkedList<T> &rhs)
 
         this->clear(); // the function at the start of this review
 
-        if (rhs.isEmpty()) {
-            // short cut, since the other list is empty
-            return *this;
-        }
+//        if (rhs.isEmpty()) {
+//            // short cut, since the other list is empty
+//            linkedList<T> tmp = new linkedList<T>();
+//            this = tmp;
+//            return *this;
+//        }
 
 
         for ( auto item : rhs) {
@@ -385,9 +387,24 @@ l_node<T> *linkedList<T>::createNode(T data) {
     return temp;
 }
 
+template<class T>
+linkedList<T>::linkedList(linkedList &rhs) {
 
 
 
+//    this->clear(); // the function at the start of this review
+    this->head = nullptr;
+    this->tail= nullptr;
+
+    for ( auto item : rhs) {
+        this->insert_last(item);
+
+    }
+
+//    return *this;
+
+
+}
 
 
 #endif //TRANSACTIONBITCOINSYSTEM_MYLINKEDLIST_H

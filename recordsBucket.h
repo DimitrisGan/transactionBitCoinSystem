@@ -41,7 +41,7 @@ struct transacNode{
     transacNode& operator=( transacNode rhs)  {
         walletId = rhs.walletId ;
         bitcoinSentList = rhs.bitcoinSentList ;
-        treeNodeList_ptrs = rhs.treeNodeList_ptrs;
+        treeNodeList_ptrs = rhs.treeNodeList_ptrs; //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS
         amount = rhs.amount;
         return *this;
     }
@@ -62,7 +62,7 @@ struct record{
     record() {transacLlist_ptr = nullptr;transacLlist_ptr = new linkedList<transacNode> ;}
 
     virtual ~record() {
-        delete [] transacLlist_ptr;
+        delete  transacLlist_ptr;
         transacLlist_ptr = nullptr;
     }
 
@@ -92,7 +92,7 @@ struct recordsBucket{
         //    delete  recordsArray;
 
         cout << "DESTRUCTOR OF BUCKET IS CALLED #" <<endl;
-        this->recordsAlreadyExist=0;
+//        this->recordsAlreadyExist=0;
         delete  [] recordTable;
         recordTable= nullptr;
     }
@@ -154,8 +154,8 @@ struct recordsBucket{
         if (recordsAlreadyExist < recordsMaxCapacity) { //space recordExist to insert record in this recordsBucket
 
             recordsAlreadyExist++;
-            recordTable[recordsAlreadyExist].walletId = key;
-            recordTable[recordsAlreadyExist].insertTransacNodeInTransacList(newNode);
+            recordTable[recordsAlreadyExist-1].walletId = key;  //starts from zero 0
+            recordTable[recordsAlreadyExist-1].insertTransacNodeInTransacList(newNode); //recordTable[recordsAlreadyExist-1].transacLlist_ptr.insert_last(newNode)
 
         }
         else{ //no free space.Thus, we must insert an overflow recordsBucket
