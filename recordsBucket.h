@@ -34,7 +34,7 @@ struct transacNode{
                                                             treeNodeList_ptrs(treeNode_ptr) {}
 
     virtual ~transacNode() {
-//         treeNodeList_ptrs.clear();
+//         treeNodeList_ptrs.clear(); OXI DE THELW NA GINEI FREE TO DENTRO MOY APO TO TRANSACTION NODE LIST
 
     }
 
@@ -55,9 +55,11 @@ struct record{
     linkedList<transacNode> *transacLlist_ptr; //TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO
 
 
-    record( myString walletId, linkedList<transacNode> *transacLlist_ptr) : walletId(walletId), transacLlist_ptr(transacLlist_ptr) {}
+//    record( myString walletId) : walletId(walletId) {
+//        transacLlist_ptr = new linkedList<transacNode> ;
+//    }
 
-    record() {transacLlist_ptr = nullptr;}
+    record() {transacLlist_ptr = nullptr;transacLlist_ptr = new linkedList<transacNode> ;}
 
     virtual ~record() {
         delete [] transacLlist_ptr;
@@ -231,6 +233,7 @@ struct recordsBucket_chain{
             }
             else    //insert a new overflow bucket because there is no free-space and then the record
             {
+
                 recordsBucket newBucket(maxNumberOfRecordsInBucket);
                 newBucket.insertNewRecord(key,newNode);
                 this->bucketsList.insert_last(newBucket);

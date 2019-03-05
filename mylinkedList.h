@@ -14,6 +14,11 @@ using namespace std;
 template <class T>
 struct l_node {
 
+//    virtual ~l_node() {
+//            delete next;
+//            next = nullptr;
+//    }
+
     explicit l_node(T data) : data(data), next(nullptr) { static  int globo3=0;  cout << "CONSTRUCTOR OF list NODE IS CALLED #"<<globo3++ <<endl; }
     T data;
     l_node<T> *next;
@@ -147,18 +152,21 @@ linkedList<T>::~linkedList()
 
 template<class T>
 void linkedList<T>::clear () {
-    if ( !isEmpty() ) { // List is not empty
+    static const bool IS_POINTER = std::is_pointer<T>::value;
+    if (IS_POINTER) {
+        if (!isEmpty()) { // List is not empty
 
-        l_node<T> *currPtr = head;
-        l_node<T> *tempPtr ;
-        while (currPtr != nullptr) { // delete remaining nodes
-            tempPtr = currPtr;
-            currPtr = currPtr->next;
-            delete tempPtr;
+            l_node<T> *currPtr = head;
+            l_node<T> *tempPtr;
+            while (currPtr != nullptr) { // delete remaining nodes
+                tempPtr = currPtr;
+                currPtr = currPtr->next;
+                delete tempPtr;
+            }
+            head = nullptr;
+            tail = nullptr;
+
         }
-        head= nullptr;
-        tail= nullptr;
-
     }
 }
 
@@ -240,6 +248,8 @@ void linkedList<T>::insert_first( T data)
 {
 
     l_node<T> *temp = createNode(data);
+    temp = nullptr;
+
 //    auto temp =  new l_node<T>(data);//createNode(data);
 
 
@@ -270,7 +280,8 @@ void linkedList<T>::insert_last( T data)
 {
 
 
-    auto temp =  new l_node<T>(data);//createNode(data);
+    auto *temp =  new l_node<T>(data);//createNode(data);
+    temp->next = nullptr;
 
     if (this->isEmpty()){
         head=temp;
@@ -281,6 +292,7 @@ void linkedList<T>::insert_last( T data)
         tail->next = temp;
         tail = temp;
     }
+
 
 
 }

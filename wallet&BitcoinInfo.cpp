@@ -27,7 +27,10 @@ void wallet::setAmountOnEachBtc( linkedList<int> &amountOnEachBtc) {
 
 wallet::wallet( myString id, int balance,  linkedList<myString> btcIdsOwned_list,
                 linkedList<int> amountOnEachBtc) : id(id), balance(balance), btcIdsOwned_list(btcIdsOwned_list),
-                                                         amountOnEachBtc(amountOnEachBtc) {} //todo//todo//todo//todo//todo//todo//todo//todo//todo//todo//todo
+                                                         amountOnEachBtc(amountOnEachBtc) {}
+
+
+//todo//todo//todo//todo//todo//todo//todo//todo//todo//todo//todo
 
 
 //===========================================================================================

@@ -31,6 +31,8 @@ struct wallet{
     wallet( myString id, int balance,  linkedList<myString> btcIdsOwned_list,
             linkedList<int> amountOnEachBtc);
 
+    virtual ~wallet() = default;
+
     void setBalance(int balance);
 
     void setBtcIdsOwned_list( linkedList<myString> &btcIdsOwned_list);

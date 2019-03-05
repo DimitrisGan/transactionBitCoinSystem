@@ -81,7 +81,7 @@ int main(int argc, char **argv) {
     linkedList <myString> btcL;
     btcL.insert_last(btcId);
     linkedList <int> amountL;
-    wallet testWallet(walletId,5,btcL,amountL);
+    wallet*  testWalletPtr = new wallet(walletId,5,btcL,amountL);
 
 //    template < typename T, /*type of bucketChain*/unsigned tableSize, typename F = KeyHash< /*key=*/myString, tableSize> >
     myHashMap< myBucket_chain<wallet> , 100 , MyKeyHash > ht;
@@ -94,7 +94,7 @@ int main(int argc, char **argv) {
 
     int index = static_cast<int>(ht.getHashFunc()(201));
 
-    ht.getTable()[index].insert(testWallet);
+    ht.getTable()[index].insert(*testWalletPtr);
     htBtc.getTable()[index].insert(btc);
 //    htBtc.getTable()[index].insert(btc);
 
@@ -107,11 +107,14 @@ int main(int argc, char **argv) {
     t_node *ptr = new t_node(walletId,40, nullptr, nullptr) ;//myString walletId, int amount, t_node *left, t_node *right);
     treeList.insert_last(ptr);
 
-    myHashMap< recordsBucket_chain<1000> , 100 , MyKeyHash > senderHT;
 
+//    delete ptr;
     transacNode newNode(walletId,btcL,250,treeList);
 
-
+    myHashMap< recordsBucket_chain<1000> , 100 , MyKeyHash > senderHT;
+//
+//
+//
     int indexSender = static_cast<int>(senderHT.getHashFunc()(201));
     senderHT.getTable()[indexSender].insert(walletId,newNode);
 

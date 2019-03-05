@@ -25,7 +25,10 @@ void btc_tree::destroy_tree(t_node *leaf){
     }
 }
 
-t_node::~t_node() {}
+t_node::~t_node() {
+//    this->left = nullptr;
+//    this->right= nullptr;
+}
 
 // function to print leaf
 // nodes from left to right

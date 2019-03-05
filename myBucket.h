@@ -12,7 +12,7 @@ template <typename T>
 struct myBucket{
     T _data;
 
-    explicit myBucket(T data) : _data(data) {}
+    explicit myBucket(T &data) : _data(data) {}
     virtual ~myBucket() = default;
     void insert(T data);
 
@@ -53,7 +53,7 @@ struct myBucket_chain{
 
     //todo to update ginetai apo tis alles domes
 
-    bool existInChain(T data){
+    bool existInChain(T &data){
         for ( auto &item : myBucketList) {
             if (item == data){
                 return true;
