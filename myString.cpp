@@ -27,7 +27,7 @@ myString::~myString() {
     if (len != 0)
         delete [] this->myStr;
     this->myStr= nullptr;
-    len=0;
+//    len=0;
 
 }
 

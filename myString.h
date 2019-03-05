@@ -19,7 +19,7 @@ public:
     myString(){myStr= nullptr;len =0;}
 
     explicit myString(char *sptr);
-    myString(myString &right); //move operator maybe not needed because of not existing simple constructor
+    myString( myString &right); //move operator maybe not needed because of not existing simple constructor
 
     virtual ~myString();
 

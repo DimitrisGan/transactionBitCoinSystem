@@ -41,23 +41,32 @@ struct KeyHash {
  * T : is the recordsBucket_chain type to choose
  * U : is the type of the recordsBucket
  * */
-template < typename T, /*type of bucketChain*/unsigned tableSize, typename F = KeyHash< /*key=*/myString, tableSize> >
+//template < typename T, /*type of bucketChain*/unsigned tableSize, typename F = KeyHash< /*key=*/myString, tableSize> >
+template < typename T  >
 class myHashMap {
 
 private:
 
     T *table;
-    F hashFunc;
+//    F hashFunc;
+
+    unsigned  (*hashFunc)(myString, unsigned)  ;
+    unsigned tableSize;
 
 //    unsigned maxNumberOfRecordsInBucket;
 //    unsigned tableSize;
 
+
+
 public:
 
-    myHashMap() {
+    myHashMap(int tableSize ,unsigned (*hashF)(myString, unsigned)  ) {
 
+        tableSize = tableSize;
 
         table = new T  [tableSize] ;
+
+        this->hashFunc = &hashF;
 
 //        for (int i = 0; i < tableSize; i++)
 //            table[i] = nullptr; //todo maybe initialize the pointer
@@ -79,8 +88,9 @@ public:
         return table;
     }
 
-    F getHashFunc() const {
-        return hashFunc;
+
+    unsigned int getTableSize() const {
+        return tableSize;
     }
 
 

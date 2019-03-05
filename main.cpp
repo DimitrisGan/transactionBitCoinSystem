@@ -8,16 +8,19 @@
 #include "wallet&BitcoinInfo.h"
 #include "myBucket.h"
 #include "myHashMap.h"
+#include "hashFunction.h"
 
 using  namespace std;
 
 int main(int argc, char **argv) {
     std::cout << "Hello, World!\n" << std::endl;
+/*
 
     ArgumentsKeeper argmKeeper;
     ArgmParser(argc, argv , argmKeeper);
 
     argmKeeper.printArgs();
+*/
 
     char* firstWalletId = const_cast<char *>("Owner!");
     myString rootakos (firstWalletId);
@@ -71,7 +74,6 @@ int main(int argc, char **argv) {
 
 
 
-    struct MyKeyHash hash;
 
     char* key1 = const_cast<char *>("testWalletId!");
     char* key2 = const_cast<char *>("testBtcId!");
@@ -83,8 +85,19 @@ int main(int argc, char **argv) {
     wallet*  testWalletPtr = new wallet(walletId,5,btcL,amountL);
 
 //    template < typename T, /*type of bucketChain*/unsigned tableSize, typename F = KeyHash< /*key=*/myString, tableSize> >
-    myHashMap< myBucket_chain<wallet> , tableSize , MyKeyHash > walletHT;
-    myHashMap< myBucket_chain<bitcoin> , tableSize , MyKeyHash > btcHT;
+//    myHashMap< myBucket_chain<wallet> , tableSize , MyKeyHash > walletHT;
+//    myHashMap< myBucket_chain<bitcoin> , tableSize , MyKeyHash > btcHT;
+
+
+    unsigned  (*myHashFunc)(const myString&, unsigned)  = & myHash ;
+
+
+    int index = (*myHashFunc)(walletId,10);
+    cout << "index = "<<index<<endl;
+
+
+       /* myHashMap< myBucket_chain<wallet>  > walletHT();
+    myHashMap< myBucket_chain<bitcoin>  > btcHT;
 
     btc_tree *btcPtr = new btc_tree( walletId , 200);
 
@@ -118,12 +131,14 @@ int main(int argc, char **argv) {
     int indexSender = static_cast<int>(senderHT.getHashFunc()(201));
     senderHT.getTable()[indexSender].insert(walletId,newTransactionNode);
 
-    cout <<"end\n";
-
 
     delete ptr;
     delete btcPtr;
     delete testWalletPtr;
+
+*/
+    cout <<"end\n";
+
 
     exit(1);
 //    //todo call linked list

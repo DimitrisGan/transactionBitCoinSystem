@@ -5,39 +5,38 @@
 #ifndef TRANSACTIONBITCOINSYSTEM_HASHFUNCTION_H
 #define TRANSACTIONBITCOINSYSTEM_HASHFUNCTION_H
 
-////template <typename K, typename V >
-//class hashFunc {
-//private:
-//
-//public:
-//    hashFunc() = default;
-//
-//    virtual ~hashFunc() = default;
-//
-//    virtual  double calc(int key,int val) = 0;
-//
-//};
-//
-////=========================================================
-//template <typename K, typename V >
-//class myHash1 final : public hashFunc {
-//private:
-//public:
-//    myHash1() = default;
-//
-//    ~myHash1() override = default;
-//
-//
-//    double calc(K key,V val) override{
-//
-//    }
-//
-//
-//};
-//
+
+#include <cstring>
+#include "myString.h"
+
+unsigned myHash(const myString &id, unsigned  size_of_table) {
+    unsigned hash = 5381 ;
+    int c =0;
+
+    char *str = new char[id.size() + 1];
+    strcpy(str, id.getMyStr())   ;
+
+
+
+    while ((c = *str++))
+        hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+
+    return (hash % size_of_table);
+}
 ////=========================================================
 
 
+
+
+//unsigned hash(char *str, long int size_of_table) {
+//    unsigned hash = 5381 ;
+//    int c;
+//
+//    while ((c = *str++))
+//        hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+//
+//    return hash % size_of_table;
+//}
 
 
 

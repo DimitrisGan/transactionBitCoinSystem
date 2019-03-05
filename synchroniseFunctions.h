@@ -21,9 +21,9 @@
     template < /*type of bucketChain*/unsigned tableSize, unsigned  bucketSize>
 struct Synchroniser{
 
-    myHashMap< myBucket_chain<wallet> , tableSize , MyKeyHash > *walletHT;
-    myHashMap< myBucket_chain<bitcoin> , tableSize , MyKeyHash > *btcHT;
-
+//    myHashMap< myBucket_chain<wallet> , tableSize , MyKeyHash > *walletHT;
+//    myHashMap< myBucket_chain<bitcoin> , tableSize , MyKeyHash > *btcHT;
+//
 
     //todo senderHT
     //todo receiverHT
