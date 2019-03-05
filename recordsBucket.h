@@ -192,12 +192,12 @@ struct recordsBucket{
 };
 
 
-template <unsigned bucketSizeInBytes>
+//template <unsigned bucketSizeInBytes>
 struct recordsBucket_chain{
     linkedList<recordsBucket> bucketsList;
     unsigned maxNumberOfRecordsInBucket;
 
-    explicit recordsBucket_chain()  {
+    explicit recordsBucket_chain(unsigned bucketSizeInBytes)  {
         maxNumberOfRecordsInBucket = bucketSizeInBytes/sizeof(record);
 
     }

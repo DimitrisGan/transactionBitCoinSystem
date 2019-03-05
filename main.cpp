@@ -89,22 +89,26 @@ int main(int argc, char **argv) {
 //    myHashMap< myBucket_chain<bitcoin> , tableSize , MyKeyHash > btcHT;
 
 
-    unsigned  (*myHashFunc)(const myString&, unsigned)  = & myHash ;
+    unsigned  (*myHashFunc)( myString, unsigned)  = & myHash ;
 
 
     int index = (*myHashFunc)(walletId,10);
     cout << "index = "<<index<<endl;
 
 
-       /* myHashMap< myBucket_chain<wallet>  > walletHT();
-    myHashMap< myBucket_chain<bitcoin>  > btcHT;
+    myHashMap< myBucket_chain<wallet>  > walletHT(tableSize , myHashFunc);
+    myHashMap< myBucket_chain<bitcoin>  > btcHT (tableSize , myHashFunc);
+
+//    walletHT.getIndex(walletId);
+//    btcHT.getIndex(walletId);
+//    cout << "index from hash wallet = "<<index<<endl;
+//    cout << "index from hash btc= "<<index<<endl;
 
     btc_tree *btcPtr = new btc_tree( walletId , 200);
 
     bitcoin btc(btcId,btcPtr);
 
 
-    int index = static_cast<int>(walletHT.getHashFunc()(201));
 
     walletHT.getTable()[index].insert(*testWalletPtr);
     btcHT.getTable()[index].insert(btc);
@@ -123,20 +127,19 @@ int main(int argc, char **argv) {
 //    delete ptr;
     transacNode newTransactionNode(walletId,btcL,250,treeList);
 
-    myHashMap< recordsBucket_chain<bucketSize> , tableSize , MyKeyHash > senderHT;
-    myHashMap< recordsBucket_chain<bucketSize> , tableSize , MyKeyHash > receiverHT;
+    myHashMap< recordsBucket_chain   > senderHT;
+    myHashMap< recordsBucket_chain > receiverHT;
+////
+////
+////
+//    int indexSender = static_cast<int>(senderHT.getHashFunc()(201));
+//    senderHT.getTable()[indexSender].insert(walletId,newTransactionNode);
 //
 //
-//
-    int indexSender = static_cast<int>(senderHT.getHashFunc()(201));
-    senderHT.getTable()[indexSender].insert(walletId,newTransactionNode);
+//    delete ptr;
+//    delete btcPtr;
+//    delete testWalletPtr;
 
-
-    delete ptr;
-    delete btcPtr;
-    delete testWalletPtr;
-
-*/
     cout <<"end\n";
 
 

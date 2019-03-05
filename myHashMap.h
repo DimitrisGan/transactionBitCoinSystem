@@ -15,25 +15,6 @@ unsigned hashFunction(char *str, int size_of_table);
 
 // https://www.quora.com/How-do-I-implement-a-hash-table-and-a-hash-map-in-C++
 
-struct MyKeyHash {
-    unsigned long operator()(const int& k) const
-    {
-        return k % 10;
-    }
-};
-
-
-// Default hash function class
-template <typename K, unsigned tableSize>
-struct KeyHash {
-    unsigned long operator()(const K &key) const
-    {
-        return reinterpret_cast<unsigned long>(key) % tableSize;
-    }
-};
-
-
-
 //template <typename K, typename V>
 
 // T = recordsBucket type
@@ -60,17 +41,31 @@ private:
 
 public:
 
-    myHashMap(int tableSize ,unsigned (*hashF)(myString, unsigned)  ) {
+    myHashMap(int tableSize ,unsigned (*hashF)(const myString, unsigned)  ) {
 
         tableSize = tableSize;
 
         table = new T  [tableSize] ;
 
-        this->hashFunc = &hashF;
+        this->hashFunc = hashF;
 
 //        for (int i = 0; i < tableSize; i++)
 //            table[i] = nullptr; //todo maybe initialize the pointer
     }
+
+//myHashMap(int tableSize ,unsigned (*hashF)(const myString, unsigned) , int bucketSize  ) {
+//
+//        tableSize = tableSize;
+//
+//        table = new T  [tableSize] ;
+//
+//        this->hashFunc = hashF;
+//
+////        for (int i = 0; i < tableSize; i++)
+////            table[i] = nullptr; //todo maybe initialize the pointer
+//    }
+
+
 
     ~myHashMap() {
 
@@ -90,6 +85,11 @@ public:
 
 
     unsigned int getTableSize() const {
+        return tableSize;
+    }
+
+    unsigned int getIndex(myString s) const {
+        this->hashFunc(s, this->tableSize);
         return tableSize;
     }
 
