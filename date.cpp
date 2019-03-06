@@ -39,3 +39,21 @@ bool date::operator<=(const date &rhs) const {
 bool date::operator>=(const date &rhs) const {
     return !(*this < rhs);
 }
+
+void date::setDateByGivenList(linkedList<int> setDateList) {
+
+    int i=0;
+    for ( auto &item : setDateList) {
+        switch (i) {
+            case 0: this->day = item;break;
+            case 1: this->month = item;break;
+            case 2: this->year = item;break;
+            case 3: this->hour = item;break;
+            case 4: this->minute = item;break;
+            default: exit(EXIT_FAILURE);
+                //execution of subsequent statements is terminated
+        }
+
+        i++;
+    }
+}

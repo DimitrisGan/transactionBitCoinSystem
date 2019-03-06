@@ -5,7 +5,7 @@
 #include <cstring>
 #include <fstream>
 #include "assistantFunctions.h"
-#include "ErrorsCodes.h"
+#include "date.h"
 
 
 void argmParser(int &argc, char **argv, struct ArgumentsKeeper &argmKeeper){
@@ -110,6 +110,127 @@ void ArgumentsKeeper::printArgs() {
     cout << "receiverHashtableNumOfEntries (-h2) : \t" << receiverHashtableNumOfEntries <<endl;
     cout << "bucketSize (-b) : \t\t\t" << bucketSize <<endl;
 }
+
+
+
+
+
+void split( char* str, char* delimiter , linkedList<char*> & result2return) {
+
+    char* token ;
+//    linkedList<char*> result;
+
+    token = strtok(str , delimiter);
+
+    while (token!= nullptr){
+//        printf("'%s'\n", token);
+        result2return.insert_last(token);
+        token = strtok(nullptr, delimiter);
+
+    }
+
+}
+
+
+
+//23 richard crystalsmith 20 13-02-2018 12:32
+//
+//45 novaldach hackerman 30 11-01-2017 14:46
+
+
+void readTransactionQueries(const myString &initiaTransacFile, myTransacHashMap &senderHT_ptr ,  myTransacHashMap  &receiverHT_ptr,
+                            myHashMap<wallet > &walletHT_ptr,myHashMap<bitcoin> &btcHT_ptr){
+
+    FILE * fp;
+    char * line = nullptr;
+    size_t len = 0;
+    ssize_t read;
+    fp = fopen(initiaTransacFile .getMyStr(), "r");
+    if (fp == nullptr)
+        exit(EXIT_FAILURE);
+
+
+    linkedList<char*> resultList;
+    char delim[] = " ";
+    while ((read = getline(&line, &len, fp)) != -1) {
+
+        if (line[0] == '\n'){continue;} //skip empty lines
+
+        split(line, delim , resultList); /// push all char* tokens to the list
+
+        myString new_transactionId;
+        myString senderId;
+        myString receiverId;
+        date transacDate;
+        transacNode new_transacNode;
+        myString sender;
+        myString receiver;
+        int amountToTransfer;
+
+        linkedList<int> transacDateList;
+        int i=0;
+        for ( auto tokenStr : resultList){
+            //convert token to myString
+
+            myString token(tokenStr);
+//            cout <<token <<"\t";
+
+
+//
+            if (i==0) {
+                new_transacNode.setTransacId(atoi(tokenStr));
+            }
+            if (i==1) {
+                sender = token; //it is the hash key to the sender HashMap
+            }
+            if (i==2) {
+                receiver = token;
+                new_transacNode.setWalletId(receiver);
+            }
+            if (i==3) {
+                amountToTransfer = atoi(tokenStr);
+                new_transacNode.setAmount(amountToTransfer);
+            }
+            if (i==4) {//todo make it optional
+                //todo split (-) meta convert to int
+
+                linkedList<char*> dateNumbersChar;
+                split(tokenStr,"-",dateNumbersChar);
+                for (auto &item : dateNumbersChar) {
+                    transacDateList.insert_last(atoi(item));
+                }
+            }
+            if (i==5) {//todo make it optional
+                //todo split (:) meta convert to int
+
+                linkedList<char*> hourNumbersChar;
+                split(tokenStr,":",hourNumbersChar);
+                for (auto &item : hourNumbersChar) {
+                    transacDateList.insert_last(atoi(item));
+                }
+            }
+
+            i++;
+        }
+
+
+        //todo set here the date object
+        transacDate.setDateByGivenList(transacDateList);
+
+        //todo tha ftiaksw thn insertSync pou legame kai tha ta kanei ekeinh insert me ta katallhla exceptions
+
+        resultList.clear();
+    }
+
+
+
+    fclose(fp);
+    if (line)
+        free(line);
+}
+
+
+
 
 
 
@@ -222,58 +343,4 @@ void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHa
         free(line);
 }
 
-//    ifstream inFile;
-//    inFile.open(inCoinsFileName.getMyStr());
-//    if (!inFile) {
-//        cout << "Unable to open inCoinsFile\n";
-//        //todo stderr unable to open input file ...
-//        exit(1); // terminate with error
-//    }
-//
-//    string line;
-//
-//    int index = 0; //line number
-//    while (getline(inFile, line, '\n')) {
-//        int column=0;
-//
-//// skip empty lines:
-//        if (line.empty()) continue;
-//
-//        if (line[line.size() - 1] == '\r')
-//            line.erase(line.size() - 1);
-//
-//
-//    myfile.close();
-//}
-//
-//
-//fp = fopen("/etc/motd", "r");
-//if (fp == NULL)
-//exit(EXIT_FAILURE);
-//
-//while ((read = getline(&line, &len, fp)) != -1) {
-//printf("Retrieved line of length %zu:\n", read);
-//printf("%s", line);
-//}
-//
-//fclose(fp);
-//
-//
 
-
-
-void split( char* str, char* delimiter , linkedList<char*> & result2return) {
-
-    char* token ;
-//    linkedList<char*> result;
-
-    token = strtok(str , delimiter);
-
-    while (token!= nullptr){
-//        printf("'%s'\n", token);
-        result2return.insert_last(token);
-        token = strtok(nullptr, delimiter);
-
-    }
-
-}

@@ -52,7 +52,7 @@ public:
 
         table->setMaxNumberOfRecordsInBucket(maxNumberOfRecordsInBucket);
 
-//        this->hashFunc = hashF;
+        this->hashFunc = hashF;
 
 
     }

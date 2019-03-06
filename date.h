@@ -6,6 +6,7 @@
 #define TRANSACTIONBITCOINSYSTEM_DATE_H
 
 
+#include "mylinkedList.h"
 
 struct date{
 
@@ -15,6 +16,8 @@ struct date{
     int hour;
     int minute;
 
+
+    void setDateByGivenList(linkedList<int> setDateList);
 
     bool operator<(const date &rhs) const;
 

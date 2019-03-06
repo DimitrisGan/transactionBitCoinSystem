@@ -21,6 +21,7 @@
 //todo apo to walletID tha pairnw ta btcIds pou tha peiraksw mazi me to poso
 //todo kai tha phgainw sto tree pou tha epistrefei deiktes pou tha tous xwnw
 struct transacNode{
+    int transacId;
     myString walletId; //in sender table is receiverWalletId
 
     //mporei na exoun dhmiourgithei parapanw apo ena nodes se diaforetika bitcoins trees
@@ -28,9 +29,10 @@ struct transacNode{
     int amount;
     linkedList<t_node *> treeNodeList_ptrs;
 
+    transacNode() =default;
 
-    transacNode( myString WalletId,  linkedList<myString> bitcoinId, int amount,
-                 linkedList<t_node *> treeNode_ptr) : walletId(WalletId), bitcoinSentList(bitcoinId), amount(amount),
+    transacNode( int transacId,myString WalletId,  linkedList<myString> bitcoinId, int amount,
+                 linkedList<t_node *> treeNode_ptr) : transacId(transacId) ,walletId(WalletId), bitcoinSentList(bitcoinId), amount(amount),
                                                             treeNodeList_ptrs(treeNode_ptr) {}
 
     virtual ~transacNode() {
@@ -39,6 +41,7 @@ struct transacNode{
     }
 
     transacNode& operator=( transacNode rhs)  {
+        transacId = rhs.transacId;
         walletId = rhs.walletId ;
         bitcoinSentList = rhs.bitcoinSentList ;
         treeNodeList_ptrs = rhs.treeNodeList_ptrs; //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS
@@ -46,6 +49,26 @@ struct transacNode{
         return *this;
     }
 
+
+    void setTransacId(int transacId) {
+        transacNode::transacId = transacId;
+    }
+
+    void setWalletId(const myString &walletId) {
+        transacNode::walletId = walletId;
+    }
+
+    void setBitcoinSentList( linkedList<myString> bitcoinSentList) {
+        transacNode::bitcoinSentList = bitcoinSentList;
+    }
+
+    void setAmount(int amount) {
+        transacNode::amount = amount;
+    }
+
+    void setTreeNodeList_ptrs( linkedList<t_node *> treeNodeList_ptrs) {
+        transacNode::treeNodeList_ptrs = treeNodeList_ptrs;
+    }
 
 
 };
