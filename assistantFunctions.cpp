@@ -155,7 +155,7 @@ void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHa
         for ( auto tokenStr : resultList) {
             //convert token to myString
             myString token(tokenStr);
-
+//
             if (isUserName){ //means that we have the user name (=new_walletId)
                 new_walletId = token;
                 isUserName = false;
@@ -193,6 +193,7 @@ void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHa
             cout << item <<endl;
 
         }
+        cout <<endl;
 
 
 
@@ -203,6 +204,7 @@ void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHa
 //        printf("Retrieved line of length %zu:\n", read);
 //        printf("%s", line);
 
+        resultList.clear();
     }
 
 
