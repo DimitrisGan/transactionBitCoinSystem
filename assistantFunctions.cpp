@@ -159,13 +159,11 @@ void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHa
 
             myString token(tokenStr);
 //
-            if (isUserName){ //means that we have the user name (=new_walletId)
+            if (isUserName) { //means that we have the user name (=new_walletId)
                 new_walletId = token;
                 isUserName = false;
-            }
 
-            if (resultList.getSize() == 1){  // in case that the user doesn't have a wallet [avoid seg for user with empty wallet]
-                break;
+
             }
 
             else{ //there is a btc id to insert in wallet's user
@@ -177,18 +175,16 @@ void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHa
 
             }
 
+            if (resultList.getSize() == 1) {  // in case that the user doesn't have a wallet [avoid seg for user with empty wallet]
+                break;
+            }
+
         }
 
 
         if (resultList.getSize() == 1){  // in case that the user doesn't have a wallet [avoid seg for user with empty wallet]
 
-            //trim the walletId myString to cut "\n" delimiter
-//            text[strlen(text)-1] = '\0';
-            new_walletId.getMyStr()[new_walletId.size() -1] = '\0';
-//            linkedList<char*> tmpList;
-//            split(cutLastChar.getMyStr() , const_cast<char *>("\n"), tmpList);
-//            btcList.updateTailData(cutLastChar);
-
+            new_walletId.getMyStr()[new_walletId.size() -1] = '\0';  //remove '\n'
         }
         else{
             //trim the last btc myString to cut "\n" delimiter

@@ -38,6 +38,7 @@ private: //private attributes
     l_node<T> *head;
     l_node<T> *tail;
     int size;
+
 public:
     int getSize() const;
 
@@ -48,7 +49,7 @@ private: //private methods
     friend std::ostream &operator<<(std::ostream &os, const linkedList<U> &rhs);
 
 public:
-    linkedList() : head(nullptr) ,tail(nullptr){size =0;};
+    linkedList() : head(nullptr) ,tail(nullptr){this->size =0;};
     linkedList( linkedList &rhs);
 
     virtual ~linkedList();
@@ -75,6 +76,7 @@ public:
 
     /*operators overload*/
     linkedList& operator=( linkedList &rhs)  ;
+
 
 
 
@@ -181,6 +183,11 @@ void linkedList<T>::clear () {
 
         }
     }
+    else{
+        head = nullptr;
+        tail = nullptr;
+        size=0;
+    }
 }
 
 template<class T>
@@ -252,6 +259,10 @@ linkedList<T> &  linkedList<T>::operator=(  linkedList<T> &rhs)
     return *this;
 
 }
+
+
+
+
 
 
 
@@ -413,7 +424,6 @@ linkedList<T>::linkedList(linkedList &rhs) {
 //    this->clear(); // the function at the start of this review
     this->head = nullptr;
     this->tail= nullptr;
-    this->size = rhs.size;
 
     for ( auto item : rhs) {
         this->insert_last(item);
