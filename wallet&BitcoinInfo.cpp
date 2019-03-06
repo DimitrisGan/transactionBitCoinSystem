@@ -33,6 +33,10 @@ void wallet::setId(const myString &id) {
     wallet::id = id;
 }
 
+ myString wallet::getId()  {
+    return this->id;
+}
+
 
 //todo//todo//todo//todo//todo//todo//todo//todo//todo//todo//todo
 

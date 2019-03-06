@@ -23,14 +23,14 @@ int main(int argc, char **argv) {
 */
 
  int bucketSizeInBytes = 1024;
- int tableSize =100;
+ int tableSize =1;
  int btcValue = 50;
  unsigned  (*myHashFunc)( myString, unsigned)  = & myHash ;
 
 
 
- myHashMap< myBucket_chain<wallet>  > walletHT(tableSize , myHashFunc );
- myHashMap< myBucket_chain<bitcoin>  > btcHT (tableSize , myHashFunc );
+ myHashMap<wallet>   walletHT(tableSize , myHashFunc );
+ myHashMap< bitcoin> btcHT (tableSize , myHashFunc );
 
  argmKeeper.bitCoinBalancesFile = "bitCoinBalancesFile";
 

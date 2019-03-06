@@ -36,6 +36,9 @@ public:
 
     virtual ~wallet() = default;
 
+
+    myString getId() ;
+
     void setId(const myString &id);
 
     void setBalance(int balance);

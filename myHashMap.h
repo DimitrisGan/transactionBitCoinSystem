@@ -8,6 +8,7 @@
 
 #include "myString.h"
 #include "hashFunction.h"
+#include "myBucket.h"
 
 
 
@@ -28,7 +29,7 @@ class myHashMap {
 
 private:
 
-    T *table;
+    myBucket_chain<T> *table;
 //    F hashFunc;
 
     unsigned  (*hashFunc)(myString, unsigned)  ;
@@ -45,9 +46,9 @@ public:
 
         this->tableSize = tableSize;
 
-        this->table = new T  [tableSize] ;
+        this->table = new myBucket_chain<T>  [tableSize] ;
 
-//        this->hashFunc = hashF;
+        this->hashFunc = hashF;
 
     }
 
@@ -75,14 +76,15 @@ public:
 
 
 
-//    void insertInTransacHT(myString key,transacNode transacNode2Insert ){
-//
-//        int indexHash = hashFunc(key);
+    void insert( myString key,T data2insert){
+
+        int indexHash = hashFunc(key,this->tableSize);
+//        int indexHash = this->hashFunc(key,this->tableSize);
 //        if (table[indexHash] == nullptr) //if table[index] is null then we have to initialize a recordsBucket chain
-//            table[indexHash] = new T ;
-//
-//        this->table[indexHash].insertNewRecord(transacNode2Insert);
-//    }
+//            table[indexHash] = new myBucket_chain  <T> ;
+
+        this->table[indexHash].insert(data2insert);
+    }
 
 
 

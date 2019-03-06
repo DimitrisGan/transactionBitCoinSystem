@@ -109,6 +109,9 @@ myString &myString::operator=(const myString &right)  {
     return *this;
 }
 
+
+
+
 //***********************************************
 // Overloaded = operator. Called when operand   *
 // on the right is a string.                    *

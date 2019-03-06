@@ -36,18 +36,21 @@ struct myBucket{
 template <typename T>
 struct myBucket_chain{
     linkedList<myBucket<T>> myBucketList;
+    int size;
 
 
+    myBucket_chain() {size =0;}
 
     void insert(T data){
         //todo
         if (existInChain(data)){
             cout << "YPARXEI HDH !!!!!"<<endl;
-            exit(10);
+            exit(100);
         }
         else{
             myBucket<T> newBucket(data);
             myBucketList.insert_last(newBucket);
+            size++;
         }
     }
 

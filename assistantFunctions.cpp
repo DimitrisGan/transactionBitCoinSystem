@@ -117,8 +117,8 @@ void ArgumentsKeeper::printArgs() {
 //richard 541 896 453 670 432
 //annie 235 5490 325
 
-void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHashMap<myBucket_chain<wallet >> &walletHT_ptr,
-                                      myHashMap<myBucket_chain<bitcoin>> &btcHT_ptr, int bitCoinValue) {
+void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHashMap<wallet > &walletHT_ptr,
+                                      myHashMap<bitcoin> &btcHT_ptr, int bitCoinValue) {
     //todo ftiaxnw domh wallet edw
     //todo + ftiaxnw tis rizes twn btcTrees (gia tous prokatoxous) ara ftiaxnw domh btcTree-->bitcoin
     //todo ta xwne sta walletHT , btcHT
@@ -178,7 +178,11 @@ void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHa
 //        btcList.updateTailData()
         wallet wallet2insert(walletId,balance,btcList,amountList);
 
-//        todo insert it to HT walletHT_ptr.
+        myString key = walletId;
+
+        cout << "key = " <<key<<endl;
+
+        walletHT_ptr.insert(key , wallet2insert);
 
 
         printf("Retrieved line of length %zu:\n", read);
