@@ -37,6 +37,10 @@ class linkedList {
 private: //private attributes
     l_node<T> *head;
     l_node<T> *tail;
+    int size;
+public:
+    int getSize() const;
+
 private: //private methods
     l_node<T> *createNode(T data);
 
@@ -44,7 +48,7 @@ private: //private methods
     friend std::ostream &operator<<(std::ostream &os, const linkedList<U> &rhs);
 
 public:
-    linkedList() : head(nullptr) ,tail(nullptr){};
+    linkedList() : head(nullptr) ,tail(nullptr){size =0;};
     linkedList( linkedList &rhs);
 
     virtual ~linkedList();
@@ -173,6 +177,7 @@ void linkedList<T>::clear () {
             }
             head = nullptr;
             tail = nullptr;
+            size=0;
 
         }
     }
@@ -280,6 +285,8 @@ void linkedList<T>::insert_first( T data)
         //        for (temp = head; temp->next != NULL; temp = temp->next);
         //        temp->next = new l_node<T>(data);
     }
+
+    size++;
 }
 
 
@@ -304,6 +311,7 @@ void linkedList<T>::insert_last( T data)
     }
 
 
+    size++;
 
 }
 
@@ -366,6 +374,7 @@ bool linkedList<T>::exists(const T data) const
 template<class T>
 bool linkedList<T>::isEmpty() const
 {
+    //todo tha mporousa apla size == 0;
     return head == nullptr && tail == nullptr; //if the start pointer and end pointer are NULL then the list is empty
 //    return head ==  tail ; //if the start pointer and end pointer are NULL then the list is empty
 }
@@ -392,6 +401,7 @@ l_node<T> *linkedList<T>::createNode(T data) {
     //todo an dothei gia data recordsBucket object anti gia ptr trww seg ston destructor tou recordsBucket
     l_node<T> *temp = new l_node<T>(data);
 
+
     return temp;
 }
 
@@ -403,6 +413,7 @@ linkedList<T>::linkedList(linkedList &rhs) {
 //    this->clear(); // the function at the start of this review
     this->head = nullptr;
     this->tail= nullptr;
+    this->size = rhs.size;
 
     for ( auto item : rhs) {
         this->insert_last(item);
@@ -432,6 +443,11 @@ l_node<T> *linkedList<T>::getHead() const {
 template<class T>
 l_node<T> *linkedList<T>::getTail() const {
     return tail;
+}
+
+template<class T>
+int linkedList<T>::getSize() const {
+    return size;
 }
 
 

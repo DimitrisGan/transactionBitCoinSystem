@@ -140,7 +140,7 @@ void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHa
     char delim[] = " ";
     while ((read = getline(&line, &len, fp)) != -1) {
 
-        if (line[0] == '\n'){continue;}
+        if (line[0] == '\n'){continue;} //skip empty lines
 
         split(line, delim , resultList); /// push all char* tokens to the list
 
@@ -152,15 +152,25 @@ void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHa
 
         bool  isUserName= true;
 
+
+
         for ( auto tokenStr : resultList) {
             //convert token to myString
+
             myString token(tokenStr);
 //
             if (isUserName){ //means that we have the user name (=new_walletId)
                 new_walletId = token;
                 isUserName = false;
             }
-            else{ //is a btc id
+
+            if (resultList.getSize() == 1){  // in case that the user doesn't have a wallet [avoid seg for user with empty wallet]
+                break;
+            }
+
+            else{ //there is a btc id to insert in wallet's user
+
+
                 btcList.insert_last(token);
                 amountList.insert_last(bitCoinValue);
                 balance+= bitCoinValue;
@@ -170,39 +180,42 @@ void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHa
         }
 
 
-        //trim the last btc myString to cut "\n" delimiter
-        myString cutLastTime = btcList.getTail()->data;
-        linkedList<char*> tmpList;
-        split(cutLastTime.getMyStr() , const_cast<char *>("\n"), tmpList);
-        btcList.updateTailData(cutLastTime);
+        if (resultList.getSize() == 1){  // in case that the user doesn't have a wallet [avoid seg for user with empty wallet]
 
+            //trim the walletId myString to cut "\n" delimiter
+//            text[strlen(text)-1] = '\0';
+            new_walletId.getMyStr()[new_walletId.size() -1] = '\0';
+//            linkedList<char*> tmpList;
+//            split(cutLastChar.getMyStr() , const_cast<char *>("\n"), tmpList);
+//            btcList.updateTailData(cutLastChar);
+
+        }
+        else{
+            //trim the last btc myString to cut "\n" delimiter
+            myString cutLastChar = btcList.getTail()->data;
+            linkedList<char*> tmpList;
+            split(cutLastChar.getMyStr() , const_cast<char *>("\n"), tmpList);
+            btcList.updateTailData(cutLastChar);
+
+        }
 
         //insert to wallet HashTable
         wallet wallet2insert(new_walletId,balance,btcList,amountList);
-
         myString key = new_walletId;
-
         walletHT_ptr.insert(key , wallet2insert);
 
-        //insert to btc HashTable
-        for ( auto item: wallet2insert.getBtcIdsOwned_list()) {
-            //create a btcTree and add it to the new btc struct
-            btc_tree *new_btcTreePtr = new  btc_tree(new_walletId , bitCoinValue);
-            bitcoin new_btc (item, new_btcTreePtr);
-            btcHT_ptr.insert(new_btc.id , new_btc);
-            cout << item <<endl;
+        if (resultList.getSize() == 1) {  // in case that the user doesn't have a wallet [avoid seg for user with empty wallet]
+            //insert to btc HashTable
+            for (auto item: wallet2insert.getBtcIdsOwned_list()) {
+                //create a btcTree and add it to the new btc struct
+                btc_tree *new_btcTreePtr = new btc_tree(new_walletId, bitCoinValue);
+                bitcoin new_btc(item, new_btcTreePtr);
+                btcHT_ptr.insert(new_btc.id, new_btc);
+                cout << item << endl;
 
+            }
         }
-        cout <<endl;
-
-
-
-//        cout << "key = " <<key<<endl;
-//
-//
-//        //todo same adds for bitcoin !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//        printf("Retrieved line of length %zu:\n", read);
-//        printf("%s", line);
+        cout <<"end of this user \n\n";
 
         resultList.clear();
     }
