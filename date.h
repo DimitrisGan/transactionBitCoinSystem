@@ -27,6 +27,8 @@ struct date{
 
     bool operator>=(const date &rhs) const;
 
+
+
 };
 
 #endif //TRANSACTIONBITCOINSYSTEM_DATE_H

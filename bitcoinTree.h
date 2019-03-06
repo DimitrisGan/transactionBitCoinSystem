@@ -29,8 +29,8 @@ struct t_node{
 
     myString walletId;
     int amount;
-    struct t_node *left; // the receiver user/walletId with the amount that gets
-    struct t_node *right; // the sender user/walletId (same as parent walletId) with the remainder amount
+    struct t_node *left; // the receiver user/receiverWalletId with the amount that gets
+    struct t_node *right; // the sender user/receiverWalletId (same as parent receiverWalletId) with the remainder amount
 
     void fillNode( myString id, int amount , t_node* left , t_node* right );
 

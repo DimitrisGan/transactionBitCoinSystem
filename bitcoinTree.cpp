@@ -90,7 +90,7 @@ void btc_tree::insert(myString senderWalletId, myString receiverWalletId, int am
 
     linkedList<t_node*> leafs_list; //logika tha paizw me pointers gia na grapsw kateutheian ston komvo
     getLeafs(this->root , leafs_list);
-    //kane searchKeyIdFromLeafs ola ta leafs  kai apo kei pare ola ta walletId pou einia o walletId sender
+    //kane searchKeyIdFromLeafs ola ta leafs  kai apo kei pare ola ta receiverWalletId pou einia o receiverWalletId sender
     linkedList<t_node*> found_list;
     searchKeyIdFromLeafs(senderWalletId, leafs_list, found_list);
     //todo mhpws na pairna deiktes kai etsi wste na ekana eskava kateutheian panw stous komvous????
@@ -174,7 +174,7 @@ void btc_tree::insert(myString receiverWalletID ,int amountToSend , t_node* send
 //    }else{
     senderNode->left = new t_node;
 
-//    senderNode->left->walletId = receiverWalletID;
+//    senderNode->left->receiverWalletId = receiverWalletID;
 //    senderNode->left->amountToSend = ;
 //    senderNode->left->left = nullptr ;
 //    senderNode->left->right = nullptr ;
@@ -186,7 +186,7 @@ void btc_tree::insert(myString receiverWalletID ,int amountToSend , t_node* send
     assert(amountRemain >=0);
 
     senderNode->right = new t_node;
-//    senderNode->right->walletId = senderNode->walletId;
+//    senderNode->right->receiverWalletId = senderNode->receiverWalletId;
 //    senderNode->right->amountToSend = ;
 //
 //    senderNode->right->left = nullptr ;

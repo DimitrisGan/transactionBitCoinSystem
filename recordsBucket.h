@@ -10,6 +10,7 @@
 #include "mylinkedList.h"
 #include "myString.h"
 #include "bitcoinTree.h"
+#include "date.h"
 
 
 //int globo=0;
@@ -17,23 +18,24 @@
 
 //template <class U ,class B>
 
-//todo to transacNode list tha pairnei se template to sender walletId opote de xreiazetai sthn insert
+//todo to transacNode list tha pairnei se template to sender receiverWalletId opote de xreiazetai sthn insert
 //todo apo to walletID tha pairnw ta btcIds pou tha peiraksw mazi me to poso
 //todo kai tha phgainw sto tree pou tha epistrefei deiktes pou tha tous xwnw
 struct transacNode{
     int transacId;
-    myString walletId; //in sender table is receiverWalletId
+    myString receiverWalletId; //in sender table is receiverWalletId
+    date transacTime;
 
     //mporei na exoun dhmiourgithei parapanw apo ena nodes se diaforetika bitcoins trees
     linkedList<myString> bitcoinSentList;
     int amount;
     linkedList<t_node *> treeNodeList_ptrs;
 
-    transacNode() =default;
+    transacNode() = default;
 
     transacNode( int transacId,myString WalletId,  linkedList<myString> bitcoinId, int amount,
-                 linkedList<t_node *> treeNode_ptr) : transacId(transacId) ,walletId(WalletId), bitcoinSentList(bitcoinId), amount(amount),
-                                                            treeNodeList_ptrs(treeNode_ptr) {}
+                 linkedList<t_node *> treeNode_ptr) : transacId(transacId) ,receiverWalletId(WalletId), bitcoinSentList(bitcoinId), amount(amount),
+                                                            treeNodeList_ptrs(treeNode_ptr) , transacTime(transacTime) {}
 
     virtual ~transacNode() {
 //         treeNodeList_ptrs.clear(); OXI DE THELW NA GINEI FREE TO DENTRO MOY APO TO TRANSACTION NODE LIST
@@ -42,10 +44,11 @@ struct transacNode{
 
     transacNode& operator=( transacNode rhs)  {
         transacId = rhs.transacId;
-        walletId = rhs.walletId ;
+        receiverWalletId = rhs.receiverWalletId ;
         bitcoinSentList = rhs.bitcoinSentList ;
         treeNodeList_ptrs = rhs.treeNodeList_ptrs; //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS
         amount = rhs.amount;
+        transacTime = rhs.transacTime;
         return *this;
     }
 
@@ -55,7 +58,7 @@ struct transacNode{
     }
 
     void setWalletId(const myString &walletId) {
-        transacNode::walletId = walletId;
+        transacNode::receiverWalletId = walletId;
     }
 
     void setBitcoinSentList( linkedList<myString> bitcoinSentList) {
@@ -70,6 +73,9 @@ struct transacNode{
         transacNode::treeNodeList_ptrs = treeNodeList_ptrs;
     }
 
+    void setTransacTime(const date &transacTime) {
+        transacNode::transacTime = transacTime;
+    }
 
 };
 
@@ -78,7 +84,7 @@ struct record{
     linkedList<transacNode> *transacLlist_ptr; //TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO
 
 
-//    record( myString walletId) : walletId(walletId) {
+//    record( myString receiverWalletId) : receiverWalletId(receiverWalletId) {
 //        transacLlist_ptr = new linkedList<transacNode> ;
 //    }
 

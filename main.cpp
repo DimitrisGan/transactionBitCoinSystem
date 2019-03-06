@@ -9,6 +9,7 @@
 #include "myHashMap.h"
 //#include "hashFunction.h"
 #include "transacHashMap.h"
+#include "synchroniseFunctions.h"
 
 using  namespace std;
 
@@ -37,8 +38,11 @@ int main(int argc, char **argv) {
     btcBalancesFile_parsing_and_save(argmKeeper.bitCoinBalancesFile , walletHT , btcHT , btcValue);
 */
 
-    myTransacHashMap senderHT(tableSize ,myHashFunc   ,bucketSizeInBytes);
+    myTransacHashMap  senderHT(tableSize ,myHashFunc   ,bucketSizeInBytes);
     myTransacHashMap  receiverHT(tableSize ,myHashFunc   ,bucketSizeInBytes);
+
+
+    struct Synchroniser sync (&senderHT,&receiverHT,&walletHT,&btcHT);
 
     //todo call transacFile
     argmKeeper.transactionsFile = "transactionFile";
@@ -82,7 +86,7 @@ int main(int argc, char **argv) {
 //    root.fillNode(key,10, nullptr, nullptr);
 //
 //    linkedList<myString> btcOwnedList;
-//    t_node * tNode_test_ptr = new t_node; //( myString walletId, int amount, t_node *left, t_node *right)
+//    t_node * tNode_test_ptr = new t_node; //( myString receiverWalletId, int amount, t_node *left, t_node *right)
 //    linkedList<t_node *> treeNodesChangedList;
 //    treeNodesChangedList.insert_last(tNode_test_ptr);
 //
@@ -105,7 +109,7 @@ int main(int argc, char **argv) {
     linkedList <myString> btcL;
     btcL.insert_last(btcId);
     linkedList <int> amountL;
-//    wallet*  testWalletPtr = new wallet(walletId,5,btcL,amountL);
+//    wallet*  testWalletPtr = new wallet(receiverWalletId,5,btcL,amountL);
 
 //    template < typename T, /*type of bucketChain*/unsigned tableSize, typename F = KeyHash< /*key=*/myString, tableSize> >
 //    myHashMap< myBucket_chain<wallet> , tableSize , MyKeyHash > walletHT;
@@ -114,13 +118,13 @@ int main(int argc, char **argv) {
 
 
 
-//    int index = (*myHashFunc)(walletId,10);
+//    int index = (*myHashFunc)(receiverWalletId,10);
 //    cout << "index = "<<index<<endl;
 
 
 
-//    walletHT.getIndex(walletId);
-//    btcHT.getIndex(walletId);
+//    walletHT.getIndex(receiverWalletId);
+//    btcHT.getIndex(receiverWalletId);
 //    cout << "index from hash wallet = "<<index<<endl;
 //    cout << "index from hash btc= "<<index<<endl;
 
@@ -140,19 +144,19 @@ int main(int argc, char **argv) {
     //////////now let's make the hash table for transactions
 
     linkedList <t_node*> treeList;
-    t_node *ptr = new t_node(walletId,40, nullptr, nullptr) ;//myString walletId, int amount, t_node *left, t_node *right);
+    t_node *ptr = new t_node(walletId,40, nullptr, nullptr) ;//myString receiverWalletId, int amount, t_node *left, t_node *right);
     treeList.insert_last(ptr);
 
 
 //    delete ptr;
-//    transacNode newTransactionNode(walletId,btcL,250,treeList);
+//    transacNode newTransactionNode(receiverWalletId,btcL,250,treeList);
 
 
 //
 //
 ////
 //    int indexSender = static_cast<int>(senderHT.getHashFunc()(201));
-//    senderHT.getTable()[indexSender].insert(walletId,newTransactionNode);
+//    senderHT.getTable()[indexSender].insert(receiverWalletId,newTransactionNode);
 //
 //
 //    delete ptr;

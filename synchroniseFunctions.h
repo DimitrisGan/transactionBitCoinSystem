@@ -31,15 +31,16 @@ struct Synchroniser{
     //todo btcHT
     myTransacHashMap *senderHT_ptr;
     myTransacHashMap  *receiverHT_ptr;
-    myHashMap< myBucket_chain<wallet>> *walletHT_ptr;
-    myHashMap< myBucket_chain<bitcoin>> *btcHT_ptr;
+    myHashMap<wallet> *walletHT_ptr;
+    myHashMap< bitcoin> *btcHT_ptr;
 
-    Synchroniser(myTransacHashMap *senderHT_ptr, myTransacHashMap *receiverHT_ptr,
-                 myHashMap<myBucket_chain<wallet>> *walletHT_ptr, myHashMap<myBucket_chain<bitcoin>> *btcHT_ptr)
-            : senderHT_ptr(senderHT_ptr), receiverHT_ptr(receiverHT_ptr), walletHT_ptr(walletHT_ptr),
-              btcHT_ptr(btcHT_ptr) {}
 
-    void insertTransaction( myString sender,myString receiver ,int amount );
+    //todo ayrio !!!
+    Synchroniser(myTransacHashMap *senderHT_ptr, myTransacHashMap *receiverHT_ptr, myHashMap<wallet> *walletHT_ptr,
+                 myHashMap<bitcoin> *btcHT_ptr);
+
+    void insertTransaction( myString sender, transacNode transNode);
+
     void checkIfTransactionIsPossible(myString sender,myString receiver ,int amount);
     void createTransactionNode(myString sender,myString receiver ,int amount);
     void updateWallet(); //will be called two times for sender and receiver

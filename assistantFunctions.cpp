@@ -217,7 +217,11 @@ void readTransactionQueries(const myString &initiaTransacFile, myTransacHashMap 
         //todo set here the date object
         transacDate.setDateByGivenList(transacDateList);
 
+        new_transacNode.setTransacTime(transacDate);
+
+
         //todo tha ftiaksw thn insertSync pou legame kai tha ta kanei ekeinh insert me ta katallhla exceptions
+        //call insertSync
 
         resultList.clear();
     }
