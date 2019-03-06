@@ -18,6 +18,14 @@ myString::myString(char *sptr)  {
     strcpy(this->myStr, sptr);
 }
 
+
+
+myString::myString (char c)
+{
+    this->len = 1;
+    this->myStr   = new char(c);
+}
+
 //**************************************************
 // Destructor to delete/free the allocate memory   *
 //**************************************************
@@ -172,6 +180,3 @@ std::istream& operator>> (std::istream& is, myString& s)
 
 
 
-//void myString::makeOneToken(char delimeter) {
-//    char* token = strtok(this->myStr, "-"); //todo ???
-//}

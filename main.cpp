@@ -14,14 +14,29 @@ using  namespace std;
 
 int main(int argc, char **argv) {
     std::cout << "Hello, World!\n" << std::endl;
-/*
 
-    ArgumentsKeeper argmKeeper;
-    ArgmParser(argc, argv , argmKeeper);
+   ArgumentsKeeper argmKeeper;
+  /*
+    argmParser(argc, argv , argmKeeper);
 
     argmKeeper.printArgs();
 */
 
+    int bucketSizeInBytes = 1024;
+    int tableSize =100;
+   unsigned  (*myHashFunc)( myString, unsigned)  = & myHash ;
+
+
+   myHashMap< myBucket_chain<wallet>  > walletHT(tableSize , myHashFunc );
+   myHashMap< myBucket_chain<bitcoin>  > btcHT (tableSize , myHashFunc );
+
+
+   argmKeeper.bitCoinBalancesFile = "bitCoinBalancesFile";
+
+ btcBalancesFile_InputParser(argmKeeper.bitCoinBalancesFile , walletHT , btcHT);
+
+    cout <<"end\n";
+    exit(1);
     char* firstWalletId = const_cast<char *>("Owner!");
     myString rootakos (firstWalletId);
     char* firstReceivertId = const_cast<char *>("1st Receiver!");
@@ -43,8 +58,7 @@ int main(int argc, char **argv) {
 
     cout<< "Size of myString :"<< sizeof(myString)<<endl;
 
-    const int bucketSizeInBytes = 1024;
-    const int tableSize =100;
+
 //    unsigned numberOfRecordsInBucket = BucketSize/sizeof(record<myString ,myString>);
 //    cout <<"numberOfRecords : " <<numberOfRecordsInBucket<<endl;
 
@@ -89,15 +103,12 @@ int main(int argc, char **argv) {
 //    myHashMap< myBucket_chain<bitcoin> , tableSize , MyKeyHash > btcHT;
 
 
-//    unsigned  (*myHashFunc)( myString, unsigned)  = & myHash ;
 
 
 //    int index = (*myHashFunc)(walletId,10);
 //    cout << "index = "<<index<<endl;
 
 
-//    myHashMap< myBucket_chain<wallet>  > walletHT(tableSize , myHashFunc );
-//    myHashMap< myBucket_chain<bitcoin>  > btcHT (tableSize , myHashFunc );
 
 //    walletHT.getIndex(walletId);
 //    btcHT.getIndex(walletId);
@@ -127,10 +138,10 @@ int main(int argc, char **argv) {
 //    delete ptr;
     transacNode newTransactionNode(walletId,btcL,250,treeList);
 
-//    myTransacHashMap senderHT(tableSize ,myHashFunc   ,bucketSizeInBytes);
-//    myTransacHashMap  receiverHT(tableSize ,myHashFunc   ,bucketSizeInBytes);
-////
-////
+    myTransacHashMap senderHT(tableSize ,myHashFunc   ,bucketSizeInBytes);
+    myTransacHashMap  receiverHT(tableSize ,myHashFunc   ,bucketSizeInBytes);
+//
+//
 ////
 //    int indexSender = static_cast<int>(senderHT.getHashFunc()(201));
 //    senderHT.getTable()[indexSender].insert(walletId,newTransactionNode);

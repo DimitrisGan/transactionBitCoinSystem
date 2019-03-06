@@ -15,7 +15,9 @@
 
 #include "mylinkedList.h"
 #include "myString.h"
-
+#include "myHashMap.h"
+#include "myBucket.h"
+#include "wallet&BitcoinInfo.h"
 
 
 struct ArgumentsKeeper{
@@ -30,8 +32,10 @@ struct ArgumentsKeeper{
 };
 
 
-void ArgmParser(int &argc, char **argv , struct ArgumentsKeeper& argmKeeper);
+void argmParser(int &argc, char **argv, struct ArgumentsKeeper &argmKeeper);
 
+void btcBalancesFile_InputParser(const myString& btcInitialOwnersFile ,myHashMap< myBucket_chain<wallet >> &walletHT_ptr , myHashMap< myBucket_chain<bitcoin>> &btcHT_ptr);
 
+void split( char* str, char* delimiter , linkedList<char*> & result2return) ;
 
 #endif //TRANSACTIONBITCOINSYSTEM_ASSISTANTFUNCTIONS_H
