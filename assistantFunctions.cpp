@@ -144,7 +144,8 @@ void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHa
 
         split(line, delim , resultList); /// push all char* tokens to the list
 
-        myString walletId;
+        myString new_walletId;
+
         int balance =0;
         linkedList<myString> btcList;
         linkedList<int> amountList;
@@ -155,38 +156,52 @@ void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHa
             //convert token to myString
             myString token(tokenStr);
 
-            if (isUserName){ //means that we have the user name (=walletId)
-                walletId = token;
+            if (isUserName){ //means that we have the user name (=new_walletId)
+                new_walletId = token;
                 isUserName = false;
             }
             else{ //is a btc id
                 btcList.insert_last(token);
                 amountList.insert_last(bitCoinValue);
                 balance+= bitCoinValue;
+
             }
 
         }
 
 
-            //trim the last btc myString to cut "\n" delimiter
-            myString cutLastTime = btcList.getTail()->data;
-            linkedList<char*> tmpList;
-            split(cutLastTime.getMyStr() , const_cast<char *>("\n"), tmpList);
-            btcList.updateTailData(cutLastTime);
+        //trim the last btc myString to cut "\n" delimiter
+        myString cutLastTime = btcList.getTail()->data;
+        linkedList<char*> tmpList;
+        split(cutLastTime.getMyStr() , const_cast<char *>("\n"), tmpList);
+        btcList.updateTailData(cutLastTime);
 
 
-//        btcList.updateTailData()
-        wallet wallet2insert(walletId,balance,btcList,amountList);
+        //insert to wallet HashTable
+        wallet wallet2insert(new_walletId,balance,btcList,amountList);
 
-        myString key = walletId;
-
-        cout << "key = " <<key<<endl;
+        myString key = new_walletId;
 
         walletHT_ptr.insert(key , wallet2insert);
 
+        //insert to btc HashTable
+        for ( auto item: wallet2insert.getBtcIdsOwned_list()) {
+            //create a btcTree and add it to the new btc struct
+            btc_tree *new_btcTreePtr = new  btc_tree(new_walletId , bitCoinValue);
+            bitcoin new_btc (item, new_btcTreePtr);
+            btcHT_ptr.insert(new_btc.id , new_btc);
+            cout << item <<endl;
 
-        printf("Retrieved line of length %zu:\n", read);
-        printf("%s", line);
+        }
+
+
+
+//        cout << "key = " <<key<<endl;
+//
+//
+//        //todo same adds for bitcoin !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//        printf("Retrieved line of length %zu:\n", read);
+//        printf("%s", line);
 
     }
 
@@ -245,7 +260,7 @@ void split( char* str, char* delimiter , linkedList<char*> & result2return) {
     token = strtok(str , delimiter);
 
     while (token!= nullptr){
-        printf("'%s'\n", token);
+//        printf("'%s'\n", token);
         result2return.insert_last(token);
         token = strtok(nullptr, delimiter);
 

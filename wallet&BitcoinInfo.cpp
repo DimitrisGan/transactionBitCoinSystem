@@ -37,6 +37,11 @@ void wallet::setId(const myString &id) {
     return this->id;
 }
 
+ linkedList<myString> wallet::getBtcIdsOwned_list()  {
+    return btcIdsOwned_list;
+}
+
+
 
 //todo//todo//todo//todo//todo//todo//todo//todo//todo//todo//todo
 

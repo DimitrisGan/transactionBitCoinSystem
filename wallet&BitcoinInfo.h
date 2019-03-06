@@ -39,6 +39,9 @@ public:
 
     myString getId() ;
 
+     linkedList<myString> getBtcIdsOwned_list() ;
+
+
     void setId(const myString &id);
 
     void setBalance(int balance);

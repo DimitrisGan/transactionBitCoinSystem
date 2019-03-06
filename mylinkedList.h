@@ -19,7 +19,7 @@ struct l_node {
 //            next = nullptr;
 //    }
 
-    explicit l_node(T data) : data(data), next(nullptr) { static  int globo3=0;  cout << "CONSTRUCTOR OF list NODE IS CALLED #"<<globo3++ <<endl; }
+    explicit l_node(T data) : data(data), next(nullptr) { static  int globo3=0;  /*cout << "CONSTRUCTOR OF list NODE IS CALLED #"<<globo3++ <<endl;*/ }
     T data;
     l_node<T> *next;
 
