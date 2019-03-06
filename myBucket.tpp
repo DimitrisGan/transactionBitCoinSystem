@@ -31,3 +31,8 @@ template<typename T>
 bool myBucket<T>::operator!=(T &data)  {
     return !(data == *this);
 }
+//template<typename T>
+//friend ostream &operator<<(ostream &os,  myBucket<T> bucket){
+//    os << "_data: " << bucket._data;
+//    return os;
+//}

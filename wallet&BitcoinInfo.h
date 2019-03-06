@@ -6,6 +6,7 @@
 #define TRANSACTIONBITCOINSYSTEM_WALLET_H
 
 
+#include <ostream>
 #include "myString.h"
 #include "mylinkedList.h"
 #include "bitcoinTree.h"
@@ -19,6 +20,8 @@ struct bitcoin{
     bool operator==( bitcoin &rhs) ;
 
     bool operator!=( bitcoin &rhs) ;
+
+    friend ostream &operator<<(ostream &os, const bitcoin &bitcoin1);
 };
 
 
@@ -53,6 +56,8 @@ public:
     bool operator==(const wallet &rhs) const;
 
     bool operator!=(const wallet &rhs) const;
+
+    friend ostream &operator<<(ostream &os, const wallet &wallet1);
 
 };
 

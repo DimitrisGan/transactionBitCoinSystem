@@ -41,6 +41,11 @@ void wallet::setId(const myString &id) {
     return btcIdsOwned_list;
 }
 
+ostream &operator<<(ostream &os, const wallet &wallet1) {
+    os << "id: " << wallet1.id;
+    return os;
+}
+
 
 
 //todo//todo//todo//todo//todo//todo//todo//todo//todo//todo//todo
@@ -60,3 +65,8 @@ bool bitcoin::operator!=( bitcoin &rhs)  {
 
 bitcoin::bitcoin( myString id, btc_tree *transactionTree_ptr) : id(id), transactionTree_ptr(
         transactionTree_ptr) {}
+
+ostream &operator<<(ostream &os, const bitcoin &bitcoin1) {
+    os << "id: " << bitcoin1.id;
+    return os;
+}

@@ -200,18 +200,17 @@ void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHa
         myString key = new_walletId;
         walletHT_ptr.insert(key , wallet2insert);
 
-        if (resultList.getSize() == 1) {  // in case that the user doesn't have a wallet [avoid seg for user with empty wallet]
+        if (resultList.getSize() != 1) { //avoid to create btcTree for empty wallets
+            // in case that the user has a wallet with coins
             //insert to btc HashTable
             for (auto item: wallet2insert.getBtcIdsOwned_list()) {
                 //create a btcTree and add it to the new btc struct
                 btc_tree *new_btcTreePtr = new btc_tree(new_walletId, bitCoinValue);
                 bitcoin new_btc(item, new_btcTreePtr);
                 btcHT_ptr.insert(new_btc.id, new_btc);
-                cout << item << endl;
 
             }
         }
-        cout <<"end of this user \n\n";
 
         resultList.clear();
     }

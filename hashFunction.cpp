@@ -9,6 +9,7 @@ unsigned myHash( myString id, unsigned  size_of_table) {
     int c =0;
 
     char *str = new char[id.size() + 1];
+    char *toDelete = str;
     strcpy(str, id.getMyStr())   ;
 
 
@@ -16,5 +17,6 @@ unsigned myHash( myString id, unsigned  size_of_table) {
     while ((c = *str++))
         hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
 
+        delete [] toDelete;toDelete= nullptr;str = nullptr;
     return (hash % size_of_table);
 }

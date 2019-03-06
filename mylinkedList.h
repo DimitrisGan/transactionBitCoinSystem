@@ -167,7 +167,7 @@ linkedList<T>::~linkedList()
 template<class T>
 void linkedList<T>::clear () {
     static const bool IS_POINTER = std::is_pointer<T>::value;
-    if (IS_POINTER) {
+//    if (IS_POINTER) {
         if (!isEmpty()) { // List is not empty
 
             l_node<T> *currPtr = head;
@@ -182,12 +182,12 @@ void linkedList<T>::clear () {
             size=0;
 
         }
-    }
-    else{
-        head = nullptr;
-        tail = nullptr;
-        size=0;
-    }
+//    }
+//    else{
+//        head = nullptr;
+//        tail = nullptr;
+//        size=0;
+//    }
 }
 
 template<class T>

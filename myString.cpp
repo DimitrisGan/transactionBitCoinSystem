@@ -104,6 +104,9 @@ myString::myString(myString &right)
 
 
 myString &myString::operator=(const myString &right)  {
+
+    if (len != 0)
+        delete [] myStr;
     myStr = new char[right.size() + 1];
     strcpy(myStr, right.getMyStr());
     len  = right.size();

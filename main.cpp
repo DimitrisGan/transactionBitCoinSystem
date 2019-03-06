@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
 */
 
  int bucketSizeInBytes = 1024;
- int tableSize =1;
+ int tableSize =2;
  int btcValue = 50;
  unsigned  (*myHashFunc)( myString, unsigned)  = & myHash ;
 
@@ -35,6 +35,9 @@ int main(int argc, char **argv) {
  argmKeeper.bitCoinBalancesFile = "bitCoinBalancesFile";
 
  btcBalancesFile_parsing_and_save(argmKeeper.bitCoinBalancesFile , walletHT , btcHT , btcValue);
+
+
+
 
  cout <<"end\n";
  exit(1);

@@ -6,6 +6,7 @@
 #define TRANSACTIONBITCOINSYSTEM_MYBUCKET_H
 
 
+#include <ostream>
 #include "mylinkedList.h"
 
 template <typename T>
@@ -20,7 +21,7 @@ struct myBucket{
 
     void set_data(T _data);
 
-
+//    friend ostream &operator<<(ostream &os,  myBucket<T> bucket);
 
 
     //todo overload == , =
@@ -65,6 +66,10 @@ struct myBucket_chain{
         return false;
     }
 
+    friend ostream &operator<<(ostream &os, const myBucket_chain &chain) {
+        os << "myBucketList: " << chain.myBucketList;
+        return os;
+    }
 };
 
 

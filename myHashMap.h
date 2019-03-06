@@ -27,7 +27,7 @@
 template < typename T  >
 class myHashMap {
 
-private:
+public://private:
 
     myBucket_chain<T> *table;
 //    F hashFunc;
@@ -65,6 +65,7 @@ public:
     }
 
 
+
     unsigned int getTableSize() const {
         return tableSize;
     }
@@ -83,11 +84,33 @@ public:
 //        if (table[indexHash] == nullptr) //if table[index] is null then we have to initialize a recordsBucket chain
 //            table[indexHash] = new myBucket_chain  <T> ;
 
+        cout << "index to Hash = "<< indexHash<<endl;
         this->table[indexHash].insert(data2insert);
     }
 
 
+//    void printAllBucketChains(){
+//
+//
+//        for (int i = 0; i < this->tableSize ; ++i) {
+//
+//            for ( auto item : table[i].myBucketList.getHead()->data) {
+////                cout << item;
+//            }
+//        }
+//
+//    }
 
+//    void printEveryBucketChain(){
+//
+//        for (int i = 0; i < this->tableSize; ++i) {
+//            cout<<"[";
+//            for (const auto &bucket : this->table[i]) {
+//                cout << bucket;
+//            }
+//            cout<<"]\n";
+//        }
+//    }
 
 //todo    void getTransacNodeByRef();
 
