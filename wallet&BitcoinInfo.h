@@ -22,16 +22,21 @@ struct bitcoin{
 };
 
 
-struct wallet{
+class wallet{
+private:
     myString id ; // aka userName
     int balance;
     linkedList<myString> btcIdsOwned_list;
     linkedList<int> amountOnEachBtc;
+public:
+//    wallet() = default;
 
     wallet( myString id, int balance,  linkedList<myString> btcIdsOwned_list,
             linkedList<int> amountOnEachBtc);
 
     virtual ~wallet() = default;
+
+    void setId(const myString &id);
 
     void setBalance(int balance);
 

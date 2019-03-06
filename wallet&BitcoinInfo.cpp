@@ -29,6 +29,10 @@ wallet::wallet( myString id, int balance,  linkedList<myString> btcIdsOwned_list
                 linkedList<int> amountOnEachBtc) : id(id), balance(balance), btcIdsOwned_list(btcIdsOwned_list),
                                                          amountOnEachBtc(amountOnEachBtc) {}
 
+void wallet::setId(const myString &id) {
+    wallet::id = id;
+}
+
 
 //todo//todo//todo//todo//todo//todo//todo//todo//todo//todo//todo
 

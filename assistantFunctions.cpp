@@ -117,35 +117,73 @@ void ArgumentsKeeper::printArgs() {
 //richard 541 896 453 670 432
 //annie 235 5490 325
 
-void btcBalancesFile_InputParser(const myString& btcInitialOwnersFile ,myHashMap< myBucket_chain<wallet >> &walletHT_ptr , myHashMap< myBucket_chain<bitcoin>> &btcHT_ptr){
+void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHashMap<myBucket_chain<wallet >> &walletHT_ptr,
+                                      myHashMap<myBucket_chain<bitcoin>> &btcHT_ptr, int bitCoinValue) {
     //todo ftiaxnw domh wallet edw
     //todo + ftiaxnw tis rizes twn btcTrees (gia tous prokatoxous) ara ftiaxnw domh btcTree-->bitcoin
     //todo ta xwne sta walletHT , btcHT
 
 
-//    strcat(btcInitialOwnersFile.getMyStr(), "\0");
-
-//    ofstream myfile;
-//    myfile.open (inCoinsFileName.getMyStr());
-//    myfile << "Writing this to a file.\n";
-
     FILE * fp;
-    char * line = NULL;
+    char * line = nullptr;
     size_t len = 0;
     ssize_t read;
 
     fp = fopen(btcInitialOwnersFile .getMyStr(), "r");
-    if (fp == NULL)
+    if (fp == nullptr)
         exit(EXIT_FAILURE);
 
-    linkedList<char*> result;
+
+
+
+    linkedList<char*> resultList;
     char delim[] = " ";
     while ((read = getline(&line, &len, fp)) != -1) {
 
-        split(line, delim , result);
+        if (line[0] == '\n'){continue;}
+
+        split(line, delim , resultList); /// push all char* tokens to the list
+
+        myString walletId;
+        int balance =0;
+        linkedList<myString> btcList;
+        linkedList<int> amountList;
+
+        bool  isUserName= true;
+
+        for ( auto tokenStr : resultList) {
+            //convert token to myString
+            myString token(tokenStr);
+
+            if (isUserName){ //means that we have the user name (=walletId)
+                walletId = token;
+                isUserName = false;
+            }
+            else{ //is a btc id
+                btcList.insert_last(token);
+                amountList.insert_last(bitCoinValue);
+                balance+= bitCoinValue;
+            }
+
+        }
+
+
+            //trim the last btc myString to cut "\n" delimiter
+            myString cutLastTime = btcList.getTail()->data;
+            linkedList<char*> tmpList;
+            split(cutLastTime.getMyStr() , const_cast<char *>("\n"), tmpList);
+            btcList.updateTailData(cutLastTime);
+
+
+//        btcList.updateTailData()
+        wallet wallet2insert(walletId,balance,btcList,amountList);
+
+//        todo insert it to HT walletHT_ptr.
+
+
         printf("Retrieved line of length %zu:\n", read);
         printf("%s", line);
-        break;
+
     }
 
 

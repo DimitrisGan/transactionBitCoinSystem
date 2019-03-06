@@ -52,6 +52,14 @@ public:
     void insert_first(T data);
     void insert_last(T data);
 
+
+    void updateHeadData(T data);
+    void updateTailData(T data);
+
+    l_node<T> *getHead() const;
+
+    l_node<T> *getTail() const;
+
     bool exists(T data) const;
     l_node<T>* search(T data); //searches for a value in the linked list and returns the point to object that contains that value
 //    l_node<T>* getNext(l_node<T> baseNode); //get next l_node
@@ -94,7 +102,7 @@ public:
     bool operator != (const Iterator &rhs) const {
         if (currPtr != nullptr)
 //            std::cout<<"SUGKRINEI : "<<currPtr->data << " $$ "<<rhs.currPtr->data<<endl;
-        return currPtr != nullptr;
+            return currPtr != nullptr;
     }
 
     T& operator * ()  {return currPtr->data; }
@@ -222,7 +230,7 @@ linkedList<T> &  linkedList<T>::operator=(  linkedList<T> &rhs)
 
 //        linkedList *tmp = new linkedList;
 
-        this->clear(); // the function at the start of this review
+    this->clear(); // the function at the start of this review
 
 //        if (rhs.isEmpty()) {
 //            // short cut, since the other list is empty
@@ -232,11 +240,11 @@ linkedList<T> &  linkedList<T>::operator=(  linkedList<T> &rhs)
 //        }
 
 
-        for ( auto item : rhs) {
-            this->insert_last(item);
-        }
+    for ( auto item : rhs) {
+        this->insert_last(item);
+    }
 
-        return *this;
+    return *this;
 
 }
 
@@ -404,6 +412,26 @@ linkedList<T>::linkedList(linkedList &rhs) {
 //    return *this;
 
 
+}
+
+template<class T>
+void linkedList<T>::updateHeadData(T data) {
+    linkedList::head->data = data;
+}
+
+template<class T>
+void linkedList<T>::updateTailData(T data) {
+    linkedList::tail->data = data;
+}
+
+template<class T>
+l_node<T> *linkedList<T>::getHead() const {
+    return head;
+}
+
+template<class T>
+l_node<T> *linkedList<T>::getTail() const {
+    return tail;
 }
 
 

@@ -34,7 +34,8 @@ struct ArgumentsKeeper{
 
 void argmParser(int &argc, char **argv, struct ArgumentsKeeper &argmKeeper);
 
-void btcBalancesFile_InputParser(const myString& btcInitialOwnersFile ,myHashMap< myBucket_chain<wallet >> &walletHT_ptr , myHashMap< myBucket_chain<bitcoin>> &btcHT_ptr);
+void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHashMap<myBucket_chain<wallet >> &walletHT_ptr,
+                                      myHashMap<myBucket_chain<bitcoin>> &btcHT_ptr, int bitCoinValue);
 
 void split( char* str, char* delimiter , linkedList<char*> & result2return) ;
 

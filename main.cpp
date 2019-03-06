@@ -13,50 +13,51 @@
 using  namespace std;
 
 int main(int argc, char **argv) {
-    std::cout << "Hello, World!\n" << std::endl;
+ std::cout << "Hello, World!\n" << std::endl;
 
-   ArgumentsKeeper argmKeeper;
-  /*
-    argmParser(argc, argv , argmKeeper);
+ ArgumentsKeeper argmKeeper;
+ /*
+   argmParser(argc, argv , argmKeeper);
 
-    argmKeeper.printArgs();
+   argmKeeper.printArgs();
 */
 
-    int bucketSizeInBytes = 1024;
-    int tableSize =100;
-   unsigned  (*myHashFunc)( myString, unsigned)  = & myHash ;
+ int bucketSizeInBytes = 1024;
+ int tableSize =100;
+ int btcValue = 50;
+ unsigned  (*myHashFunc)( myString, unsigned)  = & myHash ;
 
 
-   myHashMap< myBucket_chain<wallet>  > walletHT(tableSize , myHashFunc );
-   myHashMap< myBucket_chain<bitcoin>  > btcHT (tableSize , myHashFunc );
 
+ myHashMap< myBucket_chain<wallet>  > walletHT(tableSize , myHashFunc );
+ myHashMap< myBucket_chain<bitcoin>  > btcHT (tableSize , myHashFunc );
 
-   argmKeeper.bitCoinBalancesFile = "bitCoinBalancesFile";
+ argmKeeper.bitCoinBalancesFile = "bitCoinBalancesFile";
 
- btcBalancesFile_InputParser(argmKeeper.bitCoinBalancesFile , walletHT , btcHT);
+ btcBalancesFile_parsing_and_save(argmKeeper.bitCoinBalancesFile , walletHT , btcHT , btcValue);
 
-    cout <<"end\n";
-    exit(1);
-    char* firstWalletId = const_cast<char *>("Owner!");
-    myString rootakos (firstWalletId);
-    char* firstReceivertId = const_cast<char *>("1st Receiver!");
-    myString receiver1 (firstReceivertId);
-    char* secondReceivertId = const_cast<char *>("2st Receiver!");
-    myString receiver2 (secondReceivertId);
-    char* thirdReceivertId = const_cast<char *>("3rd Receiver!");
-    myString receiver3 (thirdReceivertId);
+ cout <<"end\n";
+ exit(1);
+ char* firstWalletId = const_cast<char *>("Owner!");
+ myString rootakos (firstWalletId);
+ char* firstReceivertId = const_cast<char *>("1st Receiver!");
+ myString receiver1 (firstReceivertId);
+ char* secondReceivertId = const_cast<char *>("2st Receiver!");
+ myString receiver2 (secondReceivertId);
+ char* thirdReceivertId = const_cast<char *>("3rd Receiver!");
+ myString receiver3 (thirdReceivertId);
 
-    btc_tree myFirstBtcTree (rootakos,50);
+ btc_tree myFirstBtcTree (rootakos,50);
 
 //    void insert(myString senderWalletId, myString receiverWalletId, int amount);
-    myFirstBtcTree.insert(rootakos , receiver1 , 10 ); //inserts one t_node
-    //todo parse the files and save them
+ myFirstBtcTree.insert(rootakos , receiver1 , 10 ); //inserts one t_node
+ //todo parse the files and save them
 
-    myFirstBtcTree.insert(rootakos , receiver2 , 20 );
-    myFirstBtcTree.insert(receiver1 , receiver3 , 10 );
+ myFirstBtcTree.insert(rootakos , receiver2 , 20 );
+ myFirstBtcTree.insert(receiver1 , receiver3 , 10 );
 
 
-    cout<< "Size of myString :"<< sizeof(myString)<<endl;
+ cout<< "Size of myString :"<< sizeof(myString)<<endl;
 
 
 //    unsigned numberOfRecordsInBucket = BucketSize/sizeof(record<myString ,myString>);
@@ -89,14 +90,14 @@ int main(int argc, char **argv) {
 
 
 
-    char* key1 = const_cast<char *>("testWalletId!");
-    char* key2 = const_cast<char *>("testBtcId!");
-    myString walletId (key1);
-    myString btcId (key2);
-    linkedList <myString> btcL;
-    btcL.insert_last(btcId);
-    linkedList <int> amountL;
-    wallet*  testWalletPtr = new wallet(walletId,5,btcL,amountL);
+ char* key1 = const_cast<char *>("testWalletId!");
+ char* key2 = const_cast<char *>("testBtcId!");
+ myString walletId (key1);
+ myString btcId (key2);
+ linkedList <myString> btcL;
+ btcL.insert_last(btcId);
+ linkedList <int> amountL;
+//    wallet*  testWalletPtr = new wallet(walletId,5,btcL,amountL);
 
 //    template < typename T, /*type of bucketChain*/unsigned tableSize, typename F = KeyHash< /*key=*/myString, tableSize> >
 //    myHashMap< myBucket_chain<wallet> , tableSize , MyKeyHash > walletHT;
@@ -115,9 +116,9 @@ int main(int argc, char **argv) {
 //    cout << "index from hash wallet = "<<index<<endl;
 //    cout << "index from hash btc= "<<index<<endl;
 
-    btc_tree *btcPtr = new btc_tree( walletId , 200);
+ btc_tree *btcPtr = new btc_tree( walletId , 200);
 
-    bitcoin btc(btcId,btcPtr);
+ bitcoin btc(btcId,btcPtr);
 
 
 
@@ -128,18 +129,18 @@ int main(int argc, char **argv) {
 //    cout << "index :"<<index <<endl;
 
 
-    //////////now let's make the hash table for transactions
+ //////////now let's make the hash table for transactions
 
-    linkedList <t_node*> treeList;
-    t_node *ptr = new t_node(walletId,40, nullptr, nullptr) ;//myString walletId, int amount, t_node *left, t_node *right);
-    treeList.insert_last(ptr);
+ linkedList <t_node*> treeList;
+ t_node *ptr = new t_node(walletId,40, nullptr, nullptr) ;//myString walletId, int amount, t_node *left, t_node *right);
+ treeList.insert_last(ptr);
 
 
 //    delete ptr;
-    transacNode newTransactionNode(walletId,btcL,250,treeList);
+ transacNode newTransactionNode(walletId,btcL,250,treeList);
 
-    myTransacHashMap senderHT(tableSize ,myHashFunc   ,bucketSizeInBytes);
-    myTransacHashMap  receiverHT(tableSize ,myHashFunc   ,bucketSizeInBytes);
+ myTransacHashMap senderHT(tableSize ,myHashFunc   ,bucketSizeInBytes);
+ myTransacHashMap  receiverHT(tableSize ,myHashFunc   ,bucketSizeInBytes);
 //
 //
 ////
@@ -151,10 +152,10 @@ int main(int argc, char **argv) {
 //    delete btcPtr;
 //    delete testWalletPtr;
 
-    cout <<"end\n";
+ cout <<"end\n";
 
 
-    exit(1);
+ exit(1);
 //    //todo call linked list
 //    linkedList<int> llist;
 //    llist.insert_last(1);
@@ -252,13 +253,13 @@ int main(int argc, char **argv) {
 //
 //
 
-    linkedList<int> listOFints;
-    int n1=1;
-    int n2=2;
-    int n4=4;
-    listOFints.insert_last(n1);
-    listOFints.insert_last(n2);
-    listOFints.insert_last(n4);
+ linkedList<int> listOFints;
+ int n1=1;
+ int n2=2;
+ int n4=4;
+ listOFints.insert_last(n1);
+ listOFints.insert_last(n2);
+ listOFints.insert_last(n4);
 
 
 //
@@ -278,7 +279,7 @@ int main(int argc, char **argv) {
 ////    staticArray[2] = c3;
 //
 //
-    cout<< "ok?"<<endl;
+ cout<< "ok?"<<endl;
 //
 ////        cout << array;
 //
@@ -289,8 +290,8 @@ int main(int argc, char **argv) {
 ////    cout<<listForBuckets<<endl;
 
 
-    //todo 1# ftiaxnw to recordsBucket apo ysvd
+ //todo 1# ftiaxnw to recordsBucket apo ysvd
 
 
-    return 0;
+ return 0;
 }
