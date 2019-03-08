@@ -39,7 +39,8 @@ struct Synchroniser{
     Synchroniser(myTransacHashMap *senderHT_ptr, myTransacHashMap *receiverHT_ptr, myHashMap<wallet> *walletHT_ptr,
                  myHashMap<bitcoin> *btcHT_ptr);
 
-    void insertTransaction( myString sender, transacNode transNode);
+    void insertTransaction( myString sender, transacNode &transNode);
+
 
     void checkIfTransactionIsPossible(myString sender,myString receiver ,int amount);
     void createTransactionNode(myString sender,myString receiver ,int amount);

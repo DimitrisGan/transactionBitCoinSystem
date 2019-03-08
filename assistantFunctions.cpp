@@ -5,7 +5,7 @@
 #include <cstring>
 #include <fstream>
 #include "assistantFunctions.h"
-#include "date.h"
+
 
 
 void argmParser(int &argc, char **argv, struct ArgumentsKeeper &argmKeeper){
@@ -138,8 +138,7 @@ void split( char* str, char* delimiter , linkedList<char*> & result2return) {
 //45 novaldach hackerman 30 11-01-2017 14:46
 
 
-void readTransactionQueries(const myString &initiaTransacFile, myTransacHashMap &senderHT_ptr ,  myTransacHashMap  &receiverHT_ptr,
-                            myHashMap<wallet > &walletHT_ptr,myHashMap<bitcoin> &btcHT_ptr){
+void readTransactionQueries(const myString &initiaTransacFile,  Synchroniser &sync){
 
     FILE * fp;
     char * line = nullptr;
@@ -159,13 +158,10 @@ void readTransactionQueries(const myString &initiaTransacFile, myTransacHashMap 
         split(line, delim , resultList); /// push all char* tokens to the list
 
         myString new_transactionId;
-        myString senderId;
         myString receiverId;
         date transacDate;
         transacNode new_transacNode;
         myString sender;
-        myString receiver;
-        int amountToTransfer;
 
         linkedList<int> transacDateList;
         int i=0;
@@ -177,19 +173,17 @@ void readTransactionQueries(const myString &initiaTransacFile, myTransacHashMap 
 
 
 //
-            if (i==0) {
-                new_transacNode.setTransacId(atoi(tokenStr));
+            if (i==0) { //transacId
+                new_transacNode.setTransacId(token);
             }
-            if (i==1) {
+            if (i==1) { //senderId
                 sender = token; //it is the hash key to the sender HashMap
             }
-            if (i==2) {
-                receiver = token;
-                new_transacNode.setWalletId(receiver);
+            if (i==2) { //receiverId
+                new_transacNode.setWalletId(token);
             }
-            if (i==3) {
-                amountToTransfer = atoi(tokenStr);
-                new_transacNode.setAmount(amountToTransfer);
+            if (i==3) { //amount to transfer
+                new_transacNode.setAmount(atoi(tokenStr));
             }
             if (i==4) {//todo make it optional
                 //todo split (-) meta convert to int
@@ -221,7 +215,7 @@ void readTransactionQueries(const myString &initiaTransacFile, myTransacHashMap 
 
 
         //todo tha ftiaksw thn insertSync pou legame kai tha ta kanei ekeinh insert me ta katallhla exceptions
-        //call insertSync
+        sync.insertTransaction( sender , new_transacNode );
 
         resultList.clear();
     }

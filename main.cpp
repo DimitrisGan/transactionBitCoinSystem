@@ -42,11 +42,12 @@ int main(int argc, char **argv) {
     myTransacHashMap  receiverHT(tableSize ,myHashFunc   ,bucketSizeInBytes);
 
 
-    struct Synchroniser sync (&senderHT,&receiverHT,&walletHT,&btcHT);
+    struct Synchroniser sync (&senderHT,&receiverHT,&walletHT,&btcHT); //initiate sync struct
 
-    //todo call transacFile
     argmKeeper.transactionsFile = "transactionFile";
-    readTransactionQueries(argmKeeper.transactionsFile ,senderHT,receiverHT,walletHT , btcHT );
+    readTransactionQueries(argmKeeper.transactionsFile ,sync );
+
+
 
     cout <<"end\n";
     exit(1);

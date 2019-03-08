@@ -88,9 +88,12 @@ public:
 //    }
 
 
+    recordsBucket_chain getTableById(myString id) const ;
+
+    void addTransacNode2appropriateIndex(myString senderId , transacNode transac2add);
 
 
-//todo    void getTransacNodeByRef();
+    transacNode &getTransacNodeByRef(myString id);
 
 //    bool get(const K &key, V &value)
 //    {

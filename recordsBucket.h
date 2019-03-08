@@ -22,7 +22,7 @@
 //todo apo to walletID tha pairnw ta btcIds pou tha peiraksw mazi me to poso
 //todo kai tha phgainw sto tree pou tha epistrefei deiktes pou tha tous xwnw
 struct transacNode{
-    int transacId;
+    myString transacId;
     myString receiverWalletId; //in sender table is receiverWalletId
     date transacTime;
 
@@ -53,7 +53,7 @@ struct transacNode{
     }
 
 
-    void setTransacId(int transacId) {
+    void setTransacId(myString transacId) {
         transacNode::transacId = transacId;
     }
 
@@ -77,6 +77,10 @@ struct transacNode{
         transacNode::transacTime = transacTime;
     }
 
+
+     myString getTransacId()  {
+        return transacId;
+    }
 };
 
 struct record{
@@ -231,6 +235,9 @@ struct recordsBucket_chain{
 //
 //    }
 
+    const linkedList<recordsBucket> &getBucketsList() const {
+        return bucketsList;
+    }
 
     void setMaxNumberOfRecordsInBucket(unsigned int maxNumberOfRecordsInBucket) {
         recordsBucket_chain::maxNumberOfRecordsInBucket = maxNumberOfRecordsInBucket;

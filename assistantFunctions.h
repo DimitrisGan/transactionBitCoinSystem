@@ -20,7 +20,8 @@
 #include "wallet&BitcoinInfo.h"
 #include "ErrorsCodes.h"
 #include "transacHashMap.h"
-
+#include "date.h"
+#include "synchroniseFunctions.h"
 
 struct ArgumentsKeeper{
     myString bitCoinBalancesFile;
@@ -39,8 +40,12 @@ void argmParser(int &argc, char **argv, struct ArgumentsKeeper &argmKeeper);
 void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHashMap<wallet > &walletHT_ptr,
                                       myHashMap<bitcoin> &btcHT_ptr, int bitCoinValue) ;
 
-void readTransactionQueries(const myString &initiaTransacFile, myTransacHashMap &senderHT_ptr ,  myTransacHashMap  &receiverHT_ptr,
-                            myHashMap<wallet > &walletHT_ptr,myHashMap<bitcoin> &btcHT_ptr);
+
+void readTransactionQueries(const myString &initiaTransacFile,  Synchroniser &sync);
+
+
+//void readTransactionQueries(const myString &initiaTransacFile, myTransacHashMap &senderHT_ptr ,  myTransacHashMap  &receiverHT_ptr,
+//                            myHashMap<wallet > &walletHT_ptr,myHashMap<bitcoin> &btcHT_ptr);
 
 void split( char* str, char* delimiter , linkedList<char*> & result2return) ;
 
