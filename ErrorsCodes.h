@@ -8,7 +8,8 @@
 
 typedef enum ERRORCODE { OK=0,
     UNKNOWN_CMDARGUMENT=1,  //unknown flag at cmd arguments
-    AMOUNT_NOT_POSSIBLE_TO_DIVIDE_IN_BITCOINTREE
+    AMOUNT_NOT_POSSIBLE_TO_DIVIDE_IN_BITCOINTREE ,
+    NOT_VALID_TRSANSACTION
 //    FILE_ACCESS,  //couldnt open a file
 //    BAD_STREAM,   //a fstream did not return goodbit
 //    UNKNOWN_METRIC, //unknown metric in file @metric

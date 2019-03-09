@@ -4,7 +4,7 @@
 #include "recordsBucket.h"
 #include "assistantFunctions.h"
 #include "bitcoinTree.h"
-#include "wallet&BitcoinInfo.h"
+#include "wallet.h"
 #include "myBucket.h"
 #include "myHashMap.h"
 //#include "hashFunction.h"
@@ -23,8 +23,8 @@ int main(int argc, char **argv) {
       argmKeeper.printArgs();
    */
 
-    int bucketSizeInBytes = 1024;
-    int tableSize =2;
+    unsigned bucketSizeInBytes = 1024;
+    unsigned tableSize =2;
     int btcValue = 50;
     unsigned  (*myHashFunc)( myString, unsigned)  = & myHash ;
 
@@ -32,17 +32,18 @@ int main(int argc, char **argv) {
 
     myHashMap<wallet>   walletHT(tableSize , myHashFunc );
     myHashMap< bitcoin> btcHT (tableSize , myHashFunc );
+    myHashMap<transaction> transacHT(tableSize , myHashFunc ); //todo
 
-    /*argmKeeper.bitCoinBalancesFile = "bitCoinBalancesFile";
+    argmKeeper.bitCoinBalancesFile = "bitCoinBalancesFile";
 
-    btcBalancesFile_parsing_and_save(argmKeeper.bitCoinBalancesFile , walletHT , btcHT , btcValue);
-*/
+    btcBalancesFile_parsing_and_save(argmKeeper.bitCoinBalancesFile , walletHT , btcHT , btcValue); //save also to walletHT,btcHT
+
 
     myTransacHashMap  senderHT(tableSize ,myHashFunc   ,bucketSizeInBytes);
     myTransacHashMap  receiverHT(tableSize ,myHashFunc   ,bucketSizeInBytes);
 
 
-    struct Synchroniser sync (&senderHT,&receiverHT,&walletHT,&btcHT); //initiate sync struct
+    Synchroniser sync (senderHT,receiverHT,walletHT,btcHT ,transacHT); //initiate sync struct
 
     argmKeeper.transactionsFile = "transactionFile";
     readTransactionQueries(argmKeeper.transactionsFile ,sync );
@@ -91,7 +92,7 @@ int main(int argc, char **argv) {
 //    linkedList<t_node *> treeNodesChangedList;
 //    treeNodesChangedList.insert_last(tNode_test_ptr);
 //
-//    transacNode myTransNode(  key,  btcOwnedList, 50,
+//    transaction myTransNode(  key,  btcOwnedList, 50,
 //                              treeNodesChangedList) ;
 //
 //
@@ -150,7 +151,7 @@ int main(int argc, char **argv) {
 
 
 //    delete ptr;
-//    transacNode newTransactionNode(receiverWalletId,btcL,250,treeList);
+//    transaction newTransactionNode(receiverWalletId,btcL,250,treeList);
 
 
 //

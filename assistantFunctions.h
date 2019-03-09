@@ -17,7 +17,7 @@
 #include "myString.h"
 #include "myHashMap.h"
 #include "myBucket.h"
-#include "wallet&BitcoinInfo.h"
+#include "wallet.h"
 #include "ErrorsCodes.h"
 #include "transacHashMap.h"
 #include "date.h"

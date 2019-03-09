@@ -57,3 +57,5 @@ void date::setDateByGivenList(linkedList<int> setDateList) {
         i++;
     }
 }
+
+

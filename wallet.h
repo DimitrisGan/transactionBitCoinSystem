@@ -11,18 +11,6 @@
 #include "mylinkedList.h"
 #include "bitcoinTree.h"
 
-struct bitcoin{
-    myString id; //btcId
-    btc_tree * transactionTree_ptr;
-
-    bitcoin( myString id, btc_tree *transactionTree_ptr);
-
-    bool operator==( bitcoin &rhs) ;
-
-    bool operator!=( bitcoin &rhs) ;
-
-    friend ostream &operator<<(ostream &os, const bitcoin &bitcoin1);
-};
 
 
 class wallet{
@@ -32,17 +20,23 @@ private:
     linkedList<myString> btcIdsOwned_list;
     linkedList<int> amountOnEachBtc;
 public:
-//    wallet() = default;
+    wallet() = default;
 
     wallet( myString id, int balance,  linkedList<myString> btcIdsOwned_list,
             linkedList<int> amountOnEachBtc);
 
+
+
     virtual ~wallet() = default;
+
+    wallet( wallet &right);
 
 
     myString getId() ;
 
-     linkedList<myString> getBtcIdsOwned_list() ;
+    int getBalance() const;
+
+    linkedList<myString> getBtcIdsOwned_list() ;
 
 
     void setId(const myString &id);
@@ -56,6 +50,10 @@ public:
     bool operator==(const wallet &rhs) const;
 
     bool operator!=(const wallet &rhs) const;
+
+    bool operator==(const myString &id) const;
+
+    bool operator!=(const myString &id) const;
 
     friend ostream &operator<<(ostream &os, const wallet &wallet1);
 

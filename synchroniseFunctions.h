@@ -6,11 +6,12 @@
 #define TRANSACTIONBITCOINSYSTEM_SYNCHRONISEFUNCTIONS_H
 
 
-#include "wallet&BitcoinInfo.h"
+#include "wallet.h"
 #include "myBucket.h"
 #include "recordsBucket.h"
 #include "myHashMap.h"
 #include "transacHashMap.h"
+#include "bitcoin.h"
 
 //myHashMap< myBucket_chain<wallet> , 100 , MyKeyHash > walletHT;
 //myHashMap< myBucket_chain<bitcoin> , 100 , MyKeyHash > btcHT;
@@ -21,28 +22,22 @@
 
 struct Synchroniser{
 
-//    myHashMap< myBucket_chain<wallet> , tableSize , MyKeyHash > *walletHT;
-//    myHashMap< myBucket_chain<bitcoin> , tableSize , MyKeyHash > *btcHT;
-//
-
-    //todo senderHT
-    //todo receiverHT
-    //todo walletHT
-    //todo btcHT
-    myTransacHashMap *senderHT_ptr;
-    myTransacHashMap  *receiverHT_ptr;
-    myHashMap<wallet> *walletHT_ptr;
-    myHashMap< bitcoin> *btcHT_ptr;
+    myTransacHashMap senderHT_ptr;
+    myTransacHashMap  receiverHT_ptr;
+    myHashMap<wallet> walletHT_ptr;
+    myHashMap< bitcoin> btcHT_ptr;
+    myHashMap<transaction> transacHT_ptr;
 
 
     //todo ayrio !!!
-    Synchroniser(myTransacHashMap *senderHT_ptr, myTransacHashMap *receiverHT_ptr, myHashMap<wallet> *walletHT_ptr,
-                 myHashMap<bitcoin> *btcHT_ptr);
+    Synchroniser(const myTransacHashMap &senderHT_ptr, const myTransacHashMap &receiverHT_ptr,
+                 const myHashMap<wallet> &walletHT_ptr, const myHashMap<bitcoin> &btcHT_ptr,
+                 const myHashMap<transaction> &transacHT_ptr);
 
-    void insertTransaction( myString sender, transacNode &transNode);
+    void insertTransaction(transaction &potentialTransaction);
 
 
-    void checkIfTransactionIsPossible(myString sender,myString receiver ,int amount);
+    bool transactionIsValid(transaction potentialTransac, int sendersBalance);
     void createTransactionNode(myString sender,myString receiver ,int amount);
     void updateWallet(); //will be called two times for sender and receiver
 

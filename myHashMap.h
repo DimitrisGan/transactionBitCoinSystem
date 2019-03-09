@@ -27,17 +27,18 @@
 template < typename T  >
 class myHashMap {
 
-public://private:
+public://todo private:
 
     myBucket_chain<T> *table;
-//    F hashFunc;
 
-    unsigned  (*hashFunc)(myString, unsigned)  ;
+    unsigned  (*hashFunc)(myString, unsigned);
     unsigned tableSize;
 
-//    unsigned maxNumberOfRecordsInBucket;
-//    unsigned tableSize;
 
+    unsigned int getIndex(myString s) const {
+        this->hashFunc(s, this->tableSize);
+        return tableSize;
+    }
 
 
 public:
@@ -70,11 +71,14 @@ public:
         return tableSize;
     }
 
-    unsigned int getIndex(myString s) const {
-        this->hashFunc(s, this->tableSize);
-        return tableSize;
-    }
 
+    T* getData(myString key) {
+        int indexHash = hashFunc(key,this->tableSize);
+
+        return this->table[indexHash].getData(key);
+
+
+    }
 
 
     void insert( myString key,T data2insert){

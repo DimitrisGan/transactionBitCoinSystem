@@ -11,88 +11,24 @@
 #include "myString.h"
 #include "bitcoinTree.h"
 #include "date.h"
+#include "transaction.h"
 
 
 //int globo=0;
 //int globo2=0;
 
-//template <class U ,class B>
 
-//todo to transacNode list tha pairnei se template to sender receiverWalletId opote de xreiazetai sthn insert
-//todo apo to walletID tha pairnw ta btcIds pou tha peiraksw mazi me to poso
-//todo kai tha phgainw sto tree pou tha epistrefei deiktes pou tha tous xwnw
-struct transacNode{
-    myString transacId;
-    myString receiverWalletId; //in sender table is receiverWalletId
-    date transacTime;
-
-    //mporei na exoun dhmiourgithei parapanw apo ena nodes se diaforetika bitcoins trees
-    linkedList<myString> bitcoinSentList;
-    int amount;
-    linkedList<t_node *> treeNodeList_ptrs;
-
-    transacNode() = default;
-
-    transacNode( int transacId,myString WalletId,  linkedList<myString> bitcoinId, int amount,
-                 linkedList<t_node *> treeNode_ptr) : transacId(transacId) ,receiverWalletId(WalletId), bitcoinSentList(bitcoinId), amount(amount),
-                                                            treeNodeList_ptrs(treeNode_ptr) , transacTime(transacTime) {}
-
-    virtual ~transacNode() {
-//         treeNodeList_ptrs.clear(); OXI DE THELW NA GINEI FREE TO DENTRO MOY APO TO TRANSACTION NODE LIST
-
-    }
-
-    transacNode& operator=( transacNode rhs)  {
-        transacId = rhs.transacId;
-        receiverWalletId = rhs.receiverWalletId ;
-        bitcoinSentList = rhs.bitcoinSentList ;
-        treeNodeList_ptrs = rhs.treeNodeList_ptrs; //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS
-        amount = rhs.amount;
-        transacTime = rhs.transacTime;
-        return *this;
-    }
-
-
-    void setTransacId(myString transacId) {
-        transacNode::transacId = transacId;
-    }
-
-    void setWalletId(const myString &walletId) {
-        transacNode::receiverWalletId = walletId;
-    }
-
-    void setBitcoinSentList( linkedList<myString> bitcoinSentList) {
-        transacNode::bitcoinSentList = bitcoinSentList;
-    }
-
-    void setAmount(int amount) {
-        transacNode::amount = amount;
-    }
-
-    void setTreeNodeList_ptrs( linkedList<t_node *> treeNodeList_ptrs) {
-        transacNode::treeNodeList_ptrs = treeNodeList_ptrs;
-    }
-
-    void setTransacTime(const date &transacTime) {
-        transacNode::transacTime = transacTime;
-    }
-
-
-     myString getTransacId()  {
-        return transacId;
-    }
-};
 
 struct record{
     myString walletId;
-    linkedList<transacNode> *transacLlist_ptr; //TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO
+    linkedList<transaction*> *transacLlist_ptr; //TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO
 
 
 //    record( myString receiverWalletId) : receiverWalletId(receiverWalletId) {
-//        transacLlist_ptr = new linkedList<transacNode> ;
+//        transacLlist_ptr = new linkedList<transaction> ;
 //    }
 
-    record() {transacLlist_ptr = nullptr;transacLlist_ptr = new linkedList<transacNode> ;}
+    record() {transacLlist_ptr = nullptr;transacLlist_ptr = new linkedList<transaction*> ;}
 
     virtual ~record() {
         delete  transacLlist_ptr;
@@ -116,7 +52,7 @@ struct record{
 
 
 
-    void insertTransacNodeInTransacList(transacNode transacNode2add){
+    void insertTransacNodeInTransacList(transaction *transacNode2add){
         transacLlist_ptr->insert_last(transacNode2add);
     }
 };
@@ -205,7 +141,7 @@ struct recordsBucket{
     }
 
 
-    void insertNewRecord( myString key , transacNode newNode){ //todo//todo//todo//todo//todo//todo//todo//todo
+    void insertNewRecord( myString key , transaction *newNode){ //todo//todo//todo//todo//todo//todo//todo//todo
 
         //todo createRecord;
 //        record<T> newRecord()
@@ -275,7 +211,7 @@ struct recordsBucket_chain{
         return true;
     }
 
-    void insert( myString key ,transacNode newNode ){
+    void insert( myString key ,transaction *newNode ){
 
         //todo tsekarw gia kathe bucket an uparxei
         //todo an uparxei tote ....

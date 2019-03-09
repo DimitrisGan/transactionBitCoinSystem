@@ -78,7 +78,7 @@ public:
 
 
 
-//    void insertInTransacHT(myString key,transacNode transacNode2Insert ){
+//    void insertInTransacHT(myString key,transaction transacNode2Insert ){
 //
 //        int indexHash = hashFunc(key);
 //        if (table[indexHash] == nullptr) //if table[index] is null then we have to initialize a recordsBucket chain
@@ -90,10 +90,10 @@ public:
 
     recordsBucket_chain getTableById(myString id) const ;
 
-    void addTransacNode2appropriateIndex(myString senderId , transacNode transac2add);
+    void addTransacNode2appropriateIndex(myString senderId , transaction transac2add);
 
 
-    transacNode &getTransacNodeByRef(myString id);
+    transaction &getTransacNodeByRef(myString id);
 
 //    bool get(const K &key, V &value)
 //    {

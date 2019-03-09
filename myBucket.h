@@ -7,7 +7,10 @@
 
 
 #include <ostream>
+#include <assert.h>
 #include "mylinkedList.h"
+#include "myString.h"
+#include "wallet.h"
 
 template <typename T>
 struct myBucket{
@@ -17,7 +20,7 @@ struct myBucket{
     virtual ~myBucket() = default;
     void insert(T data);
 
-    T get_data() const;
+    T* get_data() ;
 
     void set_data(T _data);
 
@@ -26,8 +29,10 @@ struct myBucket{
 
     //todo overload == , =
     bool operator==(T &data) ;
+    bool operator==(myString &id) ;
 
     bool operator!=(T &data) ;
+    bool operator!=(myString &id) ;
 
 };
 
@@ -41,6 +46,20 @@ struct myBucket_chain{
 
 
     myBucket_chain() {size =0;}
+
+
+    T* getData(myString key)  {
+
+        for (  auto &dataNode : myBucketList) { //dataNode : myBucket<T>
+            if (dataNode == key){
+
+                return dataNode.get_data();
+            }
+
+        }
+        assert(1);//means that we didnt found the data that we were expecting
+    }
+
 
     void insert(T data){
         //todo

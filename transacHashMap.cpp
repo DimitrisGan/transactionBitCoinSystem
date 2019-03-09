@@ -4,7 +4,7 @@
 
 #include "transacHashMap.h"
 
-//transacNode &myTransacHashMap::getTransacNodeByRef(myString id) {
+//transaction &myTransacHashMap::getTransacNodeByRef(myString id) {
 //    int index = this->getIndex(id);
 //
 //    return <#initializer#>;
@@ -17,7 +17,7 @@ recordsBucket_chain myTransacHashMap::getTableById(myString id) const {
     return table[index];
 }
 
-void myTransacHashMap::addTransacNode2appropriateIndex(myString senderId , transacNode transac2add){
+void myTransacHashMap::addTransacNode2appropriateIndex(myString senderId , transaction transac2add){
     int index = this->getIndex(senderId);
     myTransacHashMap::table = table;
 }
