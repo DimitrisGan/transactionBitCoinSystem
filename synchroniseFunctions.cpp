@@ -32,15 +32,19 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
     //todo apo sender pairnw to poso kai to tsekarw apo ta t-nodes
     linkedList<myString> btcId2extract_list;
     linkedList<int> amountInEachBtc2extract_list;
+    linkedList<int> indexesThatSenderLostBtcOwnership;
 
     int amount2extract = potentialTransaction.getAmount();
+
+
     decideWhichAndHowMuchInEach2extractFromSender(sendersWallet, btcId2extract_list, amountInEachBtc2extract_list,
-                                                  amount2extract);
+                                                  amount2extract, indexesThatSenderLostBtcOwnership);
 
+    removeLostOwnershipBtcFromSender (sendersWallet , indexesThatSenderLostBtcOwnership);
 
-    exit(10);
+    cout << "EXIT 1000\n";
 
-
+    exit(4);
     //todo tha to valw sto telos afou exw setarei kai th lista pou tha dwsei
 //    this->transacHT_ptr.insert(potentialTransaction.transacId, potentialTransaction);
 
@@ -50,15 +54,16 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
     //todo last#  kanw update ta upoloipo--btcList--amountBtcList sta wallets tou sender kai receiveer
 
 
-
+    cout << "exit apo edw \n";
 
 }
 
 
 void Synchroniser::decideWhichAndHowMuchInEach2extractFromSender(wallet *sendersWallet,
-                                                                 linkedList<myString> & btcId2extract_list,
-                                                                 linkedList<int> & amountInEachBtc2extract_list,
-                                                                 int amount2extract) {
+                                                                 linkedList<myString> &btcId2extract_list,
+                                                                 linkedList<int> &amountInEachBtc2extract_list,
+                                                                 int amount2extract,
+                                                                 linkedList<int> &indexesList2remove) {
 
 
     int amountRemain2gather =amount2extract;
@@ -83,6 +88,7 @@ void Synchroniser::decideWhichAndHowMuchInEach2extractFromSender(wallet *senders
      * ItA = btcId name
      * ItB = amount owned of the current btc
      **/
+    int index =0; //maybe is needed to deleteByIndex if a btc to senders wallet reached zero
     while(true) //iterate simultaneously the 2 lists
     {
 
@@ -95,6 +101,9 @@ void Synchroniser::decideWhichAndHowMuchInEach2extractFromSender(wallet *senders
             *ItB = *ItB - amountRemain2gather; //reduce the amount from the owner(=sender) wallet
             sendersWallet->setBalance(sendersWallet->getBalance() - amountRemain2gather); //update the new total baalnce
             amountRemain2gather=0;
+
+//            sendersWallet..deleteNodeByIndex(index);
+//            sendersWallet->getBtcIdsOwned_list().(*ItA);
             break;
 
         }
@@ -104,13 +113,15 @@ void Synchroniser::decideWhichAndHowMuchInEach2extractFromSender(wallet *senders
             btcId2extract_list.insert_last(*ItA); //add btcId in exchange list
             amountInEachBtc2extract_list.insert_last(*ItB);
             sendersWallet->setBalance(sendersWallet->getBalance() - *ItB); //update the new total baalnce
+
+            indexesList2remove.insert_last(index);
             *ItB = 0; //the wallet(=sender) is not owner of this btc anymore
             //todo do the appropriate removes for the senders 2 lists!!!!!!!!!!!!!!!!!!!!!!!
 
         }
 
 
-
+        index++;
 
         if(ItA != sendersWallet->getBtcIdsOwned_list().end())
         {
@@ -140,6 +151,24 @@ Synchroniser::Synchroniser(const myTransacHashMap &senderHT_ptr, const myTransac
 bool Synchroniser::transactionIsValid(transaction potentialTransac, int sendersBalance) {
     return (potentialTransac.getAmount() <= sendersBalance);
 }
+
+
+void Synchroniser::removeLostOwnershipBtcFromSender (wallet *sendersWallet , linkedList<int>  &indexesThatSenderLostBtcOwnership){
+
+    bool flagError =false;
+    for (const auto &item : indexesThatSenderLostBtcOwnership) {
+
+        flagError= sendersWallet->getBtcIdsOwned_listByRef().deleteNodeByIndex(item);
+        flagError= sendersWallet->getAmountOnEachBtcByRef().deleteNodeByIndex(item);
+    }
+    if (flagError){
+        std::cerr << "ERROR IN DELETION  "<<endl;
+        exit(1);
+    }
+
+}
+
+
 
 //            this->walletHT_ptr.getData(potentialTransac.getSenderWalletId()).getBalance());
 

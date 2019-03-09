@@ -39,8 +39,14 @@ struct Synchroniser{
 
     bool transactionIsValid(transaction potentialTransac, int sendersBalance);
 
-    void decideWhichAndHowMuchInEach2extractFromSender(wallet *sendersWallet, linkedList<myString> &btcId2extract_list,
-                                                       linkedList<int> &amountInEachBtc2extract_list, int amount2extract);
+    void decideWhichAndHowMuchInEach2extractFromSender(wallet *sendersWallet,
+                                                           linkedList<myString> &btcId2extract_list,
+                                                           linkedList<int> &amountInEachBtc2extract_list,
+                                                           int amount2extract,
+                                                           linkedList<int> &indexesList2remove);
+
+
+    void removeLostOwnershipBtcFromSender (wallet *sendersWallet , linkedList<int>  &indexesThatSenderLostBtcOwnership);
 
     void createTransactionNode(myString sender,myString receiver ,int amount);
     void updateWallet(); //will be called two times for sender and receiver

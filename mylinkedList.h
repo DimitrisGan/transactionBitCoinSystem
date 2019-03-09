@@ -54,6 +54,9 @@ public:
 
     virtual ~linkedList();
 
+    void remove( T data);
+    bool deleteNodeByIndex( int index );
+
     void insert_first(T data);
     void insert_last(T data);
 
@@ -138,9 +141,89 @@ public:
 ///////===========================================================
 
 
+//template<class T>
+//void linkedList<T>::remove( T data)
+//{
+//    if(isEmpty())
+//    {
+//        return;
+//    }
+//
+//    if (head->data == data)
+//    {
+//        l_node<T> * tmp = head;
+//        head = head->next;
+//        delete tmp;
+//
+//        return;
+//    }
+//
+//
+//    for (l_node<T> * curr = head->next, prev = head; curr != NULL; curr = curr->next)
+//    {
+//        if (curr->data == data)
+//        {
+//            l_node<T> *tmp = curr;
+//            prev->next = curr->next;
+//            delete tmp;
+//
+//            return;
+//        }
+//        prev = curr;
+//    }
+//}
+//
 
 
 
+template<class T>
+bool linkedList<T>::deleteNodeByIndex( int index )
+{
+    cout << "MPIKA STH DELETEEEEE\n";
+    bool exit;
+
+    l_node<T> *pPre = NULL,
+            *pCur = this->head;
+    int currentIndex = 0;
+
+    while ( pCur )
+    {
+        // Here we just loop until we reach our desired index.
+        if (currentIndex == index)
+        {
+            break;
+        }
+
+        // Increment the current index and pCur to the next item.
+        currentIndex++;
+        pPre = pCur;
+        pCur = pCur -> next;
+    }
+
+    // If pCur is still valid at this point, it means we broke at the
+    // proper place and pCur should be at the proper index.
+    if ( pCur )
+    {
+        if ( pPre )
+        {
+            pPre -> next = pCur -> next;
+            delete pCur;
+            this->size--;
+            exit = false; // return false if successful
+        }
+        else
+        {
+            this->head = pCur -> next;
+            delete pCur;
+            this->size--;
+            exit = false; // return false if successful
+        }
+    }
+    else
+        exit = true; // return true if unsuccessful
+
+    return exit;
+}
 
 //template<class T>
 //linkedList<T>::linkedList( linkedList & rhs) : head(nullptr) ,tail(nullptr)
