@@ -38,6 +38,13 @@ public:
 
     linkedList<myString> getBtcIdsOwned_list() ;
 
+    linkedList<int> getAmountOnEachBtc() ;
+
+
+    linkedList<myString>& getBtcIdsOwned_listByRef() ;
+
+    linkedList<int>& getAmountOnEachBtcByRef() ;
+
 
     void setId(const myString &id);
 

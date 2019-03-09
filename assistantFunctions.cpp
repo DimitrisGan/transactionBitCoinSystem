@@ -157,7 +157,7 @@ void readTransactionQueries(const myString &initiaTransacFile,  Synchroniser &sy
 
         split(line, delim , resultList); /// push all char* tokens to the list
 
-        transaction new_transacNode;
+        transaction newTransac ;
         myString sender;
 
         linkedList<int> transacDateList;
@@ -171,16 +171,16 @@ void readTransactionQueries(const myString &initiaTransacFile,  Synchroniser &sy
 
 //
             if (i==0) { //transacId
-                new_transacNode.setTransacId(token); //it is the hash key to the transaction HashMap
+                newTransac.setTransacId(token); //it is the hash key to the transaction HashMap
             }
             if (i==1) { //senderId
-                new_transacNode.setSenderWalletId(token);
+                newTransac.setSenderWalletId(token);
             }
             if (i==2) { //receiverId
-                new_transacNode.setReceiverWalletId(token);
+                newTransac.setReceiverWalletId(token);
             }
             if (i==3) { //amount to transfer
-                new_transacNode.setAmount(atoi(tokenStr));
+                newTransac.setAmount(atoi(tokenStr));
             }
             if (i==4) {//todo make it optional
                 //todo split (-) meta convert to int
@@ -205,10 +205,10 @@ void readTransactionQueries(const myString &initiaTransacFile,  Synchroniser &sy
         }
 
 
-        new_transacNode.getTransacTime().setDateByGivenList(transacDateList); //set the date in the transaction date
+        newTransac.getTransacTime().setDateByGivenList(transacDateList); //set the date in the transaction date
 
         //todo tha ftiaksw thn insertSync pou legame kai tha ta kanei ekeinh insert me ta katallhla exceptions
-        sync.insertTransaction( new_transacNode );
+        sync.insertTransaction( newTransac );
 
         resultList.clear();
     }

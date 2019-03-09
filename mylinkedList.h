@@ -37,7 +37,7 @@ class linkedList {
 private: //private attributes
     l_node<T> *head;
     l_node<T> *tail;
-    int size;
+    int size{0};
 
 public:
     int getSize() const;

@@ -34,10 +34,14 @@ struct Synchroniser{
                  const myHashMap<wallet> &walletHT_ptr, const myHashMap<bitcoin> &btcHT_ptr,
                  const myHashMap<transaction> &transacHT_ptr);
 
-    void insertTransaction(transaction &potentialTransaction);
+    void insertTransaction(transaction potentialTransaction);
 
 
     bool transactionIsValid(transaction potentialTransac, int sendersBalance);
+
+    void decideWhichAndHowMuchInEach2extractFromSender(wallet *sendersWallet, linkedList<myString> &btcId2extract_list,
+                                                       linkedList<int> &amountInEachBtc2extract_list, int amount2extract);
+
     void createTransactionNode(myString sender,myString receiver ,int amount);
     void updateWallet(); //will be called two times for sender and receiver
 

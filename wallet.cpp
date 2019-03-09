@@ -9,11 +9,11 @@ bool wallet::operator==(const wallet &rhs) const {
 }
 
 bool wallet::operator!=(const wallet &rhs) const {
-    return !(rhs == *this);
+    return !(rhs.id == this->id);
 }
 
 bool wallet::operator==(const myString &id2) const {
-    return id == id2;;
+    return id == id2;
 }
 
 bool wallet::operator!=(const myString &id2) const {
@@ -49,9 +49,6 @@ myString wallet::getId()  {
     return this->id;
 }
 
-linkedList<myString> wallet::getBtcIdsOwned_list()  {
-    return btcIdsOwned_list;
-}
 
 ostream &operator<<(ostream &os, const wallet &wallet1) {
     os << "id: " << wallet1.id;
@@ -70,6 +67,24 @@ wallet::wallet( wallet &right) {
     this->balance = right.balance;
     this->btcIdsOwned_list = right.btcIdsOwned_list;
     this->amountOnEachBtc = right.amountOnEachBtc;
+}
+
+
+
+linkedList<myString> wallet::getBtcIdsOwned_list()  {
+    return btcIdsOwned_list;
+}
+
+ linkedList<int> wallet::getAmountOnEachBtc()  {
+    return amountOnEachBtc;
+}
+
+linkedList<myString> &wallet::getBtcIdsOwned_listByRef() {
+    return btcIdsOwned_list;
+}
+
+linkedList<int> &wallet::getAmountOnEachBtcByRef() {
+    return amountOnEachBtc;
 }
 
 

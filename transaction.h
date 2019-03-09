@@ -16,7 +16,7 @@
 //todo apo to walletID tha pairnw ta btcIds pou tha peiraksw mazi me to poso
 //todo kai tha phgainw sto tree pou tha epistrefei deiktes pou tha tous xwnw
 class transaction{
-private:
+public: //private:
     myString transacId;
     myString senderWalletId;
     myString receiverWalletId; //in sender table is receiverWalletId
@@ -37,6 +37,9 @@ public:
 
     }
 
+
+
+
     transaction& operator=( transaction rhs)  {
         transacId = rhs.transacId;
         receiverWalletId = rhs.receiverWalletId ;
@@ -47,6 +50,14 @@ public:
         return *this;
     }
 
+
+    bool operator==(const transaction &rhs) const;
+
+    bool operator!=(const transaction &rhs) const;
+
+    bool operator==(const myString &id) const;
+
+    bool operator!=(const myString &id) const;
 
     //getters
      myString &getSenderWalletId()  {
@@ -65,7 +76,7 @@ public:
         return amount;
     }
 
-    const myString &getTransacId() const {
+    myString getTransacId() {
         return transacId;
     }
 

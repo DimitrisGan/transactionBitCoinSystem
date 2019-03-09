@@ -13,7 +13,7 @@ bool bitcoin::operator==( bitcoin &rhs)  {
 }
 
 bool bitcoin::operator!=( bitcoin &rhs)  {
-    return !(rhs == *this);
+    return !(rhs.id == this->id);
 }
 
 
