@@ -58,47 +58,15 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
     addAmountAndBtc2receiver(receiversWallet , btcId2extract_list ,amountInEachBtc2extract_list);
 
 
+    addTheNewNodes2Tree(sendersWallet->id , receiversWallet->id , btcId2extract_list ,amountInEachBtc2extract_list);
+
     cout <<"edw eimai"<<endl;
-    //todo edw phgainw sto treeHT kai m epistrefei to treeNode twn btc
-    //todo + meta panw se auta ta peirazw kai skave ta dentra
-
-
-//    linkedList<myString>::Iterator  ItA;
-//    linkedList<int>::Iterator  ItB;
-//
-//    ItA = btcId2extract_list.begin();  //refers to the btcIds
-//    ItB = amountInEachBtc2extract_list.begin(); //refers to the amount to extract from each btc
-//
-//
-//    while(true) //iterate simultaneously the 2 lists
-//    {
-//        if (btcId2extract_list.isEmpty() ) {break;}
-//
-//        //do stuff with ItA and ItB
-////        this->btcHT_ptr.getData(*ItA)->getTransactionTree_ptr()->insert(potentialTransaction.getSenderWalletId() , potentialTransaction.getReceiverWalletId() , *ItB);
-////        bitcoin* btc = this->btcHT_ptr.getData(*ItA);
-//    //todo gia ayrio na tsekarw oti paizei
-//    //todo na epistrefei kai tous deiktes sta kainourgia h toulaxiston sta idia t_nodes
-//
-//        if (ItA != btcId2extract_list.end()) {
-//            ++ItA;
-//        }
-//        if (ItB != amountInEachBtc2extract_list.end()) {
-//            ++ItB;
-//        }
-//        if (ItA == btcId2extract_list.end() && ItB == amountInEachBtc2extract_list.end()) {
-//            break;
-//        }
-//
-//
-//    }
-//
 
     cout << "EXIT 1000\n";
 
 
 
-
+//    exit(3);
 
     //todo last#  kanw update ta upoloipo--btcList--amountBtcList sta wallets tou sender kai receiveer
 
@@ -181,10 +149,10 @@ void Synchroniser::decideWhichAndHowMuchInEach2extractFromSender(wallet *senders
         {
             ++ItB;
         }
-        if(ItA == sendersWallet->getBtcIdsOwned_list().end() && ItB == sendersWallet->getAmountOnEachBtc().end())
-        {
-            break;
-        }
+//        if(ItA == sendersWallet->getBtcIdsOwned_list().end() && ItB == sendersWallet->getAmountOnEachBtc().end())
+//        {
+//            break;
+//        }
     }
 }
 
@@ -262,6 +230,56 @@ void Synchroniser::addAmountAndBtc2receiver(wallet *receiversWallet, linkedList<
 
     receiversWallet->setBalance(sumBalancies); //update the new total baalnce
 
+
+
+}
+
+void Synchroniser::addTheNewNodes2Tree(myString senderId, myString receiverId, linkedList<myString> btcId2extract_list,
+                                       linkedList<int> amountInEachBtc2extract_list) {
+
+
+    //todo edw phgainw sto treeHT kai m epistrefei to treeNode twn btc
+    //todo + meta panw se auta ta peirazw kai skave ta dentra
+
+
+    linkedList<myString>::Iterator  ItA;
+    linkedList<int>::Iterator  ItB;
+
+    ItA = btcId2extract_list.begin();           //refers to the btcIds
+    ItB = amountInEachBtc2extract_list.begin(); //refers to the amount to extract from each btc
+
+
+    int counter=0;
+    while(true) //iterate simultaneously the 2 lists
+    {
+//        if (btcId2extract_list.isEmpty() ) {break;}
+        if (counter == amountInEachBtc2extract_list.getSize()){break;ItA= nullptr;ItB= nullptr;}
+
+
+        //do stuff with ItA and ItB
+        int amount = *ItB;
+        myString btcId= *ItA;
+        this->btcHT_ptr.getData(btcId)->getTransactionTree_ptr()->insert(senderId , receiverId , amount);
+//        bitcoin* btc = this->btcHT_ptr.getData(*ItA);
+
+    //todo gia ayrio na tsekarw oti paizei
+    //todo na epistrefei kai tous deiktes sta kainourgia h toulaxiston sta idia t_nodes
+
+        counter++;
+
+
+        if (ItA != btcId2extract_list.end()) {
+            ++ItA;
+        }
+        if (ItB != amountInEachBtc2extract_list.end()) {
+            ++ItB;
+        }
+//        if (ItA == btcId2extract_list.end() && ItB == amountInEachBtc2extract_list.end()) {
+//            break;
+//        }
+
+
+    }
 
 
 }

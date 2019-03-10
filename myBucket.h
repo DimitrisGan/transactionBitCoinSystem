@@ -50,6 +50,7 @@ struct myBucket_chain{
 
     T* getData(myString key)  {
 
+
         for (  auto &dataNode : myBucketList) { //dataNode : myBucket<T>
             if (dataNode == key){
 
