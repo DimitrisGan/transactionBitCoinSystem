@@ -46,6 +46,12 @@ public:
     linkedList<int>& getAmountOnEachBtcByRef() ;
 
 
+    bool btcExists(myString btcId);
+    int getIndexBybtcId(myString btcId);
+
+    void updateAmountByIndex(int index, int newAmount);
+
+
     void setId(const myString &id);
 
     void setBalance(int balance);

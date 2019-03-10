@@ -24,8 +24,9 @@ struct l_node {
     l_node<T> *next;
 
 
-    typedef l_node<T> node_type;
-    typedef node_type* node_ptr;
+    T getData() const {
+        return data;
+    }
 };
 
 

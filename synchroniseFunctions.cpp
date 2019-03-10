@@ -58,6 +58,7 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
     addAmountAndBtc2receiver(receiversWallet , btcId2extract_list ,amountInEachBtc2extract_list);
 
 
+    cout <<"edw eimai"<<endl;
     //todo edw phgainw sto treeHT kai m epistrefei to treeNode twn btc
     //todo + meta panw se auta ta peirazw kai skave ta dentra
 
@@ -93,7 +94,7 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
 //    }
 //
 
-        cout << "EXIT 1000\n";
+    cout << "EXIT 1000\n";
 
 
 
@@ -225,17 +226,42 @@ void Synchroniser::addAmountAndBtc2receiver(wallet *receiversWallet, linkedList<
 
 
     int index2increse = 0;
-    if (! receiversWallet->getBtcIdsOwned_list().isEmpty())
-    for ( auto &btcIdinReceiver : receiversWallet->getBtcIdsOwned_listByRef()) { //for every btc in receiversWallet
+    int sumBalancies= receiversWallet->getBalance();
+//    if (! receiversWallet->getBtcIdsOwned_list().isEmpty()) {
+    for (auto &btcId : btcId2extract_list) {
 
-        for ( auto &btcIdinList : btcId2extract_list) {
-            if (btcIdinList == btcIdinReceiver){ //it means that in the current btc btcReceiver has already percentage so we have oly to increase the amount and not add new btc
+        int amount2insert = amountInEachBtc2extract_list.getByIndex(index2increse)->getData(); //todo tsekare to
 
-                receiversWallet->getAmountOnEachBtcByRef().getByIndex(index2increse)->data; //todo tsekare to
-            }
+        sumBalancies+=amount2insert;
+
+        if (receiversWallet->btcExists(btcId) ){ //it means that in the current btc btcReceiver has already percentage so we have oly to increase the amount and not add new btc
+            //then we have to update already existing amount
+
+            int index2update = receiversWallet->getIndexBybtcId(btcId);
+
+            int existingAmount = receiversWallet->getAmountOnEachBtc().getByIndex(index2update)->getData();
+            assert(index2update >=0);
+
+            int newTotalAmount = existingAmount + amount2insert ;
+
+            receiversWallet->updateAmountByIndex(index2update,newTotalAmount);
+
+
         }
+        else{ //we have to insrt the new btc and its amount
+            receiversWallet->getBtcIdsOwned_listByRef().insert_last(btcId);
+            receiversWallet->getAmountOnEachBtcByRef().insert_last(amount2insert);
+
+        }
+
+
+
+
         index2increse++;
     }
+
+    receiversWallet->setBalance(sumBalancies); //update the new total baalnce
+
 
 
 }

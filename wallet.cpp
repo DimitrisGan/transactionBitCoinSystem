@@ -2,6 +2,7 @@
 // Created by dimitrisgan on 27/2/2019.
 //
 
+#include <assert.h>
 #include "wallet.h"
 
 bool wallet::operator==(const wallet &rhs) const {
@@ -71,6 +72,7 @@ wallet::wallet( wallet &right) {
 
 
 
+
 linkedList<myString> wallet::getBtcIdsOwned_list()  {
     return btcIdsOwned_list;
 }
@@ -85,6 +87,44 @@ linkedList<myString> &wallet::getBtcIdsOwned_listByRef() {
 
 linkedList<int> &wallet::getAmountOnEachBtcByRef() {
     return amountOnEachBtc;
+}
+
+bool wallet::btcExists(myString btcId) {
+
+    for (const auto &item : this->btcIdsOwned_list) {
+        if (item == btcId){
+            return true;
+        }
+    }
+    return false;
+}
+
+int wallet::getIndexBybtcId(myString btcId) {
+    int index =0;
+    for (const auto &item : this->getBtcIdsOwned_list()) {
+
+       if (item == btcId)
+           break;
+
+        index++;
+    }
+
+    return index;
+}
+
+void wallet::updateAmountByIndex(int index, int newAmount) {
+
+    cout << "GINETAI UPDATE\n";
+    int currIndex=0;
+    for ( auto &item : this->amountOnEachBtc) {
+        if (currIndex == index){
+            item = newAmount;
+            return;
+        }
+        currIndex++;
+    }
+    assert(1);
+
 }
 
 
