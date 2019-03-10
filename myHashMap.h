@@ -77,7 +77,11 @@ public:
 
         return this->table[indexHash].getData(key);
 
+    }
 
+    bool exists (myString key){ //todo implement it
+        int indexHash = hashFunc(key,this->tableSize);
+        return this->table[indexHash].exist(key);
     }
 
 

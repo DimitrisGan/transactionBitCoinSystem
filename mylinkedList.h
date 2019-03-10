@@ -54,7 +54,6 @@ public:
 
     virtual ~linkedList();
 
-    void remove( T data);
     bool deleteNodeByIndex( int index );
     bool deleteNodeByItem( T item2delete);
 
@@ -62,7 +61,8 @@ public:
     void insert_first(T data);
     void insert_last(T data);
 
-
+    l_node<T> * getByIndex(int index) ;
+    void updateByIndex (int index , T data);
     void updateHeadData(T data);
     void updateTailData(T data);
 
@@ -592,6 +592,73 @@ l_node<T> *linkedList<T>::getTail() const {
 template<class T>
 int linkedList<T>::getSize() const {
     return size;
+}
+
+
+
+
+template<class T>
+void linkedList<T>::updateByIndex(int index, T data) {
+
+    l_node<T> *pCur = this->head;
+    int currentIndex = 0;
+
+    while ( pCur )
+    {
+        // Here we just loop until we reach our desired index.
+        if (currentIndex == index)
+        {
+            break;
+        }
+
+        // Increment the current index and pCur to the next item.
+        currentIndex++;
+        pCur = pCur -> next;
+    }
+
+    // If pCur is still valid at this point, it means we broke at the
+    // proper place and pCur should be at the proper index.
+    if ( pCur )
+    {
+        pCur->data = data;
+    }
+    else {
+        fprintf(stderr, "ERROR IN UPDATEBYINDEX FUNCTION IN LINKED LIST");
+        exit(1);
+    }
+}
+
+
+template<class T>
+l_node<T> *linkedList<T>::getByIndex(int index) {
+
+    l_node<T> *pCur = this->head;
+    int currentIndex = 0;
+
+    while ( pCur )
+    {
+        // Here we just loop until we reach our desired index.
+        if (currentIndex == index)
+        {
+            break;
+        }
+
+        // Increment the current index and pCur to the next item.
+        currentIndex++;
+        pCur = pCur -> next;
+    }
+
+    // If pCur is still valid at this point, it means we broke at the
+    // proper place and pCur should be at the proper index.
+    if ( pCur )
+    {
+        return pCur;
+    }
+    else{
+        fprintf(stderr, "ERROR IN GETBYINDEX FUNCTION IN LINKED LIST");
+        exit(1);
+    }
+
 }
 
 

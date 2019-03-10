@@ -22,12 +22,25 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
 
 
     wallet  *sendersWallet =  this->walletHT_ptr.getData(potentialTransaction.getSenderWalletId());
+    wallet  *receiversWallet =  this->walletHT_ptr.getData(potentialTransaction.getReceiverWalletId());
 
+//todo check if sender/receiver wallet    this->walletHT_ptr.exists(sendersWallet->getId() ,sendersWallet);
 
-    if (!transactionIsValid(potentialTransaction, sendersWallet->getBalance())){ //check id transaction is possible or throw error and exit
-        std::cerr << "CANT APPLY THE TRANSACTION WITH ID# "<<potentialTransaction.getTransacId()<<endl;
+    if (! this->walletHT_ptr.exists(sendersWallet->id) ){
+        std::cerr << "CANT APPLY THE TRANSACTION  ID# "<<potentialTransaction.getTransacId()<<" BECAUSE SENDER DOESNT EXIST"<<endl;
         exit(NOT_VALID_TRSANSACTION);
     }
+
+    if (! this->walletHT_ptr.exists(receiversWallet->id) ){
+        std::cerr << "CANT APPLY THE TRANSACTION  ID# "<<potentialTransaction.getTransacId()<<" BECAUSE RECEIVER DOESNT EXIST"<<endl;
+        exit(NOT_VALID_TRSANSACTION);
+    }
+
+    if (!transactionIsValid(potentialTransaction, sendersWallet->getBalance())){ //check id transaction is possible or throw error and exit
+        std::cerr << "CANT APPLY THE TRANSACTION WITH ID# "<<potentialTransaction.getTransacId()<< " BECAUSE THERE IS NOT ENOUGH BALANCE FROM SENDER"<<endl;
+        exit(NOT_VALID_TRSANSACTION);
+    }
+
     //transaction is valid
     //todo apo sender pairnw to poso kai to tsekarw apo ta t-nodes
     linkedList<myString> btcId2extract_list;
@@ -41,6 +54,8 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
                                                   amount2extract, btcIds2deleteFromOwner);
 
     removeLostOwnershipBtcFromSender (sendersWallet , btcIds2deleteFromOwner);
+
+    addAmountAndBtc2receiver(receiversWallet , btcId2extract_list ,amountInEachBtc2extract_list);
 
 
     //todo edw phgainw sto treeHT kai m epistrefei to treeNode twn btc
@@ -199,6 +214,29 @@ void Synchroniser::removeLostOwnershipBtcFromSender(wallet *sendersWallet, linke
         std::cerr << "ERROR IN DELETION  "<<endl;
         exit(1);
     }
+
+}
+
+void Synchroniser::addAmountAndBtc2receiver(wallet *receiversWallet, linkedList<myString> btcId2extract_list,
+                                            linkedList<int> amountInEachBtc2extract_list) {
+
+
+    //todo dwse to poso ston receiver ...alla prosekse oti an exei hdh to btc prepei na to prostheseis
+
+
+    int index2increse = 0;
+    if (! receiversWallet->getBtcIdsOwned_list().isEmpty())
+    for ( auto &btcIdinReceiver : receiversWallet->getBtcIdsOwned_listByRef()) { //for every btc in receiversWallet
+
+        for ( auto &btcIdinList : btcId2extract_list) {
+            if (btcIdinList == btcIdinReceiver){ //it means that in the current btc btcReceiver has already percentage so we have oly to increase the amount and not add new btc
+
+                receiversWallet->getAmountOnEachBtcByRef().getByIndex(index2increse)->data; //todo tsekare to
+            }
+        }
+        index2increse++;
+    }
+
 
 }
 

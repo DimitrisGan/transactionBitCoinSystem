@@ -14,14 +14,14 @@
 
 
 class wallet{
-private:
+public://private:
     myString id ; // aka userName
     int balance;
     linkedList<myString> btcIdsOwned_list;
     linkedList<int> amountOnEachBtc;
 public:
-    wallet() = default;
 
+    wallet (){balance =-1;}
     wallet( myString id, int balance,  linkedList<myString> btcIdsOwned_list,
             linkedList<int> amountOnEachBtc);
 

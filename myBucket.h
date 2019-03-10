@@ -85,6 +85,16 @@ struct myBucket_chain{
         return false;
     }
 
+    bool exist(myString key){
+        for ( auto &item : myBucketList) {
+            if (item == key){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     friend ostream &operator<<(ostream &os, const myBucket_chain &chain) {
         os << "myBucketList: " << chain.myBucketList;
         return os;
