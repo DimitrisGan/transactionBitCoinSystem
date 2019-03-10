@@ -64,7 +64,7 @@ public:
         return senderWalletId;
     }
 
-    const myString &getReceiverWalletId() const {
+     myString &getReceiverWalletId()  {
         return receiverWalletId;
     }
 

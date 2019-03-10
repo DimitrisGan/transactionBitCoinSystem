@@ -48,7 +48,7 @@ myString::~myString() {
 //***************************************************************
 
 bool myString::operator==(const myString &rhs) const {
-    return !strcmp(myStr, rhs.getMyStr());
+    return strcmp(myStr, rhs.getMyStr()) == 0;
 }
 
 bool myString::operator!=(const myString &rhs) const {
@@ -80,7 +80,8 @@ bool myString::operator!=(const char *rhs)
 
 myString::myString(myString &right)
 {
-
+//    if (len != 0)
+//        delete [] myStr;
     myStr = new char[right.size() + 1];
     strcpy(myStr, right.getMyStr());
     len = right.size();

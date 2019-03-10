@@ -56,6 +56,8 @@ public:
 
     void remove( T data);
     bool deleteNodeByIndex( int index );
+    bool deleteNodeByItem( T item2delete);
+
 
     void insert_first(T data);
     void insert_last(T data);
@@ -196,6 +198,55 @@ bool linkedList<T>::deleteNodeByIndex( int index )
 
         // Increment the current index and pCur to the next item.
         currentIndex++;
+        pPre = pCur;
+        pCur = pCur -> next;
+    }
+
+    // If pCur is still valid at this point, it means we broke at the
+    // proper place and pCur should be at the proper index.
+    if ( pCur )
+    {
+        if ( pPre )
+        {
+            pPre -> next = pCur -> next;
+            delete pCur;
+            this->size--;
+            exit = false; // return false if successful
+        }
+        else
+        {
+            this->head = pCur -> next;
+            delete pCur;
+            this->size--;
+            exit = false; // return false if successful
+        }
+    }
+    else
+        exit = true; // return true if unsuccessful
+
+    return exit;
+}
+
+
+
+template<class T>
+bool linkedList<T>::deleteNodeByItem( T item2delete)
+{
+    cout << "MPIKA STH DELETEEEEE\n";
+    bool exit;
+
+    l_node<T> *pPre = NULL,
+            *pCur = this->head;
+
+    while ( pCur )
+    {
+        // Here we just loop until we reach our desired index.
+        if (pCur->data == item2delete)
+        {
+            break;
+        }
+
+        // Increment the current index and pCur to the next item.
         pPre = pCur;
         pCur = pCur -> next;
     }

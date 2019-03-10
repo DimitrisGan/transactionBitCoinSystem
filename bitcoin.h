@@ -15,9 +15,17 @@ struct bitcoin{
 
     bitcoin( myString id, btc_tree *transactionTree_ptr);
 
+    const myString &getId() const;
+
+    btc_tree *getTransactionTree_ptr() ;
+
     bool operator==( bitcoin &rhs) ;
 
     bool operator!=( bitcoin &rhs) ;
+
+    bool operator==(const myString &id) const;
+
+    bool operator!=(const myString &id) const;
 
     friend ostream &operator<<(ostream &os, const bitcoin &bitcoin1);
 };
