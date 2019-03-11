@@ -23,7 +23,7 @@ public: //private:
     date transacTime;
 
     //mporei na exoun dhmiourgithei parapanw apo ena nodes se diaforetika bitcoins trees
-    linkedList<myString> bitcoinSentList;
+//    linkedList<myString> bitcoinSentList;
     int amount;
     linkedList<t_node *> t_nodePtrList;
 
@@ -43,7 +43,7 @@ public:
     transaction& operator=( transaction rhs)  {
         transacId = rhs.transacId;
         receiverWalletId = rhs.receiverWalletId ;
-        bitcoinSentList = rhs.bitcoinSentList ;
+//        bitcoinSentList = rhs.bitcoinSentList ;
         t_nodePtrList = rhs.t_nodePtrList; //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS
         amount = rhs.amount;
         transacTime = rhs.transacTime;
@@ -96,9 +96,9 @@ public:
     }
 
 
-    void setBitcoinSentList( linkedList<myString> bitcoinSentList) {
-        transaction::bitcoinSentList = bitcoinSentList;
-    }
+//    void setBitcoinSentList( linkedList<myString> bitcoinSentList) {
+//        transaction::bitcoinSentList = bitcoinSentList;
+//    }
 
     void setAmount(int amount) {
         transaction::amount = amount;
