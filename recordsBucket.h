@@ -28,11 +28,17 @@ struct record{
 //        transacLlist_ptr = new linkedList<transaction> ;
 //    }
 
-    record() {transacLlist_ptr = nullptr;transacLlist_ptr = new linkedList<transaction*> ;}
+    record() {/*walletId.setMyStr("empty slot");*/
+        transacLlist_ptr = nullptr;
+        transacLlist_ptr = new linkedList<transaction*> ;
+    }
 
     virtual ~record() {
-        delete  transacLlist_ptr;
-        transacLlist_ptr = nullptr;
+//        delete  transacLlist_ptr;
+//        transacLlist_ptr = nullptr;
+        transacLlist_ptr->clear();
+//        delete transacLlist_ptr;
+//        transacLlist_ptr= nullptr;
     }
 
 
@@ -80,16 +86,17 @@ struct recordsBucket{
         cout << "DESTRUCTOR OF BUCKET RECORD TABLE IS CALLED #" <<endl;
 //        this->recordsAlreadyExist=0;
         delete  [] recordTable; //todo des ksana//todo des ksana//todo des ksana//todo des ksana//todo des ksana//todo des ksana//todo des ksana//todo des ksana
+
         recordTable= nullptr;
     }
 
     recordsBucket& operator=(recordsBucket right)
     {
 
-        for (int i = 0; i < this->recordsMaxCapacity ; ++i) {
+        for (int i = 0; i < right.recordsAlreadyExist ; ++i) {
             this->recordTable[i] = right.recordTable[i];
         }   //todo AYTA TA 2 EINIA LATHOS//todo AYTA TA 2 EINIA LATHOS//todo AYTA TA 2 EINIA LATHOS//todo AYTA TA 2 EINIA LATHOS//todo AYTA TA 2 EINIA LATHOS
-        right.recordTable= nullptr;
+//        right.recordTable= nullptr;
         this->recordsAlreadyExist= right.recordsAlreadyExist;
         this->recordsMaxCapacity= right.recordsMaxCapacity;
         return *this;
@@ -97,13 +104,16 @@ struct recordsBucket{
 
     recordsBucket(recordsBucket &right)
     {
-        for (int i = 0; i < this->recordsMaxCapacity ; ++i) {
-            this->recordTable[i] = right.recordTable[i];
-        }
-        right.recordTable= nullptr;  //todo edw to kanw null gia na mhn koitaei //todo edw to kanw null gia na mhn koitaei //todo edw to kanw null gia na mhn koitaei //todo edw to kanw null gia na mhn koitaei
-
+        this->recordTable = new record [right.recordsMaxCapacity ];
         recordsAlreadyExist =right.recordsAlreadyExist;
         recordsMaxCapacity =right.recordsMaxCapacity;
+
+        for (int i = 0; i < right.recordsAlreadyExist; ++i) {
+            this->recordTable[i] = right.recordTable[i];
+        }
+//        right.recordTable= nullptr;  //todo edw to kanw null gia na mhn koitaei //todo edw to kanw null gia na mhn koitaei //todo edw to kanw null gia na mhn koitaei //todo edw to kanw null gia na mhn koitaei
+
+
     }
 
     bool recordExist(const myString &walletId){
@@ -119,12 +129,15 @@ struct recordsBucket{
 
     int  getIndex(const myString &walletId){
         int flagFound = -1;
+        int index=0;
         for (int i = 0; i < recordsAlreadyExist; ++i) {
 
             myString walletIdAlreadyExist = recordTable[i].walletId;
             if (walletIdAlreadyExist == walletId){
+                return index;
                 break;
             }
+            index++;
         }
         assert(flagFound != -1);
         return  flagFound;
@@ -166,6 +179,7 @@ struct recordsBucket_chain{
     linkedList<recordsBucket> bucketsList;
     unsigned maxNumberOfRecordsInBucket;
 
+
 //    explicit recordsBucket_chain(unsigned bucketSizeInBytes)  {
 //        maxNumberOfRecordsInBucket = bucketSizeInBytes/sizeof(record);
 //
@@ -182,6 +196,7 @@ struct recordsBucket_chain{
     virtual ~recordsBucket_chain() = default;
 
     bool recordExistInChain( myString key ) {
+        if (this->bucketsList.isEmpty()){return false;}
         for ( auto &bucket : bucketsList) { //todo tsekarw gia kathe bucket an uparxei
             if (bucket.recordExist(key)) {                //todo an uparxei tote ....
                 return true;

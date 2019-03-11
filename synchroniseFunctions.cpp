@@ -69,6 +69,13 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
 
     addTheNewNodes2Tree(potentialTransaction , btcId2extract_list ,amountInEachBtc2extract_list);
 
+    //todo twra pou oloklhrwthike to transaction class xwsto sto transactionHT
+    //todo + pare ton pointer kai addare ton sto senderReceiverHT
+
+    this->transacHT_ptr.insert(potentialTransaction.transacId , potentialTransaction); //insert new transaction in the transactionHT
+    ;
+    this->senderHT_ptr.addTransacNode2appropriateIndex(potentialTransaction.senderWalletId , this->transacHT_ptr.getData(potentialTransaction.transacId) ); //insert a new node with a pointer to the transaction node in senderHT
+
     cout <<"edw eimai"<<endl;
 
     cout << "EXIT 1000\n";

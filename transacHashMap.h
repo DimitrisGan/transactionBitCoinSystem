@@ -72,25 +72,16 @@ public:
     }
 
     unsigned int getIndex(myString s) const {
-        this->hashFunc(s, this->tableSize);
-        return tableSize;
+        return  this->hashFunc(s, this->tableSize);;
     }
 
 
 
-//    void insertInTransacHT(myString key,transaction transacNode2Insert ){
-//
-//        int indexHash = hashFunc(key);
-//        if (table[indexHash] == nullptr) //if table[index] is null then we have to initialize a recordsBucket chain
-//            table[indexHash] = new T ;
-//
-//        this->table[indexHash].insertNewRecord(transacNode2Insert);
-//    }
 
 
     recordsBucket_chain getTableById(myString id) const ;
 
-    void addTransacNode2appropriateIndex(myString senderId , transaction transac2add);
+    void addTransacNode2appropriateIndex(myString senderId , transaction *transac2add);
 
 
     transaction &getTransacNodeByRef(myString id);

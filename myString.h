@@ -27,7 +27,7 @@ public:
 
     char *getMyStr() const;
 
-    void setMyStr(char *myStr);
+    void setMyStr(const char *myStr);
 
     unsigned size() const;
 //    void myString::makeOneToken(char delimeter);

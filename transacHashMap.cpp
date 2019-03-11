@@ -17,7 +17,12 @@ recordsBucket_chain myTransacHashMap::getTableById(myString id) const {
     return table[index];
 }
 
-void myTransacHashMap::addTransacNode2appropriateIndex(myString senderId , transaction transac2add){
+void myTransacHashMap::addTransacNode2appropriateIndex(myString senderId , transaction* transac2add){
     int index = this->getIndex(senderId);
-    myTransacHashMap::table = table;
+//    if (table[index].bucketsList.isEmpty()) //if table[index] is null then we have to initialize a recordsBucket chain
+//        table[index] = new T ;
+
+    myTransacHashMap::table[index].insert(senderId,transac2add);
 }
+
+
