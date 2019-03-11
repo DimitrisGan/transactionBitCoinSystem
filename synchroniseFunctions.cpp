@@ -17,7 +17,7 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
     //todo 3#  an nai sortarw an goustarw apo th lista me ta btc kai anoigw auta me to megalutero poso
     //todo 4#  paw sta dentra twn chosenBtc kai ta skavw ---> ta xwnw se mia lista kai to poso pou phra ---> ta xwnw sto transaction mou (forse pointer)
     //todo 5#  sto skapsimo h sunarthsh prepei na mou epistrepsei pointers (stous pateres) sta kainourgia nodes pou anoiksa
-    //todo 6#  autous tous pointers tous xwnw sto potentialTransaction.treeNodeList_ptrs<t_nodes*>.PROSOXH! xwnw to aristero paidi ston sender kai deksi sto wallet
+    //todo 6#  autous tous pointers tous xwnw sto potentialTransaction.t_nodePtrList<t_nodes*>.PROSOXH! xwnw to aristero paidi ston sender kai deksi sto wallet
     //todo edw dhmiourgeitai h aporia mhpws prepei na xw sa parametro 2 transacNodes --> ena tou sender kai ena tou receiver
 
 
@@ -67,7 +67,7 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
     addAmountAndBtc2receiver(receiversWallet , btcId2extract_list ,amountInEachBtc2extract_list);
 
 
-    addTheNewNodes2Tree(sendersWallet->id , receiversWallet->id , btcId2extract_list ,amountInEachBtc2extract_list);
+    addTheNewNodes2Tree(potentialTransaction , btcId2extract_list ,amountInEachBtc2extract_list);
 
     cout <<"edw eimai"<<endl;
 
@@ -243,8 +243,8 @@ void Synchroniser::addAmountAndBtc2receiver(wallet *receiversWallet, linkedList<
 
 }
 
-void Synchroniser::addTheNewNodes2Tree(myString senderId, myString receiverId, linkedList<myString> btcId2extract_list,
-                                       linkedList<int> amountInEachBtc2extract_list) {
+void Synchroniser::addTheNewNodes2Tree(transaction &potentialTransaction , linkedList<myString> btcId2extract_list ,linkedList<int> amountInEachBtc2extract_list)
+{
 
 
     //todo edw phgainw sto treeHT kai m epistrefei to treeNode twn btc
@@ -268,7 +268,7 @@ void Synchroniser::addTheNewNodes2Tree(myString senderId, myString receiverId, l
         //do stuff with ItA and ItB
         int amount = *ItB;
         myString btcId= *ItA;
-        this->btcHT_ptr.getData(btcId)->getTransactionTree_ptr()->insert(senderId , receiverId , amount);
+        this->btcHT_ptr.getData(btcId)->getTransactionTree_ptr()->insert(potentialTransaction.getSenderWalletId() , potentialTransaction.getReceiverWalletId() , amount ,potentialTransaction.t_nodePtrList);
 //        bitcoin* btc = this->btcHT_ptr.getData(*ItA);
 
     //todo gia ayrio na tsekarw oti paizei

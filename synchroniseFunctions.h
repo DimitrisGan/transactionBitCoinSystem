@@ -50,7 +50,7 @@ struct Synchroniser{
 
     void  addAmountAndBtc2receiver(wallet *receiversWallet , linkedList<myString> btcId2extract_list ,linkedList<int> amountInEachBtc2extract_list);
 
-    void  addTheNewNodes2Tree(myString senderId ,myString receiverId , linkedList<myString> btcId2extract_list ,linkedList<int> amountInEachBtc2extract_list);
+    void  addTheNewNodes2Tree(transaction &potentialTransaction , linkedList<myString> btcId2extract_list ,linkedList<int> amountInEachBtc2extract_list);
 
     void createTransactionNode(myString sender,myString receiver ,int amount);
     void updateWallet(); //will be called two times for sender and receiver

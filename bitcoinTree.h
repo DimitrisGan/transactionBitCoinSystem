@@ -48,7 +48,7 @@ public:
 
     t_node *getRoot() const;
 
-    void insert(myString senderWalletId, myString receiverWalletId, int amount);
+    void insert(myString senderWalletId, myString receiverWalletId, int amount , linkedList<t_node*> &returnPtrs2t_nodes );
 
     bool operator==(const btc_tree &rhs) const;
 

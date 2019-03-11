@@ -25,7 +25,7 @@ public: //private:
     //mporei na exoun dhmiourgithei parapanw apo ena nodes se diaforetika bitcoins trees
     linkedList<myString> bitcoinSentList;
     int amount;
-    linkedList<t_node *> treeNodeList_ptrs;
+    linkedList<t_node *> t_nodePtrList;
 
 public:
 
@@ -33,7 +33,7 @@ public:
 
 
     virtual ~transaction() {
-//         treeNodeList_ptrs.clear(); OXI DE THELW NA GINEI FREE TO DENTRO MOY APO TO TRANSACTION NODE LIST
+//         t_nodePtrList.clear(); OXI DE THELW NA GINEI FREE TO DENTRO MOY APO TO TRANSACTION NODE LIST
 
     }
 
@@ -44,7 +44,7 @@ public:
         transacId = rhs.transacId;
         receiverWalletId = rhs.receiverWalletId ;
         bitcoinSentList = rhs.bitcoinSentList ;
-        treeNodeList_ptrs = rhs.treeNodeList_ptrs; //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS
+        t_nodePtrList = rhs.t_nodePtrList; //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS
         amount = rhs.amount;
         transacTime = rhs.transacTime;
         return *this;
@@ -105,7 +105,7 @@ public:
     }
 
     void setTreeNodeList_ptrs( linkedList<t_node *> treeNodeList_ptrs) {
-        transaction::treeNodeList_ptrs = treeNodeList_ptrs;
+        transaction::t_nodePtrList = treeNodeList_ptrs;
     }
 
     void setTransacTime(const date &transacTime) {

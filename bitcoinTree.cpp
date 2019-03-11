@@ -81,7 +81,7 @@ void searchKeyIdFromLeafs(myString keyWalletId, linkedList<t_node*> &leafs_list,
 //
 /*basically inserts all the amount asked for the transcation in the tree.
  * Thus,it can add more than 2 nodes in the tree*/
-void btc_tree::insert(myString senderWalletId, myString receiverWalletId, int amount){
+void btc_tree::insert(myString senderWalletId, myString receiverWalletId, int amount , linkedList<t_node*> &returnPtrs2t_nodes ){
 
     cout <<"SKAVW\n\n";
 
@@ -108,6 +108,8 @@ void btc_tree::insert(myString senderWalletId, myString receiverWalletId, int am
             //and also that will take only the amountLeft2add because is less than the potential amount to give
             //todo digNode() - createNode()
             //todo add2Tree()
+            returnPtrs2t_nodes.insert_last(senderLeafNode); //add a pointer to the t_node before we insert children
+
             this->insert(receiverWalletId ,amountLeft , senderLeafNode);
             amountLeft = 0;
             break;
@@ -116,6 +118,8 @@ void btc_tree::insert(myString senderWalletId, myString receiverWalletId, int am
         else{ //means that the amount of the node is not enough we need to add another node
             //todo digNode() - createNode()
             //todo add2Tree()
+            returnPtrs2t_nodes.insert_last(senderLeafNode); //add a pointer to the t_node before we insert children
+
             this->insert(receiverWalletId ,senderLeafNode->amount /*node can give only the amount that contains*/ , senderLeafNode);
             amountLeft = amountLeft - senderLeafNode->amount;
             continue;

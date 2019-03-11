@@ -63,12 +63,12 @@ int main(int argc, char **argv) {
 
     btc_tree myFirstBtcTree (rootakos,50);
 
-//    void insert(myString senderWalletId, myString receiverWalletId, int amount);
-    myFirstBtcTree.insert(rootakos , receiver1 , 10 ); //inserts one t_node
-    //todo parse the files and save them
-
-    myFirstBtcTree.insert(rootakos , receiver2 , 20 );
-    myFirstBtcTree.insert(receiver1 , receiver3 , 10 );
+////    void insert(myString senderWalletId, myString receiverWalletId, int amount);
+//    myFirstBtcTree.insert(rootakos , receiver1 , 10 ); //inserts one t_node
+//    //todo parse the files and save them
+//
+//    myFirstBtcTree.insert(rootakos , receiver2 , 20 );
+//    myFirstBtcTree.insert(receiver1 , receiver3 , 10 );
 
 
     cout<< "Size of myString :"<< sizeof(myString)<<endl;
