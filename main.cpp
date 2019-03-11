@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
       argmKeeper.printArgs();
    */
 
-    unsigned bucketSizeInBytes = 1024;
+    unsigned bucketSizeInBytes = 100;
     unsigned tableSize =1;
     int btcValue = 50;
     unsigned  (*myHashFunc)( myString, unsigned)  = & myHash ;

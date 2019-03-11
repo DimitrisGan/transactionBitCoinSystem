@@ -29,7 +29,7 @@
 
 class myTransacHashMap {
 
-private:
+public://todo change to --->private:
 
     recordsBucket_chain *table;
 
