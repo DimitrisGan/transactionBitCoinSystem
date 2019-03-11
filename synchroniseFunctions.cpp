@@ -36,10 +36,19 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
         exit(NOT_VALID_TRSANSACTION);
     }
 
+    if (potentialTransaction.getSenderWalletId() == potentialTransaction.getReceiverWalletId()){ //check if user is the same and sends to himself money
+        std::cerr << "CANT APPLY THE TRANSACTION WITH ID# "<<potentialTransaction.getTransacId()<< " BECAUSE THE RECEIVER IS ALSO THE SENDER"<<endl;
+        exit(NOT_VALID_TRSANSACTION);
+    }
+
+
+
     if (!transactionIsValid(potentialTransaction, sendersWallet->getBalance())){ //check id transaction is possible or throw error and exit
         std::cerr << "CANT APPLY THE TRANSACTION WITH ID# "<<potentialTransaction.getTransacId()<< " BECAUSE THERE IS NOT ENOUGH BALANCE FROM SENDER"<<endl;
         exit(NOT_VALID_TRSANSACTION);
     }
+
+
 
     //transaction is valid
     //todo apo sender pairnw to poso kai to tsekarw apo ta t-nodes
