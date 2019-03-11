@@ -81,7 +81,7 @@ public:
 
     recordsBucket_chain getTableById(myString id) const ;
 
-    void addTransacNode2appropriateIndex(myString senderId , transaction *transac2add);
+    void addTransacNode2appropriateIndex(myString walletId , transaction *transac2add);
 
 
     transaction &getTransacNodeByRef(myString id);

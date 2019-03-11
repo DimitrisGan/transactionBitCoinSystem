@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
    */
 
     unsigned bucketSizeInBytes = 1024;
-    unsigned tableSize =2;
+    unsigned tableSize =1;
     int btcValue = 50;
     unsigned  (*myHashFunc)( myString, unsigned)  = & myHash ;
 

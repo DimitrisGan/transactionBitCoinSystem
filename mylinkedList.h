@@ -390,6 +390,7 @@ linkedList<T> &  linkedList<T>::operator=(  linkedList<T> &rhs)
     for ( auto item : rhs) {
         this->insert_last(item);
     }
+    this->size = rhs.size; //peritto
 
     return *this;
 
@@ -521,8 +522,9 @@ template<class T>
 bool linkedList<T>::isEmpty() const
 {
     //todo tha mporousa apla size == 0;
-    return head == nullptr && tail == nullptr; //if the start pointer and end pointer are NULL then the list is empty
+//    return head == nullptr && tail == nullptr; //if the start pointer and end pointer are NULL then the list is empty
 //    return head ==  tail ; //if the start pointer and end pointer are NULL then the list is empty
+    return (! this->size);
 }
 
 template<class T>

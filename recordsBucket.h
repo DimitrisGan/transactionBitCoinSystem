@@ -21,7 +21,7 @@
 
 struct record{
     myString walletId;
-    linkedList<transaction*> *transacLlist_ptr; //TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO
+    linkedList<transaction*> transacLlist_ptr; //TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO
 
 
 //    record( myString receiverWalletId) : receiverWalletId(receiverWalletId) {
@@ -29,14 +29,14 @@ struct record{
 //    }
 
     record() {/*walletId.setMyStr("empty slot");*/
-        transacLlist_ptr = nullptr;
-        transacLlist_ptr = new linkedList<transaction*> ;
+//        transacLlist_ptr = nullptr;
+//        transacLlist_ptr = new linkedList<transaction*> ;
     }
 
     virtual ~record() {
 //        delete  transacLlist_ptr;
 //        transacLlist_ptr = nullptr;
-        transacLlist_ptr->clear();
+//        transacLlist_ptr->clear();
 //        delete transacLlist_ptr;
 //        transacLlist_ptr= nullptr;
     }
@@ -59,7 +59,7 @@ struct record{
 
 
     void insertTransacNodeInTransacList(transaction *transacNode2add){
-        transacLlist_ptr->insert_last(transacNode2add);
+        transacLlist_ptr.insert_last(transacNode2add);
     }
 };
 
@@ -135,7 +135,6 @@ struct recordsBucket{
             myString walletIdAlreadyExist = recordTable[i].walletId;
             if (walletIdAlreadyExist == walletId){
                 return index;
-                break;
             }
             index++;
         }
@@ -150,7 +149,7 @@ struct recordsBucket{
     }
 
     bool recordIsEmpty(int index){
-        return recordTable[index].transacLlist_ptr == nullptr;
+        return recordTable[index].transacLlist_ptr.isEmpty();
     }
 
 
@@ -196,7 +195,8 @@ struct recordsBucket_chain{
     virtual ~recordsBucket_chain() = default;
 
     bool recordExistInChain( myString key ) {
-        if (this->bucketsList.isEmpty()){return false;}
+//        if (this->bucketsList.isEmpty()){return false;}
+
         for ( auto &bucket : bucketsList) { //todo tsekarw gia kathe bucket an uparxei
             if (bucket.recordExist(key)) {                //todo an uparxei tote ....
                 return true;
@@ -226,20 +226,29 @@ struct recordsBucket_chain{
         return true;
     }
 
+    bool bucketChainIsEmpty(){
+        return this->bucketsList.isEmpty();
+    }
+
     void insert( myString key ,transaction *newNode ){
 
         //todo tsekarw gia kathe bucket an uparxei
         //todo an uparxei tote ....
+        if (bucketChainIsEmpty()){
+            recordsBucket  newBucket(maxNumberOfRecordsInBucket);
+            newBucket.insertNewRecord(key,newNode);
+            this->bucketsList.insert_last(newBucket);
+            return;
+        }
 
-        if (recordExistInChain(key)){ //if exists
-
+        if (recordExistInChain(key)){
             record* record2add = find(key);
-            //todo add in it a transaction node in transList //todo//todo//todo//todo//todo//todo//todo//todo//todo//todo//todo//todo
             record2add->insertTransacNodeInTransacList(newNode);
         }
-        else{
-            //todo check for empty space
-            //todo if not ftiakse overflow bucket kai kanw insert to recors sto kainourgio bucket
+
+        else{ //we have to write new record
+
+            //check for empty space
             if (! bucketChainIsFull()) { //insert a new record
 
                 for ( auto &bucket : this->bucketsList) {
@@ -247,7 +256,7 @@ struct recordsBucket_chain{
                         bucket.insertNewRecord(key,newNode);
                     }
                 }
-            }
+            } //if not insert an overflow bucket & insert the record
             else    //insert a new overflow bucket because there is no free-space and then the record
             {
 
