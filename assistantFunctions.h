@@ -37,8 +37,8 @@ struct ArgumentsKeeper{
 
 void argmParser(int &argc, char **argv, struct ArgumentsKeeper &argmKeeper);
 
-void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHashMap<wallet > &walletHT_ptr,
-                                      myHashMap<bitcoin> &btcHT_ptr, int bitCoinValue) ;
+void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHashMap<wallet > *walletHT_ptr,
+                                      myHashMap<bitcoin> *btcHT_ptr, int bitCoinValue) ;
 
 
 void readTransactionQueries(const myString &initiaTransacFile,  Synchroniser &sync);

@@ -15,6 +15,8 @@ struct bitcoin{
 
     bitcoin( myString id, btc_tree *transactionTree_ptr);
 
+    virtual ~bitcoin();
+
     const myString &getId() const;
 
     btc_tree *getTransactionTree_ptr() ;

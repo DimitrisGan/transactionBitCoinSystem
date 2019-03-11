@@ -61,9 +61,10 @@ public:
 
 
     ~myTransacHashMap() {
-
+        if (table!= nullptr) {
             delete[] table;
             table = nullptr;
+        }
     }
 
 

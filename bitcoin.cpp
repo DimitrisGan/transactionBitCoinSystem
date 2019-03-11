@@ -43,3 +43,9 @@ bool bitcoin::operator==(const myString &id) const {
 bool bitcoin::operator!=(const myString &id) const {
     return !(this->id == id);
 }
+
+bitcoin::~bitcoin() {
+
+//    delete transactionTree_ptr;
+//    transactionTree_ptr = nullptr;
+}

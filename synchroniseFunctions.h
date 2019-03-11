@@ -22,17 +22,15 @@
 
 struct Synchroniser{
 
-    myTransacHashMap senderHT_ptr;
-    myTransacHashMap  receiverHT_ptr;
-    myHashMap<wallet> walletHT_ptr;
-    myHashMap< bitcoin> btcHT_ptr;
-    myHashMap<transaction> transacHT_ptr;
+    myTransacHashMap    *senderHT_ptr;
+    myTransacHashMap    *receiverHT_ptr;
+    myHashMap<wallet>   *walletHT_ptr;
+    myHashMap< bitcoin> *btcHT_ptr;
+    myHashMap<transaction> *transacHT_ptr;
 
 
-    //todo ayrio !!!
-    Synchroniser(const myTransacHashMap &senderHT_ptr, const myTransacHashMap &receiverHT_ptr,
-                 const myHashMap<wallet> &walletHT_ptr, const myHashMap<bitcoin> &btcHT_ptr,
-                 const myHashMap<transaction> &transacHT_ptr);
+    Synchroniser(myTransacHashMap *senderHT_ptr, myTransacHashMap *receiverHT_ptr, myHashMap<wallet> *walletHT_ptr,
+                 myHashMap<bitcoin> *btcHT_ptr, myHashMap<transaction> *transacHT_ptr);
 
     void insertTransaction(transaction potentialTransaction);
 

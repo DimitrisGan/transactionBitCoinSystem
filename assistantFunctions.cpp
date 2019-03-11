@@ -229,8 +229,8 @@ void readTransactionQueries(const myString &initiaTransacFile,  Synchroniser &sy
 //richard 541 896 453 670 432
 //annie 235 5490 325
 
-void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHashMap<wallet > &walletHT_ptr,
-                                      myHashMap<bitcoin> &btcHT_ptr, int bitCoinValue) {
+void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHashMap<wallet > *walletHT_ptr,
+                                      myHashMap<bitcoin> *btcHT_ptr, int bitCoinValue) {
     //todo ftiaxnw domh wallet edw
     //todo + ftiaxnw tis rizes twn btcTrees (gia tous prokatoxous) ara ftiaxnw domh btcTree-->bitcoin
     //todo ta xwne sta walletHT , btcHT
@@ -310,7 +310,7 @@ void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHa
         //insert to wallet HashTable
         wallet wallet2insert(new_walletId,balance,btcList,amountList);
         myString key = new_walletId;
-        walletHT_ptr.insert(key , wallet2insert);
+        walletHT_ptr->insert(key , wallet2insert);
 
         if (resultList.getSize() != 1) { //avoid to create btcTree for empty wallets
             // in case that the user has a wallet with coins
@@ -319,7 +319,7 @@ void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHa
                 //create a btcTree and add it to the new btc struct
                 btc_tree *new_btcTreePtr = new btc_tree(new_walletId, bitCoinValue);
                 bitcoin new_btc(item, new_btcTreePtr);
-                btcHT_ptr.insert(new_btc.id, new_btc);
+                btcHT_ptr->insert(new_btc.id, new_btc);
 
             }
         }

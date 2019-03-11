@@ -21,17 +21,17 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
     //todo edw dhmiourgeitai h aporia mhpws prepei na xw sa parametro 2 transacNodes --> ena tou sender kai ena tou receiver
 
 
-    wallet  *sendersWallet =  this->walletHT_ptr.getData(potentialTransaction.getSenderWalletId());
-    wallet  *receiversWallet =  this->walletHT_ptr.getData(potentialTransaction.getReceiverWalletId());
+    wallet  *sendersWallet =  this->walletHT_ptr->getData(potentialTransaction.getSenderWalletId());
+    wallet  *receiversWallet =  this->walletHT_ptr->getData(potentialTransaction.getReceiverWalletId());
 
 //todo check if sender/receiver wallet    this->walletHT_ptr.exists(sendersWallet->getId() ,sendersWallet);
 
-    if (! this->walletHT_ptr.exists(sendersWallet->id) ){
+    if (! this->walletHT_ptr->exists(sendersWallet->id) ){
         std::cerr << "CANT APPLY THE TRANSACTION  ID# "<<potentialTransaction.getTransacId()<<" BECAUSE SENDER DOESNT EXIST"<<endl;
         exit(NOT_VALID_TRSANSACTION);
     }
 
-    if (! this->walletHT_ptr.exists(receiversWallet->id) ){
+    if (! this->walletHT_ptr->exists(receiversWallet->id) ){
         std::cerr << "CANT APPLY THE TRANSACTION  ID# "<<potentialTransaction.getTransacId()<<" BECAUSE RECEIVER DOESNT EXIST"<<endl;
         exit(NOT_VALID_TRSANSACTION);
     }
@@ -72,12 +72,12 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
     //todo twra pou oloklhrwthike to transaction class xwsto sto transactionHT
     //todo + pare ton pointer kai addare ton sto senderReceiverHT
 
-    this->transacHT_ptr.insert(potentialTransaction.transacId , potentialTransaction); //insert new transaction in the transactionHT
+    this->transacHT_ptr->insert(potentialTransaction.transacId , potentialTransaction); //insert new transaction in the transactionHT
 
     //insert the transaction ptr to senderHT
-    this->senderHT_ptr.addTransacNode2appropriateIndex(potentialTransaction.senderWalletId , this->transacHT_ptr.getData(potentialTransaction.transacId) ); //insert a new node with a pointer to the transaction node in senderHT
+    this->senderHT_ptr->addTransacNode2appropriateIndex(potentialTransaction.senderWalletId , this->transacHT_ptr->getData(potentialTransaction.transacId) ); //insert a new node with a pointer to the transaction node in senderHT
     //insert the transaction ptr to receiverHT
-    this->receiverHT_ptr.addTransacNode2appropriateIndex(potentialTransaction.receiverWalletId , this->transacHT_ptr.getData(potentialTransaction.transacId) ); //insert a new node with a pointer to the transaction node in senderHT
+    this->receiverHT_ptr->addTransacNode2appropriateIndex(potentialTransaction.receiverWalletId , this->transacHT_ptr->getData(potentialTransaction.transacId) ); //insert a new node with a pointer to the transaction node in senderHT
 
     cout <<"edw eimai"<<endl;
 
@@ -176,14 +176,6 @@ void Synchroniser::decideWhichAndHowMuchInEach2extractFromSender(wallet *senders
 }
 
 
-Synchroniser::Synchroniser(const myTransacHashMap &senderHT_ptr, const myTransacHashMap &receiverHT_ptr,
-                           const myHashMap<wallet> &walletHT_ptr, const myHashMap<bitcoin> &btcHT_ptr,
-                           const myHashMap<transaction> &transacHT_ptr) : senderHT_ptr(senderHT_ptr),
-                                                                          receiverHT_ptr(receiverHT_ptr),
-                                                                          walletHT_ptr(walletHT_ptr),
-                                                                          btcHT_ptr(btcHT_ptr),
-                                                                          transacHT_ptr(transacHT_ptr) {}
-
 
 bool Synchroniser::transactionIsValid(transaction potentialTransac, int sendersBalance) {
     return (potentialTransac.getAmount() <= sendersBalance);
@@ -278,7 +270,7 @@ void Synchroniser::addTheNewNodes2Tree(transaction &potentialTransaction , linke
         //do stuff with ItA and ItB
         int amount = *ItB;
         myString btcId= *ItA;
-        this->btcHT_ptr.getData(btcId)->getTransactionTree_ptr()->insert(potentialTransaction.getSenderWalletId() , potentialTransaction.getReceiverWalletId() , amount ,potentialTransaction.t_nodePtrList);
+        this->btcHT_ptr->getData(btcId)->getTransactionTree_ptr()->insert(potentialTransaction.getSenderWalletId() , potentialTransaction.getReceiverWalletId() , amount ,potentialTransaction.t_nodePtrList);
 //        bitcoin* btc = this->btcHT_ptr.getData(*ItA);
 
     //todo gia ayrio na tsekarw oti paizei
@@ -302,6 +294,13 @@ void Synchroniser::addTheNewNodes2Tree(transaction &potentialTransaction , linke
 
 
 }
+
+Synchroniser::Synchroniser(myTransacHashMap *senderHT_ptr, myTransacHashMap *receiverHT_ptr,
+                           myHashMap<wallet> *walletHT_ptr, myHashMap<bitcoin> *btcHT_ptr,
+                           myHashMap<transaction> *transacHT_ptr) : senderHT_ptr(senderHT_ptr),
+                                                                    receiverHT_ptr(receiverHT_ptr),
+                                                                    walletHT_ptr(walletHT_ptr), btcHT_ptr(btcHT_ptr),
+                                                                    transacHT_ptr(transacHT_ptr) {}
 
 
 
