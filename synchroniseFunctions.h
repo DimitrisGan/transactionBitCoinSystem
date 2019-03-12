@@ -28,6 +28,8 @@ struct Synchroniser{
     myHashMap< bitcoin> *btcHT_ptr;
     myHashMap<transaction> *transacHT_ptr;
 
+    date latestTrsansactionDate; //todo
+
 
     Synchroniser(myTransacHashMap *senderHT_ptr, myTransacHashMap *receiverHT_ptr, myHashMap<wallet> *walletHT_ptr,
                  myHashMap<bitcoin> *btcHT_ptr, myHashMap<transaction> *transacHT_ptr);

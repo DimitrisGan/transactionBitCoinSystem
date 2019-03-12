@@ -62,7 +62,26 @@ int main(int argc, char **argv) {
     //[6] /traceCoin bitCoinID
     //[7] ​/exit
 
+
+    char* command=  new char[5000];
+
+    bool flagExit = false;
+    do {
+        cin >> command;
+
+
+        if (strcmp(command,"/requestTransaction") ==0){
+            //todo call requestTransaction(command);
+        }
+
+
+        if ( strcmp(command,"exit") ==0){flagExit =true;}
+    }while (! flagExit);
+
     cout << "end\n";
+
+
+    delete [] command;command= nullptr;
     delete walletHT; walletHT= nullptr;
     delete btcHT; btcHT= nullptr;
     delete transacHT; transacHT= nullptr;
@@ -71,7 +90,7 @@ int main(int argc, char **argv) {
     delete receiverHT; receiverHT= nullptr;
 
 
-    cout <<"end\n";
+    cout <<"end2\n";
 
 
 
