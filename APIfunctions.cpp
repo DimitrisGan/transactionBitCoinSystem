@@ -11,23 +11,25 @@ void requestTransactions(char* buffer){
 
 
     linkedList<char*> resultList;
-    split(buffer, ";" , resultList); /// push all char* tokens to the list
+    split(buffer, ";" , resultList); /// separate all string commands by ";" and push them to the llist
     cout <<resultList;
 
+    //todo call the requestTransaction(char* buffer) to handle the transaction
 
-//    split()
+    for ( auto transactionCommand : resultList) {
+        requestTransaction(transactionCommand);
+    }
+
 }
 
 void requestTransaction(char* buffer){
 
-//todo edw tha elegxw ti einai apo to buffer kai poia sunartisi tha kalesw
-    std::cout << "mpika gtxmmou\n";
-
     linkedList<char*> resultList;
-    split(buffer, ";" , resultList); /// push all char* tokens to the list
-    cout <<resultList;
+    split(buffer, " " , resultList); /// separate all string commands by " " and push them to the llist
+
+    cout << resultList;
 
 
-    exit(2);
+//    exit(2);
 //    split()
 }

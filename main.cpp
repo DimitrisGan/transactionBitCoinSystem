@@ -78,13 +78,13 @@ int main(int argc, char **argv) {
 
         strcpy(copybuffer , buffer);
 
-        split(buffer," ",cin_list); //we split into list to take the first word which is the command
+        split(buffer," ",cin_list); //we split into list to take the first word which is the commandType
 
-        char* command = cin_list.getHead()->getData(); //take the first node of the list
+        char* commandType = cin_list.getHead()->getData(); //take the first node of the list
 
         char* substr = copybuffer; //we want the substr because we want to shift by one position right to avoid the " "
 
-        removeFirst(substr, command); //remove command word in the string
+        removeFirst(substr, commandType); //remove commandType word in the string
         substr++;   //shift one letter to avoid " "
 
 //        if (strcmp(cin_list.getHead()->getData(),"requestTransaction") ==0){
@@ -93,14 +93,14 @@ int main(int argc, char **argv) {
 //        }
 
 
-        if (strcmp(command,"requestTransactions") ==0){
+        if (strcmp(commandType,"requestTransactions") ==0){
 
             requestTransactions(substr);
         }
 
 
 
-        if ( strcmp(command,"exit") ==0){flagExit =true;}
+        if ( strcmp(commandType,"exit") ==0){flagExit =true;}
         cin_list.clear();
 //        copybuffer--; //don't for
 
