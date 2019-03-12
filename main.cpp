@@ -73,8 +73,10 @@ int main(int argc, char **argv) {
     do {
 //        cin >> buffer;
 
-        strcpy(buffer , "requestTransactions senderWalletID receiverWalletID amount date time;"
-                        "senderWalletID2 receiverWalletID2 amount2 date2 time2;");
+//        strcpy(buffer , "requestTransactions senderWalletID receiverWalletID amount date time;"
+//                        "senderWalletID2 receiverWalletID2 amount2 date2 time2;");
+
+        strcpy(buffer , "walletStatus lookingforagoogusernametoo");
 
         strcpy(copybuffer , buffer);
 
@@ -97,6 +99,22 @@ int main(int argc, char **argv) {
 
             requestTransactions(substr, sync);
         }
+
+
+//        ​/walletStatus walletID
+
+
+
+        if (strcmp(commandType,"walletStatus") ==0){
+
+            walletStatus(substr, sync);
+        }
+
+
+
+//        ​/bitCoinStatus bitCoinID
+
+
 
 
 

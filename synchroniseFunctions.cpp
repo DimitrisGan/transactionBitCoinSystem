@@ -300,7 +300,31 @@ Synchroniser::Synchroniser(myTransacHashMap *senderHT_ptr, myTransacHashMap *rec
                            myHashMap<transaction> *transacHT_ptr) : senderHT_ptr(senderHT_ptr),
                                                                     receiverHT_ptr(receiverHT_ptr),
                                                                     walletHT_ptr(walletHT_ptr), btcHT_ptr(btcHT_ptr),
-                                                                    transacHT_ptr(transacHT_ptr) {}
+                                                                    transacHT_ptr(transacHT_ptr) ,max_t_id(0){}
+
+myTransacHashMap *Synchroniser::getSenderHT_ptr() const {
+    return senderHT_ptr;
+}
+
+myTransacHashMap *Synchroniser::getReceiverHT_ptr() const {
+    return receiverHT_ptr;
+}
+
+myHashMap<wallet> *Synchroniser::getWalletHT_ptr() const {
+    return walletHT_ptr;
+}
+
+myHashMap<bitcoin> *Synchroniser::getBtcHT_ptr() const {
+    return btcHT_ptr;
+}
+
+myHashMap<transaction> *Synchroniser::getTransacHT_ptr() const {
+    return transacHT_ptr;
+}
+
+const date &Synchroniser::getLatestTrsansactionDate() const {
+    return latestTrsansactionDate;
+}
 
 
 

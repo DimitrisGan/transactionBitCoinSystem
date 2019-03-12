@@ -243,6 +243,8 @@ void readTransactionQueries(const myString &initiaTransacFile,  Synchroniser &sy
         transaction newTransac ;
         myString sender;
 
+
+
         linkedList<int> transacDateList;
         int i=0;
         for ( auto tokenStr : resultList){

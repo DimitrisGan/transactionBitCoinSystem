@@ -30,6 +30,8 @@ private:
 
     date latestTrsansactionDate; //todo
 
+    int max_t_id;
+
 
 
     bool transactionIsValid(transaction potentialTransac, int sendersBalance);
@@ -55,6 +57,18 @@ public:
 
     void insertTransaction(transaction potentialTransaction);
 
+
+    myTransacHashMap *getSenderHT_ptr() const;
+
+    myTransacHashMap *getReceiverHT_ptr() const;
+
+    myHashMap<wallet> *getWalletHT_ptr() const;
+
+    myHashMap<bitcoin> *getBtcHT_ptr() const;
+
+    myHashMap<transaction> *getTransacHT_ptr() const;
+
+    const date &getLatestTrsansactionDate() const;
 
 
     void createTransactionNode(myString sender,myString receiver ,int amount);

@@ -41,3 +41,16 @@ void requestTransaction(char *buffer,Synchroniser &sync) {
 //    exit(2);
 //    split()
 }
+
+
+
+void walletStatus(char *buffer, Synchroniser &sync) {
+    myString walletId(buffer);
+    int current_balance = sync.getWalletHT_ptr()->getData(walletId)->getBalance();
+    cout << "The current balance of wallet ID #"<<buffer<< "is:\t"<< current_balance<<endl;
+}
+
+
+void bitCoinStatus(char *buffer, Synchroniser &sync){
+
+}

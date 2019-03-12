@@ -35,6 +35,8 @@ struct ArgumentsKeeper{
 };
 
 
+//void createNewTransacNode()
+
 void argmParser(int &argc, char **argv, struct ArgumentsKeeper &argmKeeper);
 
 void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHashMap<wallet > *walletHT_ptr,
