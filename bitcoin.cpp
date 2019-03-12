@@ -58,11 +58,10 @@ bitcoin::bitcoin(bitcoin &right) { //todo deep copy
 //    this->transactionTree_ptr = nullptr;
 }
 
-bitcoin::bitcoin(btc_tree *transactionTree_ptr) : transactionTree_ptr(transactionTree_ptr) {}
-
-
-btc_tree *makeDeepCopy (btc_tree *rightTransactionTree_ptr){
-
-
+int bitcoin::getInitialValue() {
+    return  this->transactionTree_ptr->getRoot()->amount;
 }
+
+
+
 

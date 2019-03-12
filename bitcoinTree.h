@@ -60,6 +60,9 @@ public:
 
     bool operator!=(const btc_tree &rhs) const;
 
+    void getUniqueTransacList(t_node* node ,linkedList<myString> &transIdUnique_list);
+
+
 
     t_node *search(int key);
     void destroy_tree();
@@ -75,6 +78,8 @@ private:
     void insert(myString receiverWalletID ,int amountToSend , t_node* senderNode); //inserts one t_node
 
     t_node *search(int key, t_node *leaf);
+
+
 
 
     void inorder_print(t_node *leaf);

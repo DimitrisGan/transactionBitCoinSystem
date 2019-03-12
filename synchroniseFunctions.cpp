@@ -21,6 +21,9 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
     //todo edw dhmiourgeitai h aporia mhpws prepei na xw sa parametro 2 transacNodes --> ena tou sender kai ena tou receiver
 
 
+//    int transacId = potentialTransaction.transacId;
+
+
     wallet  *sendersWallet =  this->walletHT_ptr->getData(potentialTransaction.getSenderWalletId());
     wallet  *receiversWallet =  this->walletHT_ptr->getData(potentialTransaction.getReceiverWalletId());
 

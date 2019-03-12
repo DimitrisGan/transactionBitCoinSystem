@@ -13,7 +13,6 @@ struct bitcoin{
     myString id; //btcId
     btc_tree * transactionTree_ptr;
 
-    bitcoin(btc_tree *transactionTree_ptr);
 
     bitcoin( myString id, btc_tree *transactionTree_ptr);
 
@@ -24,6 +23,8 @@ struct bitcoin{
     const myString &getId() const;
 
     btc_tree *getTransactionTree_ptr() ;
+
+    int getInitialValue();
 
     bool operator==( bitcoin &rhs) ;
 

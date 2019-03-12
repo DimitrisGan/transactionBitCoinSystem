@@ -24,6 +24,11 @@ void requestTransactions(char *buffer,Synchroniser &sync) {
 
 void requestTransaction(char *buffer,Synchroniser &sync) {
 
+
+
+    //long int strtol(const char *nptr, char **endptr, int base);
+
+
     linkedList<char*> resultList;
     split(buffer, " " , resultList); /// separate all string commands by " " and push them to the llist
 
@@ -47,10 +52,20 @@ void requestTransaction(char *buffer,Synchroniser &sync) {
 void walletStatus(char *buffer, Synchroniser &sync) {
     myString walletId(buffer);
     int current_balance = sync.getWalletHT_ptr()->getData(walletId)->getBalance();
-    cout << "The current balance of wallet ID #"<<buffer<< "is:\t"<< current_balance<<endl;
+    cout << "The current balance of wallet ID #"<<buffer<< " is:\t"<< current_balance<<endl;
 }
 
 
 void bitCoinStatus(char *buffer, Synchroniser &sync){
 
+    myString btcId(buffer);
+
+    int initBtcValue = sync.getBtcHT_ptr()->getData(btcId)->getInitialValue();
+    //call btc::getInitValue()
+    cout<< "initial value for btc ID #"<<buffer <<" is:\t"<< initBtcValue <<endl;
+
+
+    linkedList<myString> numberOfTransacUsed_list ;
+    sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getUniqueTransacList(sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getRoot() , numberOfTransacUsed_list);
+    cout << numberOfTransacUsed_list; //todo exei thema gt den kserw an xwsw ta transacIds sta t_nodes h valw deiktes na koitane apo to tree sta t_nodes
 }

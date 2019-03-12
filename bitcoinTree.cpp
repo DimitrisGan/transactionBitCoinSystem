@@ -43,7 +43,7 @@ void  getLeafs(t_node *root , linkedList<t_node*>  &leafs_list)
     if (!root)
         return;
 
-    // if node is leaf node, print its data
+    // if node is leaf node, insert its data
     if (!root->left && !root->right)
     {
         leafs_list.insert_last(root); //todo tha xw thema edw
@@ -217,6 +217,8 @@ bool btc_tree::operator!=(const btc_tree &rhs) const {
 
 btc_tree::btc_tree( btc_tree &rhs)
         : root(new t_node(*rhs.root)){}
+
+
 // recursively call copy constructor
 
 
@@ -230,6 +232,21 @@ t_node::t_node( t_node &n) : walletId(n.walletId) , amount(n.amount) ,left(nullp
         right = new t_node(*n.right);
 }
 
+
+
+void btc_tree::getUniqueTransacList(t_node* node ,linkedList<myString> &transIdUnique_list) { //preorder traverse
+
+    {
+        if (!node)
+            return;
+        if ( ! transIdUnique_list.exists(node->walletId)){ //if the transaction Id doesnt exist then push it to the list
+            transIdUnique_list.insert_last(node->walletId);
+        }
+
+        getUniqueTransacList(node->left,transIdUnique_list);
+        getUniqueTransacList(node->right ,transIdUnique_list);
+    }
+}
 
 //TreeNode::TreeNode(const TreeNode &n)
 //        : value(n.value), count(n.count), left(nullptr), right(nullptr) {

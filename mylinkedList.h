@@ -531,7 +531,7 @@ template<class T>
 std::ostream & operator<<(std::ostream & os, const linkedList<T>& rhs)
 {
     if (rhs.isEmpty()){
-        os << "EMPTY LIST";
+        os << "EMPTY LIST\n";
 
     }
     for (l_node<T> *temp = rhs.head; temp != nullptr; temp = temp->next)
