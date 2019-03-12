@@ -6,6 +6,8 @@
 #define TRANSACTIONBITCOINSYSTEM_APIFUNCTIONS_H
 
 
+void requestTransactions(char* buffer);
+
 void requestTransaction(char* buffer);
 
 void findEarnings(char* buffer);

@@ -49,4 +49,10 @@ void readTransactionQueries(const myString &initiaTransacFile,  Synchroniser &sy
 
 void split( char* str, char* delimiter , linkedList<char*> & result2return) ;
 
+
+char *
+str_slice(char str[], int slice_from, int slice_to);
+
+void removeFirst(char * str, const char * toRemove);
+
 #endif //TRANSACTIONBITCOINSYSTEM_ASSISTANTFUNCTIONS_H

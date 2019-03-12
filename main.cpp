@@ -65,35 +65,53 @@ int main(int argc, char **argv) {
 
 
     char* buffer=  new char[5000];
+    char* copybuffer=  new char[5000];
+    char* initBuffer= nullptr;
     linkedList<char*> cin_list;
 
     bool flagExit = false;
     do {
-        cin >> buffer;
-        split(buffer," ",cin_list);
-        char* command = cin_list.getHead()->getData();
+//        cin >> buffer;
 
-//        strcpy(command , "requestTransaction");
+        strcpy(buffer , "requestTransactions senderWalletID receiverWalletID amount date time;"
+                        "senderWalletID2 receiverWalletID2 amount2 date2 time2;");
+
+        strcpy(copybuffer , buffer);
+
+        split(buffer," ",cin_list); //we split into list to take the first word which is the command
+
+        char* command = cin_list.getHead()->getData(); //take the first node of the list
+
+        char* substr = copybuffer; //we want the substr because we want to shift by one position right to avoid the " "
+
+        removeFirst(substr, command); //remove command word in the string
+        substr++;   //shift one letter to avoid " "
+
+//        if (strcmp(cin_list.getHead()->getData(),"requestTransaction") ==0){
+//
+//            requestTransaction(buffer);
+//        }
 
 
-        if (strcmp(cin_list.getHead()->getData(),"requestTransaction") ==0){
+        if (strcmp(command,"requestTransactions") ==0){
 
-            //todo call requestTransaction(command);
-            cout <<"teleia\n";
-            requestTransaction(command);
+            requestTransactions(substr);
         }
 
 
 
         if ( strcmp(command,"exit") ==0){flagExit =true;}
         cin_list.clear();
+//        copybuffer--; //don't for
 
-    }while (! flagExit);
+
+    }while (false);//todo(! flagExit);
 
     cout << "end\n";
 
 
     delete [] buffer;buffer= nullptr;
+    delete [] copybuffer;copybuffer= nullptr;
     delete walletHT; walletHT= nullptr;
     delete btcHT; btcHT= nullptr;
     delete transacHT; transacHT= nullptr;
