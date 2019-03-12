@@ -95,7 +95,7 @@ int main(int argc, char **argv) {
 
         if (strcmp(commandType,"requestTransactions") ==0){
 
-            requestTransactions(substr);
+            requestTransactions(substr, sync);
         }
 
 

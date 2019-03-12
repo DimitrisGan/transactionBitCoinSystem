@@ -20,8 +20,8 @@
 //myHashMap< recordsBucket_chain<1000> , 100 , MyKeyHash > senderHT;
 //myHashMap< recordsBucket_chain<1000> , 100 , MyKeyHash > receiverHT;
 
-struct Synchroniser{
-
+class Synchroniser{
+private:
     myTransacHashMap    *senderHT_ptr;
     myTransacHashMap    *receiverHT_ptr;
     myHashMap<wallet>   *walletHT_ptr;
@@ -30,11 +30,6 @@ struct Synchroniser{
 
     date latestTrsansactionDate; //todo
 
-
-    Synchroniser(myTransacHashMap *senderHT_ptr, myTransacHashMap *receiverHT_ptr, myHashMap<wallet> *walletHT_ptr,
-                 myHashMap<bitcoin> *btcHT_ptr, myHashMap<transaction> *transacHT_ptr);
-
-    void insertTransaction(transaction potentialTransaction);
 
 
     bool transactionIsValid(transaction potentialTransac, int sendersBalance);
@@ -51,6 +46,16 @@ struct Synchroniser{
     void  addAmountAndBtc2receiver(wallet *receiversWallet , linkedList<myString> btcId2extract_list ,linkedList<int> amountInEachBtc2extract_list);
 
     void  addTheNewNodes2Tree(transaction &potentialTransaction , linkedList<myString> btcId2extract_list ,linkedList<int> amountInEachBtc2extract_list);
+
+
+public:
+
+    Synchroniser(myTransacHashMap *senderHT_ptr, myTransacHashMap *receiverHT_ptr, myHashMap<wallet> *walletHT_ptr,
+                 myHashMap<bitcoin> *btcHT_ptr, myHashMap<transaction> *transacHT_ptr);
+
+    void insertTransaction(transaction potentialTransaction);
+
+
 
     void createTransactionNode(myString sender,myString receiver ,int amount);
     void updateWallet(); //will be called two times for sender and receiver

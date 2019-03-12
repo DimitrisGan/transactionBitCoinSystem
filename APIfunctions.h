@@ -6,9 +6,11 @@
 #define TRANSACTIONBITCOINSYSTEM_APIFUNCTIONS_H
 
 
-void requestTransactions(char* buffer);
+#include "synchroniseFunctions.h"
 
-void requestTransaction(char* buffer);
+void requestTransactions(char *buffer, Synchroniser &sync);
+
+void requestTransaction(char *buffer,Synchroniser& sync);
 
 void findEarnings(char* buffer);
 
