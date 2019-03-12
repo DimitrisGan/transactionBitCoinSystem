@@ -10,6 +10,7 @@
 //#include "hashFunction.h"
 #include "transacHashMap.h"
 #include "synchroniseFunctions.h"
+#include "APIfunctions.h"
 
 using  namespace std;
 
@@ -63,25 +64,36 @@ int main(int argc, char **argv) {
     //[7] ​/exit
 
 
-    char* command=  new char[5000];
+    char* buffer=  new char[5000];
+    linkedList<char*> cin_list;
 
     bool flagExit = false;
     do {
-        cin >> command;
+        cin >> buffer;
+        split(buffer," ",cin_list);
+        char* command = cin_list.getHead()->getData();
+
+//        strcpy(command , "requestTransaction");
 
 
-        if (strcmp(command,"/requestTransaction") ==0){
+        if (strcmp(cin_list.getHead()->getData(),"requestTransaction") ==0){
+
             //todo call requestTransaction(command);
+            cout <<"teleia\n";
+            requestTransaction(command);
         }
 
 
+
         if ( strcmp(command,"exit") ==0){flagExit =true;}
+        cin_list.clear();
+
     }while (! flagExit);
 
     cout << "end\n";
 
 
-    delete [] command;command= nullptr;
+    delete [] buffer;buffer= nullptr;
     delete walletHT; walletHT= nullptr;
     delete btcHT; btcHT= nullptr;
     delete transacHT; transacHT= nullptr;
