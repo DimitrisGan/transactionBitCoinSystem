@@ -46,6 +46,23 @@ bool bitcoin::operator!=(const myString &id) const {
 
 bitcoin::~bitcoin() {
 
-//    delete transactionTree_ptr;
-//    transactionTree_ptr = nullptr;
+    delete transactionTree_ptr;
+    transactionTree_ptr = nullptr;
 }
+
+bitcoin::bitcoin(bitcoin &right) { //todo deep copy
+
+    this->id =right.id;
+    this->transactionTree_ptr = new btc_tree (*right.transactionTree_ptr);
+//    this->transactionTree_ptr = makeDeepCopy (right.transactionTree_ptr);
+//    this->transactionTree_ptr = nullptr;
+}
+
+bitcoin::bitcoin(btc_tree *transactionTree_ptr) : transactionTree_ptr(transactionTree_ptr) {}
+
+
+btc_tree *makeDeepCopy (btc_tree *rightTransactionTree_ptr){
+
+
+}
+

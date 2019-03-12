@@ -215,7 +215,29 @@ bool btc_tree::operator!=(const btc_tree &rhs) const {
 }
 
 
+btc_tree::btc_tree( btc_tree &rhs)
+        : root(new t_node(*rhs.root)){}
+// recursively call copy constructor
 
+
+t_node::t_node( t_node &n) : walletId(n.walletId) , amount(n.amount) ,left(nullptr) ,right(nullptr){
+
+//    t_node * newNode  (n.walletId,n.amount, nullptr, nullptr);
+
+    if (n.left)
+        left = new t_node(*n.left);
+    if (n.right)
+        right = new t_node(*n.right);
+}
+
+
+//TreeNode::TreeNode(const TreeNode &n)
+//        : value(n.value), count(n.count), left(nullptr), right(nullptr) {
+//    if (n.left)
+//        left = new TreeNode(*n.left);  // recursively call copy constructor
+//    if (n.right)
+//        right = new TreeNode(*n.right);  // recursively call copy constructor
+//}
 
 //
 //t_node *btc_tree::searchKeyIdFromLeafs(int key){

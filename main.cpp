@@ -62,6 +62,7 @@ int main(int argc, char **argv) {
     //[6] /traceCoin bitCoinID
     //[7] ​/exit
 
+    cout << "end\n";
     delete walletHT; walletHT= nullptr;
     delete btcHT; btcHT= nullptr;
     delete transacHT; transacHT= nullptr;

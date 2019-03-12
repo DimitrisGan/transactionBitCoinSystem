@@ -25,7 +25,9 @@ struct t_node{
 
     t_node( myString walletId, int amount, t_node *left, t_node *right);
 
-    virtual ~t_node();
+    t_node( t_node &n);
+
+        virtual ~t_node();
 
     myString walletId;
     int amount;
@@ -45,6 +47,10 @@ class btc_tree{
 public:
     btc_tree( myString initWalletIdOwner , int initialBtcValue);
     ~btc_tree();
+
+//    btc_tree(const btc_tree &n);
+    btc_tree( btc_tree &rhs);
+
 
     t_node *getRoot() const;
 
