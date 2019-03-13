@@ -11,6 +11,8 @@
 #include "myString.h"
 #include "date.h"
 #include "bitcoinTree.h"
+//#include "bitcoinTree.h"
+
 
 //todo to transaction list tha pairnei se template to sender receiverWalletId opote de xreiazetai sthn insert
 //todo apo to walletID tha pairnw ta btcIds pou tha peiraksw mazi me to poso
@@ -111,6 +113,8 @@ public:
     void setTransacTime(const date &transacTime) {
         transaction::transacTime = transacTime;
     }
+
+    void updateTransacionPtrIn_t_nodes();
 
 };
 

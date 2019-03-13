@@ -70,6 +70,7 @@ bool myString::operator==(const char *rhs)
 
 bool myString::operator!=(const char *rhs)
 {
+
     return strcmp(myStr, rhs) != 0;
 }
 

@@ -77,10 +77,12 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
 
     this->transacHT_ptr->insert(potentialTransaction.transacId , potentialTransaction); //insert new transaction in the transactionHT
 
+    this->transacHT_ptr->getData(potentialTransaction.transacId)->updateTransacionPtrIn_t_nodes();  //here we do the update to the t_nodes ptrs to transactions
+
     //insert the transaction ptr to senderHT
     this->senderHT_ptr->addTransacNode2appropriateIndex(potentialTransaction.senderWalletId , this->transacHT_ptr->getData(potentialTransaction.transacId) ); //insert a new node with a pointer to the transaction node in senderHT
     //insert the transaction ptr to receiverHT
-    this->receiverHT_ptr->addTransacNode2appropriateIndex(potentialTransaction.receiverWalletId , this->transacHT_ptr->getData(potentialTransaction.transacId) ); //insert a new node with a pointer to the transaction node in senderHT
+    this->receiverHT_ptr->addTransacNode2appropriateIndex(potentialTransaction.receiverWalletId , this->transacHT_ptr->getData(potentialTransaction.transacId) ); //insert a new node with a pointer to the transaction node in receiverHT
 
     cout <<"edw eimai"<<endl;
 
@@ -274,10 +276,10 @@ void Synchroniser::addTheNewNodes2Tree(transaction &potentialTransaction , linke
         int amount = *ItB;
         myString btcId= *ItA;
         this->btcHT_ptr->getData(btcId)->getTransactionTree_ptr()->insert(potentialTransaction.getSenderWalletId() , potentialTransaction.getReceiverWalletId() , amount ,potentialTransaction.t_nodePtrList);
-//        bitcoin* btc = this->btcHT_ptr.getData(*ItA);
 
-    //todo gia ayrio na tsekarw oti paizei
-    //todo na epistrefei kai tous deiktes sta kainourgia h toulaxiston sta idia t_nodes
+
+        //todo gia ayrio na tsekarw oti paizei
+        //todo na epistrefei kai tous deiktes sta kainourgia h toulaxiston sta idia t_nodes
 
         counter++;
 

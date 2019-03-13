@@ -20,5 +20,13 @@ bool transaction::operator!=(const myString &id) const {
     return !(id == this->transacId);
 }
 
+void transaction::updateTransacionPtrIn_t_nodes() {
+
+    for (auto tNode : this->t_nodePtrList) {
+        tNode->setTransac_ptr(this);
+    }
+}
+//void setTransac_ptr(transaction *transac_ptr);
+
 
 

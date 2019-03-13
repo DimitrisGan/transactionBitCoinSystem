@@ -10,6 +10,7 @@
 #include "myString.h"
 #include "ErrorsCodes.h"
 
+class transaction;
 
 // https://gist.github.com/toboqus/def6a6915e4abd66e922
 
@@ -31,12 +32,16 @@ struct t_node{
 
     myString walletId;
     int amount;
-    struct t_node *left; // the receiver user/receiverWalletId with the amount that gets
-    struct t_node *right; // the sender user/receiverWalletId (same as parent receiverWalletId) with the remainder amount
+    t_node *left; // the receiver user/receiverWalletId with the amount that gets
+    t_node *right; // the sender user/receiverWalletId (same as parent receiverWalletId) with the remainder amount
+
+    transaction *transac_ptr;
 
     void fillNode( myString id, int amount , t_node* left , t_node* right );
 
     t_node& operator=(const t_node &rhs);
+
+    void setTransac_ptr(transaction *transac_ptr);
 
     bool operator==( t_node rhs) ;
 

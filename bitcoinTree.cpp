@@ -4,6 +4,7 @@
 
 #include <assert.h>
 #include "bitcoinTree.h"
+#include "transaction.h"
 
 
 btc_tree::btc_tree( myString initWalletIdOwner , int initialBtcValue){
@@ -232,6 +233,9 @@ t_node::t_node( t_node &n) : walletId(n.walletId) , amount(n.amount) ,left(nullp
         right = new t_node(*n.right);
 }
 
+void t_node::setTransac_ptr(transaction *transac_ptr) {
+    t_node::transac_ptr = transac_ptr;
+}
 
 
 void btc_tree::getUniqueTransacList(t_node* node ,linkedList<myString> &transIdUnique_list) { //preorder traverse
@@ -239,8 +243,11 @@ void btc_tree::getUniqueTransacList(t_node* node ,linkedList<myString> &transIdU
     {
         if (!node)
             return;
-        if ( ! transIdUnique_list.exists(node->walletId)){ //if the transaction Id doesnt exist then push it to the list
-            transIdUnique_list.insert_last(node->walletId);
+        if ( node->transac_ptr) {
+            if (!transIdUnique_list.exists(
+                    node->transac_ptr->transacId)) { //if the transaction Id doesnt exist then push it to the list
+                transIdUnique_list.insert_last(node->transac_ptr->transacId);
+            }
         }
 
         getUniqueTransacList(node->left,transIdUnique_list);
