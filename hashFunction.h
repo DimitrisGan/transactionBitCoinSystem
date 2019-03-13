@@ -9,7 +9,7 @@
 #include <cstring>
 #include "myString.h"
 
-unsigned myHash( myString id, unsigned  size_of_table) ;
+unsigned myHash(const myString &id, unsigned size_of_table) ;
 
 
 

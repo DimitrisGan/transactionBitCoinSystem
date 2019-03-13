@@ -59,5 +59,8 @@ void removeFirst(char * str, const char * toRemove); // https://codeforwin.org/2
 
 bool isNumber(char* s);
 
+void filterTransactionsByDate(linkedList<char*> inputList ,linkedList<transaction *> allList , linkedList<transaction *>  &outputList);
+
+
 
 #endif //TRANSACTIONBITCOINSYSTEM_ASSISTANTFUNCTIONS_H

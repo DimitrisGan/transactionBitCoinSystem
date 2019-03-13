@@ -24,6 +24,10 @@ struct record{
     linkedList<transaction*> transacLlist_ptr; //TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO
 
 
+     linkedList<transaction *> &getTransacLlist_ptr()  {
+        return transacLlist_ptr;
+    }
+
 //    record( myString receiverWalletId) : receiverWalletId(receiverWalletId) {
 //        transacLlist_ptr = new linkedList<transaction> ;
 //    }
@@ -69,6 +73,11 @@ struct recordsBucket{
     unsigned recordsAlreadyExist{};
     record *recordTable;
 
+
+     linkedList<transaction *> &getAllTransactions(const myString &walletId) {
+        int recordIndex = this->getIndex(walletId);
+        return recordTable[recordIndex].getTransacLlist_ptr();
+    }
 
     explicit recordsBucket(unsigned RecordsCapacity){
 
@@ -125,7 +134,7 @@ struct recordsBucket{
         return false;
     }
 
-    int  getIndex(const myString &walletId){
+    int  getIndex(const myString &walletId) const{
         int flagFound = -1;
         int index=0;
         for (int i = 0; i < recordsAlreadyExist; ++i) {
@@ -182,6 +191,13 @@ struct recordsBucket_chain{
 //
 //    }
 
+
+     linkedList<transaction *> &getAllTransactions(const myString &walletId) {
+        record* record2retrieve = find(walletId);
+        return record2retrieve->getTransacLlist_ptr();
+    }
+
+
     const linkedList<recordsBucket> &getBucketsList() const {
         return bucketsList;
     }
@@ -203,7 +219,7 @@ struct recordsBucket_chain{
         return false;
     }
 
-    record* find ( myString &key){
+    record* find ( const myString &key){
         int index =-1;
         for (auto &bucket : bucketsList) {
             if (bucket.recordExist(key)){
@@ -269,7 +285,6 @@ struct recordsBucket_chain{
 
 
 
-    //todo insertRecord2bucket(recordsBucket );
 };
 
 

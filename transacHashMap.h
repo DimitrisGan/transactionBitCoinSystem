@@ -33,7 +33,7 @@ public://todo change to --->private:
 
     recordsBucket_chain *table;
 
-    unsigned  (*hashFunc)(myString, unsigned)  ;
+    unsigned  (*hashFunc)(const myString&, unsigned)  ;
     unsigned tableSize;
 
 
@@ -41,7 +41,7 @@ public://todo change to --->private:
 
 public:
 
-    myTransacHashMap(unsigned tableSize ,unsigned (*hashF)( myString, unsigned)  ,unsigned bucketSizeInBytes) {
+    myTransacHashMap(unsigned tableSize ,unsigned (*hashF)(const myString&, unsigned)  ,unsigned bucketSizeInBytes) {
 
         this->tableSize = tableSize;
 
@@ -71,7 +71,7 @@ public:
         return tableSize;
     }
 
-    unsigned int getIndex(myString s) const {
+    unsigned int getIndex(const myString &s) const {
         return  this->hashFunc(s, this->tableSize);;
     }
 
@@ -84,7 +84,13 @@ public:
     void addTransacNode2appropriateIndex(myString walletId , transaction *transac2add);
 
 
-    transaction &getTransacNodeByRef(myString id);
+    linkedList<transaction *> &getAllTransactions(const myString &walletId) {
+        int index2table = this->getIndex(walletId);
+        return this->table[index2table].getAllTransactions(walletId);
+    }
+
+
+
 
 //    bool get(const K &key, V &value)
 //    {

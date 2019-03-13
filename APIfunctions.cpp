@@ -9,9 +9,18 @@
 
 void findEarnings(char *buffer,Synchroniser &sync){
     //todo
+    linkedList<char*> resultList;
+    split(buffer, " " , resultList); /// separate all string commands by ";" and push them to the llist
+    char* walletId_str = resultList.getHead()->getData();
+    myString walletId(walletId_str);
+    linkedList<transaction *> returnedList = sync.getReceiverHT_ptr()->getAllTransactions(walletId);
+//    if (resultList.getSize() > 2)
+        linkedList<transaction *> filteredListByDate ;
+    filterTransactionsByDate( resultList , returnedList , filteredListByDate) ;
 
 
 
+            cout <<" ";
 }
 
 

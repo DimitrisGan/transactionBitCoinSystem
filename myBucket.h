@@ -65,7 +65,7 @@ struct myBucket_chain{
     void insert(T data){
         //todo
         if (existInChain(data)){
-            std::cerr << "ERROR IN INSERTION --ITEM ALREADY EXIST"<<endl;
+            std::cerr << "ERROR IN INSERTION --ITEM ALREADY EXIST [HINT:CHECK EQUAL ID'S]"<<endl;
             exit(INSERTION);
         }
         else{

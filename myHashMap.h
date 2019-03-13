@@ -31,7 +31,7 @@ public://todo private:
 
     myBucket_chain<T> *table;
 
-    unsigned  (*hashFunc)(myString, unsigned);
+    unsigned  (*hashFunc)(const myString&, unsigned);
     unsigned tableSize;
 
 
@@ -43,7 +43,7 @@ public://todo private:
 
 public:
 
-    myHashMap(unsigned tableSize ,unsigned (*hashF)( myString, unsigned)  ) {
+    myHashMap(unsigned tableSize ,unsigned (*hashF)(const myString&, unsigned )) {
 
         this->tableSize = tableSize;
 

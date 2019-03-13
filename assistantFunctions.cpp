@@ -399,5 +399,42 @@ bool isNumber(char* s)
     return true;
 }
 
+void filterTransactionsByDate(linkedList<char *> inputList, linkedList<transaction *> allList, /*the list to filter*/
+                              linkedList<transaction *> &outputList) {
+
+    cout << "geia sas!!\n";
+
+    date d1;
+    date d2;
+    linkedList<char*>::Iterator iter;
+    iter = inputList.begin();
+    iter++; //pass walletId
+    if (inputList.getSize() == 3){ //format: [year1][year2] or [time1][time2]
+        d1.setDate(*iter);d1.setTime(*iter); //if it's year or time
+        iter++;
+        d2.setDate(*iter);d2.setTime(*iter); //if it's year or time
+    }
+    if (inputList.getSize() == 5){ //format: [time1][year1][time2][year2]
+
+        d1.setTime(*iter); //setTime for d1
+        iter++;
+        d1.setDate(*iter); //setYear for d1
+        //==============
+        iter++; //move iterator to time2
+        d2.setTime(*iter); //setTime for d2
+        iter++;
+        d2.setDate(*iter); //setYear for d2
+    }
+
+    //from here the dates are set so we can filter the list
+
+    for ( auto item : allList) {
+        if (item->getTransacTime() > d1 && item->getTransacTime() < d2 )
+            outputList.insert_last(item);
+    }
+
+
+}
+
 
 
