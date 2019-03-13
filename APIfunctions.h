@@ -8,11 +8,12 @@
 
 #include "synchroniseFunctions.h"
 
+void findEarnings(char *buffer,Synchroniser &sync);
+
+
 void requestTransactions(char *buffer, Synchroniser &sync);
 
 void requestTransaction(char *buffer,Synchroniser& sync);
-
-void findEarnings(char* buffer);
 
 
 void walletStatus(char* buffer, Synchroniser& sync);

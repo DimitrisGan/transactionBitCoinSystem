@@ -7,13 +7,16 @@
 #include "assistantFunctions.h"
 
 
-void requestTransactions(char *buffer,Synchroniser &sync) {
+void findEarnings(char *buffer,Synchroniser &sync){
+    //todo
 
+}
+
+
+void requestTransactions(char *buffer,Synchroniser &sync) {
 
     linkedList<char*> resultList;
     split(buffer, ";" , resultList); /// separate all string commands by ";" and push them to the llist
-
-    //todo call the requestTransaction(char* buffer) to handle the transaction
 
     for ( auto transactionCommand : resultList) {
         requestTransaction(transactionCommand, sync);
