@@ -84,7 +84,7 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
 
     this->updateMaxId(potentialTransaction.transacId);
 
-    cout <<"transaction with id# "<<potentialTransaction.transacId <<" succesfully added! "<<endl;
+    cout <<"transaction with id# "<<potentialTransaction.transacId <<" added  Successfully! "<<endl;
 
 
 

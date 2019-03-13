@@ -366,19 +366,6 @@ void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHa
         }
 
 
-//        if (resultList.getSize() == 1){  // in case that the user doesn't have a wallet [avoid seg for user with empty wallet]
-//
-//            new_walletId.getMyStr()[new_walletId.size() -1] = '\0';  //remove '\n'
-//        }
-//        else{
-//            //trim the last btc myString to cut "\n" delimiter
-//            myString cutLastChar = btcList.getTail()->data;
-//            linkedList<char*> tmpList;
-//            split(cutLastChar.getMyStr() , const_cast<char *>("\n"), tmpList);
-//            btcList.updateTailData(cutLastChar);
-//
-//        }
-
         //insert to wallet HashTable
         wallet wallet2insert(new_walletId,balance,btcList,amountList);
         myString key = new_walletId;
