@@ -22,6 +22,28 @@ void requestTransactions(char *buffer,Synchroniser &sync) {
 
 }
 
+
+
+// Store the formatted string of time in the output
+void format_time( date& returnPCtime){
+    char output[20];
+    time_t rawtime;
+    struct tm * timeinfo;
+
+    time ( &rawtime );
+    timeinfo = localtime ( &rawtime );
+
+    sprintf(output, "[%d %d %d %d:%d:%d]",timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+
+    returnPCtime.year = timeinfo->tm_year + 1900;
+    returnPCtime.month = timeinfo->tm_mon + 1;
+    returnPCtime.day = timeinfo->tm_mday ;
+    returnPCtime.hour = timeinfo->tm_hour;
+    returnPCtime.minute = timeinfo->tm_min;
+
+
+}
+
 void requestTransaction(char *buffer,Synchroniser &sync) {
 
 
@@ -54,19 +76,23 @@ void requestTransaction(char *buffer,Synchroniser &sync) {
     }
     //now we have to check if in transaction there is given a date
 
+    date date2insert;
+
     if (resultList.getSize() == 5){ //there is also the date
         linkedList<char*> dateList2insert ;
         dateList2insert.insert_last(*iter); //insert  DD-MM-YYYY
         iter++;
         dateList2insert.insert_last(*iter); //insert  HH:MM
-        date date2insert;
         date2insert.setDateByGivenList(dateList2insert);
-        potentialTransac.transacTime = date2insert;
 
     }
-    if (resultList.getSize() == 3){ //means that we need to give date from the pc
+    else if (resultList.getSize() == 3){ //means that we need to give date from the pc
 
+        format_time(date2insert);
     }
+
+    potentialTransac.transacTime = date2insert;
+
 
 
     //todo edw tha ginei insertTransaction() --> fusika edw tha ginei kai to update tou transacId
