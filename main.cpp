@@ -73,11 +73,11 @@ int main(int argc, char **argv) {
     do {
 //        cin >> buffer;
 
-//        strcpy(buffer , "requestTransactions senderWalletID receiverWalletID amount date time;"
-//                        "senderWalletID2 receiverWalletID2 amount2 date2 time2;");
+        strcpy(buffer , "requestTransactions senderWalletID receiverWalletID 30 11-01-2017 14:46;"
+                        "senderWalletID2 receiverWalletID2 2 12-01-2012 14:22;");
 
 //        strcpy(buffer , "walletStatus lookingforagoogusernametoo");
-        strcpy(buffer , "bitCoinStatus 541");
+//        strcpy(buffer , "bitCoinStatus 541");
 
         strcpy(copybuffer , buffer);
 

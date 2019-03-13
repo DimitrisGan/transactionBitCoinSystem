@@ -25,25 +25,51 @@ void requestTransactions(char *buffer,Synchroniser &sync) {
 void requestTransaction(char *buffer,Synchroniser &sync) {
 
 
+    transaction potentialTransac;
 
-    //long int strtol(const char *nptr, char **endptr, int base);
-
+    potentialTransac.transacId = sync.createVirtualTransacId(); //create a virtualId
 
     linkedList<char*> resultList;
     split(buffer, " " , resultList); /// separate all string commands by " " and push them to the llist
 
     cout << resultList;
 
-    if (resultList.getSize() == 5){
-        //todo call insertTransaction()
-//        sync.insertTransaction()
+    // Declaring iterator to a llist
+    linkedList<char*>::Iterator iter;
+
+    // Displaying llist elements using begin() and end()
+    int i=0;
+    for (iter = resultList.begin(); iter != resultList.end() && i<3; iter++){
+        switch (i){
+            case 0: potentialTransac.senderWalletId = *iter;break;
+            case 1: potentialTransac.receiverWalletId = *iter;break;
+            case 2: if (!isNumber(*iter) ) {
+                        fprintf(stderr, "AMOUNT IN TRANSACTION IS NOT A NUMBER : %s\n", *iter);
+                        exit(EXIT_FAILURE);
+                    }
+                    potentialTransac.amount = atoi(*iter);break;
+            default: exit(EXIT_FAILURE);
+        }
+        i++;
+    }
+    //now we have to check if in transaction there is given a date
+
+    if (resultList.getSize() == 5){ //there is also the date
+        linkedList<char*> dateList2insert ;
+        dateList2insert.insert_last(*iter); //insert  DD-MM-YYYY
+        iter++;
+        dateList2insert.insert_last(*iter); //insert  HH:MM
+        date date2insert;
+        date2insert.setDateByGivenList(dateList2insert);
+        potentialTransac.transacTime = date2insert;
+
+    }
+    if (resultList.getSize() == 3){ //means that we need to give date from the pc
+
     }
 
-    if (resultList.getSize() == 3){
-        //vale wra pc
-    }
 
-//    split()
+    //todo edw tha ginei insertTransaction() --> fusika edw tha ginei kai to update tou transacId
 }
 
 

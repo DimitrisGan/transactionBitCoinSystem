@@ -16,9 +16,11 @@ struct date{
     int hour;
     int minute;
 
-    date() =default;
+    date() = default;
 
     void setDateByGivenList(linkedList<int> setDateList);
+
+    void setDateByGivenList(linkedList<char*> setDateList);
 
     bool operator<(const date &rhs) const;
 

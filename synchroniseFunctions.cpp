@@ -3,6 +3,7 @@
 //
 
 #include "synchroniseFunctions.h"
+#include "assistantFunctions.h"
 
 
 //Synchroniser sync (&senderHT,&receiverHT,&walletHT,&btcHT ,&transacHT); //initiate sync struct
@@ -84,18 +85,12 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
     //insert the transaction ptr to receiverHT
     this->receiverHT_ptr->addTransacNode2appropriateIndex(potentialTransaction.receiverWalletId , this->transacHT_ptr->getData(potentialTransaction.transacId) ); //insert a new node with a pointer to the transaction node in receiverHT
 
+    this->updateMaxId(potentialTransaction.transacId);
+
     cout <<"edw eimai"<<endl;
 
-    cout << "EXIT 1000\n";
 
 
-
-//    exit(3);
-
-    //todo last#  kanw update ta upoloipo--btcList--amountBtcList sta wallets tou sender kai receiveer
-
-
-    cout << "exit apo edw \n";
 
 }
 
@@ -330,6 +325,39 @@ myHashMap<transaction> *Synchroniser::getTransacHT_ptr() const {
 const date &Synchroniser::getLatestTrsansactionDate() const {
     return latestTrsansactionDate;
 }
+
+void Synchroniser::updateLastDate(date potentialTransacDate) {
+
+
+}
+
+void Synchroniser::updateMaxId(myString id) {
+
+
+    //todo edw tha pairnw to transaction Id tha tsekarw an metatrepetai se akeraios me strol
+    //todo an oxi den kanw update sto maxId
+    //todo an nai tote to allazw to attribute me to strol h atoi tou current transacNode
+    if (isNumber(id.getMyStr())){ //check if given id is number
+        int number = atoi (id.getMyStr());
+        if (number > this->max_t_id)
+            this->max_t_id = number;
+        else if (number == this->max_t_id)
+            assert(1);
+    }
+
+}
+
+//todo koitaei to attribute kai epistrefei maxID +1 + h updateMaxId tha kalestei kata to insertion opote de xreiazewtai na ginei apo dw
+myString Synchroniser::createVirtualTransacId() {
+    int newId = this->max_t_id + 1;
+    char str[10];
+
+    sprintf(str, "%d", newId);// Now str contains the integer as characters
+    myString virtualId (str);
+    return virtualId;
+}
+
+
 
 
 

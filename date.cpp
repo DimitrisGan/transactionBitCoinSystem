@@ -3,6 +3,7 @@
 //
 
 #include "date.h"
+#include "assistantFunctions.h"
 
 
 
@@ -45,11 +46,11 @@ void date::setDateByGivenList(linkedList<int> setDateList) {
     int i=0;
     for ( auto &item : setDateList) {
         switch (i) {
-            case 0: this->day = item;break;
-            case 1: this->month = item;break;
-            case 2: this->year = item;break;
-            case 3: this->hour = item;break;
-            case 4: this->minute = item;break;
+            case 0: this->day    =  item;break;
+            case 1: this->month  =  item;break;
+            case 2: this->year   =  item;break;
+            case 3: this->hour   =  item;break;
+            case 4: this->minute =  item;break;
             default: exit(EXIT_FAILURE);
                 //execution of subsequent statements is terminated
         }
@@ -57,5 +58,39 @@ void date::setDateByGivenList(linkedList<int> setDateList) {
         i++;
     }
 }
+
+void date::setDateByGivenList(linkedList<char *> setDateList) {
+
+    int i=0;
+    int j=0;
+    for (auto& item1 : setDateList){
+
+        linkedList<char*> formatList;
+        if (i==0)
+            split(item1, "-" , formatList); /// separate all string commands by "-" and push them to the llist
+        else
+            split(item1, ":" , formatList); /// separate all string commands by ":" and push them to the llist
+
+        for ( auto &item2 : formatList) {
+            int itemInt = atoi(item2);
+            switch (j) {
+                case 0: this->day     =   itemInt;break;
+                case 1: this->month   =   itemInt;break;
+                case 2: this->year    =   itemInt;break;
+                case 3: this->hour    =   itemInt;break;
+                case 4: this->minute  =   itemInt;break;
+                default: exit(EXIT_FAILURE);
+                    //execution of subsequent statements is terminated
+            }
+            j++;
+        }
+        i++;
+    }
+
+
+
+
+}
+
 
 

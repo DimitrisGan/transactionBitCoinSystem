@@ -50,6 +50,11 @@ private:
     void  addTheNewNodes2Tree(transaction &potentialTransaction , linkedList<myString> btcId2extract_list ,linkedList<int> amountInEachBtc2extract_list);
 
 
+    void     updateLastDate(date potentialTransacDate);
+
+    void  updateMaxId(myString id);
+
+
 public:
 
     Synchroniser(myTransacHashMap *senderHT_ptr, myTransacHashMap *receiverHT_ptr, myHashMap<wallet> *walletHT_ptr,
@@ -69,6 +74,8 @@ public:
     myHashMap<transaction> *getTransacHT_ptr() const;
 
     const date &getLatestTrsansactionDate() const;
+
+    myString createVirtualTransacId();
 
 
     void createTransactionNode(myString sender,myString receiver ,int amount);

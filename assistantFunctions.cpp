@@ -420,3 +420,13 @@ void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHa
 }
 
 
+bool isNumber(char* s)
+{
+    for (int i = 0; i < strlen(s); i++)
+        if (isdigit(s[i]) == 0)
+            return false;
+
+    return true;
+}
+
+

@@ -57,4 +57,6 @@ str_slice(char str[], int slice_from, int slice_to);
 
 void removeFirst(char * str, const char * toRemove); // https://codeforwin.org/2015/12/c-program-to-remove-first-occurrence-of-word-from-string.html
 
+bool isNumber(char* s);
+
 #endif //TRANSACTIONBITCOINSYSTEM_ASSISTANTFUNCTIONS_H
