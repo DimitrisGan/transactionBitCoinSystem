@@ -24,25 +24,6 @@ void requestTransactions(char *buffer,Synchroniser &sync) {
 
 
 
-// Store the formatted string of time in the output
-void format_time( date& returnPCtime){
-    char output[20];
-    time_t rawtime;
-    struct tm * timeinfo;
-
-    time ( &rawtime );
-    timeinfo = localtime ( &rawtime );
-
-    sprintf(output, "[%d %d %d %d:%d:%d]",timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
-
-    returnPCtime.year = timeinfo->tm_year + 1900;
-    returnPCtime.month = timeinfo->tm_mon + 1;
-    returnPCtime.day = timeinfo->tm_mday ;
-    returnPCtime.hour = timeinfo->tm_hour;
-    returnPCtime.minute = timeinfo->tm_min;
-
-
-}
 
 void requestTransaction(char *buffer,Synchroniser &sync) {
 

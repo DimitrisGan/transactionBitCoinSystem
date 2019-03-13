@@ -59,4 +59,6 @@ void removeFirst(char * str, const char * toRemove); // https://codeforwin.org/2
 
 bool isNumber(char* s);
 
+void format_time( date& returnPCtime);
+
 #endif //TRANSACTIONBITCOINSYSTEM_ASSISTANTFUNCTIONS_H
