@@ -19,7 +19,7 @@ struct date{
     bool hasDate;
     bool hasTime;
 
-    date(){hasDate= false;hasTime=false;}
+    date(){year=month=day=hour=minute=-1;hasDate= false;hasTime=false;}
 
     void setDateByGivenList(linkedList<int> setDateList);
 
@@ -39,7 +39,9 @@ struct date{
 
     bool operator>=(const date &rhs) const;
 
+    bool operator==(const date &rhs) const;
 
+    bool operator!=(const date &rhs) const;
 
 };
 

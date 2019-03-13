@@ -20,5 +20,6 @@ void walletStatus(char* buffer, Synchroniser& sync);
 
 void bitCoinStatus(char *buffer, Synchroniser &sync);
 
+void traceCoin(char *buffer, Synchroniser &sync);
 
 #endif //TRANSACTIONBITCOINSYSTEM_APIFUNCTIONS_H

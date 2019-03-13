@@ -276,10 +276,6 @@ void readTransactionQueries(const myString &initiaTransacFile,  Synchroniser &sy
             i++;
         }
 
-
-        newTransac.getTransacTime().setDateByGivenList(transacDateList); //set the date in the transaction date
-
-        //todo tha ftiaksw thn insertSync pou legame kai tha ta kanei ekeinh insert me ta katallhla exceptions
         sync.insertTransaction( newTransac );
 
         resultList.clear();

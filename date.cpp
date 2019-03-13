@@ -9,24 +9,108 @@
 
 //todo
 
+
+
+
+
+// Store the formatted string of time in the output
+void date::timeNow(){
+    time_t rawtime;
+    struct tm * timeinfo;
+
+    time ( &rawtime );
+    timeinfo = localtime ( &rawtime );
+
+
+    this->year = timeinfo->tm_year + 1900;
+    this->month = timeinfo->tm_mon + 1;
+    this->day = timeinfo->tm_mday ;
+    this->hour = timeinfo->tm_hour;
+    this->minute = timeinfo->tm_min;
+
+    this->hasDate = true;
+    this->hasTime = true;
+
+}
+
+void date::setDate(char * setDate) {
+    linkedList<char*> formatList;
+    split(setDate, "-" , formatList); /// separate all string commands by "-" and push them to the llist
+
+    if (! formatList.getSize()){ //if size is zero then is not a date (maybe it is time)
+        return;
+    }
+    if (formatList.getSize()!=3){std::cerr << "DATE : "<<setDate<< " NOT VALID"<<endl;exit(NOT_VALID_DATE);}
+
+    linkedList<char*>::Iterator iter;
+    iter = formatList.begin();
+
+    if (!isNumber(*iter)){std::cerr << "DATE : "<<setDate<< " NOT VALID"<<endl;exit(NOT_VALID_DATE);}
+    this->year =  atoi(*iter);
+
+    iter++;
+    if (!isNumber(*iter)){std::cerr << "DATE : "<<setDate<< " NOT VALID"<<endl;exit(NOT_VALID_DATE);}
+    this->month = atoi(*iter);
+
+    iter++;
+    if (!isNumber(*iter)){std::cerr << "DATE : "<<setDate<< " NOT VALID"<<endl;exit(NOT_VALID_DATE);}
+    this->day = atoi(*iter);
+
+    this->hasDate=true;
+
+}
+
+void date::setTime(char *setTime) {
+    linkedList<char*> formatList;
+    split(setTime, ":" , formatList); /// separate all string commands by "-" and push them to the llist
+
+    if (! formatList.getSize()){ //if size is zero then is not a time (maybe it is date)
+        return;
+    }
+
+    if (formatList.getSize()!=2){std::cerr << "TIME : "<<setTime<< " NOT VALID"<<endl;exit(NOT_VALID_TIME);}
+
+    linkedList<char*>::Iterator iter;
+    iter = formatList.begin();
+
+    if (!isNumber(*iter)){std::cerr << "TIME : "<<setTime<< " NOT VALID"<<endl;exit(NOT_VALID_TIME);}
+    this->hour =  atoi(*iter);
+
+    iter++;
+    if (!isNumber(*iter)){std::cerr << "TIME : "<<setTime<< " NOT VALID"<<endl;exit(NOT_VALID_TIME);}
+    this->minute = atoi(*iter);
+
+
+    this->hasTime=true;
+
+}
+
 bool date::operator<(const date &rhs) const {
-    if (year < rhs.year)
-        return true;
-    if (rhs.year < year)
-        return false;
-    if (month < rhs.month)
-        return true;
-    if (rhs.month < month)
-        return false;
-    if (day < rhs.day)
-        return true;
-    if (rhs.day < day)
-        return false;
-    if (hour < rhs.hour)
-        return true;
-    if (rhs.hour < hour)
-        return false;
-    return minute < rhs.minute;
+    if (hasDate) {
+        if (year < rhs.year)
+            return true;
+        if (rhs.year < year)
+            return false;
+        if (month < rhs.month)
+            return true;
+        if (rhs.month < month)
+            return false;
+        if (day < rhs.day)
+            return true;
+        if (rhs.day < day)
+            return false;
+    }
+    if (hasTime) {
+        if (hour < rhs.hour)
+            return true;
+        if (rhs.hour < hour)
+            return false;
+        if (minute < rhs.minute)
+            return true;
+        if (rhs.minute < minute)
+            return false;
+    }
+    return false; //everything is same or hasDate && hasTime == false
 }
 
 bool date::operator>(const date &rhs) const {
@@ -43,7 +127,22 @@ bool date::operator>=(const date &rhs) const {
 
 
 
+bool date::operator==(const date &rhs) const {
+    return year == rhs.year &&
+           month == rhs.month &&
+           day == rhs.day &&
+           hour == rhs.hour &&
+           minute == rhs.minute &&
+           hasDate == rhs.hasDate &&
+           hasTime == rhs.hasTime;
+}
 
+bool date::operator!=(const date &rhs) const {
+    return !(rhs == *this);
+}
+
+
+//--------move to trash below functions--------
 
 
 void date::setDateByGivenList(linkedList<int> setDateList) {
@@ -93,72 +192,3 @@ void date::setDateByGivenList(linkedList<char *> setDateList) {
     }
 
 }
-
-// Store the formatted string of time in the output
-void date::timeNow(){
-    time_t rawtime;
-    struct tm * timeinfo;
-
-    time ( &rawtime );
-    timeinfo = localtime ( &rawtime );
-
-
-    this->year = timeinfo->tm_year + 1900;
-    this->month = timeinfo->tm_mon + 1;
-    this->day = timeinfo->tm_mday ;
-    this->hour = timeinfo->tm_hour;
-    this->minute = timeinfo->tm_min;
-
-    this->hasDate = true;
-    this->hasTime = true;
-
-}
-
-void date::setDate(char * setDate) {
-    linkedList<char*> formatList;
-    split(setDate, "-" , formatList); /// separate all string commands by "-" and push them to the llist
-
-    if (formatList.getSize()!=3){std::cerr << "DATE : "<<setDate<< " NOT VALID"<<endl;exit(NOT_VALID_DATE);}
-
-    linkedList<char*>::Iterator iter;
-    iter = formatList.begin();
-
-    if (!isNumber(*iter)){std::cerr << "DATE : "<<setDate<< " NOT VALID"<<endl;exit(NOT_VALID_DATE);}
-    this->year =  atoi(*iter);
-
-    iter++;
-    if (!isNumber(*iter)){std::cerr << "DATE : "<<setDate<< " NOT VALID"<<endl;exit(NOT_VALID_DATE);}
-    this->month = atoi(*iter);
-
-    iter++;
-    if (!isNumber(*iter)){std::cerr << "DATE : "<<setDate<< " NOT VALID"<<endl;exit(NOT_VALID_DATE);}
-    this->day = atoi(*iter);
-
-    this->hasDate=true;
-
-}
-
-void date::setTime(char *setTime) {
-    linkedList<char*> formatList;
-    split(setTime, ":" , formatList); /// separate all string commands by "-" and push them to the llist
-
-    if (formatList.getSize()!=2){std::cerr << "TIME : "<<setTime<< " NOT VALID"<<endl;exit(NOT_VALID_TIME);}
-
-    linkedList<char*>::Iterator iter;
-    iter = formatList.begin();
-
-    if (!isNumber(*iter)){std::cerr << "TIME : "<<setTime<< " NOT VALID"<<endl;exit(NOT_VALID_TIME);}
-    this->hour =  atoi(*iter);
-
-    iter++;
-    if (!isNumber(*iter)){std::cerr << "TIME : "<<setTime<< " NOT VALID"<<endl;exit(NOT_VALID_TIME);}
-    this->minute = atoi(*iter);
-
-
-    this->hasTime=true;
-
-}
-
-
-
-
