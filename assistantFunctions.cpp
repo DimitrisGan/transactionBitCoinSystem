@@ -125,6 +125,8 @@ void split(char *str, const char *delimiter, linkedList<char *> &result2return) 
     while (token!= nullptr){
 //        printf("'%s'\n", token);
         result2return.insert_last(token);
+        if (token[strlen(token) -1] == '\n')
+            token[strlen(token)-1]= '\0';
         token = strtok(nullptr, delimiter);
 
     }
@@ -251,10 +253,7 @@ void readTransactionQueries(const myString &initiaTransacFile,  Synchroniser &sy
             //convert token to myString
 
             myString token(tokenStr);
-//            cout <<token <<"\t";
 
-
-//
             if (i==0) { //transacId
                 newTransac.setTransacId(token); //it is the hash key to the transaction HashMap
             }
@@ -267,23 +266,11 @@ void readTransactionQueries(const myString &initiaTransacFile,  Synchroniser &sy
             if (i==3) { //amount to transfer
                 newTransac.setAmount(atoi(tokenStr));
             }
-            if (i==4) {//todo make it optional
-                //todo split (-) meta convert to int
-
-                linkedList<char*> dateNumbersChar;
-                split(tokenStr,"-",dateNumbersChar);
-                for (auto &item : dateNumbersChar) {
-                    transacDateList.insert_last(atoi(item));
-                }
+            if (i==4) { // DD-MM-YYYY
+                newTransac.getTransacTime().setDate(tokenStr);
             }
-            if (i==5) {//todo make it optional
-                //todo split (:) meta convert to int
-
-                linkedList<char*> hourNumbersChar;
-                split(tokenStr,":",hourNumbersChar);
-                for (auto &item : hourNumbersChar) {
-                    transacDateList.insert_last(atoi(item));
-                }
+            if (i==5) { //HH:MM
+                newTransac.getTransacTime().setTime(tokenStr);
             }
 
             i++;
@@ -379,18 +366,18 @@ void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHa
         }
 
 
-        if (resultList.getSize() == 1){  // in case that the user doesn't have a wallet [avoid seg for user with empty wallet]
-
-            new_walletId.getMyStr()[new_walletId.size() -1] = '\0';  //remove '\n'
-        }
-        else{
-            //trim the last btc myString to cut "\n" delimiter
-            myString cutLastChar = btcList.getTail()->data;
-            linkedList<char*> tmpList;
-            split(cutLastChar.getMyStr() , const_cast<char *>("\n"), tmpList);
-            btcList.updateTailData(cutLastChar);
-
-        }
+//        if (resultList.getSize() == 1){  // in case that the user doesn't have a wallet [avoid seg for user with empty wallet]
+//
+//            new_walletId.getMyStr()[new_walletId.size() -1] = '\0';  //remove '\n'
+//        }
+//        else{
+//            //trim the last btc myString to cut "\n" delimiter
+//            myString cutLastChar = btcList.getTail()->data;
+//            linkedList<char*> tmpList;
+//            split(cutLastChar.getMyStr() , const_cast<char *>("\n"), tmpList);
+//            btcList.updateTailData(cutLastChar);
+//
+//        }
 
         //insert to wallet HashTable
         wallet wallet2insert(new_walletId,balance,btcList,amountList);

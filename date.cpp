@@ -109,26 +109,29 @@ void date::timeNow(){
     this->hour = timeinfo->tm_hour;
     this->minute = timeinfo->tm_min;
 
+    this->hasDate = true;
+    this->hasTime = true;
+
 }
 
 void date::setDate(char * setDate) {
     linkedList<char*> formatList;
     split(setDate, "-" , formatList); /// separate all string commands by "-" and push them to the llist
 
-    if (formatList.getSize()!=3){std::cerr << "DATE : "<<setDate<< "NOT VALID"<<endl;exit(NOT_VALID_DATE);}
+    if (formatList.getSize()!=3){std::cerr << "DATE : "<<setDate<< " NOT VALID"<<endl;exit(NOT_VALID_DATE);}
 
     linkedList<char*>::Iterator iter;
     iter = formatList.begin();
 
-    if (!isNumber(*iter)){std::cerr << "DATE : "<<setDate<< "NOT VALID"<<endl;exit(NOT_VALID_DATE);}
+    if (!isNumber(*iter)){std::cerr << "DATE : "<<setDate<< " NOT VALID"<<endl;exit(NOT_VALID_DATE);}
     this->year =  atoi(*iter);
 
     iter++;
-    if (!isNumber(*iter)){std::cerr << "DATE : "<<setDate<< "NOT VALID"<<endl;exit(NOT_VALID_DATE);}
+    if (!isNumber(*iter)){std::cerr << "DATE : "<<setDate<< " NOT VALID"<<endl;exit(NOT_VALID_DATE);}
     this->month = atoi(*iter);
 
     iter++;
-    if (!isNumber(*iter)){std::cerr << "DATE : "<<setDate<< "NOT VALID"<<endl;exit(NOT_VALID_DATE);}
+    if (!isNumber(*iter)){std::cerr << "DATE : "<<setDate<< " NOT VALID"<<endl;exit(NOT_VALID_DATE);}
     this->day = atoi(*iter);
 
     this->hasDate=true;
@@ -139,16 +142,16 @@ void date::setTime(char *setTime) {
     linkedList<char*> formatList;
     split(setTime, ":" , formatList); /// separate all string commands by "-" and push them to the llist
 
-    if (formatList.getSize()!=2){std::cerr << "TIME : "<<setTime<< "NOT VALID"<<endl;exit(NOT_VALID_TIME);}
+    if (formatList.getSize()!=2){std::cerr << "TIME : "<<setTime<< " NOT VALID"<<endl;exit(NOT_VALID_TIME);}
 
     linkedList<char*>::Iterator iter;
     iter = formatList.begin();
 
-    if (!isNumber(*iter)){std::cerr << "TIME : "<<setTime<< "NOT VALID"<<endl;exit(NOT_VALID_TIME);}
+    if (!isNumber(*iter)){std::cerr << "TIME : "<<setTime<< " NOT VALID"<<endl;exit(NOT_VALID_TIME);}
     this->hour =  atoi(*iter);
 
     iter++;
-    if (!isNumber(*iter)){std::cerr << "TIME : "<<setTime<< "NOT VALID"<<endl;exit(NOT_VALID_TIME);}
+    if (!isNumber(*iter)){std::cerr << "TIME : "<<setTime<< " NOT VALID"<<endl;exit(NOT_VALID_TIME);}
     this->minute = atoi(*iter);
 
 

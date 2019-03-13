@@ -47,10 +47,7 @@ void requestTransaction(char *buffer,Synchroniser &sync) {
         switch (i){
             case 0: potentialTransac.senderWalletId = *iter;break;
             case 1: potentialTransac.receiverWalletId = *iter;break;
-            case 2: if (!isNumber(*iter) ) {
-                        fprintf(stderr, "AMOUNT IN TRANSACTION IS NOT A NUMBER : %s\n", *iter);
-                        exit(EXIT_FAILURE);
-                    }
+            case 2: if (!isNumber(*iter) ) {fprintf(stderr, "AMOUNT IN TRANSACTION IS NOT A NUMBER : %s\n", *iter);exit(EXIT_FAILURE);}
                     potentialTransac.amount = atoi(*iter);break;
             default: exit(EXIT_FAILURE);
         }
@@ -62,10 +59,11 @@ void requestTransaction(char *buffer,Synchroniser &sync) {
 
     if (resultList.getSize() == 5){ //there is also the date
         linkedList<char*> dateList2insert ;
-        dateList2insert.insert_last(*iter); //insert  DD-MM-YYYY
+        date2insert.setDate(*iter);
+//        dateList2insert.insert_last(*iter); //insert  DD-MM-YYYY
         iter++;
-        dateList2insert.insert_last(*iter); //insert  HH:MM
-        date2insert.setDateByGivenList(dateList2insert);
+//        dateList2insert.insert_last(*iter); //insert  HH:MM
+        date2insert.setTime(*iter);
         potentialTransac.transacTime = date2insert;
 
 
