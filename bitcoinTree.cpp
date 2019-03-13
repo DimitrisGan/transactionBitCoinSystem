@@ -150,6 +150,7 @@ t_node& t_node::operator=(const t_node &rhs) {
     amount = rhs.amount;
     left = rhs.left ;
     right = rhs.right;
+    this->transac_ptr = right->transac_ptr;
 
     return *this;
 }
@@ -238,7 +239,7 @@ void t_node::setTransac_ptr(transaction *transac_ptr) {
 }
 
 
-void btc_tree::getUniqueTransacList(t_node* node ,linkedList<myString> &transIdUnique_list) { //preorder traverse
+void btc_tree::getUniqueTransacList(t_node* node ,linkedList<myString> &transIdUnique_list) { //with the help of preorder traverse
 
     {
         if (!node)
@@ -254,6 +255,27 @@ void btc_tree::getUniqueTransacList(t_node* node ,linkedList<myString> &transIdU
         getUniqueTransacList(node->right ,transIdUnique_list);
     }
 }
+
+bool btc_tree::hasUnspentAmount(t_node *node) {
+
+    if (node->right)
+        return hasUnspentAmount(node->right);
+
+     return node->walletId == root->walletId && node->amount!=0;
+
+}
+
+
+int btc_tree::getUnspentAmount(t_node *node) {
+
+    if (node->right)
+        return getUnspentAmount(node->right);
+
+     return node->amount;
+
+}
+
+
 
 //TreeNode::TreeNode(const TreeNode &n)
 //        : value(n.value), count(n.count), left(nullptr), right(nullptr) {

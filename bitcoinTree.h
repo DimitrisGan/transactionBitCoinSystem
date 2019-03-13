@@ -67,9 +67,11 @@ public:
 
     void getUniqueTransacList(t_node* node ,linkedList<myString> &transIdUnique_list);
 
+    bool hasUnspentAmount(t_node *node);
+    int getUnspentAmount(t_node *node);
 
 
-    t_node *search(int key);
+        t_node *search(int key);
     void destroy_tree();
 
 

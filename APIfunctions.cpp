@@ -68,4 +68,12 @@ void bitCoinStatus(char *buffer, Synchroniser &sync){
     linkedList<myString> numberOfTransacUsed_list ;
     sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getUniqueTransacList(sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getRoot() , numberOfTransacUsed_list);
     cout << numberOfTransacUsed_list; //todo exei thema gt den kserw an xwsw ta transacIds sta t_nodes h valw deiktes na koitane apo to tree sta t_nodes
+
+    bool hasUnspent = sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->hasUnspentAmount(
+            sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getRoot());
+    if (hasUnspent){
+        int unspentAmount = sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getUnspentAmount(sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getRoot());
+        //todo take the unspent value and print it ///tha mporousa kai na pairna kateutheian thn timh ka
+        cout << "unspent amount is "<<unspentAmount<<endl;
+    }
 }
