@@ -43,7 +43,6 @@ void requestTransaction(char *buffer,Synchroniser &sync) {
         //vale wra pc
     }
 
-//    exit(2);
 //    split()
 }
 

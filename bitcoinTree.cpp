@@ -142,6 +142,7 @@ void t_node::fillNode( myString id, int amount , t_node* left , t_node* right ){
     this->amount = amount;
     this->left = left;
     this->right = right;
+    this->transac_ptr= nullptr;
 
 }
 
@@ -164,7 +165,7 @@ bool t_node::operator==(t_node rhs) {
 }
 
 t_node::t_node( myString walletId, int amount, t_node *left, t_node *right) : walletId(walletId), amount(amount),
-                                                                                    left(left), right(right) {}
+                                                                                    left(left), right(right) {this->transac_ptr= nullptr;}
 
 t_node::t_node() {}
 
