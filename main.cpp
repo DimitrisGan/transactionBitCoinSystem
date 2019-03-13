@@ -74,6 +74,7 @@ int main(int argc, char **argv) {
 //        cin >> buffer;
 
         strcpy(buffer , "requestTransactions  richard annie 10  ;  richard annie 10 12-01-2012 14:22;");
+//        strcpy(buffer , "findEarnings richard ");
 
 //        strcpy(buffer , "walletStatus lookingforagoogusernametoo");
 //        strcpy(buffer , "bitCoinStatus 541");
@@ -98,6 +99,12 @@ int main(int argc, char **argv) {
         if (strcmp(commandType,"requestTransactions") ==0){
 
             requestTransactions(substr, sync);
+        }
+
+
+        if (strcmp(commandType,"findEarnings") ==0){
+
+            findEarnings(substr, sync);
         }
 
 
@@ -130,7 +137,6 @@ int main(int argc, char **argv) {
 
     }while (false);//todo(! flagExit);
 
-    cout << "end\n";
 
 
     delete [] buffer;buffer= nullptr;
@@ -143,8 +149,8 @@ int main(int argc, char **argv) {
     delete receiverHT; receiverHT= nullptr;
 
 
-    cout <<"end2\n";
 
+    cout << "\nend\n";
 
 
 

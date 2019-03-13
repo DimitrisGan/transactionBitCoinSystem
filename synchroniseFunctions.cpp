@@ -186,11 +186,11 @@ void Synchroniser::removeLostOwnershipBtcFromSender(wallet *sendersWallet, linke
     for ( auto &item : btc2deleteInlist) {
 
         flagError= sendersWallet->getBtcIdsOwned_listByRef().deleteNodeByItem(item);
-        flagError= sendersWallet->getAmountOnEachBtcByRef().deleteNodeByItem(0);
+        flagError= sendersWallet->getAmountOnEachBtcByRef().deleteNodeByItem(0); //delete the nodes that have zero as amount
     }
     if (flagError){
-        std::cerr << "ERROR IN DELETION  "<<endl;
-        exit(1);
+        std::cerr << "ERROR IN DELETION "<<endl;
+        exit(DELETION);
     }
 
 }

@@ -430,20 +430,4 @@ bool isNumber(char* s)
 }
 
 
-// Store the formatted string of time in the output
-void format_time( date& returnPCtime){
-    time_t rawtime;
-    struct tm * timeinfo;
-
-    time ( &rawtime );
-    timeinfo = localtime ( &rawtime );
-
-
-    returnPCtime.year = timeinfo->tm_year + 1900;
-    returnPCtime.month = timeinfo->tm_mon + 1;
-    returnPCtime.day = timeinfo->tm_mday ;
-    returnPCtime.hour = timeinfo->tm_hour;
-    returnPCtime.minute = timeinfo->tm_min;
-
-}
 

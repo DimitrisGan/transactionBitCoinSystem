@@ -10,6 +10,7 @@
 void findEarnings(char *buffer,Synchroniser &sync){
     //todo
 
+
 }
 
 
@@ -65,17 +66,18 @@ void requestTransaction(char *buffer,Synchroniser &sync) {
         iter++;
         dateList2insert.insert_last(*iter); //insert  HH:MM
         date2insert.setDateByGivenList(dateList2insert);
+        potentialTransac.transacTime = date2insert;
+
 
     }
     else if (resultList.getSize() == 3){ //means that we need to give date from the pc
 
-        format_time(date2insert);
+        potentialTransac.transacTime.timeNow();
     }
     else{
         assert(1);
     }
 
-    potentialTransac.transacTime = date2insert;
 
     cout <<"";
 

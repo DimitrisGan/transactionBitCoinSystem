@@ -65,8 +65,8 @@ struct myBucket_chain{
     void insert(T data){
         //todo
         if (existInChain(data)){
-            cout << "YPARXEI HDH !!!!!"<<endl;
-            exit(100);
+            std::cerr << "ERROR IN INSERTION --ITEM ALREADY EXIST"<<endl;
+            exit(INSERTION);
         }
         else{
             myBucket<T> newBucket(data);
