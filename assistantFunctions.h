@@ -49,7 +49,7 @@ void readTransactionQueries(const myString &initiaTransacFile,  Synchroniser &sy
 //void readTransactionQueries(const myString &initiaTransacFile, myTransacHashMap &senderHT_ptr ,  myTransacHashMap  &receiverHT_ptr,
 //                            myHashMap<wallet > &walletHT_ptr,myHashMap<bitcoin> &btcHT_ptr);
 
-void split( char* str, char* delimiter , linkedList<char*> & result2return) ;
+void split(char *str, const char *delimiter, linkedList<char *> &result2return) ;
 
 
 char *

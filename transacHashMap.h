@@ -36,7 +36,6 @@ public://todo change to --->private:
     unsigned  (*hashFunc)(myString, unsigned)  ;
     unsigned tableSize;
 
-//    unsigned maxNumberOfRecordsInBucket;
 
 
 

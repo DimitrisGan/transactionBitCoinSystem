@@ -71,7 +71,6 @@ struct recordsBucket{
 
 
     explicit recordsBucket(unsigned RecordsCapacity){
-        cout << "CONSTRUCTOR OF BUCKET IS CALLED #" <<endl;
 
         this->recordsMaxCapacity = RecordsCapacity;
 
@@ -83,7 +82,6 @@ struct recordsBucket{
     virtual ~recordsBucket(){
         //    delete  recordsArray;
 
-        cout << "DESTRUCTOR OF BUCKET RECORD TABLE IS CALLED #" <<endl;
 //        this->recordsAlreadyExist=0;
         delete  [] recordTable; //todo des ksana//todo des ksana//todo des ksana//todo des ksana//todo des ksana//todo des ksana//todo des ksana//todo des ksana
 
@@ -178,7 +176,7 @@ struct recordsBucket_chain{
     linkedList<recordsBucket> bucketsList;
     unsigned maxNumberOfRecordsInBucket;
 
-
+    recordsBucket_chain(){maxNumberOfRecordsInBucket=0;}
 //    explicit recordsBucket_chain(unsigned bucketSizeInBytes)  {
 //        maxNumberOfRecordsInBucket = bucketSizeInBytes/sizeof(record);
 //

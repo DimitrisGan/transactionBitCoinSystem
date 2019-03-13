@@ -44,11 +44,13 @@ public:
 
     transaction& operator=( transaction rhs)  {
         transacId = rhs.transacId;
+        senderWalletId =rhs.senderWalletId;
         receiverWalletId = rhs.receiverWalletId ;
 //        bitcoinSentList = rhs.bitcoinSentList ;
         t_nodePtrList = rhs.t_nodePtrList; //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS
         amount = rhs.amount;
         transacTime = rhs.transacTime;
+        t_nodePtrList = rhs.t_nodePtrList;
         return *this;
     }
 

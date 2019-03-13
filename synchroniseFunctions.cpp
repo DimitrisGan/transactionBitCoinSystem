@@ -22,8 +22,6 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
     //todo edw dhmiourgeitai h aporia mhpws prepei na xw sa parametro 2 transacNodes --> ena tou sender kai ena tou receiver
 
 
-//    int transacId = potentialTransaction.transacId;
-
 
     wallet  *sendersWallet =  this->walletHT_ptr->getData(potentialTransaction.getSenderWalletId());
     wallet  *receiversWallet =  this->walletHT_ptr->getData(potentialTransaction.getReceiverWalletId());
@@ -31,20 +29,19 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
 //todo check if sender/receiver wallet    this->walletHT_ptr.exists(sendersWallet->getId() ,sendersWallet);
 
     if (! this->walletHT_ptr->exists(sendersWallet->id) ){
-        std::cerr << "CANT APPLY THE TRANSACTION  ID# "<<potentialTransaction.getTransacId()<<" BECAUSE SENDER DOESNT EXIST"<<endl;
+        std::cerr << "CANT APPLY THE TRANSACTION  ID# "<<potentialTransaction.getTransacId()<<" BECAUSE SENDER WITH ID# "<<potentialTransaction.senderWalletId <<" DOESNT EXIST"<<endl;
         exit(NOT_VALID_TRSANSACTION);
     }
 
     if (! this->walletHT_ptr->exists(receiversWallet->id) ){
-        std::cerr << "CANT APPLY THE TRANSACTION  ID# "<<potentialTransaction.getTransacId()<<" BECAUSE RECEIVER DOESNT EXIST"<<endl;
+        std::cerr << "CANT APPLY THE TRANSACTION  ID# "<<potentialTransaction.getTransacId()<<" BECAUSE RECEIVER WITH ID# "<<potentialTransaction.receiverWalletId <<" DOESNT EXIST"<<endl;
         exit(NOT_VALID_TRSANSACTION);
     }
 
     if (potentialTransaction.getSenderWalletId() == potentialTransaction.getReceiverWalletId()){ //check if user is the same and sends to himself money
-        std::cerr << "CANT APPLY THE TRANSACTION WITH ID# "<<potentialTransaction.getTransacId()<< " BECAUSE THE RECEIVER IS ALSO THE SENDER"<<endl;
+        std::cerr << "CANT APPLY THE TRANSACTION WITH ID# "<<potentialTransaction.getTransacId()<< " BECAUSE THE RECEIVER IS ALSO THE SENDER WITH ID# "<<potentialTransaction.receiverWalletId<<endl;
         exit(NOT_VALID_TRSANSACTION);
     }
-
 
 
     if (!transactionIsValid(potentialTransaction, sendersWallet->getBalance())){ //check id transaction is possible or throw error and exit
@@ -87,7 +84,8 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
 
     this->updateMaxId(potentialTransaction.transacId);
 
-    cout <<"edw eimai"<<endl;
+    cout <<"transaction with id# "<<potentialTransaction.transacId <<" succesfully added! "<<endl;
+
 
 
 

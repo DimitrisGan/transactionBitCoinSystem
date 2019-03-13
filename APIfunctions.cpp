@@ -12,7 +12,6 @@ void requestTransactions(char *buffer,Synchroniser &sync) {
 
     linkedList<char*> resultList;
     split(buffer, ";" , resultList); /// separate all string commands by ";" and push them to the llist
-    cout <<resultList;
 
     //todo call the requestTransaction(char* buffer) to handle the transaction
 
@@ -34,8 +33,6 @@ void requestTransaction(char *buffer,Synchroniser &sync) {
 
     linkedList<char*> resultList;
     split(buffer, " " , resultList); /// separate all string commands by " " and push them to the llist
-
-    cout << resultList;
 
     // Declaring iterator to a llist
     linkedList<char*>::Iterator iter;
@@ -71,10 +68,15 @@ void requestTransaction(char *buffer,Synchroniser &sync) {
 
         format_time(date2insert);
     }
+    else{
+        assert(1);
+    }
 
     potentialTransac.transacTime = date2insert;
 
+    cout <<"";
 
+    sync.insertTransaction(potentialTransac);
 
     //todo edw tha ginei insertTransaction() --> fusika edw tha ginei kai to update tou transacId
 }

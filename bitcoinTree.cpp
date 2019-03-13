@@ -84,7 +84,6 @@ void searchKeyIdFromLeafs(myString keyWalletId, linkedList<t_node*> &leafs_list,
  * Thus,it can add more than 2 nodes in the tree*/
 void btc_tree::insert(myString senderWalletId, myString receiverWalletId, int amount , linkedList<t_node*> &returnPtrs2t_nodes ){
 
-    cout <<"SKAVW\n\n";
 
 //    if ( leaf->amount < amount){ // lathos
 //        fprintf(stderr, "Can't divide-send the bitcoin into pieces ");

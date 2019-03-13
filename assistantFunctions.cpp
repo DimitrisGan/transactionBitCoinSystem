@@ -115,7 +115,7 @@ void ArgumentsKeeper::printArgs() {
 
 
 
-void split( char* str, char* delimiter , linkedList<char*> & result2return) {
+void split(char *str, const char *delimiter, linkedList<char *> &result2return) {
 
     char* token ;
 //    linkedList<char*> result;

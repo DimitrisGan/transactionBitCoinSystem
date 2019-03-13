@@ -92,7 +92,6 @@ public:
 //        if (table[indexHash] == nullptr) //if table[index] is null then we have to initialize a recordsBucket chain
 //            table[indexHash] = new myBucket_chain  <T> ;
 
-        cout << "index to Hash = "<< indexHash<<endl;
         this->table[indexHash].insert(data2insert);
     }
 

@@ -25,7 +25,7 @@ int main(int argc, char **argv) {
    */
 
     unsigned bucketSizeInBytes = 100;
-    unsigned tableSize =1;
+    unsigned tableSize =100;
     int btcValue = 50;
     unsigned  (*myHashFunc)( myString, unsigned)  = & myHash ;
 
@@ -73,8 +73,7 @@ int main(int argc, char **argv) {
     do {
 //        cin >> buffer;
 
-        strcpy(buffer , "requestTransactions senderWalletID receiverWalletID 30 ;"
-                        "senderWalletID2 receiverWalletID2 2 12-01-2012 14:22;");
+        strcpy(buffer , "requestTransactions  richard annie 10  ;  richard annie 10 12-01-2012 14:22;");
 
 //        strcpy(buffer , "walletStatus lookingforagoogusernametoo");
 //        strcpy(buffer , "bitCoinStatus 541");

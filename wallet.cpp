@@ -114,7 +114,6 @@ int wallet::getIndexBybtcId(myString btcId) {
 
 void wallet::updateAmountByIndex(int index, int newAmount) {
 
-    cout << "GINETAI UPDATE\n";
     int currIndex=0;
     for ( auto &item : this->amountOnEachBtc) {
         if (currIndex == index){

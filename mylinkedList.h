@@ -182,7 +182,6 @@ public:
 template<class T>
 bool linkedList<T>::deleteNodeByIndex( int index )
 {
-    cout << "MPIKA STH DELETEEEEE\n";
     bool exit;
 
     l_node<T> *pPre = NULL,
@@ -233,7 +232,6 @@ bool linkedList<T>::deleteNodeByIndex( int index )
 template<class T>
 bool linkedList<T>::deleteNodeByItem( T item2delete)
 {
-    cout << "MPIKA STH DELETEEEEE\n";
     bool exit;
 
     l_node<T> *pPre = NULL,
