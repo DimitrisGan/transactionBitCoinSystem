@@ -1,6 +1,6 @@
 # Declaration of variables
 CC = g++
-CC_FLAGS = -w -o2
+CC_FLAGS = -w -o2  -std=c++11
  
 # File names
 EXEC = bitcoin
