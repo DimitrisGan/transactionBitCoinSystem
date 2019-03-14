@@ -251,7 +251,6 @@ void readTransactionQueries(const myString &transacFile, Synchroniser &sync){
 
 
 
-        linkedList<int> transacDateList;
         int i=0;
         for ( auto tokenStr : resultList){
             //convert token to myString
@@ -268,6 +267,7 @@ void readTransactionQueries(const myString &transacFile, Synchroniser &sync){
                 newTransac.setReceiverWalletId(token);
             }
             if (i==3) { //amount to transfer
+                if (!isNumber(tokenStr) ) {fprintf(stderr, "AMOUNT IN TRANSACTION IS NOT A NUMBER : %s\n", tokenStr);exit(EXIT_FAILURE);}
                 newTransac.setAmount(atoi(tokenStr));
             }
             if (i==4) { // DD-MM-YYYY
