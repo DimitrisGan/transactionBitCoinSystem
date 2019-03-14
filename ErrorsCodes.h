@@ -13,8 +13,8 @@ typedef enum ERRORCODE { OK=0,
     INSERTION,
     DELETION,
     NOT_VALID_DATE,
-    NOT_VALID_TIME
-//    FILE_ACCESS,  //couldnt open a file
+    NOT_VALID_TIME,
+    FILE_ACCESS  //couldnt open a file
 //    BAD_STREAM,   //a fstream did not return goodbit
 //    UNKNOWN_METRIC, //unknown metric in file @metric
 //    MOD_ZERO_EXCEPTION, //tred to modulo 0

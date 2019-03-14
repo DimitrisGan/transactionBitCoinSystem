@@ -128,9 +128,12 @@ void split(char *str, const char *delimiter, linkedList<char *> &result2return) 
 
     while (token!= nullptr){
 //        printf("'%s'\n", token);
-        result2return.insert_last(token);
+        if (token[0] == '\n')
+            token++ ;
         if (token[strlen(token) -1] == '\n')
             token[strlen(token)-1]= '\0';
+        result2return.insert_last(token);
+
         token = strtok(nullptr, delimiter);
 
     }
@@ -303,9 +306,6 @@ void readTransactionQueries(const myString &transacFile, Synchroniser &sync){
 
 void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHashMap<wallet > *walletHT_ptr,
                                       myHashMap<bitcoin> *btcHT_ptr, int bitCoinValue) {
-    //todo ftiaxnw domh wallet edw
-    //todo + ftiaxnw tis rizes twn btcTrees (gia tous prokatoxous) ara ftiaxnw domh btcTree-->bitcoin
-    //todo ta xwne sta walletHT , btcHT
 
 
     FILE * fp;
@@ -314,8 +314,10 @@ void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHa
     ssize_t read;
 
     fp = fopen(btcInitialOwnersFile .getMyStr(), "r");
-    if (fp == nullptr)
-        exit(EXIT_FAILURE);
+    if (fp == nullptr){
+        std::cerr << "ERROR IN OPENING THE FILE :"<< btcInitialOwnersFile.getMyStr()<<endl;
+        exit(FILE_ACCESS);
+    }
 
 
 

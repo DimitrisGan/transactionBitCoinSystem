@@ -12,6 +12,9 @@ void findEarnings(char *buffer,Synchroniser &sync);
 
 void findPayments(char *buffer,Synchroniser &sync);
 
+
+void requestTransactionsFromFile(char *fileName,Synchroniser &sync);
+
 void requestTransactions(char *buffer, Synchroniser &sync);
 
 void requestTransaction(char *buffer,Synchroniser& sync);

@@ -73,7 +73,8 @@ int main(int argc, char **argv) {
     do {
 //        cin >> buffer;
 
-        strcpy(buffer , "requestTransactions  richard annie 10  ;  richard annie 10 12-01-2012 14:22;");
+//        strcpy(buffer , "requestTransactions  richard annie 10  ;  richard annie 10 12-01-2012 14:22;");
+        strcpy(buffer , "requestTransactions inputTransactions2");
 //        strcpy(buffer , "findEarnings richard ");
 //        strcpy(buffer , "findPayments richard 10:00 15:00");
 //        strcpy(buffer , "findEarnings richard 10:12 11-01-2014 15:12 1-3-2030 ");
@@ -81,7 +82,7 @@ int main(int argc, char **argv) {
 
 //        strcpy(buffer , "walletStatus lookingforagoogusernametoo");
 //        strcpy(buffer , "bitCoinStatus 541");
-        strcpy(buffer , "traceCoin 541");
+//        strcpy(buffer , "traceCoin 541");
 
         strcpy(copybuffer , buffer);
 
@@ -100,9 +101,12 @@ int main(int argc, char **argv) {
 //        }
 
 
-        if (strcmp(commandType,"requestTransactions") ==0){
+        if (strcmp(commandType,"requestTransactions") ==0){ //check here if input is file or transactions
 
-            requestTransactions(substr, sync);
+            if (cin_list.getSize() == 2)
+                requestTransactionsFromFile(substr, sync); //substr contains the inputFile name
+            else
+                requestTransactions(substr, sync);
         }
 
 

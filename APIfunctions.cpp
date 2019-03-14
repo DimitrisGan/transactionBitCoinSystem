@@ -59,6 +59,32 @@ void findPayments(char *buffer, Synchroniser &sync) {
 }
 
 
+void requestTransactionsFromFile(char *fileName,Synchroniser &sync) {
+
+    FILE *fp;
+    char *line = nullptr;
+    size_t len = 0;
+    fp = fopen(fileName, "r");
+    if (fp == nullptr){
+        std::cerr << "ERROR IN OPENING THE FILE :"<< fileName<<endl;
+        exit(FILE_ACCESS);
+    }
+
+
+    char *buffer = NULL;
+    ssize_t bytes_read = getdelim(&buffer, &len, '\0', fp);
+    if (bytes_read != -1) {   /* Success, now the entire file is in the buffer */
+        requestTransactions(buffer, sync);
+    }
+    else{
+        std::cerr << "ERROR IN ACCESING THE FILE :"<< fileName<<endl;
+        exit(FILE_ACCESS);
+    }
+
+    fclose(fp);
+    if (buffer)
+        free(buffer);
+}
 
 
 void requestTransactions(char *buffer,Synchroniser &sync) {
@@ -94,7 +120,7 @@ void requestTransaction(char *buffer,Synchroniser &sync) {
         switch (i){
             case 0: potentialTransac.senderWalletId = *iter;break;
             case 1: potentialTransac.receiverWalletId = *iter;break;
-            case 2: if (!isNumber(*iter) ) {fprintf(stderr, "AMOUNT IN TRANSACTION IS NOT A NUMBER : %s\n", *iter);exit(EXIT_FAILURE);}
+            case 2: if (!isNumber(*iter) ) {fprintf(stderr, "AMOUNT IN TRANSACTION ID# %s IS NOT A NUMBER : %s\n", potentialTransac.transacId.getMyStr() ,*iter);exit(EXIT_FAILURE);}
                 potentialTransac.amount = atoi(*iter);break;
             default: exit(EXIT_FAILURE);
         }
