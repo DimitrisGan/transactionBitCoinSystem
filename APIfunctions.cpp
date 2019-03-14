@@ -8,28 +8,31 @@
 
 
 void findEarnings(char *buffer,Synchroniser &sync){
-    //todo
     linkedList<char*> resultList;
     split(buffer, " " , resultList); /// separate all string commands by ";" and push them to the llist
     char* walletId_str = resultList.getHead()->getData();
     myString walletId(walletId_str);
     linkedList<transaction *> returnedList = sync.getReceiverHT_ptr()->getAllTransactions(walletId);
-    if (resultList.getSize() == 1){
-        //todo cout the returnedList() ///////////////////////////////////////////////////////////
-        for (const auto item : returnedList) {
-            cout << item->transacId<<endl;
-        }
-        return;
-    }
+
     linkedList<transaction *> filteredListByDate ;
-    filterTransactionsByDate( resultList , returnedList , filteredListByDate) ;
 
+    if (resultList.getSize() == 1){
+        filteredListByDate = returnedList;
+    }
+    else{
+        filterTransactionsByDate( resultList , returnedList , filteredListByDate) ;
+    }
 
+    int totalEarnings = 0;
     cout<<"\n";
     for (const auto item : filteredListByDate) {
-        cout << item->transacId<<endl;
+        totalEarnings+=item->getAmount();
+        cout << item->getTransacTime() <<endl;
     }
+    cout <<"Total Earnings for "<<walletId << " is "<<totalEarnings<<endl;
 }
+
+
 
 
 void requestTransactions(char *buffer,Synchroniser &sync) {

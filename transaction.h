@@ -8,6 +8,7 @@
 
 //template <class U ,class B>
 
+#include <ostream>
 #include "myString.h"
 #include "date.h"
 #include "bitcoinTree.h"
@@ -62,6 +63,8 @@ public:
     bool operator==(const myString &id) const;
 
     bool operator!=(const myString &id) const;
+
+    friend ostream &operator<<(ostream &os, const transaction &transaction1);
 
     //getters
      myString &getSenderWalletId()  {

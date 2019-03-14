@@ -192,3 +192,18 @@ void date::setDateByGivenList(linkedList<char *> setDateList) {
     }
 
 }
+
+ostream &operator<<(ostream &os, const date &dt) {
+
+        if (dt.day<10) os << "0";
+        os << dt.day<<"-";
+        if (dt.month<10) os << "0";
+        os <<dt.month<<"-"<<dt.year;
+        os<<" ";
+        if (dt.hour < 10) os << "0";
+        os <<dt.hour<<":";
+        if (dt.month < 10) os << "0";
+        os <<dt.month;
+
+    return os;
+}

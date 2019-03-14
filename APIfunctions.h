@@ -10,6 +10,7 @@
 
 void findEarnings(char *buffer,Synchroniser &sync);
 
+void findPayments(char *buffer,Synchroniser &sync);
 
 void requestTransactions(char *buffer, Synchroniser &sync);
 

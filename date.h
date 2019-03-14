@@ -6,6 +6,7 @@
 #define TRANSACTIONBITCOINSYSTEM_DATE_H
 
 
+#include <ostream>
 #include "mylinkedList.h"
 #include "myString.h"
 
@@ -43,6 +44,9 @@ struct date{
     bool operator==(const date &rhs) const;
 
     bool operator!=(const date &rhs) const;
+
+
+    friend ostream &operator<<(ostream &os, const date &date1);
 
 };
 
