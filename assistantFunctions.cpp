@@ -128,11 +128,13 @@ void split(char *str, const char *delimiter, linkedList<char *> &result2return) 
 
     while (token!= nullptr){
 //        printf("'%s'\n", token);
+
         if (token[0] == '\n')
             token++ ;
         if (token[strlen(token) -1] == '\n')
             token[strlen(token)-1]= '\0';
-        result2return.insert_last(token);
+        if (!(token[0] == ' ' && strlen(token) == 1)) //means that is not a whitespace
+            result2return.insert_last(token);
 
         token = strtok(nullptr, delimiter);
 

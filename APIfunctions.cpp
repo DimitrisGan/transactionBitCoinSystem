@@ -60,7 +60,9 @@ void findPayments(char *buffer, Synchroniser &sync) {
 
 
 void requestTransactionsFromFile(char *fileName,Synchroniser &sync) {
-
+    linkedList<char*> cleanFromWhiteSpaces;
+    split(fileName," ",cleanFromWhiteSpaces);
+    fileName = cleanFromWhiteSpaces.getHead()->getData();
     FILE *fp;
     char *line = nullptr;
     size_t len = 0;
