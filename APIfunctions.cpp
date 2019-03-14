@@ -138,7 +138,7 @@ void requestTransaction(char *buffer,Synchroniser &sync) {
 void walletStatus(char *buffer, Synchroniser &sync) {
     myString walletId(buffer);
     int current_balance = sync.getWalletHT_ptr()->getData(walletId)->getBalance();
-    cout << "The current balance of wallet ID #"<<buffer<< " is:\t"<< current_balance<<endl;
+    cout << "The current wallet status of #"<<buffer<< " is: "<< current_balance<<endl;
 }
 
 
