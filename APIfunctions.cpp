@@ -25,11 +25,37 @@ void findEarnings(char *buffer,Synchroniser &sync){
 
     int totalEarnings = 0;
     cout<<"\n";
-    for (const auto item : filteredListByDate) {
+    for (auto item : filteredListByDate) {
         totalEarnings+=item->getAmount();
-        cout << item->getTransacTime() <<endl;
+        cout << *item <<endl;
     }
     cout <<"Total Earnings for "<<walletId << " is "<<totalEarnings<<endl;
+}
+
+
+void findPayments(char *buffer, Synchroniser &sync) {
+    linkedList<char*> resultList;
+    split(buffer, " " , resultList); /// separate all string commands by ";" and push them to the llist
+    char* walletId_str = resultList.getHead()->getData();
+    myString walletId(walletId_str);
+    linkedList<transaction *> returnedList = sync.getSenderHT_ptr()->getAllTransactions(walletId); //the only difference with findEarnings
+
+    linkedList<transaction *> filteredListByDate ;
+
+    if (resultList.getSize() == 1){
+        filteredListByDate = returnedList;
+    }
+    else{
+        filterTransactionsByDate( resultList , returnedList , filteredListByDate) ;
+    }
+
+    int totalPayments = 0;
+    cout<<"\n";
+    for (auto item : filteredListByDate) {
+        totalPayments+=item->getAmount();
+        cout << *item <<endl;
+    }
+    cout <<"Total Payments for "<<walletId << " is "<<totalPayments<<endl;
 }
 
 
@@ -137,3 +163,4 @@ void bitCoinStatus(char *buffer, Synchroniser &sync){
         cout << "unspent amount is "<<unspentAmount<<endl;
     }
 }
+

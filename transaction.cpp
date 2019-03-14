@@ -2,6 +2,7 @@
 // Created by dimitrisgan on 8/3/2019.
 //
 
+#include <iomanip>
 #include "transaction.h"
 
 bool transaction::operator==(const transaction &rhs) const {
@@ -28,9 +29,9 @@ void transaction::updateTransacionPtrIn_t_nodes() {
 }
 
 ostream &operator<<(ostream &os, const transaction &transaction1) {
-    os << "transacId: " << transaction1.transacId << " senderWalletId: " << transaction1.senderWalletId
-       << " receiverWalletId: " << transaction1.receiverWalletId << " transacTime: " << transaction1.transacTime
-       << " amount: " << transaction1.amount << " t_nodePtrList: " << transaction1.t_nodePtrList;
+    os << "TR_ID#: " << transaction1.transacId << setw(10)<< " SENDER: " << transaction1.senderWalletId <<setw(10)
+       << " RECEIVER: " << transaction1.receiverWalletId << " DATE: " << transaction1.transacTime
+       << " AMOUNT: " << transaction1.amount ;
     return os;
 }
 //void setTransac_ptr(transaction *transac_ptr);
