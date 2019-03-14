@@ -23,6 +23,8 @@ struct date{
 
     date(){year=month=day=hour=minute=-1;hasDate= false;hasTime=false;}
 
+    bool isNull();
+
     void setDateByGivenList(linkedList<int> setDateList);
 
     void setDateByGivenList(linkedList<char*> setDateList);

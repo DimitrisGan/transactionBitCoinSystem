@@ -31,11 +31,11 @@ int main(int argc, char **argv) {
 
 
 
-    myHashMap<wallet>       *walletHT = new myHashMap<wallet>(tableSize , myHashFunc );
-    myHashMap< bitcoin>     *btcHT  = new myHashMap< bitcoin> (tableSize , myHashFunc );
+    myHashMap<wallet>       *walletHT  = new myHashMap<wallet>(tableSize , myHashFunc );
+    myHashMap< bitcoin>     *btcHT     = new myHashMap< bitcoin> (tableSize , myHashFunc );
     myHashMap<transaction>  *transacHT = new myHashMap<transaction>(tableSize , myHashFunc );
 
-    argmKeeper.bitCoinBalancesFile = "bitCoinBalancesFile";
+    argmKeeper.bitCoinBalancesFile = "bitCoinBalancesFile"; //todo vgalto
 
     btcBalancesFile_parsing_and_save(argmKeeper.bitCoinBalancesFile , walletHT , btcHT , btcValue); //save also to walletHT,btcHT
 
@@ -73,8 +73,8 @@ int main(int argc, char **argv) {
     do {
 //        cin >> buffer;
 
-//        strcpy(buffer , "requestTransactions  richard annie 10  ;  richard annie 10 12-01-2012 14:22;");
-        strcpy(buffer , "requestTransactions      inputTransactions2");
+        strcpy(buffer , "requestTransactions  richard annie 10  ;  richard annie 10 12-01-2012 14:22;");
+//        strcpy(buffer , "requestTransactions      inputTransactions2");
 //        strcpy(buffer , "findEarnings richard ");
 //        strcpy(buffer , "findPayments richard 10:00 15:00");
 //        strcpy(buffer , "findEarnings richard 10:12 11-01-2014 15:12 1-3-2030 ");

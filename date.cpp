@@ -207,3 +207,7 @@ ostream &operator<<(ostream &os, const date &dt) {
 
     return os;
 }
+
+bool date::isNull() {
+    return !this->hasTime && !this->hasDate; //if both time and date are false then the date is null -->returns then true
+}

@@ -23,6 +23,7 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
 
 
 
+
     wallet  *sendersWallet =  this->walletHT_ptr->getData(potentialTransaction.getSenderWalletId());
     wallet  *receiversWallet =  this->walletHT_ptr->getData(potentialTransaction.getReceiverWalletId());
 
@@ -82,7 +83,12 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
     //insert the transaction ptr to receiverHT
     this->receiverHT_ptr->addTransacNode2appropriateIndex(potentialTransaction.receiverWalletId , this->transacHT_ptr->getData(potentialTransaction.transacId) ); //insert a new node with a pointer to the transaction node in receiverHT
 
+
+
     this->updateMaxId(potentialTransaction.transacId);
+    this->updateLatestDate(potentialTransaction.transacTime);
+
+//    this.u
 
     cout <<"transaction with id# "<<potentialTransaction.transacId <<" added  Successfully! "<<endl;
 
@@ -321,13 +327,10 @@ myHashMap<transaction> *Synchroniser::getTransacHT_ptr() const {
 }
 
 const date &Synchroniser::getLatestTrsansactionDate() const {
-    return latestTrsansactionDate;
+    return latestTransacDate;
 }
 
-void Synchroniser::updateLastDate(date potentialTransacDate) {
 
-
-}
 
 void Synchroniser::updateMaxId(myString id) {
 
@@ -353,6 +356,24 @@ myString Synchroniser::createVirtualTransacId() {
     sprintf(str, "%d", newId);// Now str contains the integer as characters
     myString virtualId (str);
     return virtualId;
+}
+
+void Synchroniser::updateLatestDate(date newDate) {
+
+    if (this->latestTransacDate.isNull())
+        this->latestTransacDate = newDate;
+    else{
+        if (newDate >= this->latestTransacDate) //if the new transaction date is the latest then assign it to sync class attribute
+            this->latestTransacDate = newDate;
+        else{
+            if (this->latestTransacDate > newDate){
+                std::cerr << "CANT APPLY THE TRANSACTION BECAUSE THE DATE IS ANTECEDENT TO THE LATEST TRANSACTION "<<endl;
+                std::cerr << "LATEST DATE : "<<this->latestTransacDate<<endl;
+                std::cerr << "NOT VALID TRANSACTION DATE : "<<newDate<<endl;
+                exit(NOT_VALID_TRSANSACTION);
+            }
+        }
+    }
 }
 
 

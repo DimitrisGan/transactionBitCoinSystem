@@ -28,7 +28,7 @@ private:
     myHashMap< bitcoin> *btcHT_ptr;
     myHashMap<transaction> *transacHT_ptr;
 
-    date latestTrsansactionDate; //todo
+    date latestTransacDate; //todo
 
     int max_t_id;
 
@@ -50,9 +50,10 @@ private:
     void  addTheNewNodes2Tree(transaction &potentialTransaction , linkedList<myString> btcId2extract_list ,linkedList<int> amountInEachBtc2extract_list);
 
 
-    void     updateLastDate(date potentialTransacDate);
 
     void  updateMaxId(myString id);
+
+    void updateLatestDate(date newDate);
 
 
 public:
