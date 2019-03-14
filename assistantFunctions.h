@@ -43,7 +43,7 @@ void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHa
                                       myHashMap<bitcoin> *btcHT_ptr, int bitCoinValue) ;
 
 
-void readTransactionQueries(const myString &initiaTransacFile,  Synchroniser &sync);
+void readTransactionQueries(const myString &transacFile, Synchroniser &sync);
 
 
 //void readTransactionQueries(const myString &initiaTransacFile, myTransacHashMap &senderHT_ptr ,  myTransacHashMap  &receiverHT_ptr,

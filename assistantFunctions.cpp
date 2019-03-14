@@ -227,13 +227,13 @@ str_slice(char str[], int slice_from, int slice_to)
 //45 novaldach hackerman 30 11-01-2017 14:46
 
 
-void readTransactionQueries(const myString &initiaTransacFile,  Synchroniser &sync){
+void readTransactionQueries(const myString &transacFile, Synchroniser &sync){
 
     FILE * fp;
     char * line = nullptr;
     size_t len = 0;
     ssize_t read;
-    fp = fopen(initiaTransacFile .getMyStr(), "r");
+    fp = fopen(transacFile .getMyStr(), "r");
     if (fp == nullptr)
         exit(EXIT_FAILURE);
 

@@ -73,9 +73,9 @@ int main(int argc, char **argv) {
     do {
 //        cin >> buffer;
 
-//        strcpy(buffer , "requestTransactions  richard annie 10  ;  richard annie 10 12-01-2012 14:22;");
+        strcpy(buffer , "requestTransactions  richard annie 10  ;  richard annie 10 12-01-2012 14:22;");
 //        strcpy(buffer , "findEarnings richard ");
-        strcpy(buffer , "findPayments richard 10:00 15:00");
+//        strcpy(buffer , "findPayments richard 10:00 15:00");
 //        strcpy(buffer , "findEarnings richard 10:12 11-01-2014 15:12 1-3-2030 ");
 //        strcpy(buffer , "findEarnings richard  10:12  16:15"); //todo de paizei
 
