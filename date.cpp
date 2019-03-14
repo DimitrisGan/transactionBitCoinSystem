@@ -33,11 +33,11 @@ void date::timeNow(){
 
 }
 
-void date::setDate(char * setDate) {
+void date::setDate(myString setDate) {
     linkedList<char*> formatList;
-    split(setDate, "-" , formatList); /// separate all string commands by "-" and push them to the llist
+    split(setDate.getMyStr(), "-" , formatList); /// separate all string commands by "-" and push them to the llist
 
-    if (! formatList.getSize()){ //if size is zero then is not a date (maybe it is time)
+    if (formatList.getSize() == 1){ //if size is zero then is not a date (maybe it is time)
         return;
     }
     if (formatList.getSize()!=3){std::cerr << "DATE : "<<setDate<< " NOT VALID"<<endl;exit(NOT_VALID_DATE);}
@@ -46,7 +46,7 @@ void date::setDate(char * setDate) {
     iter = formatList.begin();
 
     if (!isNumber(*iter)){std::cerr << "DATE : "<<setDate<< " NOT VALID"<<endl;exit(NOT_VALID_DATE);}
-    this->year =  atoi(*iter);
+    this->day =  atoi(*iter);
 
     iter++;
     if (!isNumber(*iter)){std::cerr << "DATE : "<<setDate<< " NOT VALID"<<endl;exit(NOT_VALID_DATE);}
@@ -54,17 +54,17 @@ void date::setDate(char * setDate) {
 
     iter++;
     if (!isNumber(*iter)){std::cerr << "DATE : "<<setDate<< " NOT VALID"<<endl;exit(NOT_VALID_DATE);}
-    this->day = atoi(*iter);
+    this->year = atoi(*iter);
 
     this->hasDate=true;
 
 }
 
-void date::setTime(char *setTime) {
+void date::setTime(myString setTime) {
     linkedList<char*> formatList;
-    split(setTime, ":" , formatList); /// separate all string commands by "-" and push them to the llist
+    split(setTime.getMyStr(), ":" , formatList); /// separate all string commands by "-" and push them to the llist
 
-    if (! formatList.getSize()){ //if size is zero then is not a time (maybe it is date)
+    if ( formatList.getSize() == 1 ) { //if size is zero then is not a time (maybe it is date)
         return;
     }
 
@@ -86,7 +86,7 @@ void date::setTime(char *setTime) {
 }
 
 bool date::operator<(const date &rhs) const {
-    if (hasDate) {
+    if (hasDate && rhs.hasDate) {
         if (year < rhs.year)
             return true;
         if (rhs.year < year)
@@ -100,7 +100,7 @@ bool date::operator<(const date &rhs) const {
         if (rhs.day < day)
             return false;
     }
-    if (hasTime) {
+    if (hasTime && rhs.hasTime) {
         if (hour < rhs.hour)
             return true;
         if (rhs.hour < hour)

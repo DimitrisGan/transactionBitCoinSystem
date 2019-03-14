@@ -267,10 +267,10 @@ void readTransactionQueries(const myString &initiaTransacFile,  Synchroniser &sy
                 newTransac.setAmount(atoi(tokenStr));
             }
             if (i==4) { // DD-MM-YYYY
-                newTransac.getTransacTime().setDate(tokenStr);
+                newTransac.getTransacTime().setDate(token);
             }
             if (i==5) { //HH:MM
-                newTransac.getTransacTime().setTime(tokenStr);
+                newTransac.getTransacTime().setTime(token);
             }
 
             i++;
@@ -406,24 +406,26 @@ void filterTransactionsByDate(linkedList<char *> inputList, linkedList<transacti
 
     date d1;
     date d2;
+    myString token;
     linkedList<char*>::Iterator iter;
     iter = inputList.begin();
     iter++; //pass walletId
     if (inputList.getSize() == 3){ //format: [year1][year2] or [time1][time2]
-        d1.setDate(*iter);d1.setTime(*iter); //if it's year or time
-        iter++;
-        d2.setDate(*iter);d2.setTime(*iter); //if it's year or time
+        token = *iter;
+        d1.setDate(token);d1.setTime(token); //if it's year or time
+        iter++;token = *iter;
+        d2.setDate(token);d2.setTime(token); //if it's year or time
     }
     if (inputList.getSize() == 5){ //format: [time1][year1][time2][year2]
-
-        d1.setTime(*iter); //setTime for d1
-        iter++;
-        d1.setDate(*iter); //setYear for d1
+        token = *iter;
+        d1.setTime(token); //setTime for d1
+        iter++;token = *iter;
+        d1.setDate(token); //setYear for d1
         //==============
-        iter++; //move iterator to time2
-        d2.setTime(*iter); //setTime for d2
-        iter++;
-        d2.setDate(*iter); //setYear for d2
+        iter++;token = *iter; //move iterator to time2
+        d2.setTime(token); //setTime for d2
+        iter++;token = *iter;
+        d2.setDate(token); //setYear for d2
     }
 
     //from here the dates are set so we can filter the list

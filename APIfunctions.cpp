@@ -14,13 +14,20 @@ void findEarnings(char *buffer,Synchroniser &sync){
     char* walletId_str = resultList.getHead()->getData();
     myString walletId(walletId_str);
     linkedList<transaction *> returnedList = sync.getReceiverHT_ptr()->getAllTransactions(walletId);
-//    if (resultList.getSize() > 2)
-        linkedList<transaction *> filteredListByDate ;
+    if (resultList.getSize() == 1){
+        //todo cout the returnedList() ///////////////////////////////////////////////////////////
+        for (const auto item : returnedList) {
+            cout << item->transacId<<endl;
+        }
+        return;
+    }
+    linkedList<transaction *> filteredListByDate ;
     filterTransactionsByDate( resultList , returnedList , filteredListByDate) ;
 
 
-
-            cout <<" ";
+    for (const auto item : filteredListByDate) {
+        cout << item->transacId<<endl;
+    }
 }
 
 
@@ -58,7 +65,7 @@ void requestTransaction(char *buffer,Synchroniser &sync) {
             case 0: potentialTransac.senderWalletId = *iter;break;
             case 1: potentialTransac.receiverWalletId = *iter;break;
             case 2: if (!isNumber(*iter) ) {fprintf(stderr, "AMOUNT IN TRANSACTION IS NOT A NUMBER : %s\n", *iter);exit(EXIT_FAILURE);}
-                    potentialTransac.amount = atoi(*iter);break;
+                potentialTransac.amount = atoi(*iter);break;
             default: exit(EXIT_FAILURE);
         }
         i++;
@@ -66,14 +73,16 @@ void requestTransaction(char *buffer,Synchroniser &sync) {
     //now we have to check if in transaction there is given a date
 
     date date2insert;
+    myString token;
 
     if (resultList.getSize() == 5){ //there is also the date
         linkedList<char*> dateList2insert ;
-        date2insert.setDate(*iter);
+        token = *iter;
+        date2insert.setDate(token);
 //        dateList2insert.insert_last(*iter); //insert  DD-MM-YYYY
-        iter++;
+        iter++; token = *iter;
 //        dateList2insert.insert_last(*iter); //insert  HH:MM
-        date2insert.setTime(*iter);
+        date2insert.setTime(token);
         potentialTransac.transacTime = date2insert;
 
 

@@ -7,6 +7,7 @@
 
 
 #include "mylinkedList.h"
+#include "myString.h"
 
 struct date{
 
@@ -27,8 +28,8 @@ struct date{
 
     void timeNow();
 
-    void setDate(char* setDate);
-    void setTime(char* setTime);
+    void setDate(myString setDate);
+    void setTime(myString setTime);
 
 
     bool operator<(const date &rhs) const;
