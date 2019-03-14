@@ -25,6 +25,7 @@ void findEarnings(char *buffer,Synchroniser &sync){
     filterTransactionsByDate( resultList , returnedList , filteredListByDate) ;
 
 
+    cout<<"\n";
     for (const auto item : filteredListByDate) {
         cout << item->transacId<<endl;
     }

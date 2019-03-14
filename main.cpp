@@ -17,12 +17,12 @@ using  namespace std;
 int main(int argc, char **argv) {
     std::cout << "Hello, World!\n" << std::endl;
 
+
     ArgumentsKeeper argmKeeper;
-    /*
-      argmParser(argc, argv , argmKeeper);
+/*      argmParser(argc, argv , argmKeeper);
 
       argmKeeper.printArgs();
-   */
+*/
 
     unsigned bucketSizeInBytes = 100;
     unsigned tableSize =1;
@@ -74,7 +74,7 @@ int main(int argc, char **argv) {
 //        cin >> buffer;
 
 //        strcpy(buffer , "requestTransactions  richard annie 10  ;  richard annie 10 12-01-2012 14:22;");
-        strcpy(buffer , "findEarnings richard 11-01-2014  1-3-2030 ");
+        strcpy(buffer , "findEarnings richard 10:00 13-02-2018  20:00 13-02-2018 ");
 //        strcpy(buffer , "findEarnings richard 10:12 11-01-2014 15:12 1-3-2030 ");
 //        strcpy(buffer , "findEarnings richard  10:12  16:15"); //todo de paizei
 

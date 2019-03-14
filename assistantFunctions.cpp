@@ -36,28 +36,32 @@ void argmParser(int &argc, char **argv, struct ArgumentsKeeper &argmKeeper){
         }
 
         if(strcmp(argv[i],"-v")==0 && !flagV && argv[i + 1] != nullptr){
-            argmKeeper.bitCoinValue = atoi(argv[++i]);
+            if (! isNumber(argv[++i])) {fprintf(stderr, "ARGUMENT : %s IS NOT A NUMBER\n", argv[i]);exit(UNKNOWN_CMDARGUMENT);}
+            argmKeeper.bitCoinValue = atoi(argv[i]);
             flagV = true;
             i++;
             continue;
         }
 
         if(strcmp(argv[i],"-h1")==0 && !flagH1 && argv[i + 1] != nullptr){
-            argmKeeper.senderHashtableNumOfEntries = atoi(argv[++i]);
+            if (! isNumber(argv[++i])) {fprintf(stderr, "ARGUMENT : %s IS NOT A NUMBER\n", argv[i]);exit(UNKNOWN_CMDARGUMENT);}
+            argmKeeper.senderHashtableNumOfEntries = atoi(argv[i]);
             flagH1 = true;
             i++;
             continue;
         }
 
         if(strcmp(argv[i],"-h2")==0 && !flagH2 && argv[i + 1] != nullptr){
-            argmKeeper.receiverHashtableNumOfEntries = atoi(argv[++i]);
+            if (! isNumber(argv[++i])) {fprintf(stderr, "ARGUMENT : %s IS NOT A NUMBER\n", argv[i]);exit(UNKNOWN_CMDARGUMENT);}
+            argmKeeper.receiverHashtableNumOfEntries = atoi(argv[i]);
             flagH2 = true;
             i++;
             continue;
         }
 
         if(strcmp(argv[i],"-b")==0 && !flagB && argv[i + 1] != nullptr){
-            argmKeeper.bucketSize = atoi(argv[++i]);
+            if (! isNumber(argv[++i])) {fprintf(stderr, "ARGUMENT : %s IS NOT A NUMBER\n", argv[i]);exit(UNKNOWN_CMDARGUMENT);}
+            argmKeeper.bucketSize = atoi(argv[i]);
             flagB = true;
             i++;
             continue;
@@ -402,7 +406,6 @@ bool isNumber(char* s)
 void filterTransactionsByDate(linkedList<char *> inputList, linkedList<transaction *> allList, /*the list to filter*/
                               linkedList<transaction *> &outputList) {
 
-    cout << "geia sas!!\n";
 
     date d1;
     date d2;
@@ -431,7 +434,7 @@ void filterTransactionsByDate(linkedList<char *> inputList, linkedList<transacti
     //from here the dates are set so we can filter the list
 
     for ( auto item : allList) {
-        if (item->getTransacTime() > d1 && item->getTransacTime() < d2 )
+        if (item->getTransacTime() >= d1 && item->getTransacTime() <= d2 )
             outputList.insert_last(item);
     }
 
