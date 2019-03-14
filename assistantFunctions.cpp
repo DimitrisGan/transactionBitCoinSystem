@@ -419,7 +419,7 @@ void filterTransactionsByDate(linkedList<char *> inputList, linkedList<transacti
         iter++;token = *iter;
         d2.setDate(token);d2.setTime(token); //if it's year or time
     }
-    if (inputList.getSize() == 5){ //format: [time1][year1][time2][year2]
+    else if (inputList.getSize() == 5){ //format: [time1][year1][time2][year2]
         token = *iter;
         d1.setTime(token); //setTime for d1
         iter++;token = *iter;
@@ -429,6 +429,11 @@ void filterTransactionsByDate(linkedList<char *> inputList, linkedList<transacti
         d2.setTime(token); //setTime for d2
         iter++;token = *iter;
         d2.setDate(token); //setYear for d2
+    }
+    else{
+        std::cerr << "NOT GIVEN CORRECT DATE QUERY : "<< inputList<<endl;
+        exit(NOT_VALID_DATE);
+
     }
 
     //from here the dates are set so we can filter the list
