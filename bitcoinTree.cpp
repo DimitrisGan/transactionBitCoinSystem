@@ -239,7 +239,7 @@ void t_node::setTransac_ptr(transaction *transac_ptr) {
 }
 
 
-void btc_tree::getUniqueTransacList(t_node* node ,linkedList<myString> &transIdUnique_list) { //with the help of preorder traverse
+void btc_tree::getUniqueTransacIdsList(t_node *node, linkedList<myString> &transIdUnique_list) { //with the help of preorder traverse
 
     {
         if (!node)
@@ -251,8 +251,26 @@ void btc_tree::getUniqueTransacList(t_node* node ,linkedList<myString> &transIdU
             }
         }
 
-        getUniqueTransacList(node->left,transIdUnique_list);
-        getUniqueTransacList(node->right ,transIdUnique_list);
+        getUniqueTransacIdsList(node->left, transIdUnique_list);
+        getUniqueTransacIdsList(node->right, transIdUnique_list);
+    }
+}
+
+
+void btc_tree::getUniqueTransacList(t_node *node, linkedList<transaction*> &trans_list) { //with the help of preorder traverse
+
+    {
+        if (!node)
+            return;
+        if ( node->transac_ptr) {
+            if (!trans_list.exists(
+                    node->transac_ptr)) { //if the transaction Id doesnt exist then push it to the list
+                trans_list.insert_last(node->transac_ptr);
+            }
+        }
+
+        getUniqueTransacList(node->left, trans_list);
+        getUniqueTransacList(node->right, trans_list);
     }
 }
 

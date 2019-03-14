@@ -29,7 +29,7 @@ void findEarnings(char *buffer,Synchroniser &sync){
         totalEarnings+=item->getAmount();
         cout << *item <<endl;
     }
-    cout <<"Total Earnings for "<<walletId << " is "<<totalEarnings<<endl;
+    cout <<"The total amount of Earnings for "<<walletId << " is "<<totalEarnings<<endl;
 }
 
 
@@ -55,7 +55,7 @@ void findPayments(char *buffer, Synchroniser &sync) {
         totalPayments+=item->getAmount();
         cout << *item <<endl;
     }
-    cout <<"Total Payments for "<<walletId << " is "<<totalPayments<<endl;
+    cout <<"The total amount of Payments for "<<walletId << " is "<<totalPayments<<endl;
 }
 
 
@@ -149,7 +149,8 @@ void bitCoinStatus(char *buffer, Synchroniser &sync){
     int initBtcValue = sync.getBtcHT_ptr()->getData(btcId)->getInitialValue();
 
     linkedList<myString> numberOfTransacUsed_list ;
-    sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getUniqueTransacList(sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getRoot() , numberOfTransacUsed_list);
+    sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getUniqueTransacIdsList(
+            sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getRoot(), numberOfTransacUsed_list);
 //    cout << numberOfTransacUsed_list <<endl;
 
     bool hasUnspent = sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->hasUnspentAmount(
@@ -163,7 +164,26 @@ void bitCoinStatus(char *buffer, Synchroniser &sync){
         unspentAmount=0;
     }
 
-    cout << "btc ID #"<< buffer << ": [InitValue]:"<<initBtcValue<<"\t [numberOfTransactionsInvolved]:"<<numberOfTransacUsed_list.getSize()<<"\t [unspentAmount]:"<<unspentAmount<<endl;
-    
+    cout << "btcID #"<< buffer << ": [InitValue]:"<<initBtcValue<<"\t [numberOfTransactionsInvolved]:"<<numberOfTransacUsed_list.getSize()<<"\t [unspentAmount]:"<<unspentAmount<<endl;
+
 }
+
+void traceCoin(char *buffer, Synchroniser &sync) {
+
+    myString btcId(buffer);
+
+    int initBtcValue = sync.getBtcHT_ptr()->getData(btcId)->getInitialValue();
+
+    linkedList<transaction*> transacInvolved_list ;
+    sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getUniqueTransacList(
+            sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getRoot(), transacInvolved_list);
+
+
+    for (const auto &item : transacInvolved_list) {
+        cout<< *item<<endl;
+    }
+
+
+}
+
 

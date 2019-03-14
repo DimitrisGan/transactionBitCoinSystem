@@ -28,27 +28,19 @@ void transaction::updateTransacionPtrIn_t_nodes() {
     }
 }
 
+
+//889 Maria Ronaldo 50 25-12-2018 20:08
+//776 Lionel Antonella 150 14-02-2019 10:05
 ostream &operator<<(ostream &os, const transaction &transaction1) {
-    os << "TR_ID#: " << transaction1.transacId << setw(10)<< " SENDER: " << transaction1.senderWalletId <<setw(10)
-       << " RECEIVER: " << transaction1.receiverWalletId << " DATE: " << transaction1.transacTime
-       << " AMOUNT: " << transaction1.amount ;
+    os << transaction1.transacId <<" " << transaction1.senderWalletId <<" " << transaction1.receiverWalletId << " " << transaction1.transacTime
+       << " " << transaction1.amount ;
     return os;
 }
-//void setTransac_ptr(transaction *transac_ptr);
-
-//std::ostream & operator<<(std::ostream & os, const linkedList<T>& rhs)
-//{
-//    if (rhs.isEmpty()){
-//        os << "EMPTY LIST\n";
-//
-//    }
-//    for (l_node<T> *temp = rhs.head; temp != nullptr; temp = temp->next)
-//    {
-//        os << temp->data;
-//        if (temp->next != nullptr)
-//            os << ", ";
-//    }
-////    os<<"\n";
+//ostream &operator<<(ostream &os, const transaction &transaction1) {
+//    os << "TR_ID#: " << transaction1.transacId << setw(10)<< " SENDER: " << transaction1.senderWalletId <<setw(10)
+//       << " RECEIVER: " << transaction1.receiverWalletId << " DATE: " << transaction1.transacTime
+//       << " AMOUNT: " << transaction1.amount ;
 //    return os;
 //}
+
 

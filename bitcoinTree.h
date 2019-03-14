@@ -28,7 +28,7 @@ struct t_node{
 
     t_node( t_node &n);
 
-        virtual ~t_node();
+    virtual ~t_node();
 
     myString walletId;
     int amount;
@@ -65,33 +65,34 @@ public:
 
     bool operator!=(const btc_tree &rhs) const;
 
-    void getUniqueTransacList(t_node* node ,linkedList<myString> &transIdUnique_list);
+    void getUniqueTransacIdsList(t_node *node, linkedList<myString> &transIdUnique_list);
+
+    void getUniqueTransacList(t_node *node, linkedList<transaction*> &trans_list);
 
     bool hasUnspentAmount(t_node *node);
     int getUnspentAmount(t_node *node);
 
 
-        t_node *search(int key);
-    void destroy_tree();
 
 
 
+/*  NOT IMPLEMENTED
     void inorder_print();
     void postorder_print();
     void preorder_print();
+    t_node *search(int key);
+    void destroy_tree();
+*/
 
 private:
     void destroy_tree(t_node *leaf);
     void insert(myString receiverWalletID ,int amountToSend , t_node* senderNode); //inserts one t_node
-
+/* NOT IMPLEMENTED
     t_node *search(int key, t_node *leaf);
-
-
-
-
     void inorder_print(t_node *leaf);
     void postorder_print(t_node *leaf);
     void preorder_print(t_node *leaf);
+*/
 
     t_node *root;
 };
