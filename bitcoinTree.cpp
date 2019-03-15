@@ -30,11 +30,8 @@ t_node::~t_node() {
 //    this->right= nullptr;
 }
 
-// function to print leaf
-// nodes from left to right
-//template<class T>
 
-/*pairnw th lista me ta leaf nodes*/
+/*take the leaf nodes of the tree*/
 //https://www.geeksforgeeks.org/print-leaf-nodes-left-right-binary-tree/
 void  getLeafs(t_node *root , linkedList<t_node*>  &leafs_list)
 {
@@ -45,7 +42,7 @@ void  getLeafs(t_node *root , linkedList<t_node*>  &leafs_list)
     // if node is leaf node, insert its data
     if (!root->left && !root->right)
     {
-        leafs_list.insert_last(root); //todo tha xw thema edw
+        leafs_list.insert_last(root);
         return;
     }
 
@@ -61,7 +58,7 @@ void  getLeafs(t_node *root , linkedList<t_node*>  &leafs_list)
 
 }
 
-/*vriskw auta me to sugkerkimeno senderWalletId*/
+/*find-retrieve these with the specific walletId*/
 void searchKeyIdFromLeafs(myString keyWalletId, linkedList<t_node*> &leafs_list, linkedList<t_node*> &found_list){
 
     for ( auto &item : leafs_list) {
@@ -73,39 +70,24 @@ void searchKeyIdFromLeafs(myString keyWalletId, linkedList<t_node*> &leafs_list,
 
 
 
-
-
-
-//
-//
 /*basically inserts all the amount asked for the transcation in the tree.
- * Thus,it can add more than 2 nodes in the tree*/
+ * Thus, can add more than 2 nodes in the tree*/
 void btc_tree::insert(myString senderWalletId, myString receiverWalletId, int amount , linkedList<t_node*> &returnPtrs2t_nodes ){
 
 
-//    if ( leaf->amount < amount){ // lathos
-//        fprintf(stderr, "Can't divide-send the bitcoin into pieces ");
-//        exit(AMOUNT_NOT_POSSIBLE_TO_DIVIDE_IN_BITCOINTREE);
-//    }
-
-    linkedList<t_node*> leafs_list; //logika tha paizw me pointers gia na grapsw kateutheian ston komvo
+    linkedList<t_node*> leafs_list; //play with pointers to write/insert directly in the tree
     getLeafs(this->root , leafs_list);
-    //kane searchKeyIdFromLeafs ola ta leafs  kai apo kei pare ola ta receiverWalletId pou einia o receiverWalletId sender
+
+    /*search all leafs and take the ones that the key is identical*/
     linkedList<t_node*> found_list;
     searchKeyIdFromLeafs(senderWalletId, leafs_list, found_list);
-    //todo mhpws na pairna deiktes kai etsi wste na ekana eskava kateutheian panw stous komvous????
-    //todo
-    //todo
-    //todo
-    //todo
-    //todo
+
     int amountLeft = amount;
     for (const auto &senderLeafNode : found_list) {
-        //todo insert node here
+
         if ( amountLeft <= senderLeafNode->amount){ //means that we only need one node too add
-            //and also that will take only the amountLeft2add because is less than the potential amount to give
-            //todo digNode() - createNode()
-            //todo add2Tree()
+            //and also that [the newly created node]will take only the amountLeft2add because is less than the potential amount to give
+
             returnPtrs2t_nodes.insert_last(senderLeafNode); //add a pointer to the t_node before we insert children
 
             this->insert(receiverWalletId ,amountLeft , senderLeafNode);
@@ -113,9 +95,8 @@ void btc_tree::insert(myString senderWalletId, myString receiverWalletId, int am
             break;
 
         }
-        else{ //means that the amount of the node is not enough we need to add another node
-            //todo digNode() - createNode()
-            //todo add2Tree()
+        else{ //means that the amount of the node is not enough thus we need to add another node
+
             returnPtrs2t_nodes.insert_last(senderLeafNode); //add a pointer to the t_node before we insert children
 
             this->insert(receiverWalletId ,senderLeafNode->amount /*node can give only the amount that contains*/ , senderLeafNode);
@@ -174,31 +155,14 @@ t_node::t_node() {}
  * */
 void btc_tree::insert(myString receiverWalletID ,int amountToSend , t_node* senderNode) //inserts 2 t_node
 {
-//lathos o root de tha nai null
-//    if(root != nullptr){
-//        insert(key, root);
-//    }else{
+
     senderNode->left = new t_node;
-
-//    senderNode->left->receiverWalletId = receiverWalletID;
-//    senderNode->left->amountToSend = ;
-//    senderNode->left->left = nullptr ;
-//    senderNode->left->right = nullptr ;
-
     senderNode->left->fillNode(receiverWalletID,amountToSend, nullptr, nullptr);
-
 
     int amountRemain = senderNode->amount - amountToSend;
     assert(amountRemain >=0);
 
     senderNode->right = new t_node;
-//    senderNode->right->receiverWalletId = senderNode->receiverWalletId;
-//    senderNode->right->amountToSend = ;
-//
-//    senderNode->right->left = nullptr ;
-//    senderNode->right->right = nullptr ;
-//
-
     senderNode->right->fillNode(senderNode->walletId , amountRemain , nullptr , nullptr);
 }
 
@@ -215,16 +179,12 @@ bool btc_tree::operator!=(const btc_tree &rhs) const {
 }
 
 
-btc_tree::btc_tree( btc_tree &rhs)
+btc_tree::btc_tree( btc_tree &rhs) /*here we achieve deep copy of the btc_tree*/
         : root(new t_node(*rhs.root)){}
-
 
 // recursively call copy constructor
 
-
 t_node::t_node( t_node &n) : walletId(n.walletId) , amount(n.amount) ,left(nullptr) ,right(nullptr){
-
-//    t_node * newNode  (n.walletId,n.amount, nullptr, nullptr);
 
     if (n.left)
         left = new t_node(*n.left);
@@ -232,29 +192,28 @@ t_node::t_node( t_node &n) : walletId(n.walletId) , amount(n.amount) ,left(nullp
         right = new t_node(*n.right);
 }
 
+
 void t_node::setTransac_ptr(transaction *transac_ptr) {
     t_node::transac_ptr = transac_ptr;
 }
 
-
+/*get all the transactions[Ids] that the current btc is involved*/
 void btc_tree::getUniqueTransacIdsList(t_node *node, linkedList<myString> &transIdUnique_list) { //with the help of preorder traverse
 
-    {
-        if (!node)
-            return;
-        if ( node->transac_ptr) {
-            if (!transIdUnique_list.exists(
-                    node->transac_ptr->transacId)) { //if the transaction Id doesnt exist then push it to the list
-                transIdUnique_list.insert_last(node->transac_ptr->transacId);
-            }
+    if (!node)
+        return;
+    if ( node->transac_ptr) {
+        if (!transIdUnique_list.exists(
+                node->transac_ptr->transacId)) { //if the transaction Id doesnt exist then push it to the list
+            transIdUnique_list.insert_last(node->transac_ptr->transacId);
         }
-
-        getUniqueTransacIdsList(node->left, transIdUnique_list);
-        getUniqueTransacIdsList(node->right, transIdUnique_list);
     }
+    getUniqueTransacIdsList(node->left, transIdUnique_list);
+    getUniqueTransacIdsList(node->right, transIdUnique_list);
+
 }
 
-
+/*get all the transactions that the current btc is involved*/
 void btc_tree::getUniqueTransacList(t_node *node, linkedList<transaction*> &trans_list) { //with the help of preorder traverse
 
     {
@@ -296,7 +255,7 @@ int btc_tree::getUnspentAmount(t_node *node) {
 
 
 
-//next time will be implemented
+//next time these will be implemented
 
 //TreeNode::TreeNode(const TreeNode &n)
 //        : value(n.value), count(n.count), left(nullptr), right(nullptr) {
