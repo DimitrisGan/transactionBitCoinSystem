@@ -5,12 +5,6 @@
 #include "bitcoin.h"
 
 
-
-
-
-
-
-
 bitcoin::bitcoin( myString id, btc_tree *transactionTree_ptr) : id(id), transactionTree_ptr(
         transactionTree_ptr) {}
 
@@ -50,7 +44,7 @@ bitcoin::~bitcoin() {
     transactionTree_ptr = nullptr;
 }
 
-bitcoin::bitcoin(bitcoin &right) { //todo deep copy
+bitcoin::bitcoin(bitcoin &right) {
 
     this->id =right.id;
     this->transactionTree_ptr = new btc_tree (*right.transactionTree_ptr);

@@ -24,7 +24,6 @@ void findEarnings(char *buffer,Synchroniser &sync){
     }
 
     int totalEarnings = 0;
-    cout<<"\n";
     for (auto item : filteredListByDate) {
         totalEarnings+=item->getAmount();
         cout << *item <<endl;
@@ -35,7 +34,7 @@ void findEarnings(char *buffer,Synchroniser &sync){
 
 void findPayments(char *buffer, Synchroniser &sync) {
     linkedList<char*> resultList;
-    split(buffer, " " , resultList); /// separate all string commands by ";" and push them to the llist
+    split(buffer, " " , resultList); /// separate all string commands by " " and push them to the llist
     char* walletId_str = resultList.getHead()->getData();
     myString walletId(walletId_str);
     linkedList<transaction *> returnedList = sync.getSenderHT_ptr()->getAllTransactions(walletId); //the only difference with findEarnings
@@ -50,7 +49,7 @@ void findPayments(char *buffer, Synchroniser &sync) {
     }
 
     int totalPayments = 0;
-    cout<<"\n";
+
     for (auto item : filteredListByDate) {
         totalPayments+=item->getAmount();
         cout << *item <<endl;
@@ -65,7 +64,6 @@ void requestTransactionsFromFile(char *fileName,Synchroniser &sync) {
     split(fileName," ",cleanFromWhiteSpaces);
     fileName = cleanFromWhiteSpaces.getHead()->getData();
     FILE *fp;
-    char *line = nullptr;
     size_t len = 0;
     fp = fopen(fileName, "r");
     if (fp == nullptr){
@@ -137,11 +135,10 @@ void requestTransaction(char *buffer,Synchroniser &sync) {
     if (resultList.getSize() == 5){ //there is also the date
         linkedList<char*> dateList2insert ;
         token = *iter;
-        date2insert.setDate(token);
-//        dateList2insert.insert_last(*iter); //insert  DD-MM-YYYY
+        date2insert.setDate(token); //insert  DD-MM-YYYY
         iter++; token = *iter;
-//        dateList2insert.insert_last(*iter); //insert  HH:MM
-        date2insert.setTime(token);
+
+        date2insert.setTime(token); //insert  HH:MM
         potentialTransac.transacTime = date2insert;
 
 
@@ -155,10 +152,8 @@ void requestTransaction(char *buffer,Synchroniser &sync) {
     }
 
 
-
     sync.insertTransaction(potentialTransac);
 
-    //todo edw tha ginei insertTransaction() --> fusika edw tha ginei kai to update tou transacId
 }
 
 
@@ -179,7 +174,6 @@ void bitCoinStatus(char *buffer, Synchroniser &sync){
     linkedList<myString> numberOfTransacUsed_list ;
     sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getUniqueTransacIdsList(
             sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getRoot(), numberOfTransacUsed_list);
-//    cout << numberOfTransacUsed_list <<endl;
 
     bool hasUnspent = sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->hasUnspentAmount(
             sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getRoot());
@@ -200,12 +194,9 @@ void traceCoin(char *buffer, Synchroniser &sync) {
 
     myString btcId(buffer);
 
-    int initBtcValue = sync.getBtcHT_ptr()->getData(btcId)->getInitialValue();
-
     linkedList<transaction*> transacInvolved_list ;
     sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getUniqueTransacList(
             sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getRoot(), transacInvolved_list);
-
 
     for (const auto &item : transacInvolved_list) {
         cout<< *item<<endl;

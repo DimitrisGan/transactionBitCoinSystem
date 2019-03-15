@@ -15,14 +15,12 @@
 using  namespace std;
 
 int main(int argc, char **argv) {
-    std::cout << "Hello, World!\n" << std::endl;
 
 
     ArgumentsKeeper argmKeeper;
-/*      argmParser(argc, argv , argmKeeper);
+    argmParser(argc, argv , argmKeeper);
 
-      argmKeeper.printArgs();
-*/
+//    argmKeeper.printArgs();
 
     unsigned bucketSizeInBytes = 100;
     unsigned tableSize =1;
@@ -35,18 +33,14 @@ int main(int argc, char **argv) {
     myHashMap< bitcoin>     *btcHT     = new myHashMap< bitcoin> (tableSize , myHashFunc );
     myHashMap<transaction>  *transacHT = new myHashMap<transaction>(tableSize , myHashFunc );
 
-    argmKeeper.bitCoinBalancesFile = "bitCoinBalancesFile"; //todo vgalto
-
     btcBalancesFile_parsing_and_save(argmKeeper.bitCoinBalancesFile , walletHT , btcHT , btcValue); //save also to walletHT,btcHT
 
 
     myTransacHashMap  *senderHT = new myTransacHashMap(tableSize ,myHashFunc   ,bucketSizeInBytes);
     myTransacHashMap  *receiverHT = new myTransacHashMap(tableSize ,myHashFunc   ,bucketSizeInBytes);
 
-
     Synchroniser sync (senderHT,receiverHT,walletHT,btcHT ,transacHT); //initiate sync struct
 
-    argmKeeper.transactionsFile = "transactionFile";
     readTransactionQueries(argmKeeper.transactionsFile ,sync );
 
     //======================================================
@@ -68,7 +62,6 @@ int main(int argc, char **argv) {
 
     char* buffer;
     char* copybuffer;
-    char* initBuffer= nullptr;
     linkedList<char*> cin_list;
     linkedList<char*> cin_list2;
 
@@ -82,8 +75,7 @@ int main(int argc, char **argv) {
 //        strcpy(buffer , "findEarnings richard ");
 //        strcpy(buffer , "findPayments richard 10:00 15:00");
 //        strcpy(buffer , "findEarnings richard 10:12 11-01-2014 15:12 1-3-2030 ");
-//        strcpy(buffer , "findEarnings richard  10:12  16:15"); //todo de paizei
-
+//        strcpy(buffer , "findEarnings richard  10:12  16:15");
 //        strcpy(buffer , "walletStatus lookingforagoogusernametoo");
 //        strcpy(buffer , "bitCoinStatus 541");
 //        strcpy(buffer , "traceCoin 541");
@@ -103,7 +95,7 @@ int main(int argc, char **argv) {
         if (substr[strlen(substr) -1] == '\n')
             substr[strlen(substr)-1]= '\0';
 
-    if (strcmp(commandType,"requestTransactions") ==0){ //check here if input is file or transactions
+        if (!strcmp(commandType,"requestTransactions")){ //check here if input is file or transactions
 
             if (cin_list.getSize() == 2)
                 requestTransactionsFromFile(substr, sync); //substr contains the inputFile name
@@ -112,37 +104,35 @@ int main(int argc, char **argv) {
         }
 
 
-        if (strcmp(commandType,"findEarnings") ==0){
+        if (!strcmp(commandType,"findEarnings")){
 
             findEarnings(substr, sync);
         }
 
 
-        if (strcmp(commandType,"findPayments") ==0){
+        if (!strcmp(commandType,"findPayments")){
 
             findPayments(substr, sync);
         }
 
 
-        if (strcmp(commandType,"walletStatus") ==0){
+        if (!strcmp(commandType,"walletStatus")){
 
             walletStatus(substr, sync);
         }
 
-        if (strcmp(commandType,"bitCoinStatus") ==0){
+        if (!strcmp(commandType,"bitCoinStatus")){
 
             bitCoinStatus(substr, sync);
         }
 
-        if (strcmp(commandType,"traceCoin") ==0){
+        if (!strcmp(commandType,"traceCoin")){
 
             traceCoin(substr, sync);
         }
 
-        if ( strcmp(commandType,"exit") ==0){flagExit =true;}
+        if (!strcmp(commandType,"exit")){flagExit =true;}
         cin_list.clear();
-//        copybuffer--; //don't for
-
 
         free(buffer);buffer= nullptr;
         free(copybuffer);copybuffer= nullptr;

@@ -104,132 +104,91 @@ void argmParser(int &argc, char **argv, struct ArgumentsKeeper &argmKeeper){
 }
 
 
-void ArgumentsKeeper::printArgs() {
 
-    cout << "~~~~   Arguments Given    ~~~~~"<<endl;
-    cout << "bitCoinBalancesFile (-a) : \t\t" << bitCoinBalancesFile <<endl;
-    cout << "transactionsFile (-t) : \t\t" << transactionsFile <<endl;
-    cout << "bitCoinValue (-v) : \t\t\t" << bitCoinValue <<endl;
-    cout << "senderHashtableNumOfEntries (-h1) : \t" << senderHashtableNumOfEntries <<endl;
-    cout << "receiverHashtableNumOfEntries (-h2) : \t" << receiverHashtableNumOfEntries <<endl;
-    cout << "bucketSize (-b) : \t\t\t" << bucketSize <<endl;
-}
+//richard 541 896 453 670 432
+//annie 235 5490 325
 
+void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHashMap<wallet > *walletHT_ptr,
+                                      myHashMap<bitcoin> *btcHT_ptr, int bitCoinValue) {
 
+    FILE * fp;
+    char * line = nullptr;
+    size_t len = 0;
+    ssize_t read;
 
-
-
-void split(char *str, const char *delimiter, linkedList<char *> &result2return) {
-
-    char* token ;
-//    linkedList<char*> result;
-
-    token = strtok(str , delimiter);
-
-    while (token!= nullptr){
-//        printf("'%s'\n", token);
-
-        if (token[0] == '\n')
-            token++ ;
-        if (token[strlen(token) -1] == '\n')
-            token[strlen(token)-1]= '\0';
-        if (!(token[0] == ' ' && strlen(token) == 1)) //means that is not a whitespace
-            result2return.insert_last(token);
-
-        token = strtok(nullptr, delimiter);
-
+    fp = fopen(btcInitialOwnersFile .getMyStr(), "r");
+    if (fp == nullptr){
+        std::cerr << "ERROR IN OPENING THE FILE :"<< btcInitialOwnersFile.getMyStr()<<endl;
+        exit(FILE_ACCESS);
     }
 
-}
+    linkedList<char*> resultList;
+    char delim[] = " ";
+    while ((read = getline(&line, &len, fp)) != -1) {
+
+        if (line[0] == '\n'){continue;} //skip empty lines
+
+        split(line, delim , resultList); /// push all char* tokens to the list
+
+        myString new_walletId;
+
+        int balance =0;
+        linkedList<myString> btcList;
+        linkedList<int> amountList;
+
+        bool  isUserName= true;
+
+        for ( auto tokenStr : resultList) {
+            //convert token to myString
+
+            myString token(tokenStr);
+//
+            if (isUserName) { //means that we have the user name (=new_walletId)
+                new_walletId = token;
+                isUserName = false;
+
+            }
+
+            else{ //there is a btc id to insert in wallet's user
 
 
-void removeFirst(char * str, const char * toRemove)
-{
-    int i, j;
-    int len, removeLen;
-    int found = 0;
+                btcList.insert_last(token);
+                amountList.insert_last(bitCoinValue);
+                balance+= bitCoinValue;
 
-    len = strlen(str);
-    removeLen = strlen(toRemove);
+            }
 
-    for(i=0; i<len; i++)
-    {
-        found = 1;
-        for(j=0; j<removeLen; j++)
-        {
-            if(str[i+j] != toRemove[j])
-            {
-                found = 0;
+            if (resultList.getSize() == 1) {  // in case that the user doesn't have a wallet [avoid seg for user with empty wallet]
                 break;
             }
+
         }
 
-        /* If word has been found then remove it by shifting characters  */
-        if(found == 1)
-        {
-            for(j=i; j<=len-removeLen; j++)
-            {
-                str[j] = str[j + removeLen];
+        //insert to wallet HashTable
+        wallet wallet2insert(new_walletId,balance,btcList,amountList);
+        myString key = new_walletId;
+        walletHT_ptr->insert(key , wallet2insert);
+
+        if (resultList.getSize() != 1) { //avoid to create btcTree for empty wallets
+            // in case that the user has a wallet with coins
+            //insert to btc HashTable
+            for (auto item: wallet2insert.getBtcIdsOwned_list()) {
+                //create a btcTree and add it to the new btc struct
+                btc_tree *new_btcTreePtr = new btc_tree(new_walletId, bitCoinValue);
+                bitcoin new_btc(item, new_btcTreePtr);
+                btcHT_ptr->insert(new_btc.id, new_btc);
+
             }
-
-            // Terminate from loop so only first occurrence is removed
-            break;
         }
+
+        resultList.clear();
     }
+
+
+    fclose(fp);
+    if (line)
+        free(line);
 }
-
-/**
- * Extracts a selection of string and return a new string or NULL.
- * It supports both negative and positive indexes.
- */
-char *
-str_slice(char str[], int slice_from, int slice_to)
-{
-    // if a string is empty, returns nothing
-    if (str[0] == '\0')
-        return NULL;
-
-    char *buffer;
-    size_t str_len, buffer_len;
-
-    // for negative indexes "slice_from" must be less "slice_to"
-    if (slice_to < 0 && slice_from < slice_to) {
-        str_len = strlen(str);
-
-        // if "slice_to" goes beyond permissible limits
-        if (abs(slice_to) > str_len - 1)
-            return NULL;
-
-        // if "slice_from" goes beyond permissible limits
-        if (abs(slice_from) > str_len)
-            slice_from = (-1) * str_len;
-
-        buffer_len = slice_to - slice_from;
-        str += (str_len + slice_from);
-
-        // for positive indexes "slice_from" must be more "slice_to"
-    } else if (slice_from >= 0 && slice_to > slice_from) {
-        str_len = strlen(str);
-
-        // if "slice_from" goes beyond permissible limits
-        if (slice_from > str_len - 1)
-            return NULL;
-
-        buffer_len = slice_to - slice_from;
-        str += slice_from;
-
-        // otherwise, returns NULL
-    } else
-        return NULL;
-
-    buffer =(char*) calloc(buffer_len, sizeof(char));
-    strncpy(buffer, str, buffer_len);
-    return buffer;
-}
-
-//23 richard crystalsmith 20 13-02-2018 12:32
-//
-//45 novaldach hackerman 30 11-01-2017 14:46
 
 
 void readTransactionQueries(const myString &transacFile, Synchroniser &sync){
@@ -291,110 +250,66 @@ void readTransactionQueries(const myString &transacFile, Synchroniser &sync){
     }
 
 
-
     fclose(fp);
     if (line)
         free(line);
 }
 
 
+void split(char *str, const char *delimiter, linkedList<char *> &result2return) {
 
+    char* token ;
 
+    token = strtok(str , delimiter);
 
+    while (token!= nullptr){
 
+        if (token[0] == '\n')
+            token++ ;
+        if (token[strlen(token) -1] == '\n')
+            token[strlen(token)-1]= '\0';
+        if (!(token[0] == ' ' && strlen(token) == 1)) //means that is not a whitespace
+            result2return.insert_last(token);
 
-//richard 541 896 453 670 432
-//annie 235 5490 325
+        token = strtok(nullptr, delimiter);
 
-void btcBalancesFile_parsing_and_save(const myString &btcInitialOwnersFile, myHashMap<wallet > *walletHT_ptr,
-                                      myHashMap<bitcoin> *btcHT_ptr, int bitCoinValue) {
-
-
-    FILE * fp;
-    char * line = nullptr;
-    size_t len = 0;
-    ssize_t read;
-
-    fp = fopen(btcInitialOwnersFile .getMyStr(), "r");
-    if (fp == nullptr){
-        std::cerr << "ERROR IN OPENING THE FILE :"<< btcInitialOwnersFile.getMyStr()<<endl;
-        exit(FILE_ACCESS);
     }
+}
 
 
+void removeFirst(char * str, const char * toRemove)
+{
+    int i, j;
+    int len, removeLen;
+    int found = 0;
 
+    len = strlen(str);
+    removeLen = strlen(toRemove);
 
-    linkedList<char*> resultList;
-    char delim[] = " ";
-    while ((read = getline(&line, &len, fp)) != -1) {
-
-        if (line[0] == '\n'){continue;} //skip empty lines
-
-        split(line, delim , resultList); /// push all char* tokens to the list
-
-        myString new_walletId;
-
-        int balance =0;
-        linkedList<myString> btcList;
-        linkedList<int> amountList;
-
-        bool  isUserName= true;
-
-
-
-        for ( auto tokenStr : resultList) {
-            //convert token to myString
-
-            myString token(tokenStr);
-//
-            if (isUserName) { //means that we have the user name (=new_walletId)
-                new_walletId = token;
-                isUserName = false;
-
-
-            }
-
-            else{ //there is a btc id to insert in wallet's user
-
-
-                btcList.insert_last(token);
-                amountList.insert_last(bitCoinValue);
-                balance+= bitCoinValue;
-
-            }
-
-            if (resultList.getSize() == 1) {  // in case that the user doesn't have a wallet [avoid seg for user with empty wallet]
+    for(i=0; i<len; i++)
+    {
+        found = 1;
+        for(j=0; j<removeLen; j++)
+        {
+            if(str[i+j] != toRemove[j])
+            {
+                found = 0;
                 break;
             }
-
         }
 
-
-        //insert to wallet HashTable
-        wallet wallet2insert(new_walletId,balance,btcList,amountList);
-        myString key = new_walletId;
-        walletHT_ptr->insert(key , wallet2insert);
-
-        if (resultList.getSize() != 1) { //avoid to create btcTree for empty wallets
-            // in case that the user has a wallet with coins
-            //insert to btc HashTable
-            for (auto item: wallet2insert.getBtcIdsOwned_list()) {
-                //create a btcTree and add it to the new btc struct
-                btc_tree *new_btcTreePtr = new btc_tree(new_walletId, bitCoinValue);
-                bitcoin new_btc(item, new_btcTreePtr);
-                btcHT_ptr->insert(new_btc.id, new_btc);
-
+        /* If word has been found then remove it by shifting characters  */
+        if(found == 1)
+        {
+            for(j=i; j<=len-removeLen; j++)
+            {
+                str[j] = str[j + removeLen];
             }
+
+            // Terminate from loop so only first occurrence is removed
+            break;
         }
-
-        resultList.clear();
     }
-
-
-
-    fclose(fp);
-    if (line)
-        free(line);
 }
 
 
@@ -409,7 +324,6 @@ bool isNumber(char* s)
 
 void filterTransactionsByDate(linkedList<char *> inputList, linkedList<transaction *> allList, /*the list to filter*/
                               linkedList<transaction *> &outputList) {
-
 
     date d1;
     date d2;
@@ -450,8 +364,6 @@ void filterTransactionsByDate(linkedList<char *> inputList, linkedList<transacti
 
 }
 
-
-
 char * getline() {
     char * line = (char*)malloc(100), * linep = line;
     size_t lenmax = 100, len = lenmax;
@@ -484,10 +396,73 @@ char * getline() {
     return linep;
 }
 
+
+//========BELOW are not used=======
+
+/**
+ * Extracts a selection of string and return a new string or NULL.
+ * It supports both negative and positive indexes.
+ */
+char * str_slice(char str[], int slice_from, int slice_to)
+{
+    // if a string is empty, returns nothing
+    if (str[0] == '\0')
+        return NULL;
+
+    char *buffer;
+    size_t str_len, buffer_len;
+
+    // for negative indexes "slice_from" must be less "slice_to"
+    if (slice_to < 0 && slice_from < slice_to) {
+        str_len = strlen(str);
+
+        // if "slice_to" goes beyond permissible limits
+        if (abs(slice_to) > str_len - 1)
+            return NULL;
+
+        // if "slice_from" goes beyond permissible limits
+        if (abs(slice_from) > str_len)
+            slice_from = (-1) * str_len;
+
+        buffer_len = slice_to - slice_from;
+        str += (str_len + slice_from);
+
+        // for positive indexes "slice_from" must be more "slice_to"
+    } else if (slice_from >= 0 && slice_to > slice_from) {
+        str_len = strlen(str);
+
+        // if "slice_from" goes beyond permissible limits
+        if (slice_from > str_len - 1)
+            return NULL;
+
+        buffer_len = slice_to - slice_from;
+        str += slice_from;
+
+        // otherwise, returns NULL
+    } else
+        return NULL;
+
+    buffer =(char*) calloc(buffer_len, sizeof(char));
+    strncpy(buffer, str, buffer_len);
+    return buffer;
+}
+
+
 //not working
 void trimNoise(char* str){ //noise considered '\n' ,whitespace and '\r'
     if (str[0] == '\n' || str[0] == ' '  )
         str++;   //shift one letter to avoid " " or "\n"
     if (str[strlen(str) -1] == '\n')
         str[strlen(str)-1]= '\0';
+}
+
+void ArgumentsKeeper::printArgs() {
+
+    cout << "~~~~   Arguments Given    ~~~~~"<<endl;
+    cout << "bitCoinBalancesFile (-a) : \t\t" << bitCoinBalancesFile <<endl;
+    cout << "transactionsFile (-t) : \t\t" << transactionsFile <<endl;
+    cout << "bitCoinValue (-v) : \t\t\t" << bitCoinValue <<endl;
+    cout << "senderHashtableNumOfEntries (-h1) : \t" << senderHashtableNumOfEntries <<endl;
+    cout << "receiverHashtableNumOfEntries (-h2) : \t" << receiverHashtableNumOfEntries <<endl;
+    cout << "bucketSize (-b) : \t\t\t" << bucketSize <<endl;
 }

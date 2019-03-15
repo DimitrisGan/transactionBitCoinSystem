@@ -12,12 +12,6 @@
 
 class transaction;
 
-// https://gist.github.com/toboqus/def6a6915e4abd66e922
-
-
-//using namespace std;
-
-
 
 
 struct t_node{
@@ -53,9 +47,7 @@ public:
     btc_tree( myString initWalletIdOwner , int initialBtcValue);
     ~btc_tree();
 
-//    btc_tree(const btc_tree &n);
     btc_tree( btc_tree &rhs);
-
 
     t_node *getRoot() const;
 
@@ -71,9 +63,6 @@ public:
 
     bool hasUnspentAmount(t_node *node);
     int getUnspentAmount(t_node *node);
-
-
-
 
 
 /*  NOT IMPLEMENTED
@@ -98,10 +87,12 @@ private:
 };
 
 
-
 void  getLeafs(t_node *root , linkedList<t_node*>  &leafs_list);
 void searchKeyIdFromLeafs(myString keyWalletId, linkedList<t_node*> &leafs_list, linkedList<t_node*> &found_list);
 
 
+
+
+// Source: https://gist.github.com/toboqus/def6a6915e4abd66e922
 
 #endif //TRANSACTIONBITCOINSYSTEM_BITCOINTREE_H

@@ -10,12 +10,10 @@
 btc_tree::btc_tree( myString initWalletIdOwner , int initialBtcValue){
 
     root = new t_node (initWalletIdOwner, initialBtcValue, nullptr, nullptr);
-//    root->fillNode(initWalletIdOwner,initialBtcValue, nullptr, nullptr);
 
 }
 
 btc_tree::~btc_tree(){
-//todo    destroy_tree();
     destroy_tree(this->root);
 }
 
@@ -164,7 +162,7 @@ bool t_node::operator==(t_node rhs) {
 }
 
 t_node::t_node( myString walletId, int amount, t_node *left, t_node *right) : walletId(walletId), amount(amount),
-                                                                                    left(left), right(right) {this->transac_ptr= nullptr;}
+                                                                              left(left), right(right) {this->transac_ptr= nullptr;}
 
 t_node::t_node() {}
 
@@ -279,7 +277,7 @@ bool btc_tree::hasUnspentAmount(t_node *node) {
     if (node->right)
         return hasUnspentAmount(node->right);
 
-     return node->walletId == root->walletId && node->amount!=0;
+    return node->walletId == root->walletId && node->amount!=0;
 
 }
 
@@ -289,11 +287,16 @@ int btc_tree::getUnspentAmount(t_node *node) {
     if (node->right)
         return getUnspentAmount(node->right);
 
-     return node->amount;
+    return node->amount;
 
 }
 
 
+
+
+
+
+//next time will be implemented
 
 //TreeNode::TreeNode(const TreeNode &n)
 //        : value(n.value), count(n.count), left(nullptr), right(nullptr) {
