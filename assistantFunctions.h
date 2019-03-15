@@ -61,6 +61,9 @@ bool isNumber(char* s);
 
 void filterTransactionsByDate(linkedList<char*> inputList ,linkedList<transaction *> allList , linkedList<transaction *>  &outputList);
 
+char * getline(void) ;
+
+void trimNoise(char* str); //noise considered '\n' ,whitespace and '\r'
 
 
 #endif //TRANSACTIONBITCOINSYSTEM_ASSISTANTFUNCTIONS_H

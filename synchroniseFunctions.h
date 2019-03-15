@@ -13,12 +13,7 @@
 #include "transacHashMap.h"
 #include "bitcoin.h"
 
-//myHashMap< myBucket_chain<wallet> , 100 , MyKeyHash > walletHT;
-//myHashMap< myBucket_chain<bitcoin> , 100 , MyKeyHash > btcHT;
-//
-//
-//myHashMap< recordsBucket_chain<1000> , 100 , MyKeyHash > senderHT;
-//myHashMap< recordsBucket_chain<1000> , 100 , MyKeyHash > receiverHT;
+
 
 class Synchroniser{
 private:
@@ -28,7 +23,7 @@ private:
     myHashMap< bitcoin> *btcHT_ptr;
     myHashMap<transaction> *transacHT_ptr;
 
-    date latestTransacDate; //todo
+    date latestTransacDate;
 
     int max_t_id;
 

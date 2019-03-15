@@ -64,17 +64,21 @@ int main(int argc, char **argv) {
     //[7] ​/exit
 
 
-    char* buffer=  new char[5000];
-    char* copybuffer=  new char[5000];
+
+
+    char* buffer;
+    char* copybuffer;
     char* initBuffer= nullptr;
     linkedList<char*> cin_list;
+    linkedList<char*> cin_list2;
 
     bool flagExit = false;
     do {
-//        cin >> buffer;
 
-//        strcpy(buffer , "requestTransactions  richard annie 10  ;  richard annie 10 12-01-2012 14:22;");
-        strcpy(buffer , "requestTransactions      inputTransactions2");
+        buffer = getline();
+
+//        strcpy(buffer , "requestTransactions  richard annie 10  ;  richard johnsmith 20 ;");
+//        strcpy(buffer , "requestTransactions      inputTransactions2");
 //        strcpy(buffer , "findEarnings richard ");
 //        strcpy(buffer , "findPayments richard 10:00 15:00");
 //        strcpy(buffer , "findEarnings richard 10:12 11-01-2014 15:12 1-3-2030 ");
@@ -84,6 +88,7 @@ int main(int argc, char **argv) {
 //        strcpy(buffer , "bitCoinStatus 541");
 //        strcpy(buffer , "traceCoin 541");
 
+        copybuffer = (char*)malloc(strlen(buffer)+1);
         strcpy(copybuffer , buffer);
 
         split(buffer," ",cin_list); //we split into list to take the first word which is the commandType
@@ -93,15 +98,12 @@ int main(int argc, char **argv) {
         char* substr = copybuffer; //we want the substr because we want to shift by one position right to avoid the " "
 
         removeFirst(substr, commandType); //remove commandType word in the string
-        substr++;   //shift one letter to avoid " "
+        if (substr[0] == '\n' || substr[0] == ' ' )
+            substr++;   //shift one letter to avoid " " or "\n"
+        if (substr[strlen(substr) -1] == '\n')
+            substr[strlen(substr)-1]= '\0';
 
-//        if (strcmp(cin_list.getHead()->getData(),"requestTransaction") ==0){
-//
-//            requestTransaction(buffer);
-//        }
-
-
-        if (strcmp(commandType,"requestTransactions") ==0){ //check here if input is file or transactions
+    if (strcmp(commandType,"requestTransactions") ==0){ //check here if input is file or transactions
 
             if (cin_list.getSize() == 2)
                 requestTransactionsFromFile(substr, sync); //substr contains the inputFile name
@@ -122,10 +124,6 @@ int main(int argc, char **argv) {
         }
 
 
-//        ​/walletStatus walletID
-
-
-
         if (strcmp(commandType,"walletStatus") ==0){
 
             walletStatus(substr, sync);
@@ -141,25 +139,17 @@ int main(int argc, char **argv) {
             traceCoin(substr, sync);
         }
 
-
-
-//        ​/bitCoinStatus bitCoinID
-
-
-
-
-
         if ( strcmp(commandType,"exit") ==0){flagExit =true;}
         cin_list.clear();
 //        copybuffer--; //don't for
 
 
-    }while (false);//todo(! flagExit);
+        free(buffer);buffer= nullptr;
+        free(copybuffer);copybuffer= nullptr;
+    }while (! flagExit);
 
 
 
-    delete [] buffer;buffer= nullptr;
-    delete [] copybuffer;copybuffer= nullptr;
     delete walletHT; walletHT= nullptr;
     delete btcHT; btcHT= nullptr;
     delete transacHT; transacHT= nullptr;

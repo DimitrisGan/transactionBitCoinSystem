@@ -48,7 +48,7 @@ public:
         senderWalletId =rhs.senderWalletId;
         receiverWalletId = rhs.receiverWalletId ;
 //        bitcoinSentList = rhs.bitcoinSentList ;
-        t_nodePtrList = rhs.t_nodePtrList; //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS //todo EDW LATHOS
+        t_nodePtrList = rhs.t_nodePtrList; //todo EDW LATHOS S
         amount = rhs.amount;
         transacTime = rhs.transacTime;
         t_nodePtrList = rhs.t_nodePtrList;

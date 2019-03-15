@@ -155,7 +155,6 @@ void requestTransaction(char *buffer,Synchroniser &sync) {
     }
 
 
-    cout <<"";
 
     sync.insertTransaction(potentialTransac);
 
