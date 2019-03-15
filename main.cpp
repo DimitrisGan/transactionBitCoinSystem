@@ -9,7 +9,7 @@
 #include "myHashMap.h"
 //#include "hashFunction.h"
 #include "transacHashMap.h"
-#include "synchroniseFunctions.h"
+#include "synchroniser.h"
 #include "APIfunctions.h"
 
 using  namespace std;
@@ -28,6 +28,7 @@ int main(int argc, char **argv) {
     unsigned  (*myHashFunc)( const myString&, unsigned)  = & myHash ;
 
 
+    argmKeeper.senderHashtableNumOfEntries =1;
 
     myHashMap<wallet>       *walletHT  = new myHashMap<wallet>(argmKeeper.senderHashtableNumOfEntries , myHashFunc );
     myHashMap< bitcoin>     *btcHT     = new myHashMap< bitcoin> (argmKeeper.senderHashtableNumOfEntries , myHashFunc );
@@ -92,7 +93,7 @@ int main(int argc, char **argv) {
         removeFirst(substr, commandType); //remove commandType word in the string
         if (substr[0] == '\n' || substr[0] == ' ' )
             substr++;   //shift one letter to avoid " " or "\n"
-        if (substr[strlen(substr) -1] == '\n')
+        if (substr[strlen(substr) -1] == '\n' || substr[strlen(substr) -1] == ' ')
             substr[strlen(substr)-1]= '\0';
 
         if (!strcmp(commandType,"requestTransactions")){ //check here if input is file or transactions

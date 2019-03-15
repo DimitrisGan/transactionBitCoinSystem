@@ -2,7 +2,7 @@
 // Created by dimitrisgan on 4/3/2019.
 //
 
-#include "synchroniseFunctions.h"
+#include "synchroniser.h"
 #include "assistantFunctions.h"
 
 
@@ -171,15 +171,13 @@ void Synchroniser::addAmountAndBtc2receiver(wallet *receiversWallet, linkedList<
                                             linkedList<int> amountInEachBtc2extract_list) {
 
 
-    //todo dwse to poso ston receiver ...alla prosekse oti an exei hdh to btc prepei na to prostheseis
-
 
     int index2increse = 0;
     int sumBalancies= receiversWallet->getBalance();
 //    if (! receiversWallet->getBtcIdsOwned_list().isEmpty()) {
     for (auto &btcId : btcId2extract_list) {
 
-        int amount2insert = amountInEachBtc2extract_list.getByIndex(index2increse)->getData(); //todo tsekare to
+        int amount2insert = amountInEachBtc2extract_list.getByIndex(index2increse)->getData();
 
         sumBalancies+=amount2insert;
 
@@ -219,10 +217,6 @@ void Synchroniser::addTheNewNodes2Tree(transaction &potentialTransaction , linke
 {
 
 
-    //todo edw phgainw sto treeHT kai m epistrefei to treeNode twn btc
-    //todo + meta panw se auta ta peirazw kai skave ta dentra
-
-
     linkedList<myString>::Iterator  ItA;
     linkedList<int>::Iterator  ItB;
 
@@ -242,9 +236,6 @@ void Synchroniser::addTheNewNodes2Tree(transaction &potentialTransaction , linke
         myString btcId= *ItA;
         this->btcHT_ptr->getData(btcId)->getTransactionTree_ptr()->insert(potentialTransaction.getSenderWalletId() , potentialTransaction.getReceiverWalletId() , amount ,potentialTransaction.t_nodePtrList);
 
-
-        //todo gia ayrio na tsekarw oti paizei
-        //todo na epistrefei kai tous deiktes sta kainourgia h toulaxiston sta idia t_nodes
 
         counter++;
 
@@ -301,9 +292,6 @@ const date &Synchroniser::getLatestTrsansactionDate() const {
 void Synchroniser::updateMaxId(myString id) {
 
 
-    //todo edw tha pairnw to transaction Id tha tsekarw an metatrepetai se akeraios me strol
-    //todo an oxi den kanw update sto maxId
-    //todo an nai tote to allazw to attribute me to strol h atoi tou current transacNode
     if (isNumber(id.getMyStr())){ //check if given id is number
         int number = atoi (id.getMyStr());
         if (number > this->max_t_id)
@@ -314,7 +302,6 @@ void Synchroniser::updateMaxId(myString id) {
 
 }
 
-//todo koitaei to attribute kai epistrefei maxID +1 + h updateMaxId tha kalestei kata to insertion opote de xreiazewtai na ginei apo dw
 myString Synchroniser::createVirtualTransacId() {
     int newId = this->max_t_id + 1;
     char str[10];
@@ -342,10 +329,5 @@ void Synchroniser::updateLatestDate(date newDate) {
     }
 }
 
-
-
-
-
-//            this->walletHT_ptr.getData(potentialTransac.getSenderWalletId()).getBalance());
 
 

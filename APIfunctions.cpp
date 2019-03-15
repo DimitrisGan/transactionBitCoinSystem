@@ -160,6 +160,12 @@ void requestTransaction(char *buffer,Synchroniser &sync) {
 
 void walletStatus(char *buffer, Synchroniser &sync) {
     myString walletId(buffer);
+
+    if (!sync.getWalletHT_ptr()->exists(walletId)){
+        cout<<" The wallet id# "<< walletId << " doesn't exist"<<endl;
+        return;
+
+    }
     int current_balance = sync.getWalletHT_ptr()->getData(walletId)->getBalance();
     cout << "The current wallet status of #"<<buffer<< " is: "<< current_balance<<endl;
 }
@@ -169,9 +175,18 @@ void bitCoinStatus(char *buffer, Synchroniser &sync){
 
     myString btcId(buffer);
 
+    if (!sync.getBtcHT_ptr()->exists(btcId)){
+        cout<<" The btc id# "<< btcId << " doesn't exist"<<endl;
+        return;
+
+    }
+
+
     int initBtcValue = sync.getBtcHT_ptr()->getData(btcId)->getInitialValue();
 
     linkedList<myString> numberOfTransacUsed_list ;
+
+
     sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getUniqueTransacIdsList(
             sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getRoot(), numberOfTransacUsed_list);
 
@@ -195,6 +210,11 @@ void traceCoin(char *buffer, Synchroniser &sync) {
     myString btcId(buffer);
 
     linkedList<transaction*> transacInvolved_list ;
+    if (!sync.getBtcHT_ptr()->exists(btcId)){
+        cout<<" The btc id# "<< btcId << " doesn't exist"<<endl;
+        return;
+
+    }
     sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getUniqueTransacList(
             sync.getBtcHT_ptr()->getData(btcId)->getTransactionTree_ptr()->getRoot(), transacInvolved_list);
 

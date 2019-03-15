@@ -6,7 +6,7 @@
 #define TRANSACTIONBITCOINSYSTEM_APIFUNCTIONS_H
 
 
-#include "synchroniseFunctions.h"
+#include "synchroniser.h"
 
 void findEarnings(char *buffer,Synchroniser &sync);
 

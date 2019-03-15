@@ -21,7 +21,7 @@
 #include "ErrorsCodes.h"
 #include "transacHashMap.h"
 #include "date.h"
-#include "synchroniseFunctions.h"
+#include "synchroniser.h"
 
 struct ArgumentsKeeper{
     myString bitCoinBalancesFile;
