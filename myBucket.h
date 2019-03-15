@@ -24,10 +24,7 @@ struct myBucket{
 
     void set_data(T _data);
 
-//    friend ostream &operator<<(ostream &os,  myBucket<T> bucket);
 
-
-    //todo overload == , =
     bool operator==(T &data) ;
     bool operator==(myString &id) ;
 
@@ -44,9 +41,7 @@ struct myBucket_chain{
     linkedList<myBucket<T>> myBucketList;
     int size;
 
-
     myBucket_chain() {size =0;}
-
 
     T* getData(myString key)  {
 
@@ -63,7 +58,7 @@ struct myBucket_chain{
 
 
     void insert(T data){
-        //todo
+
         if (existInChain(data)){
             std::cerr << "ERROR IN INSERTION --ITEM ALREADY EXIST [HINT:CHECK EQUAL ID'S]"<<endl;
             exit(INSERTION);
@@ -75,7 +70,6 @@ struct myBucket_chain{
         }
     }
 
-    //todo to update ginetai apo tis alles domes
 
     bool existInChain(T &data){
         for ( auto &item : myBucketList) {
@@ -96,10 +90,7 @@ struct myBucket_chain{
     }
 
 
-    friend ostream &operator<<(ostream &os, const myBucket_chain &chain) {
-        os << "myBucketList: " << chain.myBucketList;
-        return os;
-    }
+   
 };
 
 

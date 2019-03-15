@@ -8,12 +8,13 @@
 
 typedef enum ERRORCODE { OK=0,
     UNKNOWN_CMDARGUMENT=1,  //unknown flag at cmd arguments
+    LINKED_LIST,
     NOT_VALID_TRSANSACTION,
     INSERTION,
     DELETION,
     NOT_VALID_DATE,
     NOT_VALID_TIME,
-    FILE_ACCESS  //couldnt open a file
+    FILE_ACCESS  //could NOT open a file
 } ERRORCODE;
 
 #endif //TRANSACTIONBITCOINSYSTEM_ERRORSCODES_H

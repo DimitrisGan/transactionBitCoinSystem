@@ -24,11 +24,6 @@ struct date{
     date(){year=month=day=hour=minute=-1;hasDate= false;hasTime=false;}
 
     bool isNull();
-
-    void setDateByGivenList(linkedList<int> setDateList);
-
-    void setDateByGivenList(linkedList<char*> setDateList);
-
     void timeNow();
 
     void setDate(myString setDate);
@@ -50,6 +45,11 @@ struct date{
 
     friend ostream &operator<<(ostream &os, const date &date1);
 
+
+    //NOT USED ANYMORE
+    void setDateByGivenList(linkedList<int> setDateList);
+
+    void setDateByGivenList(linkedList<char*> setDateList);
 };
 
 #endif //TRANSACTIONBITCOINSYSTEM_DATE_H

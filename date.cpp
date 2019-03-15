@@ -6,13 +6,6 @@
 #include "assistantFunctions.h"
 
 
-
-//todo
-
-
-
-
-
 // Store the formatted string of time in the output
 void date::timeNow(){
     time_t rawtime;
@@ -32,6 +25,11 @@ void date::timeNow(){
     this->hasTime = true;
 
 }
+
+bool date::isNull() {
+    return !this->hasTime && !this->hasDate; //if both time and date are false then the date is null -->returns then true
+}
+
 
 void date::setDate(myString setDate) {
     linkedList<char*> formatList;
@@ -62,7 +60,7 @@ void date::setDate(myString setDate) {
 
 void date::setTime(myString setTime) {
     linkedList<char*> formatList;
-    split(setTime.getMyStr(), ":" , formatList); /// separate all string commands by "-" and push them to the llist
+    split(setTime.getMyStr(), ":" , formatList); /// separate all string commands by ":" and push them to the llist
 
     if ( formatList.getSize() == 1 ) { //if size is zero then is not a time (maybe it is date)
         return;
@@ -84,6 +82,24 @@ void date::setTime(myString setTime) {
     this->hasTime=true;
 
 }
+
+
+ostream &operator<<(ostream &os, const date &dt) {
+
+    if (dt.day<10) os << "0";
+    os << dt.day<<"-";
+    if (dt.month<10) os << "0";
+    os <<dt.month<<"-"<<dt.year;
+    os<<" ";
+    if (dt.hour < 10) os << "0";
+    os <<dt.hour<<":";
+    if (dt.month < 10) os << "0";
+    os <<dt.month;
+
+    return os;
+}
+
+
 
 bool date::operator<(const date &rhs) const {
     if (hasDate && rhs.hasDate) {
@@ -128,13 +144,13 @@ bool date::operator>=(const date &rhs) const {
 
 
 bool date::operator==(const date &rhs) const {
-    return year == rhs.year &&
-           month == rhs.month &&
-           day == rhs.day &&
-           hour == rhs.hour &&
-           minute == rhs.minute &&
-           hasDate == rhs.hasDate &&
-           hasTime == rhs.hasTime;
+    return year     == rhs.year     &&
+           month    == rhs.month    &&
+           day      == rhs.day      &&
+           hour     == rhs.hour     &&
+           minute   == rhs.minute   &&
+           hasDate  == rhs.hasDate  &&
+           hasTime  == rhs.hasTime;
 }
 
 bool date::operator!=(const date &rhs) const {
@@ -193,21 +209,3 @@ void date::setDateByGivenList(linkedList<char *> setDateList) {
 
 }
 
-ostream &operator<<(ostream &os, const date &dt) {
-
-        if (dt.day<10) os << "0";
-        os << dt.day<<"-";
-        if (dt.month<10) os << "0";
-        os <<dt.month<<"-"<<dt.year;
-        os<<" ";
-        if (dt.hour < 10) os << "0";
-        os <<dt.hour<<":";
-        if (dt.month < 10) os << "0";
-        os <<dt.month;
-
-    return os;
-}
-
-bool date::isNull() {
-    return !this->hasTime && !this->hasDate; //if both time and date are false then the date is null -->returns then true
-}

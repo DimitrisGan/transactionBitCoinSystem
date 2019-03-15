@@ -17,6 +17,6 @@ unsigned myHash(const myString &id, unsigned size_of_table) {
     while ((c = *str++))
         hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
 
-        delete [] toDelete;toDelete= nullptr;str = nullptr;
+    delete [] toDelete;toDelete= nullptr;str = nullptr;
     return (hash % size_of_table);
 }

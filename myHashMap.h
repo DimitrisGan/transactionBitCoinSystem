@@ -40,7 +40,6 @@ public://todo private:
         return tableSize;
     }
 
-
 public:
 
     myHashMap(unsigned tableSize ,unsigned (*hashF)(const myString&, unsigned )) {
@@ -52,7 +51,6 @@ public:
         this->hashFunc = hashF;
 
     }
-
 
 
     ~myHashMap() {
@@ -79,7 +77,7 @@ public:
 
     }
 
-    bool exists (myString key){ //todo implement it
+    bool exists (myString key){
         int indexHash = hashFunc(key,this->tableSize);
         return this->table[indexHash].exist(key);
     }
@@ -88,71 +86,9 @@ public:
     void insert( myString key,T data2insert){
 
         int indexHash = hashFunc(key,this->tableSize);
-//        int indexHash = this->hashFunc(key,this->tableSize);
-//        if (table[indexHash] == nullptr) //if table[index] is null then we have to initialize a recordsBucket chain
-//            table[indexHash] = new myBucket_chain  <T> ;
 
         this->table[indexHash].insert(data2insert);
     }
-
-
-//    void printAllBucketChains(){
-//
-//
-//        for (int i = 0; i < this->tableSize ; ++i) {
-//
-//            for ( auto item : table[i].myBucketList.getHead()->data) {
-////                cout << item;
-//            }
-//        }
-//
-//    }
-
-//    void printEveryBucketChain(){
-//
-//        for (int i = 0; i < this->tableSize; ++i) {
-//            cout<<"[";
-//            for (const auto &bucket : this->table[i]) {
-//                cout << bucket;
-//            }
-//            cout<<"]\n";
-//        }
-//    }
-
-//todo    void getTransacNodeByRef();
-
-//    bool get(const K &key, V &value)
-//    {
-//        unsigned long hashValue = hashFunc(key);
-//        HashNode<K, V> *entry = table[hashValue];
-//
-//        while (entry != NULL) {
-//            if (entry->getKey() == key) {
-//                value = entry->getValue();
-//                return true;
-//            }
-//
-//            entry = entry->getNext();
-//        }
-//
-//        return false;
-//    }
-//
-//    void put(int key, int value) {
-//
-//        int hash = (key % TableSize);
-//
-//        while (table[hash] != NULL && table[hash]->getKey() != key)
-//
-//            hash = (hash + 1) % TableSize;
-//
-//        if (table[hash] != NULL)
-//
-//            delete table[hash];
-//
-//        table[hash] = new HashEntry(key, value);
-//
-//    }
 
 
 };

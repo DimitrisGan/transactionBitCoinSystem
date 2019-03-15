@@ -14,14 +14,11 @@
 #include "transaction.h"
 
 
-//int globo=0;
-//int globo2=0;
-
 
 
 struct record{
     myString walletId;
-    linkedList<transaction*> transacLlist_ptr; //TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO
+    linkedList<transaction*> transacLlist_ptr; 
 
 
      linkedList<transaction *> &getTransacLlist_ptr()  {

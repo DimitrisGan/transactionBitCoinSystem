@@ -19,7 +19,7 @@ struct l_node {
 //            next = nullptr;
 //    }
 
-    explicit l_node(T data) : data(data), next(nullptr) { static  int globo3=0;  /*cout << "CONSTRUCTOR OF list NODE IS CALLED #"<<globo3++ <<endl;*/ }
+    explicit l_node(T data) : data(data), next(nullptr) {}
     T data;
     l_node<T> *next;
 
@@ -113,7 +113,6 @@ public:
 
     bool operator != (const Iterator &rhs) const {
         if (currPtr != nullptr)
-//            std::cout<<"SUGKRINEI : "<<currPtr->data << " $$ "<<rhs.currPtr->data<<endl;
             return currPtr != nullptr;
     }
 
@@ -142,41 +141,6 @@ public:
 
 
 ///////===========================================================
-
-
-//template<class T>
-//void linkedList<T>::remove( T data)
-//{
-//    if(isEmpty())
-//    {
-//        return;
-//    }
-//
-//    if (head->data == data)
-//    {
-//        l_node<T> * tmp = head;
-//        head = head->next;
-//        delete tmp;
-//
-//        return;
-//    }
-//
-//
-//    for (l_node<T> * curr = head->next, prev = head; curr != NULL; curr = curr->next)
-//    {
-//        if (curr->data == data)
-//        {
-//            l_node<T> *tmp = curr;
-//            prev->next = curr->next;
-//            delete tmp;
-//
-//            return;
-//        }
-//        prev = curr;
-//    }
-//}
-//
-
 
 
 template<class T>
@@ -301,20 +265,20 @@ template<class T>
 void linkedList<T>::clear () {
     static const bool IS_POINTER = std::is_pointer<T>::value;
 //    if (IS_POINTER) {
-        if (!isEmpty()) { // List is not empty
+    if (!isEmpty()) { // List is not empty
 
-            l_node<T> *currPtr = head;
-            l_node<T> *tempPtr;
-            while (currPtr != nullptr) { // delete remaining nodes
-                tempPtr = currPtr;
-                currPtr = currPtr->next;
-                delete tempPtr;
-            }
-            head = nullptr;
-            tail = nullptr;
-            size=0;
-
+        l_node<T> *currPtr = head;
+        l_node<T> *tempPtr;
+        while (currPtr != nullptr) { // delete remaining nodes
+            tempPtr = currPtr;
+            currPtr = currPtr->next;
+            delete tempPtr;
         }
+        head = nullptr;
+        tail = nullptr;
+        size=0;
+
+    }
 //    }
 //    else{
 //        head = nullptr;
@@ -436,7 +400,6 @@ void linkedList<T>::insert_first( T data)
 
 
 
-//  https://www.codementor.io/codementorteam/a-comprehensive-guide-to-implementation-of-singly-linked-list-using-c_plus_plus-ondlm5azr
 template<class T>
 void linkedList<T>::insert_last( T data)
 {
@@ -462,20 +425,6 @@ void linkedList<T>::insert_last( T data)
 
 
 
-//void delete_position(int pos)
-//{
-//    l_node *current=new l_node;
-//    l_node *previous=new l_node;
-//    current=head;
-//    for(int i=1;i<pos;i++)
-//    {
-//        previous=current;
-//        current=current->next;
-//    }
-//    previous->next=current->next;
-//}
-//
-
 template<class T>
 bool linkedList<T>::exists(const T data) const
 {
@@ -489,39 +438,12 @@ bool linkedList<T>::exists(const T data) const
     return false;
 }
 
-//template<class T>
-//void linkedList<T>::remove(const T data)
-//{
-//    bool removed = false;
-//    l_node<T> *curr = head;
-//    l_node<T> *prev = head;
-//
-//    for (; curr != NULL && removed == false; curr = curr->next)
-//    {
-//        if (head->data == data)
-//        {
-//            l_node<T> *tmp = head;
-//            head = head->next;
-//            delete tmp;
-//            removed = true;
-//        }
-//        else if (curr->data == data)
-//        {
-//            l_node<T> *tmp = curr;
-//            prev->next = curr->next;
-//            delete tmp;
-//            removed = true;
-//        }
-//        prev = curr;
-//    }
-//}
+
 
 template<class T>
 bool linkedList<T>::isEmpty() const
 {
-    //todo tha mporousa apla size == 0;
 //    return head == nullptr && tail == nullptr; //if the start pointer and end pointer are NULL then the list is empty
-//    return head ==  tail ; //if the start pointer and end pointer are NULL then the list is empty
     return (! this->size);
 }
 
@@ -564,8 +486,6 @@ linkedList<T>::linkedList(linkedList &rhs) {
         this->insert_last(item);
 
     }
-
-//    return *this;
 
 
 }
@@ -663,4 +583,47 @@ l_node<T> *linkedList<T>::getByIndex(int index) {
 }
 
 
+
+//void delete_position(int pos)
+//{
+//    l_node *current=new l_node;
+//    l_node *previous=new l_node;
+//    current=head;
+//    for(int i=1;i<pos;i++)
+//    {
+//        previous=current;
+//        current=current->next;
+//    }
+//    previous->next=current->next;
+//}
+//
+
+//template<class T>
+//void linkedList<T>::remove(const T data)
+//{
+//    bool removed = false;
+//    l_node<T> *curr = head;
+//    l_node<T> *prev = head;
+//
+//    for (; curr != NULL && removed == false; curr = curr->next)
+//    {
+//        if (head->data == data)
+//        {
+//            l_node<T> *tmp = head;
+//            head = head->next;
+//            delete tmp;
+//            removed = true;
+//        }
+//        else if (curr->data == data)
+//        {
+//            l_node<T> *tmp = curr;
+//            prev->next = curr->next;
+//            delete tmp;
+//            removed = true;
+//        }
+//        prev = curr;
+//    }
+//}
+
+// Source: //  https://www.codementor.io/codementorteam/a-comprehensive-guide-to-implementation-of-singly-linked-list-using-c_plus_plus-ondlm5azr
 #endif //TRANSACTIONBITCOINSYSTEM_MYLINKEDLIST_H

@@ -15,7 +15,6 @@ private:
     char* myStr;
     unsigned len;
 public:
-    //todo myString(); na kskekinaei me char* opote na mh desmeuei epipleon xwro
     myString(){myStr= nullptr;len =0;}
 
     explicit myString(char *sptr);
@@ -30,9 +29,6 @@ public:
     void setMyStr(const char *myStr);
 
     unsigned size() const;
-//    void myString::makeOneToken(char delimeter);
-    //todo split () for date dd:mm:yyyy and time hh:mm
-    //todo ousiastika tha pernw parametro to symbol ":" kai tha to spaw ws pros auto
 
     /*operators overloaded*/
     bool operator==(const myString &rhs) const; //compared with myString
@@ -47,7 +43,6 @@ public:
 
     friend ostream & operator << (ostream &out, const myString &c);
     friend std::istream& operator>> (std::istream& is, myString& s);
-
 
 
 
