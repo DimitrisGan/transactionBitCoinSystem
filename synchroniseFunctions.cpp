@@ -6,22 +6,8 @@
 #include "assistantFunctions.h"
 
 
-//Synchroniser sync (&senderHT,&receiverHT,&walletHT,&btcHT ,&transacHT); //initiate sync struct
-
-
-
 
 void Synchroniser::insertTransaction(transaction potentialTransaction) {
-
-    //todo [DONE]1#  koitaw apo senders wallet an exei to apaitoumeno poso
-    //todo [DONE]2#  an oxi :exit()
-    //todo 3#  an nai sortarw an goustarw apo th lista me ta btc kai anoigw auta me to megalutero poso
-    //todo 4#  paw sta dentra twn chosenBtc kai ta skavw ---> ta xwnw se mia lista kai to poso pou phra ---> ta xwnw sto transaction mou (forse pointer)
-    //todo 5#  sto skapsimo h sunarthsh prepei na mou epistrepsei pointers (stous pateres) sta kainourgia nodes pou anoiksa
-    //todo 6#  autous tous pointers tous xwnw sto potentialTransaction.t_nodePtrList<t_nodes*>.PROSOXH! xwnw to aristero paidi ston sender kai deksi sto wallet
-    //todo edw dhmiourgeitai h aporia mhpws prepei na xw sa parametro 2 transacNodes --> ena tou sender kai ena tou receiver
-
-
 
 
     wallet  *sendersWallet =  this->walletHT_ptr->getData(potentialTransaction.getSenderWalletId());
@@ -50,10 +36,8 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
         exit(NOT_VALID_TRSANSACTION);
     }
 
-
-
     //transaction is valid
-    //todo apo sender pairnw to poso kai to tsekarw apo ta t-nodes
+
     linkedList<myString> btcId2extract_list;
     linkedList<int> amountInEachBtc2extract_list;
     linkedList<myString> btcIds2deleteFromOwner;
@@ -71,8 +55,6 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
 
     addTheNewNodes2Tree(potentialTransaction , btcId2extract_list ,amountInEachBtc2extract_list);
 
-    //todo twra pou oloklhrwthike to transaction class xwsto sto transactionHT
-    //todo + pare ton pointer kai addare ton sto senderReceiverHT
 
     this->transacHT_ptr->insert(potentialTransaction.transacId , potentialTransaction); //insert new transaction in the transactionHT
 
@@ -84,16 +66,11 @@ void Synchroniser::insertTransaction(transaction potentialTransaction) {
     this->receiverHT_ptr->addTransacNode2appropriateIndex(potentialTransaction.receiverWalletId , this->transacHT_ptr->getData(potentialTransaction.transacId) ); //insert a new node with a pointer to the transaction node in receiverHT
 
 
-
     this->updateMaxId(potentialTransaction.transacId);
     this->updateLatestDate(potentialTransaction.transacTime);
 
-//    this.u
 
-    cout <<"transaction with id# "<<potentialTransaction.transacId <<" added  Successfully! "<<endl;
-
-
-
+    cout <<"[success] transaction with id# "<<potentialTransaction.transacId <<" added! "<<endl;
 
 
 }
@@ -106,15 +83,7 @@ void Synchroniser::decideWhichAndHowMuchInEach2extractFromSender(wallet *senders
                                                                  int amount2extract,
                                                                  linkedList<myString> &indexesList2remove) {
 
-
     int amountRemain2gather =amount2extract;
-//    for ( auto &item : sendersWallet->getAmountOnEachBtc()) {
-//        if (item < amountRemain2gather){
-//            //todo tha to parei olo
-//
-//        }
-//    }
-
 
     linkedList<myString>::Iterator  ItA;
     linkedList<int>::Iterator  ItB;
@@ -143,8 +112,6 @@ void Synchroniser::decideWhichAndHowMuchInEach2extractFromSender(wallet *senders
             sendersWallet->setBalance(sendersWallet->getBalance() - amountRemain2gather); //update the new total baalnce
             amountRemain2gather=0;
 
-//            sendersWallet..deleteNodeByIndex(index);
-//            sendersWallet->getBtcIdsOwned_list().(*ItA);
             break;
 
         }
@@ -157,7 +124,6 @@ void Synchroniser::decideWhichAndHowMuchInEach2extractFromSender(wallet *senders
 
             indexesList2remove.insert_last(*ItA);
             *ItB = 0; //the wallet(=sender) is not owner of this btc anymore
-            //todo do the appropriate removes for the senders 2 lists!!!!!!!!!!!!!!!!!!!!!!!
 
         }
 

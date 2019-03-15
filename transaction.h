@@ -15,9 +15,6 @@
 //#include "bitcoinTree.h"
 
 
-//todo to transaction list tha pairnei se template to sender receiverWalletId opote de xreiazetai sthn insert
-//todo apo to walletID tha pairnw ta btcIds pou tha peiraksw mazi me to poso
-//todo kai tha phgainw sto tree pou tha epistrefei deiktes pou tha tous xwnw
 class transaction{
 public: //private:
     myString transacId;
@@ -36,19 +33,16 @@ public:
 
 
     virtual ~transaction() {
-//         t_nodePtrList.clear(); OXI DE THELW NA GINEI FREE TO DENTRO MOY APO TO TRANSACTION NODE LIST
+//         t_nodePtrList.clear();
 
     }
-
-
 
 
     transaction& operator=( transaction rhs)  {
         transacId = rhs.transacId;
         senderWalletId =rhs.senderWalletId;
         receiverWalletId = rhs.receiverWalletId ;
-//        bitcoinSentList = rhs.bitcoinSentList ;
-        t_nodePtrList = rhs.t_nodePtrList; //todo EDW LATHOS S
+        t_nodePtrList = rhs.t_nodePtrList;
         amount = rhs.amount;
         transacTime = rhs.transacTime;
         t_nodePtrList = rhs.t_nodePtrList;
@@ -101,11 +95,6 @@ public:
     void setReceiverWalletId(const myString &receiverWalletId) {
         transaction::receiverWalletId = receiverWalletId;
     }
-
-
-//    void setBitcoinSentList( linkedList<myString> bitcoinSentList) {
-//        transaction::bitcoinSentList = bitcoinSentList;
-//    }
 
     void setAmount(int amount) {
         transaction::amount = amount;

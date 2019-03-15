@@ -4,11 +4,6 @@
 
 #include "transacHashMap.h"
 
-//transaction &myTransacHashMap::getTransacNodeByRef(myString id) {
-//    int index = this->getIndex(id);
-//
-//    return <#initializer#>;
-//}
 
 recordsBucket_chain myTransacHashMap::getTableById(myString id) const {
 
@@ -17,11 +12,10 @@ recordsBucket_chain myTransacHashMap::getTableById(myString id) const {
     return table[index];
 }
 
-void myTransacHashMap::addTransacNode2appropriateIndex(myString walletId , transaction* transac2add){
-    int index = this->getIndex(walletId);
-//    if (table[index].bucketsList.isEmpty()) //if table[index] is null then we have to initialize a recordsBucket chain
-//        table[index] = new T ;
 
+void myTransacHashMap::addTransacNode2appropriateIndex(myString walletId , transaction* transac2add){
+
+    int index = this->getIndex(walletId);
     myTransacHashMap::table[index].insert(walletId,transac2add);
 }
 

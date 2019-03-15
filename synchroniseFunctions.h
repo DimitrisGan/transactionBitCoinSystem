@@ -28,7 +28,6 @@ private:
     int max_t_id;
 
 
-
     bool transactionIsValid(transaction potentialTransac, int sendersBalance);
 
     void decideWhichAndHowMuchInEach2extractFromSender(wallet *sendersWallet,
@@ -74,22 +73,13 @@ public:
     myString createVirtualTransacId();
 
 
-    void createTransactionNode(myString sender,myString receiver ,int amount);
-    void updateWallet(); //will be called two times for sender and receiver
+    //not implemented
+    //void createTransactionNode(myString sender,myString receiver ,int amount);
+    //void updateWallet(); //will be called two times for sender and receiver
 
 };
 
 
-
-
-
-
-//void insertTransaction (myHashMap< myBucket_chain<wallet> , int tableSize , MyKeyHash > walletHT)
-
-
-
-
-//void readSender(); lathos einai edw
 
 
 #endif //TRANSACTIONBITCOINSYSTEM_SYNCHRONISEFUNCTIONS_H

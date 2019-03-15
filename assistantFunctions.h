@@ -27,9 +27,9 @@ struct ArgumentsKeeper{
     myString bitCoinBalancesFile;
     myString transactionsFile;
     int bitCoinValue;
-    int senderHashtableNumOfEntries;
-    int receiverHashtableNumOfEntries;
-    int bucketSize;
+    unsigned senderHashtableNumOfEntries;
+    unsigned receiverHashtableNumOfEntries;
+    unsigned bucketSize;
 
     void printArgs();
 };

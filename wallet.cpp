@@ -77,7 +77,7 @@ linkedList<myString> wallet::getBtcIdsOwned_list()  {
     return btcIdsOwned_list;
 }
 
- linkedList<int> wallet::getAmountOnEachBtc()  {
+linkedList<int> wallet::getAmountOnEachBtc()  {
     return amountOnEachBtc;
 }
 
@@ -103,8 +103,8 @@ int wallet::getIndexBybtcId(myString btcId) {
     int index =0;
     for (const auto &item : this->getBtcIdsOwned_list()) {
 
-       if (item == btcId)
-           break;
+        if (item == btcId)
+            break;
 
         index++;
     }
@@ -128,7 +128,6 @@ void wallet::updateAmountByIndex(int index, int newAmount) {
 
 
 
-//todo//todo//todo//todo//todo//todo//todo//todo//todo//todo//todo
 
 
 //===========================================================================================

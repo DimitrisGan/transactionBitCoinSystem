@@ -36,11 +36,4 @@ ostream &operator<<(ostream &os, const transaction &transaction1) {
        << " " << transaction1.amount ;
     return os;
 }
-//ostream &operator<<(ostream &os, const transaction &transaction1) {
-//    os << "TR_ID#: " << transaction1.transacId << setw(10)<< " SENDER: " << transaction1.senderWalletId <<setw(10)
-//       << " RECEIVER: " << transaction1.receiverWalletId << " DATE: " << transaction1.transacTime
-//       << " AMOUNT: " << transaction1.amount ;
-//    return os;
-//}
-
 

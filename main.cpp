@@ -20,24 +20,24 @@ int main(int argc, char **argv) {
     ArgumentsKeeper argmKeeper;
     argmParser(argc, argv , argmKeeper);
 
-//    argmKeeper.printArgs();
+    argmKeeper.printArgs();
 
-    unsigned bucketSizeInBytes = 100;
-    unsigned tableSize =1;
-    int btcValue = 50;
+//    unsigned bucketSizeInBytes = 100;
+//    unsigned tableSize =1;
+//    int btcValue = 50;
     unsigned  (*myHashFunc)( const myString&, unsigned)  = & myHash ;
 
 
 
-    myHashMap<wallet>       *walletHT  = new myHashMap<wallet>(tableSize , myHashFunc );
-    myHashMap< bitcoin>     *btcHT     = new myHashMap< bitcoin> (tableSize , myHashFunc );
-    myHashMap<transaction>  *transacHT = new myHashMap<transaction>(tableSize , myHashFunc );
+    myHashMap<wallet>       *walletHT  = new myHashMap<wallet>(argmKeeper.senderHashtableNumOfEntries , myHashFunc );
+    myHashMap< bitcoin>     *btcHT     = new myHashMap< bitcoin> (argmKeeper.senderHashtableNumOfEntries , myHashFunc );
+    myHashMap<transaction>  *transacHT = new myHashMap<transaction>(argmKeeper.senderHashtableNumOfEntries , myHashFunc );
 
-    btcBalancesFile_parsing_and_save(argmKeeper.bitCoinBalancesFile , walletHT , btcHT , btcValue); //save also to walletHT,btcHT
+    btcBalancesFile_parsing_and_save(argmKeeper.bitCoinBalancesFile , walletHT , btcHT , argmKeeper.bitCoinValue); //save also to walletHT,btcHT
 
 
-    myTransacHashMap  *senderHT = new myTransacHashMap(tableSize ,myHashFunc   ,bucketSizeInBytes);
-    myTransacHashMap  *receiverHT = new myTransacHashMap(tableSize ,myHashFunc   ,bucketSizeInBytes);
+    myTransacHashMap  *senderHT = new myTransacHashMap(argmKeeper.senderHashtableNumOfEntries ,myHashFunc   ,argmKeeper.bucketSize);
+    myTransacHashMap  *receiverHT = new myTransacHashMap(argmKeeper.receiverHashtableNumOfEntries ,myHashFunc   ,argmKeeper.bucketSize);
 
     Synchroniser sync (senderHT,receiverHT,walletHT,btcHT ,transacHT); //initiate sync struct
 
