@@ -20,11 +20,9 @@ int main(int argc, char **argv) {
     ArgumentsKeeper argmKeeper;
     argmParser(argc, argv , argmKeeper);
 
-    argmKeeper.printArgs();
+//    argmKeeper.printArgs();
 
-//    unsigned bucketSizeInBytes = 100;
-//    unsigned tableSize =1;
-//    int btcValue = 50;
+
     unsigned  (*myHashFunc)( const myString&, unsigned)  = & myHash ;
 
 
@@ -59,8 +57,6 @@ int main(int argc, char **argv) {
     //[7] ​/exit
 
 
-
-
     char* buffer;
     char* copybuffer;
     linkedList<char*> cin_list;
@@ -68,6 +64,7 @@ int main(int argc, char **argv) {
 
     bool flagExit = false;
     do {
+        cout <<"Insert here the query:\t";
 
         buffer = getline();
 
@@ -105,36 +102,40 @@ int main(int argc, char **argv) {
         }
 
 
-        if (!strcmp(commandType,"findEarnings")){
+        else if (!strcmp(commandType,"findEarnings")){
 
             findEarnings(substr, sync);
         }
 
 
-        if (!strcmp(commandType,"findPayments")){
+        else if (!strcmp(commandType,"findPayments")){
 
             findPayments(substr, sync);
         }
 
 
-        if (!strcmp(commandType,"walletStatus")){
+        else if (!strcmp(commandType,"walletStatus")){
 
             walletStatus(substr, sync);
         }
 
-        if (!strcmp(commandType,"bitCoinStatus")){
+        else if (!strcmp(commandType,"bitCoinStatus")){
 
             bitCoinStatus(substr, sync);
         }
 
-        if (!strcmp(commandType,"traceCoin")){
+        else if (!strcmp(commandType,"traceCoin")){
 
             traceCoin(substr, sync);
         }
 
-        if (!strcmp(commandType,"exit")){flagExit =true;}
-        cin_list.clear();
+        else if (!strcmp(commandType,"exit")){flagExit =true;}
 
+        else{
+            cout << "Not valid query\n";
+        }
+
+        cin_list.clear();
         free(buffer);buffer= nullptr;
         free(copybuffer);copybuffer= nullptr;
     }while (! flagExit);
@@ -150,7 +151,7 @@ int main(int argc, char **argv) {
 
 
 
-    cout << "\nend\n";
+    cout << "\nThe end\n";
 
 
 
